@@ -2,11 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:gold_workshop/designer.dart';
+import 'package:gold_workshop/workshop1.dart';
+import 'package:gold_workshop/workshop2.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'home.dart';
+import 'admin.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -113,11 +116,40 @@ class LoginScreen extends State<LoginPage> {
                     String loginResult = await signIn(
                         usernameController.text, passwordController.text);
                     if (_is_loged_in) {
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  HomeScreen.fromBase64(loginResult)),
-                          (Route<dynamic> route) => false);
+
+                      switch(userRole){
+
+                        case "admin":
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      AdminHomeScreen.fromBase64(loginResult)),
+                                  (Route<dynamic> route) => false);
+                          break;
+                        case "designer":
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      DesignerHomeScreen.fromBase64(loginResult)),
+                                  (Route<dynamic> route) => false);
+                          break;
+                        case "workshop1":
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      Workshop1HomeScreen.fromBase64(loginResult)),
+                                  (Route<dynamic> route) => false);
+                          break;
+                        case "workshop2":
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      Workshop2HomeScreen.fromBase64(loginResult)),
+                                  (Route<dynamic> route) => false);
+                          break;
+
+                      }
+
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text("${loginResult}"),
