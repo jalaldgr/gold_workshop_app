@@ -11,7 +11,7 @@ import 'package:gold_workshop/designer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
-import 'home.dart';
+import 'admin.dart';
 import 'login.dart';
 
 Future<void> main() async {
@@ -82,16 +82,16 @@ class MyApp extends StatelessWidget {
                           switch(snapshot.data){
 
                             case "Admin":
-                              return Scaffold(body:HomeScreen(str, payload));
+                              return Scaffold(body:AdminHomeScreen(str, payload));
                               break;
                             case "Designer":
                               return Scaffold(body:DesignerHomeScreen(str, payload));
                               break;
                             case "Workshop1":
-                              return Scaffold(body:HomeScreen(str, payload));
+                              return Scaffold(body:AdminHomeScreen(str, payload));
                               break;
                             case "Workshop2":
-                              return Scaffold(body:HomeScreen(str, payload));
+                              return Scaffold(body:AdminHomeScreen(str, payload));
                               break;
 
                           }
