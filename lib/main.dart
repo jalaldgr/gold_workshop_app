@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gold_workshop/designer.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -24,6 +25,8 @@ class MyApp extends StatelessWidget {
   Future<String> get jwtOrEmpty async {
     await dotenv.load(fileName: "assets/env");
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    final info = await PackageInfo.fromPlatform();
+    prefs.setString("version",info.version );
     var jwt = prefs.getString("jwt");
     if (jwt == null) return "N";
     return jwt.toString();
