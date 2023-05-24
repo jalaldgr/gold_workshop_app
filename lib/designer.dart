@@ -7,6 +7,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'parst/draw_menu_designer.dart';
+
 
 
 class DesignerHomeScreen extends StatefulWidget {
@@ -19,6 +21,7 @@ class DesignerHomeScreen extends StatefulWidget {
 
   final String jwt;
   final Map<String, dynamic> payload;
+
 
   @override
   _DesignerHomeScreenState createState() => _DesignerHomeScreenState();
@@ -46,6 +49,7 @@ class _DesignerHomeScreenState extends State<DesignerHomeScreen> {
           iconTheme: IconThemeData(color: Colors.green),
           backgroundColor: Colors.amber,
         ),
+        drawer:SideMenuDesigner(),
         backgroundColor: Colors.white,
         body: Column(children: <Widget>[
           ElevatedButton(onPressed: logOut, child: Text("خروج طراح"))
