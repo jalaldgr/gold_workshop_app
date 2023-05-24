@@ -2,16 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../login.dart';
-import '../models/userModel.dart';
+import '../../login.dart';
+import '../../models/userModel.dart';
 
 
-class SideMenuWorkshop1 extends StatefulWidget {
+class SideMenuWorkshop2 extends StatefulWidget {
   @override
-  _SideMenuWorkshop1State createState() => _SideMenuWorkshop1State();
+  _SideMenuWorkshop2State createState() => _SideMenuWorkshop2State();
 }
 
-class _SideMenuWorkshop1State extends State<SideMenuWorkshop1> {
+class _SideMenuWorkshop2State extends State<SideMenuWorkshop2> {
   String? _appVersion="";
 
   logOut() async {

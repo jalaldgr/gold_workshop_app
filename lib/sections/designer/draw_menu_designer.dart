@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../login.dart';
-import '../models/userModel.dart';
+import '../../login.dart';
+import '../../models/userModel.dart';
 
 
 class SideMenuDesigner extends StatefulWidget {

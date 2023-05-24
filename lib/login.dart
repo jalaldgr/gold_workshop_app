@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gold_workshop/designer.dart';
-import 'package:gold_workshop/workshop1.dart';
-import 'package:gold_workshop/workshop2.dart';
+import 'package:gold_workshop/sections/workshop1/workshop1.dart';
+import 'package:gold_workshop/sections/workshop2/workshop2.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'admin.dart';
+import 'sections/admin/admin.dart';
+import 'sections/designer/designer.dart';
 
 
 class LoginPage extends StatefulWidget {

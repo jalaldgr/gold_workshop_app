@@ -7,13 +7,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:gold_workshop/designer.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
-import 'admin.dart';
+import 'sections/admin/admin.dart';
 import 'login.dart';
+import 'sections/designer/designer.dart';
 
 Future<void> main() async {
   runApp(MyApp());
