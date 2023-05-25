@@ -2,17 +2,22 @@ class userData {
   String? username;
   String? fullName;
   String? role;
+  String? id;
+  String? password;
 
   userData(
       this.username,
       this.fullName,
       this.role,
+      this.id,
+      this.password
 );
 
   userData.fromJson(Map<String, dynamic> json) {
     username = json['username'];
     fullName = json['fullName'];
     role = json['role'];
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -20,13 +25,8 @@ class userData {
     data['username'] = this.username;
     data['fullName'] = this.fullName;
     data['role'] = this.role;
+    data['id'] = this.id;
+    data['password']= this.password;
     return data;
   }
-
-  userData.fromSimpleJson( json) {
-    username = json['username'];
-    fullName = json['fullName'];
-    role = json['role'];
-  }
-
 }
