@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:gold_workshop/sections/admin/designers/designersList.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../login.dart';
@@ -91,6 +92,10 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                                 title: Text("لیست طراحان"),
                                 trailing: Icon(Icons.chevron_right),
                                 onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DesignersList()));
 
                                 },
                               ),
@@ -115,11 +120,10 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                                 onTap: () {
                                   setState(() {
                                     logOut();
-                                    Navigator.pushAndRemoveUntil(
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => LoginPage()),
-                                        (Route<dynamic> route) => false);
+                                            builder: (context) => LoginPage()));
                                   });
                                 },
                                 splashColor: Colors.greenAccent,
