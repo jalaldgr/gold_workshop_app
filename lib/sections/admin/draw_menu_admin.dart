@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../login.dart';
 import '../../models/userModel.dart';
+import 'workshop2/wokshop1List.dart';
 
 
 
@@ -90,7 +91,7 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                               ),
                               ListTile(
                                 leading: Icon(Icons.account_box),
-                                title: Text("لیست طراحان"),
+                                title: Text("کاربران طراح"),
                                 trailing: Icon(Icons.chevron_right),
                                 onTap: (){
                                   Navigator.push(
@@ -102,7 +103,7 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                               ),
                               ListTile(
                                 leading: Icon(Icons.account_box),
-                                title: Text("لیست کارگاه های 1"),
+                                title: Text("کاربران کارگاه 1"),
                                 trailing: Icon(Icons.chevron_right),
                                 onTap: (){
                                   Navigator.push(
@@ -114,10 +115,13 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                               ),
                               ListTile(
                                 leading: Icon(Icons.account_box),
-                                title: Text("لیست کارگاه های 2"),
+                                title: Text("کاربران کارگاه 2"),
                                 trailing: Icon(Icons.chevron_right),
                                 onTap: (){
-
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Workshop2sList()));
                                 },
                               ),
                               Divider(),
