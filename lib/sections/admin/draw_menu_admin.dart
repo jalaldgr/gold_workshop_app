@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/sections/admin/designers/designersList.dart';
+import 'package:gold_workshop/sections/admin/workshop1/wokshop1List.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../login.dart';
@@ -104,6 +105,10 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                                 title: Text("لیست کارگاه های 1"),
                                 trailing: Icon(Icons.chevron_right),
                                 onTap: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Workshop1sList()));
 
                                 },
                               ),
