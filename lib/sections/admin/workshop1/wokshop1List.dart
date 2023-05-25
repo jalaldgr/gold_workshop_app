@@ -36,7 +36,7 @@ class _Workshop1sListState extends State<Workshop1sList> {
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text('لیست کارگاه 1',
+        title: const Text('کاربران کارگاه 1',
             style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.bold,
@@ -74,7 +74,7 @@ class _Workshop1sListState extends State<Workshop1sList> {
           )
               : snapshot.data != null
               ? const Center(
-            child: Text("بدون کارگاه 1..."),
+            child: Text("کاربری ثبت نشده..."),
           )
               : CircularProgressIndicator(),
         ),
