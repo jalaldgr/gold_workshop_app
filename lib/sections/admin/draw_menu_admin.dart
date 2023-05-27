@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../login.dart';
 import '../../models/userModel.dart';
+import 'orders/ordersList.dart';
 import 'workshop2/wokshop1List.dart';
 
 
@@ -70,7 +71,10 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                                 title: Text("لیست سفارش ها"),
                                 trailing: Icon(Icons.chevron_right),
                                 onTap: (){
-
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => OrdersList()));
                                 },
                               ),
                               ListTile(
