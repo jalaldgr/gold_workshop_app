@@ -53,23 +53,43 @@ class _OrdersListState extends State<OrdersList> {
             builder: (BuildContext context,
                 AsyncSnapshot<List<orderData>> snapshot) =>
             snapshot.hasData && snapshot.data!.isNotEmpty
-                ? Container(
-              height: MediaQuery.of(context).size.height * 0.87,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius:
-                BorderRadius.only(topLeft: Radius.circular(1.0)),
-              ),
-              child: ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    return _buildPaymentItem(
-                        context,
-                        snapshot.data?[index].clientFullName,
-                        snapshot.data?[index].status,
-                        snapshot.data?[index],
-                        index);
-                  }),
+                ? Column(
+              children: [
+
+                ListTile(
+                onTap: null,
+                leading: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                ),
+                title: Row(mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(child: Text("شماره")),
+                      Expanded(child: Text("نام پلاک")),
+                      Expanded(child: Text("وضعیت")),
+                      Expanded(child: Text("Id")),
+                      SizedBox(width: 100,)
+                    ]
+                ),),
+
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.87,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                    BorderRadius.only(topLeft: Radius.circular(1.0)),
+                  ),
+                  child: ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        return _buildPaymentItem(
+                            context,
+                            snapshot.data?[index].clientFullName,
+                            snapshot.data?[index].status,
+                            snapshot.data?[index],
+                            index);
+                      }),
+                )
+              ],
             )
                 : snapshot.hasError
                 ? Center(
@@ -166,28 +186,34 @@ class _OrdersListState extends State<OrdersList> {
   Widget _buildPaymentItem(BuildContext context,
       String? clientFullname,String? status , orderData? order,int? index) {
     return Padding(padding: EdgeInsets.all(4),
-      child: Row(
-        children: [
-          Text("${clientFullname}"),
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: () {
-              // userData user =new  userData(clientFullname, fullName,"Designer",id,"");
-              // _showForm(user);
-            },
+      child: ListTile(
+          title: Row(
+              children: <Widget>[
+                Expanded(child: Text("${index}")),
+                Expanded(child: Text("${order?.status}")),
+              ]
           ),
-          IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () async {
+          trailing: SizedBox(width: 100,
+            child:Row(children: [
+              IconButton(
+                icon: const Icon(Icons.edit),
+                onPressed: () {
+                  // userData user =new  userData(userName, fullName,"Workshop1",id,"");
+                  // _showForm(user);
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () async {
 
-              if(order?.id != null){
-                String response = await AdminApi.deleteOrder(order?.id);
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
-              }
-              setState(() {});
-            },
-          ),
-        ],
+                  if(order?.id != null){
+                    String response = await AdminApi.deleteOrder(order?.id);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
+                  }
+                  setState(() {});
+                },
+              ),
+            ],),)
       ),);
   }
 }
