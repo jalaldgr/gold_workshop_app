@@ -86,9 +86,37 @@ class NewOrderFormState extends State<NewOrderForm> {
                             });})
                       ],)
                       ),
-                      Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText:"کاغذی چکباکس"),),),
-                      Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "بیعانه جکباکس"),),),
-                      Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "تحویل مشتری"),),),],),
+                      Expanded(
+                          child:
+                          Row(children: [
+                            Text("کاغذی"),
+                            Checkbox(
+                                value: deliveryPaperCheckBoxValue,
+                                onChanged: (value) {setState(() {deliveryPaperCheckBoxValue = value!;
+                                  // widget.trip?.roundTrip = value;
+                                });})
+                          ],)
+                      ),
+                      Expanded(child:
+                          Row(children: [
+                            Text("بعیانه"),
+                            Checkbox(
+                                value: feeCheckBoxValue,
+                                onChanged: (value) {setState(() {feeCheckBoxValue = value!;
+                                  // widget.trip?.roundTrip = value;
+                                });})
+                          ],)
+                      ),
+                      Expanded(child:
+                        Row(children: [
+                          Text("تحویل مشتری"),
+                          Checkbox(
+                              value: deliveryByCustomerCheckBoxValue,
+                              onChanged: (value) {setState(() {deliveryByCustomerCheckBoxValue = value!;
+                                // widget.trip?.roundTrip = value;
+                              });})
+                        ],)
+                      ),],),
                   ),
                 SizedBox(height: 32,),
 
