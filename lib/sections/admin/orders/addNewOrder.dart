@@ -24,6 +24,8 @@ class NewOrderFormState extends State<NewOrderForm> {
     'مشتری',
     'همکار'
   ];
+  String statusDropDownValue = 'در انتظار بررسی';
+  var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'در حال طراحی','در کارگاه 1','در کارگاه 2','تکمیل طراحی','تکمیل کارگاه 1','تکمیل کارگاه 2' ,'لغو شده'];
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,24 @@ class NewOrderFormState extends State<NewOrderForm> {
 
 
                     ),
-                    Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "وضعیت"),),),
+                    Expanded(child:
+                    DropdownButton(
+                      value: statusDropDownValue,
+                      items: statusDropDownItems.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Text(items),
+                        );
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          statusDropDownValue = value!;
+
+                        });
+                      },
+                    )
+
+                      ,),
                   ],),
                 ),
                 SizedBox(height: 32,),
