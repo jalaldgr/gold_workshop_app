@@ -40,6 +40,18 @@ class AdminApi {
       if (response.statusCode == 200) {
         return response.body;
       }
+    }
+
+    static Future getWorkshop1sJson() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      dynamic token = prefs.getString("jwt");
+      final response = await http.get(
+        Uri.parse('${dotenv.env['API_URL']}/admin/get-all-workshop1'),
+        headers: {'Authorization': 'Bearer $token'},
+      );
+      if (response.statusCode == 200) {
+        return response.body;
+      }
 
     }
 
@@ -146,6 +158,19 @@ class AdminApi {
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((myMap) => userData.fromJson(myMap)).toList();
 
+
+  }
+
+  static Future getWorkshop2sJson() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+    final response = await http.get(
+      Uri.parse('${dotenv.env['API_URL']}/admin/get-all-workshop2'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    if (response.statusCode == 200) {
+      return response.body;
+    }
 
   }
 

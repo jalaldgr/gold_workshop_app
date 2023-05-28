@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
 
+import 'workshop1DropDown.dart';
+import 'workshop2DropDown.dart';
+
 // Define a custom Form widget.
 class NewOrderForm extends StatefulWidget {
   const NewOrderForm({super.key});
@@ -15,6 +18,12 @@ onChangeDesignerDropDown(value){
 print("in here ${value}");
 }
 
+onChangeWorkshop1DropDown(value){
+  print("in here ${value}");
+}
+onChangeWorkshop2DropDown(value){
+  print("in here ${value}");
+}
 
 
 
@@ -138,12 +147,9 @@ class NewOrderFormState extends State<NewOrderForm> {
                 Padding(padding: EdgeInsets.all(16),
                   child:
                         Row(children: [
-                          Expanded(child:
-                              DesignerDropDown(callback: onChangeDesignerDropDown,),
-
-                          ),
-                          Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "کارگاه 1"),),),
-                          Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "کارگاه 2"),),),
+                          Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,),),
+                          Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,),),
+                          Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,),),
                           Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توع مشتری"),),),],),),
                 // Add TextFormFields and ElevatedButton here.
               ],
