@@ -19,6 +19,11 @@ class NewOrderFormState extends State<NewOrderForm> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
+  String customerTypeDropDownValue = 'مشتری';
+  var customerTypeDropDownItems = [
+    'مشتری',
+    'همکار'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +54,25 @@ class NewOrderFormState extends State<NewOrderForm> {
                     Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "نام مشتری"),),),
                     Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "شماره تماس"),),),
                     Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "تاریخ تحویل"),),),
-                    Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توع مشتری"),),),
+                    Expanded(child:
+                    DropdownButton(
+                      value: customerTypeDropDownValue,
+                      items: customerTypeDropDownItems.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Text(items),
+                        );
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          customerTypeDropDownValue = value!;
+
+                        });
+                      },
+                    )
+
+
+                    ),
                     Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "وضعیت"),),),
                   ],),
                 ),
