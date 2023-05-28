@@ -73,51 +73,57 @@ class NewOrderFormState extends State<NewOrderForm> {
                 ),
                 SizedBox(height: 32,),
                 Padding(padding: EdgeInsets.all(16),
-                 child:
-                    Row(children: [
-                      Expanded(child:
+                 child:Row(children: [
+                   Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توضیحات"))),
+                   Expanded(child:
+                   Row(children: [
+                     Expanded(child:
 
-                      Row(children: [
-                        Text("تحویل فوری"),
-                        Checkbox(
-                            value: instantDeliveryCheckBoxValue,
-                            onChanged: (value) {setState(() {instantDeliveryCheckBoxValue = value!;
-                              // widget.trip?.roundTrip = value;
-                            });})
-                      ],)
-                      ),
-                      Expanded(
-                          child:
-                          Row(children: [
-                            Text("کاغذی"),
-                            Checkbox(
-                                value: deliveryPaperCheckBoxValue,
-                                onChanged: (value) {setState(() {deliveryPaperCheckBoxValue = value!;
-                                  // widget.trip?.roundTrip = value;
-                                });})
-                          ],)
-                      ),
-                      Expanded(child:
-                          Row(children: [
-                            Text("بعیانه"),
-                            Checkbox(
-                                value: feeCheckBoxValue,
-                                onChanged: (value) {setState(() {feeCheckBoxValue = value!;
-                                  // widget.trip?.roundTrip = value;
-                                });})
-                          ],)
-                      ),
-                      Expanded(child:
-                        Row(children: [
-                          Text("تحویل مشتری"),
-                          Checkbox(
-                              value: deliveryByCustomerCheckBoxValue,
-                              onChanged: (value) {setState(() {deliveryByCustomerCheckBoxValue = value!;
-                                // widget.trip?.roundTrip = value;
-                              });})
-                        ],)
-                      ),],),
-                  ),
+                     Row(children: [
+                       Text("تحویل فوری"),
+                       Checkbox(
+                           value: instantDeliveryCheckBoxValue,
+                           onChanged: (value) {setState(() {instantDeliveryCheckBoxValue = value!;
+                             // widget.trip?.roundTrip = value;
+                           });})
+                     ],)
+                     ),
+                     Expanded(
+                         child:
+                         Row(children: [
+                           Text("کاغذی"),
+                           Checkbox(
+                               value: deliveryPaperCheckBoxValue,
+                               onChanged: (value) {setState(() {deliveryPaperCheckBoxValue = value!;
+                                 // widget.trip?.roundTrip = value;
+                               });})
+                         ],)
+                     ),
+                     Expanded(child:
+                     Row(children: [
+                       Text("بعیانه"),
+                       Checkbox(
+                           value: feeCheckBoxValue,
+                           onChanged: (value) {setState(() {feeCheckBoxValue = value!;
+                             // widget.trip?.roundTrip = value;
+                           });})
+                     ],)
+                     ),
+                     Expanded(child:
+                     Row(children: [
+                       Text("تحویل مشتری"),
+                       Checkbox(
+                           value: deliveryByCustomerCheckBoxValue,
+                           onChanged: (value) {setState(() {deliveryByCustomerCheckBoxValue = value!;
+                             // widget.trip?.roundTrip = value;
+                           });})
+                     ],)
+                     ),],)
+                   )
+
+                 ],)
+
+                  ,),
                 SizedBox(height: 32,),
 
                 Padding(padding: EdgeInsets.all(16),
