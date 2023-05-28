@@ -30,6 +30,19 @@ class AdminApi {
 
   }
 
+    static Future getDesignersJson() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      dynamic token = prefs.getString("jwt");
+      final response = await http.get(
+        Uri.parse('${dotenv.env['API_URL']}/admin/get-all-designer'),
+        headers: {'Authorization': 'Bearer $token'},
+      );
+      if (response.statusCode == 200) {
+        return response.body;
+      }
+
+    }
+
     static Future<String> updateDesigner(userData user) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
