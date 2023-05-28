@@ -40,6 +40,11 @@ class NewOrderFormState extends State<NewOrderForm> {
   var customerTypeDropDownItems = [ 'مشتری','همکار' ];
   String statusDropDownValue = 'در انتظار بررسی';
   var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'در حال طراحی','در کارگاه 1','در کارگاه 2','تکمیل طراحی','تکمیل کارگاه 1','تکمیل کارگاه 2' ,'لغو شده'];
+  String productTypeDropDownValue = 'پلاک اسم';
+  var productTypeDropDownItems = ["پلاک اسم","انگشتر","النگو","دستبند","گوشواره","دوره سنگ","سرویس طلا","نیم ست طلا","آویز طلا","پا بند طلا",
+    "پا بند طلا","رو لباسی طلا","جواهرات","ساعت طلا","دستبند چرمی طلا","دستبند مهره ای فانتزی طلا","تک پوش طلا","گردنبند","حلقه ست",
+    "اکسسوری طلا","محصولات نفره","آویز ساعت و دستبند طلا","پیرسینگ طلا","زنجیر طلا","سنجاق سینه طلا","مد روز","کودک و نوزاد",
+    "طلای مناسبتی","طوق و بنگل طلا","تمیمه","انگشتر مردانه","زنجیر مردانه","دستبند مردانه","انگشتر زنانه","هدایای اقتصادی","برند ها"];
   bool instantDeliveryCheckBoxValue = false;
   bool deliveryByCustomerCheckBoxValue = false;
   bool feeCheckBoxValue = false;
@@ -143,6 +148,18 @@ class NewOrderFormState extends State<NewOrderForm> {
 
                   ,),
                 SizedBox(height: 32,),
+                Padding(padding: EdgeInsets.all(16),
+                  child:
+                  Row(children: [
+                    Expanded(child:Text("فایل عکس"),),
+                    Expanded(child:Text("فایل طراح"),),
+                    Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,),),
+                    Expanded(child: DropdownButton(
+                      value: productTypeDropDownValue,
+                      items: productTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                      onChanged: (String? value) {setState(() {productTypeDropDownValue = value!;});},
+                    ))
+                    ],),),
 
                 Padding(padding: EdgeInsets.all(16),
                   child:
@@ -150,7 +167,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                           Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,),),
                           Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,),),
                           Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,),),
-                          Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توع مشتری"),),),],),),
+                          ],),),
                 // Add TextFormFields and ElevatedButton here.
               ],
             ),
