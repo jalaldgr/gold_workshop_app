@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
 
 // Define a custom Form widget.
 class NewOrderForm extends StatefulWidget {
@@ -9,6 +10,13 @@ class NewOrderForm extends StatefulWidget {
     return NewOrderFormState();
   }
 }
+
+onChangeDesignerDropDown(value){
+print("in here ${value}");
+}
+
+
+
 
 // Define a corresponding State class.
 // This class holds data related to the form.
@@ -27,6 +35,7 @@ class NewOrderFormState extends State<NewOrderForm> {
   bool deliveryByCustomerCheckBoxValue = false;
   bool feeCheckBoxValue = false;
   bool deliveryPaperCheckBoxValue = false;
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -129,7 +138,10 @@ class NewOrderFormState extends State<NewOrderForm> {
                 Padding(padding: EdgeInsets.all(16),
                   child:
                         Row(children: [
-                          Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "طراح"),),),
+                          Expanded(child:
+                              DesignerDropDown(callback: onChangeDesignerDropDown,),
+
+                          ),
                           Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "کارگاه 1"),),),
                           Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "کارگاه 2"),),),
                           Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توع مشتری"),),),],),),
