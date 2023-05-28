@@ -59,40 +59,16 @@ class NewOrderFormState extends State<NewOrderForm> {
                     Expanded(child:
                     DropdownButton(
                       value: customerTypeDropDownValue,
-                      items: customerTypeDropDownItems.map((String items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(items),
-                        );
-                      }).toList(),
-                      onChanged: (String? value) {
-                        setState(() {
-                          customerTypeDropDownValue = value!;
-
-                        });
-                      },
-                    )
-
-
-                    ),
+                      items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                      onChanged: (String? value) {setState(() {customerTypeDropDownValue = value!;});},
+                    )),
                     Expanded(child:
                     DropdownButton(
                       value: statusDropDownValue,
-                      items: statusDropDownItems.map((String items) {
-                        return DropdownMenuItem(
-                          value: items,
-                          child: Text(items),
-                        );
-                      }).toList(),
-                      onChanged: (String? value) {
-                        setState(() {
-                          statusDropDownValue = value!;
+                      items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                      onChanged: (String? value) {setState(() {statusDropDownValue = value!;});},)
 
-                        });
-                      },
-                    )
-
-                      ,),
+                      ),
                   ],),
                 ),
                 SizedBox(height: 32,),
@@ -102,9 +78,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                       Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توع تحویل"),),),
                       Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText:"کاغذی چکباکس"),),),
                       Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "بیعانه جکباکس"),),),
-                      Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "تحویل مشتری"),),),
-
-                    ],),
+                      Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "تحویل مشتری"),),),],),
                   ),
                 SizedBox(height: 32,),
 
@@ -114,8 +88,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                           Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "طراح"),),),
                           Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "کارگاه 1"),),),
                           Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "کارگاه 2"),),),
-                          Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توع مشتری"),),),
-                        ],),),
+                          Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توع مشتری"),),),],),),
                 // Add TextFormFields and ElevatedButton here.
               ],
             ),
