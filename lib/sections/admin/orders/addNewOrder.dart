@@ -20,13 +20,13 @@ class NewOrderFormState extends State<NewOrderForm> {
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
   String customerTypeDropDownValue = 'مشتری';
-  var customerTypeDropDownItems = [
-    'مشتری',
-    'همکار'
-  ];
+  var customerTypeDropDownItems = [ 'مشتری','همکار' ];
   String statusDropDownValue = 'در انتظار بررسی';
   var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'در حال طراحی','در کارگاه 1','در کارگاه 2','تکمیل طراحی','تکمیل کارگاه 1','تکمیل کارگاه 2' ,'لغو شده'];
-
+  bool instantDeliveryCheckBoxValue = false;
+  bool deliveryByCustomerCheckBoxValue = false;
+  bool feeCheckBoxValue = false;
+  bool deliveryPaperCheckBoxValue = false;
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -75,7 +75,17 @@ class NewOrderFormState extends State<NewOrderForm> {
                 Padding(padding: EdgeInsets.all(16),
                  child:
                     Row(children: [
-                      Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توع تحویل"),),),
+                      Expanded(child:
+
+                      Row(children: [
+                        Text("تحویل فوری"),
+                        Checkbox(
+                            value: instantDeliveryCheckBoxValue,
+                            onChanged: (value) {setState(() {instantDeliveryCheckBoxValue = value!;
+                              // widget.trip?.roundTrip = value;
+                            });})
+                      ],)
+                      ),
                       Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText:"کاغذی چکباکس"),),),
                       Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "بیعانه جکباکس"),),),
                       Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "تحویل مشتری"),),),],),
