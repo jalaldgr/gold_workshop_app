@@ -45,10 +45,21 @@ class NewOrderFormState extends State<NewOrderForm> {
     "پا بند طلا","رو لباسی طلا","جواهرات","ساعت طلا","دستبند چرمی طلا","دستبند مهره ای فانتزی طلا","تک پوش طلا","گردنبند","حلقه ست",
     "اکسسوری طلا","محصولات نفره","آویز ساعت و دستبند طلا","پیرسینگ طلا","زنجیر طلا","سنجاق سینه طلا","مد روز","کودک و نوزاد",
     "طلای مناسبتی","طوق و بنگل طلا","تمیمه","انگشتر مردانه","زنجیر مردانه","دستبند مردانه","انگشتر زنانه","هدایای اقتصادی","برند ها"];
+  String orderMetaDropDownValue = 'وزن';
+  var orderMetaDropDownItems = [ 'وزن','کد' ];
+  TextEditingController orderMetaEditText=TextEditingController();
   bool instantDeliveryCheckBoxValue = false;
   bool deliveryByCustomerCheckBoxValue = false;
   bool feeCheckBoxValue = false;
   bool deliveryPaperCheckBoxValue = false;
+  List<DataRow> tableItem=[];
+
+  onSelectedRow( String row) async {
+    setState(() {
+
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +164,51 @@ class NewOrderFormState extends State<NewOrderForm> {
                   Row(children: [
                     Expanded(child:Text("فایل عکس"),),
                     Expanded(child:Text("فایل طراح"),),
-                    Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,),),
+                    Expanded(child:
+                        Column(children: [
+                          Row(
+                            children: [
+                              Expanded(child:DropdownButton(
+                                value: orderMetaDropDownValue,
+                                items: orderMetaDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                                onChanged: (String? value) {setState(() {orderMetaDropDownValue = value!;orderMetaEditText.text='';});},
+                              )),
+                              Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: ""),controller: orderMetaEditText,)),
+                              Expanded(child:IconButton( onPressed: (){
+                                  setState(() {
+                                    tableItem.add(DataRow(cells: [DataCell(Text("${orderMetaDropDownValue}")),DataCell(Text("${orderMetaEditText.text}"))]
+                                        // ,onSelectChanged:(b) {onSelectedRow("asd");}
+                                    ));
+
+                                  });
+                                }, icon: Icon(Icons.add),),
+                              )
+                            ],
+                          ),
+
+                          DataTable(
+                            columns: const <DataColumn>[
+                              DataColumn(
+                                label: Text(
+                                  'ویژگی',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'عنوان',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+
+                            ],
+                            rows: tableItem,
+                          )
+                        ],)
+
+
+
+                    ),
                     Expanded(child: DropdownButton(
                       value: productTypeDropDownValue,
                       items: productTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
