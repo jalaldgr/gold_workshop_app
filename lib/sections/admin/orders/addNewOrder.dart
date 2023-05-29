@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
 
 import 'workshop1DropDown.dart';
@@ -6,23 +7,13 @@ import 'workshop2DropDown.dart';
 
 // Define a custom Form widget.
 class NewOrderForm extends StatefulWidget {
-  const NewOrderForm({super.key});
+  orderData? order;
+  NewOrderForm({super.key,this.order});
 
   @override
   NewOrderFormState createState() {
     return NewOrderFormState();
   }
-}
-
-onChangeDesignerDropDown(value){
-print("in here ${value}");
-}
-
-onChangeWorkshop1DropDown(value){
-  print("in here ${value}");
-}
-onChangeWorkshop2DropDown(value){
-  print("in here ${value}");
 }
 
 
@@ -47,19 +38,55 @@ class NewOrderFormState extends State<NewOrderForm> {
     "طلای مناسبتی","طوق و بنگل طلا","تمیمه","انگشتر مردانه","زنجیر مردانه","دستبند مردانه","انگشتر زنانه","هدایای اقتصادی","برند ها"];
   String orderMetaDropDownValue = 'وزن';
   var orderMetaDropDownItems = [ 'وزن','کد' ];
-  TextEditingController orderMetaEditText=TextEditingController();
   bool instantDeliveryCheckBoxValue = false;
   bool deliveryByCustomerCheckBoxValue = false;
   bool feeCheckBoxValue = false;
   bool deliveryPaperCheckBoxValue = false;
   List<DataRow> tableItem=[];
 
+  TextEditingController orderMetaEditTextController=TextEditingController();
+  TextEditingController nameEditTextController=TextEditingController();
+  TextEditingController contactEditTextController=TextEditingController();
+  TextEditingController descriptionEditTextController=TextEditingController();
+
+
+
+
   onSelectedRow( String row) async {
     setState(() {
 
     });
   }
+  onChangeDesignerDropDown(value){
+    setState(() {
+      widget.order?.designerId = value["id"];
+      widget.order?.designerFullName = value["fullName"];
+    });
+  }
 
+  onChangeWorkshop1DropDown(value){
+    setState(() {
+      widget.order?.workshop1Id = value["id"];
+      widget.order?.workshop1fullName = value["fullName"];
+    });
+  }
+  onChangeWorkshop2DropDown(value){
+    setState(() {
+      widget.order?.workshop2Id = value["id"];
+      widget.order?.workshop2fullName = value["fullName"];
+    });
+  }
+
+
+
+  collectFields(){
+    setState(() {
+      widget.order?.clientFullName = nameEditTextController.text;
+      widget.order?.clientMobile =  contactEditTextController.text;
+      widget.order?.description = descriptionEditTextController.text;
+print("cellect fields${nameEditTextController.text}");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,20 +114,26 @@ class NewOrderFormState extends State<NewOrderForm> {
                 Padding(padding: EdgeInsets.all(16)
                 ,child:
                   Row(children: [
-                    Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "نام مشتری"),),),
-                    Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "شماره تماس"),),),
+                    Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "نام مشتری"),controller: nameEditTextController,),),
+                    Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "شماره تماس"),controller: contactEditTextController,),),
                     Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "تاریخ تحویل"),),),
                     Expanded(child:
                     DropdownButton(
                       value: customerTypeDropDownValue,
                       items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                      onChanged: (String? value) {setState(() {customerTypeDropDownValue = value!;});},
+                      onChanged: (String? value) {setState(() {
+                        customerTypeDropDownValue = value!;
+                        widget.order?.clientType = value;
+                      });},
                     )),
                     Expanded(child:
                     DropdownButton(
                       value: statusDropDownValue,
                       items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                      onChanged: (String? value) {setState(() {statusDropDownValue = value!;});},)
+                      onChanged: (String? value) {setState(() {
+                        statusDropDownValue = value!;
+                        widget.order?.status = value;
+                      });},)
 
                       ),
                   ],),
@@ -108,7 +141,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                 SizedBox(height: 32,),
                 Padding(padding: EdgeInsets.all(16),
                  child:Row(children: [
-                   Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توضیحات"))),
+                   Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توضیحات"),controller: descriptionEditTextController,)),
                    Expanded(child:
                    Row(children: [
                      Expanded(child:
@@ -118,7 +151,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                        Checkbox(
                            value: instantDeliveryCheckBoxValue,
                            onChanged: (value) {setState(() {instantDeliveryCheckBoxValue = value!;
-                             // widget.trip?.roundTrip = value;
+                             widget.order?.instantDelivery = value;
                            });})
                      ],)
                      ),
@@ -129,7 +162,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                            Checkbox(
                                value: deliveryPaperCheckBoxValue,
                                onChanged: (value) {setState(() {deliveryPaperCheckBoxValue = value!;
-                                 // widget.trip?.roundTrip = value;
+                                 widget.order?.paperDelivery = value;
                                });})
                          ],)
                      ),
@@ -139,7 +172,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                        Checkbox(
                            value: feeCheckBoxValue,
                            onChanged: (value) {setState(() {feeCheckBoxValue = value!;
-                             // widget.trip?.roundTrip = value;
+                             widget.order?.feeOrder = value;
                            });})
                      ],)
                      ),
@@ -149,7 +182,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                        Checkbox(
                            value: deliveryByCustomerCheckBoxValue,
                            onChanged: (value) {setState(() {deliveryByCustomerCheckBoxValue = value!;
-                             // widget.trip?.roundTrip = value;
+                             widget.order?.customerDelivery = value;
                            });})
                      ],)
                      ),],)
@@ -171,12 +204,17 @@ class NewOrderFormState extends State<NewOrderForm> {
                               Expanded(child:DropdownButton(
                                 value: orderMetaDropDownValue,
                                 items: orderMetaDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                                onChanged: (String? value) {setState(() {orderMetaDropDownValue = value!;orderMetaEditText.text='';});},
+                                onChanged: (String? value) {
+                                  setState(() {
+                                    orderMetaDropDownValue = value!;
+                                    orderMetaEditTextController.text='';});
+                                    // widget.order
+                                  },
                               )),
-                              Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: ""),controller: orderMetaEditText,)),
+                              Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: ""),controller: orderMetaEditTextController,)),
                               Expanded(child:IconButton( onPressed: (){
                                   setState(() {
-                                    tableItem.add(DataRow(cells: [DataCell(Text("${orderMetaDropDownValue}")),DataCell(Text("${orderMetaEditText.text}"))]
+                                    tableItem.add(DataRow(cells: [DataCell(Text("${orderMetaDropDownValue}")),DataCell(Text("${orderMetaEditTextController.text}"))]
                                         // ,onSelectChanged:(b) {onSelectedRow("asd");}
                                     ));
 
@@ -212,7 +250,10 @@ class NewOrderFormState extends State<NewOrderForm> {
                     Expanded(child: DropdownButton(
                       value: productTypeDropDownValue,
                       items: productTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                      onChanged: (String? value) {setState(() {productTypeDropDownValue = value!;});},
+                      onChanged: (String? value) {setState(() {
+                        productTypeDropDownValue = value!;
+                        widget.order?.productType = value;
+                      });},
                     ))
                     ],),),
 
@@ -222,7 +263,11 @@ class NewOrderFormState extends State<NewOrderForm> {
                           Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,),),
                           Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,),),
                           Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,),),
-                          ],),),
+                          ],)
+                  ,),
+                 ElevatedButton(onPressed: () {
+                   collectFields(); print("${widget.order?.toJson()}");
+                   }, child: Text("ثبت سفارش"),)
                 // Add TextFormFields and ElevatedButton here.
               ],
             ),

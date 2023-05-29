@@ -109,7 +109,7 @@ class _OrdersListState extends State<OrdersList> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => NewOrderForm()));
+                    builder: (context) => NewOrderForm(order: orderData.fromJson({}),)));
           } ,
         )
 
