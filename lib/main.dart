@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:persian_fonts/persian_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.amber,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        textTheme: PersianFonts.vazirTextTheme,
       ),
       // add local support
       localizationsDelegates: const [
