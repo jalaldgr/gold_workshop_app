@@ -1,7 +1,4 @@
-
-
 class orderData {
-  String? woocommerceOrderId;
   String? clientFullName;
   String? plateName;
   String? description;
@@ -21,11 +18,18 @@ class orderData {
   String? designerFile;
   String? createdDate;
   String? id;
-
+  bool? instantDelivery;
+  bool? customerDelivery;
+  bool? paperDelivery;
+  bool? feeOrder;
+  String? orderMeta;
+  String? woocommerceOrderId;
+  String? clientType;
+  String? clientMobile;
+  String? productType;
 
 
   orderData(
-      this.woocommerceOrderId,
       this.clientFullName,
       this.plateName,
       this.description,
@@ -43,11 +47,19 @@ class orderData {
       this.designerId,
       this.designerFile,
       this.createdDate,
-      this.id
+      this.id,
+      this.instantDelivery,
+      this.customerDelivery,
+      this.paperDelivery,
+      this.feeOrder,
+      this.orderMeta,
+      this.woocommerceOrderId,
+      this.clientMobile,
+      this.clientType,
+      this.productType
 );
 
   orderData.fromJson(Map<String, dynamic> json) {
-    woocommerceOrderId = json['woocommerceOrderId'];
     clientFullName = json['clientFullName'];
     plateName = json['plateName'];
     description = json['description'];
@@ -66,6 +78,15 @@ class orderData {
     designerFile = json['designerFile'];
     createdDate = json['createdDate'];
     id = json['id'];
+    woocommerceOrderId = json['woocommerceOrderId'];
+    instantDelivery = json['instantDelivery'];
+    customerDelivery = json['customerDelivery'];
+    paperDelivery = json['paperDelivery'];
+    feeOrder = json['feeOrder'];
+    orderMeta = json['orderMeta'];
+    clientMobile = json['clientMobile'];
+    clientType = json['clientType'];
+    productType = json['productType'];
   }
 
   Map<String, dynamic> toJson() {
@@ -82,13 +103,23 @@ class orderData {
     data['workshop1fullName']= this.workshop1fullName;
     data['workshop1Id']= this.workshop1Id;
     data['workshop1File']= this.workshop1File;
-    data['workshop2File']= this.workshop2File;
+    data['workshop2fullName']= this.workshop2fullName;
     data['workshop2Id']= this.workshop2Id;
     data['workshop2File']= this.workshop2File;
     data['designerFullName']= this.designerFullName;
     data['designerId']= this.designerId;
     data['designerFile']= this.designerFile;
     data['createdDate']= this.createdDate;
+    data['woocommerceOrderId']= this.woocommerceOrderId;
+    data['instantDelivery']= this.instantDelivery;
+    data['customerDelivery'] = this.customerDelivery;
+    data['paperDelivery']= this.paperDelivery;
+    data['feeOrder']= this.feeOrder;
+    data['orderMeta']= this.orderMeta;
+    data['clientMobile']= this.clientMobile;
+    data['clientType']= this.clientType;
+    data['productType']= this.productType;
+
 
     return data;
   }
