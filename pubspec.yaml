@@ -42,6 +42,7 @@ dependencies:
   http: ^0.13.6
   package_info_plus: ^3.0.1
   persian_fonts: ^1.0.5
+  persian_datetime_picker: ^2.6.0
 
 dev_dependencies:
   flutter_test:

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
 import 'workshop1DropDown.dart';
 import 'workshop2DropDown.dart';
@@ -49,6 +50,7 @@ class NewOrderFormState extends State<NewOrderForm> {
   TextEditingController nameEditTextController=TextEditingController();
   TextEditingController contactEditTextController=TextEditingController();
   TextEditingController descriptionEditTextController=TextEditingController();
+  TextEditingController deliverDateEditTextController=TextEditingController();
 
 
 
@@ -85,8 +87,16 @@ class NewOrderFormState extends State<NewOrderForm> {
       widget.order.clientFullName = nameEditTextController.text;
       widget.order.clientMobile =  contactEditTextController.text;
       widget.order.description = descriptionEditTextController.text;
-print("cellect fields${nameEditTextController.text}");
     });
+  }
+  openDatePicker() async {
+    Jalali? picked = await showPersianDatePicker(
+      context: context,
+      initialDate: Jalali.now(),
+      firstDate: Jalali.now(),
+      lastDate: Jalali(1414, 12),
+    );
+    deliverDateEditTextController.text = picked!.formatFullDate();
   }
 
   @override
@@ -117,7 +127,7 @@ print("cellect fields${nameEditTextController.text}");
                   Row(children: [
                     Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "نام مشتری"),controller: nameEditTextController,),),
                     Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "شماره تماس"),controller: contactEditTextController,),),
-                    Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "تاریخ تحویل"),),),
+                    Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration.collapsed(hintText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
                     Expanded(child:
                     DropdownButton(
                       value: customerTypeDropDownValue,
