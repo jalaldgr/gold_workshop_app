@@ -1,3 +1,6 @@
+
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/orderModel.dart';
@@ -51,6 +54,8 @@ class NewOrderFormState extends State<NewOrderForm> {
   TextEditingController contactEditTextController=TextEditingController();
   TextEditingController descriptionEditTextController=TextEditingController();
   TextEditingController deliverDateEditTextController=TextEditingController();
+  TextEditingController imageEditTextController=TextEditingController();
+  TextEditingController fileEditTextController=TextEditingController();
 
 
 
@@ -98,7 +103,21 @@ class NewOrderFormState extends State<NewOrderForm> {
     );
     deliverDateEditTextController.text = picked!.formatFullDate();
   }
+  openFilePicker() async {
 
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['*'],
+    );
+    fileEditTextController.text = "${result?.paths}";
+  }
+  openImagePicker() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['*'],
+    );
+    imageEditTextController.text = "${result?.paths}";
+  }
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -206,8 +225,8 @@ class NewOrderFormState extends State<NewOrderForm> {
                 Padding(padding: EdgeInsets.all(16),
                   child:
                   Row(children: [
-                    Expanded(child:Text("فایل عکس"),),
-                    Expanded(child:Text("فایل طراح"),),
+                    Expanded(child:TextFormField(onTap: openImagePicker,controller: imageEditTextController,),),
+                    Expanded(child:TextFormField(onTap: openFilePicker,controller: fileEditTextController,),),
                     Expanded(child:
                         Column(children: [
                           Row(
