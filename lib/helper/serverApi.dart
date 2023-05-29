@@ -251,13 +251,15 @@ class AdminApi {
     return response.body;
   }
 
-  static Future<String> addOrder(orderData user) async{
+  static Future<String> addOrder(orderData order) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
+
+    print("${order.toJson()}");
     final response = await http.post(
-        Uri.parse('${dotenv.env['API_URL']}/admin/register-order'),
-        headers: {'Authorization': 'Bearer $token'},
-        body: user.toJson()
+        Uri.parse('${dotenv.env['API_URL']}/admin/create-order'),
+        headers: {'Authorization': 'Bearer $token',"content-type": "application/json"},
+        body: jsonEncode(order.toJson())
     );
     return response.body;
   }

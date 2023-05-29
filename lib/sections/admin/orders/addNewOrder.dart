@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
 
@@ -7,8 +8,8 @@ import 'workshop2DropDown.dart';
 
 // Define a custom Form widget.
 class NewOrderForm extends StatefulWidget {
-  orderData? order;
-  NewOrderForm({super.key,this.order});
+  orderData order;
+  NewOrderForm({super.key,required this.order});
 
   @override
   NewOrderFormState createState() {
@@ -59,21 +60,21 @@ class NewOrderFormState extends State<NewOrderForm> {
   }
   onChangeDesignerDropDown(value){
     setState(() {
-      widget.order?.designerId = value["id"];
-      widget.order?.designerFullName = value["fullName"];
+      widget.order.designerId = value["id"];
+      widget.order.designerFullName = value["fullName"];
     });
   }
 
   onChangeWorkshop1DropDown(value){
     setState(() {
-      widget.order?.workshop1Id = value["id"];
-      widget.order?.workshop1fullName = value["fullName"];
+      widget.order.workshop1Id = value["id"];
+      widget.order.workshop1fullName = value["fullName"];
     });
   }
   onChangeWorkshop2DropDown(value){
     setState(() {
-      widget.order?.workshop2Id = value["id"];
-      widget.order?.workshop2fullName = value["fullName"];
+      widget.order.workshop2Id = value["id"];
+      widget.order.workshop2fullName = value["fullName"];
     });
   }
 
@@ -81,9 +82,9 @@ class NewOrderFormState extends State<NewOrderForm> {
 
   collectFields(){
     setState(() {
-      widget.order?.clientFullName = nameEditTextController.text;
-      widget.order?.clientMobile =  contactEditTextController.text;
-      widget.order?.description = descriptionEditTextController.text;
+      widget.order.clientFullName = nameEditTextController.text;
+      widget.order.clientMobile =  contactEditTextController.text;
+      widget.order.description = descriptionEditTextController.text;
 print("cellect fields${nameEditTextController.text}");
     });
   }
@@ -123,7 +124,7 @@ print("cellect fields${nameEditTextController.text}");
                       items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                       onChanged: (String? value) {setState(() {
                         customerTypeDropDownValue = value!;
-                        widget.order?.clientType = value;
+                        widget.order.clientType = value;
                       });},
                     )),
                     Expanded(child:
@@ -132,7 +133,7 @@ print("cellect fields${nameEditTextController.text}");
                       items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                       onChanged: (String? value) {setState(() {
                         statusDropDownValue = value!;
-                        widget.order?.status = value;
+                        widget.order.status = value;
                       });},)
 
                       ),
@@ -151,7 +152,7 @@ print("cellect fields${nameEditTextController.text}");
                        Checkbox(
                            value: instantDeliveryCheckBoxValue,
                            onChanged: (value) {setState(() {instantDeliveryCheckBoxValue = value!;
-                             widget.order?.instantDelivery = value;
+                             widget.order.instantDelivery = value;
                            });})
                      ],)
                      ),
@@ -162,7 +163,7 @@ print("cellect fields${nameEditTextController.text}");
                            Checkbox(
                                value: deliveryPaperCheckBoxValue,
                                onChanged: (value) {setState(() {deliveryPaperCheckBoxValue = value!;
-                                 widget.order?.paperDelivery = value;
+                                 widget.order.paperDelivery = value;
                                });})
                          ],)
                      ),
@@ -172,7 +173,7 @@ print("cellect fields${nameEditTextController.text}");
                        Checkbox(
                            value: feeCheckBoxValue,
                            onChanged: (value) {setState(() {feeCheckBoxValue = value!;
-                             widget.order?.feeOrder = value;
+                             widget.order.feeOrder = value;
                            });})
                      ],)
                      ),
@@ -182,7 +183,7 @@ print("cellect fields${nameEditTextController.text}");
                        Checkbox(
                            value: deliveryByCustomerCheckBoxValue,
                            onChanged: (value) {setState(() {deliveryByCustomerCheckBoxValue = value!;
-                             widget.order?.customerDelivery = value;
+                             widget.order.customerDelivery = value;
                            });})
                      ],)
                      ),],)
@@ -252,7 +253,7 @@ print("cellect fields${nameEditTextController.text}");
                       items: productTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                       onChanged: (String? value) {setState(() {
                         productTypeDropDownValue = value!;
-                        widget.order?.productType = value;
+                        widget.order.productType = value;
                       });},
                     ))
                     ],),),
@@ -265,8 +266,11 @@ print("cellect fields${nameEditTextController.text}");
                           Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,),),
                           ],)
                   ,),
-                 ElevatedButton(onPressed: () {
-                   collectFields(); print("${widget.order?.toJson()}");
+                 ElevatedButton(onPressed: () async {
+                   collectFields();
+                   var res = await AdminApi.addOrder(widget.order);
+                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                   
                    }, child: Text("ثبت سفارش"),)
                 // Add TextFormFields and ElevatedButton here.
               ],
