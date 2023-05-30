@@ -109,14 +109,22 @@ class NewOrderFormState extends State<NewOrderForm> {
       type: FileType.custom,
       allowedExtensions: ['*'],
     );
-    fileEditTextController.text = "${result?.paths}";
+
+    setState(() {
+      fileEditTextController.text = "${result?.paths[0]}";
+      widget.order.designerFile = "${result?.paths[0]}".replaceAll("\\", "\\\\");
+    });
   }
   openImagePicker() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['*'],
     );
-    imageEditTextController.text = "${result?.paths}";
+
+    setState(() {
+      imageEditTextController.text = "${result?.paths[0]}";
+      widget.order.image = "${result?.paths[0]}".replaceAll("\\", "\\\\");
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -181,7 +189,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                        Checkbox(
                            value: instantDeliveryCheckBoxValue,
                            onChanged: (value) {setState(() {instantDeliveryCheckBoxValue = value!;
-                             widget.order.instantDelivery = value;
+                             widget.order.instantDelivery = "${value}";
                            });})
                      ],)
                      ),
@@ -192,7 +200,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                            Checkbox(
                                value: deliveryPaperCheckBoxValue,
                                onChanged: (value) {setState(() {deliveryPaperCheckBoxValue = value!;
-                                 widget.order.paperDelivery = value;
+                                 widget.order.paperDelivery = "${value}";
                                });})
                          ],)
                      ),
@@ -202,7 +210,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                        Checkbox(
                            value: feeCheckBoxValue,
                            onChanged: (value) {setState(() {feeCheckBoxValue = value!;
-                             widget.order.feeOrder = value;
+                             widget.order.feeOrder = "${value}";
                            });})
                      ],)
                      ),
@@ -212,7 +220,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                        Checkbox(
                            value: deliveryByCustomerCheckBoxValue,
                            onChanged: (value) {setState(() {deliveryByCustomerCheckBoxValue = value!;
-                             widget.order.customerDelivery = value;
+                             widget.order.customerDelivery = "${value}";
                            });})
                      ],)
                      ),],)
@@ -297,9 +305,10 @@ class NewOrderFormState extends State<NewOrderForm> {
                   ,),
                  ElevatedButton(onPressed: () async {
                    collectFields();
+                   print(widget.order.toJson());
+
                    var res = await AdminApi.addOrder(widget.order);
                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                   
                    }, child: Text("ثبت سفارش"),)
                 // Add TextFormFields and ElevatedButton here.
               ],

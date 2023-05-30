@@ -1,7 +1,7 @@
 
 
 import 'dart:convert';
-
+import 'package:http_parser/http_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gold_workshop/models/orderModel.dart';
@@ -59,7 +59,6 @@ class AdminApi {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
 
-    print(user.toJson());
     final response = await http.post(
       Uri.parse('${dotenv.env['API_URL']}/admin/update-designer/${user.id}'),
       headers: {'Authorization': 'Bearer $token'},
@@ -112,7 +111,6 @@ class AdminApi {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
 
-    print(user.toJson());
     final response = await http.post(
         Uri.parse('${dotenv.env['API_URL']}/admin/update-workshop1/${user.id}'),
         headers: {'Authorization': 'Bearer $token'},
@@ -252,16 +250,32 @@ class AdminApi {
   }
 
   static Future<String> addOrder(orderData order) async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    dynamic token = prefs.getString("jwt");
 
-    print("${order.toJson()}");
-    final response = await http.post(
-        Uri.parse('${dotenv.env['API_URL']}/admin/create-order'),
-        headers: {'Authorization': 'Bearer $token',"content-type": "application/json"},
-        body: jsonEncode(order.toJson())
-    );
-    return response.body;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // dynamic token = prefs.getString("jwt");
+    var stringResponse="no response";
+    var request =  http.MultipartRequest("POST", Uri.parse('${dotenv.env['API_URL']}/admin/create-order'));
+    // request.headers.addAll({'Authorization': 'Bearer $token',"Content-Type": "application/x-www-form-urlencoded"});
+    if(order.image!="" && order.image!="null"){
+      http.MultipartFile file = await http.MultipartFile.fromPath('file', "${order.image}");
+      request.files.add(file);
+    }
+    order.toJson().forEach((key, value) {
+      request.fields[key] = value;
+    });
+
+     request.send().then((response) {
+      if (response.statusCode == 200)
+      response.stream.transform(utf8.decoder).listen((value) {
+        stringResponse=value;
+
+      });
+
+    });
+
+    return stringResponse;
   }
+
+
 
 }
