@@ -18,10 +18,10 @@ class orderData {
   String? designerFile;
   String? createdDate;
   String? id;
-  bool? instantDelivery;
-  bool? customerDelivery;
-  bool? paperDelivery;
-  bool? feeOrder;
+  String? instantDelivery;
+  String? customerDelivery;
+  String? paperDelivery;
+  String? feeOrder;
   String? orderMeta;
   String? woocommerceOrderId;
   String? clientType;
@@ -91,7 +91,6 @@ class orderData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['woocommerceOrderId'] = this.woocommerceOrderId;
     data['clientFullName'] = this.clientFullName;
     data['plateName'] = this.plateName;
     data['id'] = this.id;
