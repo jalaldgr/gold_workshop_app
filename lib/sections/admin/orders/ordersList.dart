@@ -109,7 +109,36 @@ class _OrdersListState extends State<OrdersList> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => NewOrderForm(order: orderData.fromJson({}),)));
+                    builder: (context) => NewOrderForm(order: orderData.fromJson({
+                      "clientFullName":"",
+                      "plateName":"",
+                      "description":"",
+                      "image":"",
+                      "code":"",
+                      "weight":"",
+                      "status":"",
+                      "workshop1fullName":"",
+                      "workshop1Id":"",
+                      "workshop1File":"",
+                      "workshop2fullName":"",
+                      "workshop2Id":"",
+                      "workshop2File":"",
+                      "designerFullName":"",
+                      "designerId":"",
+                      "designerFile":"",
+                      "createdDate":"",
+                      "id":"",
+                      "instantDelivery":"",
+                      "customerDelivery":"",
+                      "paperDelivery":"",
+                      "feeOrder":"",
+                      "orderMeta":"",
+                      "woocommerceOrderId":"",
+                      "clientMobile":"",
+                      "clientType":"",
+                      "productType":""
+
+                    }),)));
           } ,
         )
 
