@@ -20,6 +20,17 @@ class userData {
     id = json['id'];
   }
 
+
+
+  userData.fromSimpleJson(json) {
+    username = json['username'];
+    fullName = json['fullName'];
+    role = json['role'];
+    id = json['id'];
+
+  }
+
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['username'] = this.username;
