@@ -87,7 +87,7 @@ class _Workshop2ProfileScreenState extends State<Workshop2ProfileScreen> {
               ElevatedButton(
                 onPressed: () async {
                   // Save new journal
-                userData userUpdated =new  userData(user.username, fullNameController.text,"Admin",user.id,passwordController.text);
+                userData userUpdated =new  userData(user.username, fullNameController.text,"Workshop2",user.id,passwordController.text);
                 String response = await Workshop2Api.updateWorkshop2(userUpdated);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
                   // Close the bottom sheet
