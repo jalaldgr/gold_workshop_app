@@ -2,6 +2,7 @@
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
@@ -64,52 +65,31 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                   ,child:
                   Row(children: [
                     Expanded(child: Column(children: [Text("نام مشتری",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.clientFullName}")],)),
-                    Expanded(child: Column(children: [Text("شماره تماس",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.clientMobile}")],)),
+                    Expanded(child: Column(children: [Text("کارگاه1",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.workshop1fullName}")],)),
                     Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
                     Expanded(child: Column(children: [Text("تاریخ تحویل",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.deliveryDate}")],)),
                   ],),
                 ),
                 SizedBox(height: 32,),
                 Padding(padding: EdgeInsets.all(16),
-                  child:Row(children: [
-                    Expanded(child: Text("${widget.order.description}")),
-                    Expanded(child:
-                    Row(children: [
-                      Expanded(child:
-
-                      Row(children: [
-                        Text("${widget.order.instantDelivery=="true" ? "تحویل فوری":""}"),
-
-                      ],)
-                      ),
-                      Expanded(
-                          child:
-                          Row(children: [
-                            Text("${widget.order.paperDelivery=="true" ? "کاغذی":""}"),
-                          ],)
-                      ),
-                      Expanded(child:
-                      Row(children: [
-                        Text("${widget.order.feeOrder=="true" ? "بیعانه":""}"),
-
-                      ],)
-                      ),
-                      Expanded(child:
-                      Row(children: [
-                        Text("${widget.order.customerDelivery=="true" ? "تحویل مشتری":""}"),
-
-                      ],)
-                      ),],)
-                    )
-
-                  ],)
-
+                  child:Row(
+                    children: [
+                      Expanded(child: Row(children: [Column(children: [Text("توضیحات",style: TextStyle(fontSize: 14,color: Colors.grey)),Text("${widget.order.description}")])],)),
+                      Expanded(child: Row(children: [
+                        Expanded(child:Row(children: [Text("${widget.order.instantDelivery=="true" ? "تحویل فوری":""}"),],)),
+                        Expanded(child:Row(children: [Text("${widget.order.paperDelivery=="true" ? "کاغذی":""}"),],)),
+                        Expanded(child:Row(children: [Text("${widget.order.feeOrder=="true" ? "بیعانه":""}"),],)),
+                        Expanded(child:Row(children: [Text("${widget.order.customerDelivery=="true" ? "تحویل مشتری":""}"),],)),],
+                      )
+                      )]
+                    ,)
                   ,),
                 SizedBox(height: 32,),
                 Padding(padding: EdgeInsets.all(16),
                   child:
-                  Row(children: [
-                    Expanded(child: Text("${widget.order.image}")),
+                  Row(
+                    children: [
+                    Expanded(child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}")),
                     Expanded(child:
                     Column(children: [
                       Row(
@@ -140,17 +120,8 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
 
 
                     ),
-                    Expanded(child: Text("${widget.order.productType}")),
                   ],),),
 
-                Padding(padding: EdgeInsets.all(16),
-                  child:
-                  Row(children: [
-                    Expanded(child: Text("${widget.order.designerFullName}")),
-                    Expanded(child: Text("${widget.order.workshop1fullName}")),
-                    Expanded(child: Text("${widget.order.workshop2fullName}")),
-                  ],)
-                  ,),
                 ElevatedButton(onPressed: () async {
                   print(widget.order.toJson());
 
