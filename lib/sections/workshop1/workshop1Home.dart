@@ -8,6 +8,8 @@ import 'package:gold_workshop/sections/workshop1/draw_menu_workshop1.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'workshop1OrdersList.dart';
+
 
 
 class Workshop1HomeScreen extends StatefulWidget {
@@ -49,10 +51,33 @@ class _Workshop1HomeScreenState extends State<Workshop1HomeScreen> {
         ),
         backgroundColor: Colors.white,
         drawer: SideMenuWorkshop1(),
-        body: Column(children: <Widget>[
-          ElevatedButton(onPressed: logOut, child: Text("خروج کارگاه 1"))
-
-        ]));
+        body: Center(
+            child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(32),
+                        child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Workshop1OrdersList()));
+                            },
+                            child: Text("سفارش ها",style: TextStyle(fontSize: 32),)),
+                      )),
+                  Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(32),
+                        child: OutlinedButton(
+                            onPressed: () {
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => Workshop1OrdersList()));
+                            },
+                            child: Text("جدول ها",style: TextStyle(fontSize: 32),)),
+                      ))        ])));
   }
 
   logOut() async {
