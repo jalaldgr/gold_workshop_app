@@ -7,6 +7,7 @@ import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 // Define a custom Form widget.
@@ -36,7 +37,14 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
   }
 
 
-
+  Future<void> _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"),
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
 
   @override
@@ -89,7 +97,10 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                   child:
                   Row(
                     children: [
-                    Expanded(child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}")),
+                    InkWell(onTap: (){
+                      launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"));
+
+                    },child: Expanded(child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}")),),
                     Expanded(child:
                     Column(children: [
                       Row(
