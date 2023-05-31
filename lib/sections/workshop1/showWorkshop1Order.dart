@@ -63,10 +63,10 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                 Padding(padding: EdgeInsets.all(16)
                   ,child:
                   Row(children: [
-                    Expanded(child: Text("${widget.order.clientFullName}")),
-                    Expanded(child: Text("${widget.order.clientMobile}")),
-                    Expanded(child: Text("${widget.order.clientFullName}")),
-                    Expanded(child: Text("${widget.order.deliveryDate}")),
+                    Expanded(child: Column(children: [Text("نام مشتری",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.clientFullName}")],)),
+                    Expanded(child: Column(children: [Text("شماره تماس",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.clientMobile}")],)),
+                    Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
+                    Expanded(child: Column(children: [Text("تاریخ تحویل",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.deliveryDate}")],)),
                   ],),
                 ),
                 SizedBox(height: 32,),
