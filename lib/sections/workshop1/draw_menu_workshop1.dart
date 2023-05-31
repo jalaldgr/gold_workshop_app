@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../login.dart';
 import '../../models/userModel.dart';
+import 'profile.dart';
 
 
 class SideMenuWorkshop1 extends StatefulWidget {
@@ -57,7 +58,10 @@ class _SideMenuWorkshop1State extends State<SideMenuWorkshop1> {
                       title: Text("پروفایل"),
                       trailing: Icon(Icons.chevron_right),
                       onTap: (){
-
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Workshop1ProfileScreen()));
                       },
                     ),
                     ListTile(
