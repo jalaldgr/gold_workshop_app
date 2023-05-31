@@ -64,10 +64,11 @@ class _OrdersListState extends State<OrdersList> {
                 ),
                 title: Row(mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Expanded(child: Text("شماره")),
-                      Expanded(child: Text("نام پلاک")),
-                      Expanded(child: Text("وضعیت")),
-                      Expanded(child: Text("Id")),
+                      Expanded(child: Text("ردیف" ,style: TextStyle(fontStyle: FontStyle.italic),)),
+                      Expanded(child: Text("نام مشتری",style: TextStyle(fontStyle: FontStyle.italic))),
+                      Expanded(child: Text("نوع محصول",style: TextStyle(fontStyle: FontStyle.italic))),
+                      Expanded(child: Text("تاریخ تحویل",style: TextStyle(fontStyle: FontStyle.italic))),
+                      Expanded(child: Text("وضعیت",style: TextStyle(fontStyle: FontStyle.italic))),
                       SizedBox(width: 100,)
                     ]
                 ),),
@@ -84,8 +85,6 @@ class _OrdersListState extends State<OrdersList> {
                       itemBuilder: (context, index) {
                         return _buildPaymentItem(
                             context,
-                            snapshot.data?[index].clientFullName,
-                            snapshot.data?[index].status,
                             snapshot.data?[index],
                             index);
                       }),
@@ -145,83 +144,19 @@ class _OrdersListState extends State<OrdersList> {
     );
   }
 
-  void _showForm(userData user) async {
-    userNameController.text = user.username!;
-    fullNameController.text = user.fullName!;
-    passwordController.text = "";
-
-    showModalBottomSheet(
-        context: context,
-        elevation: 5,
-        isScrollControlled: true,
-        builder: (_) => Container(
-          padding: EdgeInsets.only(
-            top: 15,
-            left: 15,
-            right: 15,
-            // this will prevent the soft keyboard from covering the text fields
-            bottom: MediaQuery.of(context).viewInsets.bottom + 120,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              TextField(
-                decoration: const InputDecoration(hintText: 'نام و نام خانوادگی'),
-                controller: fullNameController,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextField(
-                decoration: const InputDecoration(hintText: 'نام کاربری'),
-                controller: userNameController,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextField(
-                decoration: const InputDecoration(hintText: 'پسورد'),
-                controller: passwordController,
-                obscureText: true,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  // Save new journal
-
-                  if(user.id != ""){
-                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Designer",user.id,passwordController.text);
-                    String response = await AdminApi.updateDesigner(userUpdated);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
-                  }
-                  if(user.id == ""){
-                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Designer","",passwordController.text);
-                    String response = await AdminApi.addDesigner(userUpdated);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
-                  }
-                  // Close the bottom sheet
-                  Navigator.of(context).pop();
-                  setState(() {});
-                },
-                child: Text(user.id == ""  ? 'ایجاد کاربر' : 'بروزرسانی'),
-              )
-            ],
-          ),
-        ));
-  }
 
 
 
   Widget _buildPaymentItem(BuildContext context,
-      String? clientFullname,String? status , orderData? order,int? index) {
+       orderData? order,int? index) {
     return Padding(padding: EdgeInsets.all(4),
       child: ListTile(
           title: Row(
               children: <Widget>[
                 Expanded(child: Text("${index}")),
+                Expanded(child: Text("${order?.clientFullName}")),
+                Expanded(child: Text("${order?.productType}")),
+                Expanded(child: Text("${order?.deliveryDate}")),
                 Expanded(child: Text("${order?.status}")),
               ]
           ),
