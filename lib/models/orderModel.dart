@@ -27,6 +27,7 @@ class orderData {
   String? clientType;
   String? clientMobile;
   String? productType;
+  String? deliveryDate;
 
 
   orderData(
@@ -56,7 +57,8 @@ class orderData {
       this.woocommerceOrderId,
       this.clientMobile,
       this.clientType,
-      this.productType
+      this.productType,
+      this.deliveryDate
 );
 
   orderData.fromJson(Map<String, dynamic> json) {
@@ -87,6 +89,8 @@ class orderData {
     clientMobile = json['clientMobile'];
     clientType = json['clientType'];
     productType = json['productType'];
+    deliveryDate = json['deliveryDate'];
+
   }
 
   Map<String, dynamic> toJson() {
@@ -118,6 +122,7 @@ class orderData {
     data['clientMobile']= this.clientMobile;
     data['clientType']= this.clientType;
     data['productType']= this.productType;
+    data['deliveryDate']= this.deliveryDate;
 
 
     return data;

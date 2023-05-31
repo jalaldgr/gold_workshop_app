@@ -92,6 +92,7 @@ class NewOrderFormState extends State<NewOrderForm> {
       widget.order.clientFullName = nameEditTextController.text;
       widget.order.clientMobile =  contactEditTextController.text;
       widget.order.description = descriptionEditTextController.text;
+      widget.order.deliveryDate = deliverDateEditTextController.text;
     });
   }
   openDatePicker() async {
