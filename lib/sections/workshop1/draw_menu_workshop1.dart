@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:gold_workshop/sections/workshop1/showWorkshop1Orders.dart';
+import 'package:gold_workshop/sections/workshop1/workshop1OrdersList.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../login.dart';
 import '../../models/userModel.dart';
@@ -69,7 +71,10 @@ class _SideMenuWorkshop1State extends State<SideMenuWorkshop1> {
                       title: Text("لیست سفارش ها"),
                       trailing: Icon(Icons.chevron_right),
                       onTap: (){
-
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Workshop1OrdersList()));
                       },
                     ),
                     ListTile(
