@@ -7,6 +7,7 @@ import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../helper/serverApi.dart';
 import '../../models/userModel.dart';
 
 
@@ -16,6 +17,10 @@ class AdminProfileScreen extends StatefulWidget {
 }
 
 class _AdminProfileScreenState extends State<AdminProfileScreen> {
+  TextEditingController fullNameController=TextEditingController();
+  TextEditingController userNameController=TextEditingController();
+  TextEditingController passwordController=TextEditingController();
+
   Future<userData> fetchUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic user = jsonDecode(prefs.getString(
@@ -31,9 +36,7 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
         Uri.parse('${dotenv.env['API_URL']}/admin/get/$userID'),
         headers: {'Authorization': 'Bearer $token'},
         );
-    print(jsonDecode(response.body));
     userModel=userData.fromSimpleJson(jsonDecode(response.body));
-    print("im here");
 
     return userModel;
   }
@@ -42,6 +45,60 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
   void initState() {
     super.initState();
   }
+
+
+  void _showForm(userData user) async {
+    fullNameController.text = user.fullName!;
+    passwordController.text = "";
+
+    showModalBottomSheet(
+        context: context,
+        elevation: 5,
+        isScrollControlled: true,
+        builder: (_) => Container(
+          padding: EdgeInsets.only(
+            top: 15,
+            left: 15,
+            right: 15,
+            // this will prevent the soft keyboard from covering the text fields
+            bottom: MediaQuery.of(context).viewInsets.bottom + 120,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                decoration: const InputDecoration(hintText: 'نام و نام خانوادگی'),
+                controller: fullNameController,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextField(
+                decoration: const InputDecoration(hintText: 'پسورد'),
+                controller: passwordController,
+                obscureText: true,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  // Save new journal
+                userData userUpdated =new  userData(user.username, fullNameController.text,"Admin",user.id,passwordController.text);
+                String response = await AdminApi.updateAdmin(userUpdated);
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
+                  // Close the bottom sheet
+                  Navigator.of(context).pop();
+                  setState(() {});
+                },
+                child: Text('بروزرسانی'),
+              )
+            ],
+          ),
+        ));
+  }
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,6 +170,17 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
             )
                 : CircularProgressIndicator()),
       ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () async {
+
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            dynamic user = jsonDecode(prefs.getString(
+                "user")!);
+            userData userModel =userData.fromJson(user);
+            _showForm(userData(userModel.username, userModel.fullName, "", userModel.id, ""));
+          } ,
+        )
     );
   }
 }

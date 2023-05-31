@@ -299,6 +299,25 @@ class AdminApi {
 
 
 
+  /////////////////////////// Orders ////////////////////////
+
+  static Future<String> updateAdmin(userData user) async{
+      String result="بدون نتیجه";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+
+    final response = await http.post(
+        Uri.parse('${dotenv.env['API_URL']}/admin/update/${user.id}'),
+        headers: {'Authorization': 'Bearer $token'},
+        body: user.toJson()
+    );
+    if(response.statusCode==200){
+      prefs.setString('user', response.body);
+      result = "پروفایل با موفقیت ذخیره شد";
+    }
+    return result;
+  }
+
 
 
 
