@@ -54,16 +54,14 @@ class _OrdersListState extends State<OrdersList> {
             builder: (BuildContext context,
                 AsyncSnapshot<List<orderData>> snapshot) =>
             snapshot.hasData && snapshot.data!.isNotEmpty
-                ? Column(
+                ?
+            Column(
               children: [
-
                 ListTile(
-                onTap: null,
-                leading: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                ),
+
                 title: Row(mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
+                      SizedBox(height: 8,),
                       Expanded(child: Text("ردیف" ,style: TextStyle(fontStyle: FontStyle.italic),)),
                       Expanded(child: Text("نام مشتری",style: TextStyle(fontStyle: FontStyle.italic))),
                       Expanded(child: Text("نوع محصول",style: TextStyle(fontStyle: FontStyle.italic))),
@@ -81,6 +79,7 @@ class _OrdersListState extends State<OrdersList> {
                     BorderRadius.only(topLeft: Radius.circular(1.0)),
                   ),
                   child: ListView.builder(
+
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         return _buildPaymentItem(
@@ -150,37 +149,43 @@ class _OrdersListState extends State<OrdersList> {
   Widget _buildPaymentItem(BuildContext context,
        orderData? order,int? index) {
     return Padding(padding: EdgeInsets.all(4),
-      child: ListTile(
-          title: Row(
-              children: <Widget>[
-                Expanded(child: Text("${index}")),
-                Expanded(child: Text("${order?.clientFullName}")),
-                Expanded(child: Text("${order?.productType}")),
-                Expanded(child: Text("${order?.deliveryDate}")),
-                Expanded(child: Text("${order?.status}")),
-              ]
-          ),
-          trailing: SizedBox(width: 100,
-            child:Row(children: [
-              IconButton(
-                icon: const Icon(Icons.edit),
-                onPressed: () {
-                  // userData user =new  userData(userName, fullName,"Workshop1",id,"");
-                  // _showForm(user);
-                },
-              ),
-              IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: () async {
+      child:
+      Container( color: (index! % 2 == 0) ? Colors.brown.shade50 : Colors.lightBlue.shade50,height: 100,
+        child:
+        Card(
+            child: Row(
+                children: <Widget>[
+                  Expanded(child: Text("${index}")),
+                  Expanded(child: Text("${order?.clientFullName}")),
+                  Expanded(child: Text("${order?.productType}")),
+                  Expanded(child: Text("${order?.deliveryDate}")),
+                  Expanded(child: Text("${order?.status}")),
+                  SizedBox(width: 100,
+                    child:Row(children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          // userData user =new  userData(userName, fullName,"Workshop1",id,"");
+                          // _showForm(user);
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () async {
 
-                  if(order?.id != null){
-                    String response = await AdminApi.deleteOrder(order?.id);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
-                  }
-                  setState(() {});
-                },
-              ),
-            ],),)
-      ),);
+                          if(order?.id != null){
+                            String response = await AdminApi.deleteOrder(order?.id);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
+                          }
+                          setState(() {});
+                        },
+                      ),
+                    ],),)
+                ]
+            ),
+        ),
+      )
+
+      ,);
   }
 }
