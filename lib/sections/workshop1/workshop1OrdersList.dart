@@ -63,15 +63,19 @@ class _Workshop1OrdersListState extends State<Workshop1OrdersList> {
                 leading: CircleAvatar(
                   backgroundColor: Colors.transparent,
                 ),
-                title: Row(mainAxisAlignment: MainAxisAlignment.start,
+                title:
+                Row(mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Expanded(child: Text("شماره")),
-                      Expanded(child: Text("نام پلاک")),
-                      Expanded(child: Text("وضعیت")),
-                      Expanded(child: Text("Id")),
+                      SizedBox(height: 8,),
+                      Expanded(child: Text("ردیف" ,style: TextStyle(fontStyle: FontStyle.italic),)),
+                      Expanded(child: Text("نام مشتری",style: TextStyle(fontStyle: FontStyle.italic))),
+                      Expanded(child: Text("نوع محصول",style: TextStyle(fontStyle: FontStyle.italic))),
+                      Expanded(child: Text("تاریخ تحویل",style: TextStyle(fontStyle: FontStyle.italic))),
+                      Expanded(child: Text("وضعیت",style: TextStyle(fontStyle: FontStyle.italic))),
                       SizedBox(width: 100,)
                     ]
-                ),),
+                ),
+                ),
 
                 Container(
                   height: MediaQuery.of(context).size.height * 0.87,
@@ -114,26 +118,34 @@ class _Workshop1OrdersListState extends State<Workshop1OrdersList> {
   Widget _buildPaymentItem(BuildContext context,
       String? clientFullname,String? status , orderData? order,int? index) {
     return Padding(padding: EdgeInsets.all(4),
-      child: ListTile(
-          title: Row(
+      child:
+      Container( color: (index! % 2 == 0) ? Colors.brown.shade50 : Colors.lightBlue.shade50,height: 100,
+        child:
+        Card(
+          child: Row(
               children: <Widget>[
                 Expanded(child: Text("${index}")),
+                Expanded(child: Text("${order?.clientFullName}")),
+                Expanded(child: Text("${order?.productType}")),
+                Expanded(child: Text("${order?.deliveryDate}")),
                 Expanded(child: Text("${order?.status}")),
+                SizedBox(width: 100,
+                  child:Row(children: [
+                    IconButton(
+                      icon: const Icon(Icons.remove_red_eye),
+                      onPressed: () async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShowWorkshop1OrderScreen(order: order!,)));
+                      },
+                    ),
+                  ],),)
               ]
           ),
-          trailing: SizedBox(width: 100,
-            child:Row(children: [
-              IconButton(
-                icon: const Icon(Icons.remove_red_eye),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ShowWorkshop1OrderScreen(order: order!,)));
+        ),
+      )
 
-                },
-              ),
-            ],),)
-      ),);
+      ,);
   }
 }
