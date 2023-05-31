@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:gold_workshop/sections/designer/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../login.dart';
 import '../../models/userModel.dart';
@@ -57,7 +58,10 @@ class _SideMenuDesignerState extends State<SideMenuDesigner> {
                       title: Text("پروفایل"),
                       trailing: Icon(Icons.chevron_right),
                       onTap: (){
-
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DesignerProfileScreen()));
                       },
                     ),
                     ListTile(
