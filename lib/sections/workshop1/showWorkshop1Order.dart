@@ -49,6 +49,7 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isScreenWide = MediaQuery.of(context).size.width >= 720;
     // Build a Form widget using the _formKey created above.
     return Scaffold(
         appBar: AppBar(
@@ -69,69 +70,85 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
           child:Center(
             child: Column(
               children: <Widget>[
-                Padding(padding: EdgeInsets.all(16)
-                  ,child:
-                  Row(children: [
-                    Expanded(child: Column(children: [Text("نام مشتری",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.clientFullName}")],)),
-                    Expanded(child: Column(children: [Text("کارگاه1",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.workshop1fullName}")],)),
-                    Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
-                    Expanded(child: Column(children: [Text("تاریخ تحویل",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.deliveryDate}")],)),
-                  ],),
-                ),
-                SizedBox(height: 32,),
-                Padding(padding: EdgeInsets.all(16),
-                  child:Row(
-                    children: [
-                      Expanded(child: Row(children: [Column(children: [Text("توضیحات",style: TextStyle(fontSize: 14,color: Colors.grey)),Text("${widget.order.description}")])],)),
-                      Expanded(child: Row(children: [
-                        Expanded(child:Row(children: [Text("${widget.order.instantDelivery=="true" ? "تحویل فوری":""}"),],)),
-                        Expanded(child:Row(children: [Text("${widget.order.paperDelivery=="true" ? "کاغذی":""}"),],)),
-                        Expanded(child:Row(children: [Text("${widget.order.feeOrder=="true" ? "بیعانه":""}"),],)),
-                        Expanded(child:Row(children: [Text("${widget.order.customerDelivery=="true" ? "تحویل مشتری":""}"),],)),],
-                      )
-                      )]
-                    ,)
-                  ,),
-                SizedBox(height: 32,),
-                Padding(padding: EdgeInsets.all(16),
-                  child:
-                  Row(
-                    children: [
-                    InkWell(onTap: (){
-                      launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"));
-
-                    },child: Expanded(child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}")),),
-                    Expanded(child:
-                    Column(children: [
-                      Row(
-                        children: []
-
-                      ),
-
-                      DataTable(
-                        columns: const <DataColumn>[
-                          DataColumn(
-                            label: Text(
-                              'ویژگی',
-                              style: TextStyle(fontStyle: FontStyle.italic),
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'عنوان',
-                              style: TextStyle(fontStyle: FontStyle.italic),
-                            ),
-                          ),
-
-                        ],
-                        rows: tableItem,
-                      )
+                Padding(padding: EdgeInsets.all(4)
+                 ,child:
+                  Card(child:
+                    Container(padding:EdgeInsets.all(16),child:
+                    Row(
+                      children: [
+                      Expanded(child: Column(children: [Text("نام مشتری",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.clientFullName}")],)),
+                      Expanded(child: Column(children: [Text("کارگاه1",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.workshop1fullName}")],)),
+                      Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
+                      Expanded(child: Column(children: [Text("تاریخ تحویل",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.deliveryDate}")],)),
                     ],)
+                      ,)
+
+                    ,),
+                ),
+                Padding(padding: EdgeInsets.all(4),
+                  child:Card(
+                    child:
+                    Container(margin:EdgeInsets.all(16),child:
+                    // Flex(       direction: isScreenWide ? Axis.horizontal : Axis.vertical,
+                    Row(
+                      children: [
+                        Expanded(child:Column(children: [Text("توضیحات",style: TextStyle(fontSize: 14,color: Colors.grey)),Text("${widget.order.description}")])),
+                        Expanded(child: Row(children: [
+                          Expanded(child:Row(children: [Text("${widget.order.instantDelivery=="true" ? "✓ تحویل فوری":""}"),],)),
+                          Expanded(child:Row(children: [Text("${widget.order.paperDelivery=="true" ? "✓ کاغذی":""}"),],)),
+                          Expanded(child:Row(children: [Text("${widget.order.feeOrder=="true" ? "✓ بیعانه":""}"),],)),
+                          Expanded(child:Row(children: [Text("${widget.order.customerDelivery=="true" ? "✓ تحویل مشتری":""}"),],)),],
+                        )
+                        )]
+                      ,)
+                      ,),
+
+                  )
+                  ,),
+                Padding(padding: EdgeInsets.all(4),
+                  child:Card(
+                    child: Container(margin: EdgeInsets.all(16),
+                      child:
+                      Row(
+                        children: [
+                          InkWell(onTap: (){
+                            launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"));
+
+                          },child: Expanded(child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}")),),
+                          Expanded(child:
+                          Column(children: [
+                            Row(
+                                children: []
+
+                            ),
+
+                            DataTable(
+                              columns: const <DataColumn>[
+                                DataColumn(
+                                  label: Text(
+                                    'ویژگی',
+                                    style: TextStyle(fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'عنوان',
+                                    style: TextStyle(fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+
+                              ],
+                              rows: tableItem,
+                            )
+                          ],)
 
 
 
+                          ),
+                        ],),
                     ),
-                  ],),),
+                  ),
+                ),
 
                 ElevatedButton(onPressed: () async {
                   print(widget.order.toJson());
