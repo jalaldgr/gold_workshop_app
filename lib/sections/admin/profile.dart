@@ -104,7 +104,7 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.pink,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -129,8 +129,8 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        Colors.yellow,
-                        Colors.yellowAccent
+                        Colors.pink,
+                        Colors.pinkAccent
                       ],
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
@@ -171,7 +171,7 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
                 : CircularProgressIndicator()),
       ),
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.edit),
           onPressed: () async {
 
             SharedPreferences prefs = await SharedPreferences.getInstance();

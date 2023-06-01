@@ -53,7 +53,7 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                           accountEmail: Text("${snapshot.data?.username}",
                               style: const TextStyle(color: Colors.black87)),
                           decoration:
-                              BoxDecoration(color: Colors.amber),
+                              BoxDecoration(color: Colors.pink),
 
                         ),
                         Expanded(
@@ -143,7 +143,6 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                                             builder: (context) => LoginPage()));
                                   });
                                 },
-                                splashColor: Colors.greenAccent,
                                 child: ListTile(
                                   leading: Icon(Icons.logout),
                                   title: Text("خروج"),

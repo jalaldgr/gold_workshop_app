@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       scrollBehavior: AppScrollBehavior(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.amber,
+        primaryColor: Colors.pink,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: PersianFonts.vazirTextTheme,
       ),

@@ -45,8 +45,8 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.green),
-          backgroundColor: Colors.amber,
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.pink,
         ),
         backgroundColor: Colors.white,
         body: Column(children: <Widget>[

@@ -161,7 +161,7 @@ class LoginScreen extends State<LoginPage> {
                     ));
                   }
                 },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                 child: Container(
                   alignment: Alignment.center,
                   height: 50.0,
