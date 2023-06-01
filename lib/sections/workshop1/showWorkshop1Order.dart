@@ -127,7 +127,8 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                               InkWell(onTap: (){
                                 launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"));
 
-                              },child: Expanded(child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}")),),
+                              },child: Expanded(child: 
+                              FadeInImage(image: NetworkImage("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"), placeholder: AssetImage("assets/images/placeholder.png"),)),),
                               Expanded(child:
                               Column(children: [
                                 Row(
@@ -194,7 +195,7 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                 ),
               )
               ,)
-            ],
+              ],
           ),
         )
 
