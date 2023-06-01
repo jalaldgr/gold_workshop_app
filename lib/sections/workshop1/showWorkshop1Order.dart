@@ -75,122 +75,130 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                   fontWeight: FontWeight.bold,
                   fontSize: 22.0)),
         ),
-        body: Container(
-          decoration: BoxDecoration(color: Colors.white38),
-          child:Center(
-            child: Column(
-              children: <Widget>[
-                Padding(padding: EdgeInsets.all(4)
-                 ,child:
-                  Card(child:
-                    Container(padding:EdgeInsets.all(16),child:
-                    Row(
-                      children: [
-                      Expanded(child: Column(children: [Text("نام مشتری",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.clientFullName}")],)),
-                      Expanded(child: Column(children: [Text("کارگاه1",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.workshop1fullName}")],)),
-                      Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
-                      Expanded(child: Column(children: [Text("تاریخ تحویل",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.deliveryDate}")],)),
-                    ],)
-                      ,)
-
-                    ,),
-                ),
-                Padding(padding: EdgeInsets.all(4),
-                  child:Card(
-                    child:
-                    Container(margin:EdgeInsets.all(16),child:
-                    // Flex(       direction: isScreenWide ? Axis.horizontal : Axis.vertical,
-                    Row(
-                      children: [
-                        Expanded(child:Column(children: [Text("توضیحات",style: TextStyle(fontSize: 14,color: Colors.grey)),Text("${widget.order.description}")])),
-                        Expanded(child: Row(children: [
-                          Expanded(child:Row(children: [Text("${widget.order.instantDelivery=="true" ? "✓ تحویل فوری":""}"),],)),
-                          Expanded(child:Row(children: [Text("${widget.order.paperDelivery=="true" ? "✓ کاغذی":""}"),],)),
-                          Expanded(child:Row(children: [Text("${widget.order.feeOrder=="true" ? "✓ بیعانه":""}"),],)),
-                          Expanded(child:Row(children: [Text("${widget.order.customerDelivery=="true" ? "✓ تحویل مشتری":""}"),],)),],
-                        )
-                        )]
-                      ,)
-                      ,),
-
-                  )
-                  ,),
-                Padding(padding: EdgeInsets.all(4),
-                  child:Card(
-                    child: Container(margin: EdgeInsets.all(16),
-                      child:
+        body:SingleChildScrollView(
+          child: Stack(
+            children: [
+              Container(
+              decoration: BoxDecoration(color: Colors.white38),
+              child:Center(
+                child: Column(
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.all(4)
+                      ,child:
+                      Card(child:
+                      Container(padding:EdgeInsets.all(16),child:
                       Row(
                         children: [
-                          InkWell(onTap: (){
-                            launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"));
+                          Expanded(child: Column(children: [Text("نام مشتری",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.clientFullName}")],)),
+                          Expanded(child: Column(children: [Text("کارگاه1",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.workshop1fullName}")],)),
+                          Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
+                          Expanded(child: Column(children: [Text("تاریخ تحویل",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.deliveryDate}")],)),
+                        ],)
+                        ,)
 
-                          },child: Expanded(child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}")),),
-                          Expanded(child:
-                          Column(children: [
-                            Row(
-                                children: []
-
-                            ),
-
-                            DataTable(
-                              columns: const <DataColumn>[
-                                DataColumn(
-                                  label: Text(
-                                    'ویژگی',
-                                    style: TextStyle(fontStyle: FontStyle.italic),
-                                  ),
-                                ),
-                                DataColumn(
-                                  label: Text(
-                                    'عنوان',
-                                    style: TextStyle(fontStyle: FontStyle.italic),
-                                  ),
-                                ),
-
-                              ],
-                              rows: tableItem,
-                            )
-                          ],)
-
-
-
-                          ),
-                        ],),
+                        ,),
                     ),
-                  ),
-                ),
-                Padding(padding: EdgeInsets.all(4),
-                  child:Card(
-                    child: Container(margin: EdgeInsets.all(16),
-                      child:
-                      Row(
-                        children: [
-                          Expanded(child:TextFormField(onTap: openImagePicker,controller: imageEditTextController,),),
-                          Expanded(child:
-                          Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
-                            OutlinedButton(onPressed: (){
+                    Padding(padding: EdgeInsets.all(4),
+                      child:Card(
+                        child:
+                        Container(margin:EdgeInsets.all(16),child:
+                        // Flex(       direction: isScreenWide ? Axis.horizontal : Axis.vertical,
+                        Row(
+                          children: [
+                            Expanded(child:Column(children: [Text("توضیحات",style: TextStyle(fontSize: 14,color: Colors.grey)),Text("${widget.order.description}")])),
+                            Expanded(child: Row(children: [
+                              Expanded(child:Row(children: [Text("${widget.order.instantDelivery=="true" ? "✓ تحویل فوری":""}"),],)),
+                              Expanded(child:Row(children: [Text("${widget.order.paperDelivery=="true" ? "✓ کاغذی":""}"),],)),
+                              Expanded(child:Row(children: [Text("${widget.order.feeOrder=="true" ? "✓ بیعانه":""}"),],)),
+                              Expanded(child:Row(children: [Text("${widget.order.customerDelivery=="true" ? "✓ تحویل مشتری":""}"),],)),],
+                            )
+                            )]
+                          ,)
+                          ,),
 
-                            }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("ارسال فایل")  ,))
-                            ),
-                            SizedBox(height: 16,),
-                            ElevatedButton(onPressed: (){
+                      )
+                      ,),
+                    Padding(padding: EdgeInsets.all(4),
+                      child:Card(
+                        child: Container(margin: EdgeInsets.all(16),
+                          child:
+                          Row(
+                            children: [
+                              InkWell(onTap: (){
+                                launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"));
 
-                            }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("تکمیل سفارش")  ,))
-                            ),
-                          ],)
-                          ),
-                            ],
+                              },child: Expanded(child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}")),),
+                              Expanded(child:
+                              Column(children: [
+                                Row(
+                                    children: []
+
+                                ),
+
+                                DataTable(
+                                  columns: const <DataColumn>[
+                                    DataColumn(
+                                      label: Text(
+                                        'ویژگی',
+                                        style: TextStyle(fontStyle: FontStyle.italic),
+                                      ),
+                                    ),
+                                    DataColumn(
+                                      label: Text(
+                                        'عنوان',
+                                        style: TextStyle(fontStyle: FontStyle.italic),
+                                      ),
+                                    ),
+
+                                  ],
+                                  rows: tableItem,
+                                )
+                              ],)
+
+
+
+                              ),
+                            ],),
+                        ),
                       ),
                     ),
-                  ),
+                    Padding(padding: EdgeInsets.all(4),
+                      child:Card(
+                        child: Container(margin: EdgeInsets.all(16),
+                          child:
+                          Row(
+                            children: [
+                              Expanded(child:TextFormField(onTap: openImagePicker,controller: imageEditTextController,),),
+                              Expanded(child:
+                              Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
+                                OutlinedButton(onPressed: (){
+
+                                }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("ارسال فایل")  ,))
+                                ),
+                                SizedBox(height: 16,),
+                                ElevatedButton(onPressed: (){
+
+                                }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("تکمیل سفارش")  ,))
+                                ),
+                              ],)
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+
+                    // Add TextFormFields and ElevatedButton here.
+                  ],
                 ),
+              )
+              ,)
+            ],
+          ),
+        )
 
 
-                // Add TextFormFields and ElevatedButton here.
-              ],
-            ),
-          )
-          ,)
 
 
     );
