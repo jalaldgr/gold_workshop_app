@@ -104,7 +104,7 @@ class _DesignerProfileScreenState extends State<DesignerProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.lightGreen,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -129,8 +129,8 @@ class _DesignerProfileScreenState extends State<DesignerProfileScreen> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        Colors.yellow,
-                        Colors.yellowAccent
+                        Colors.lightGreen,
+                        Colors.lightGreenAccent
                       ],
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,

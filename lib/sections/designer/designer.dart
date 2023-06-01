@@ -46,8 +46,8 @@ class _DesignerHomeScreenState extends State<DesignerHomeScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.green),
-          backgroundColor: Colors.amber,
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.lightGreen,
         ),
         drawer:SideMenuDesigner(),
         backgroundColor: Colors.white,
