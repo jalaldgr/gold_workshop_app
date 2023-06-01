@@ -27,6 +27,7 @@ class ShowWorkshop1OrderScreen extends StatefulWidget {
 class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
 
   List<DataRow> tableItem=[DataRow(cells: [DataCell(Text(";کلید")),DataCell(Text("مقدار"))])];
+  TextEditingController imageEditTextController=TextEditingController();
 
 
   onChangeDesignerDropDown(value){
@@ -35,7 +36,16 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
       widget.order.designerFullName = value["fullName"];
     });
   }
-
+  openImagePicker() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['*'],
+    );
+    setState(() {
+      imageEditTextController.text = "${result?.paths[0]}";
+      widget.order.designerFile = "${result?.paths[0]}".replaceAll("\\", "\\\\");
+    });
+  }
 
   Future<void> _launchInBrowser(Uri url) async {
     if (!await launchUrl(
@@ -149,13 +159,33 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                     ),
                   ),
                 ),
+                Padding(padding: EdgeInsets.all(4),
+                  child:Card(
+                    child: Container(margin: EdgeInsets.all(16),
+                      child:
+                      Row(
+                        children: [
+                          Expanded(child:TextFormField(onTap: openImagePicker,controller: imageEditTextController,),),
+                          Expanded(child:
+                          Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
+                            OutlinedButton(onPressed: (){
 
-                ElevatedButton(onPressed: () async {
-                  print(widget.order.toJson());
+                            }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("ارسال فایل")  ,))
+                            ),
+                            SizedBox(height: 16,),
+                            ElevatedButton(onPressed: (){
 
-                  // var res = await AdminApi.addOrder(widget.order);
-                  // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                }, child: Text("بروزرسانی"),)
+                            }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("تکمیل سفارش")  ,))
+                            ),
+                          ],)
+                          ),
+                            ],
+                      ),
+                    ),
+                  ),
+                ),
+
+
                 // Add TextFormFields and ElevatedButton here.
               ],
             ),
