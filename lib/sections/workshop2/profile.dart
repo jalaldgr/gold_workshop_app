@@ -106,7 +106,7 @@ class _Workshop2ProfileScreenState extends State<Workshop2ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.cyan,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -131,8 +131,8 @@ class _Workshop2ProfileScreenState extends State<Workshop2ProfileScreen> {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        Colors.yellow,
-                        Colors.yellowAccent
+                        Colors.cyan,
+                        Colors.cyanAccent
                       ],
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,

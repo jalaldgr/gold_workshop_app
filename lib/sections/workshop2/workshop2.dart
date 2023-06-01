@@ -45,8 +45,8 @@ class _Workshop2HomeScreenState extends State<Workshop2HomeScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.green),
-          backgroundColor: Colors.amber,
+          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.cyan,
         ),
         backgroundColor: Colors.white,
         drawer: SideMenuWorkshop2(),

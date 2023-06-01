@@ -47,7 +47,7 @@ class _SideMenuWorkshop2State extends State<SideMenuWorkshop2> {
                 accountEmail: Text("${snapshot.data?.username}",
                     style: const TextStyle(color: Colors.black87)),
                 decoration:
-                BoxDecoration(color: Colors.amber),
+                BoxDecoration(color: Colors.cyan),
 
               ),
               Expanded(
@@ -92,7 +92,6 @@ class _SideMenuWorkshop2State extends State<SideMenuWorkshop2> {
                                   (Route<dynamic> route) => false);
                         });
                       },
-                      splashColor: Colors.greenAccent,
                       child: ListTile(
                         leading: Icon(Icons.logout),
                         title: Text("خروج"),
