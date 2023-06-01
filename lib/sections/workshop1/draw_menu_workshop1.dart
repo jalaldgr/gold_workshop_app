@@ -97,7 +97,6 @@ class _SideMenuWorkshop1State extends State<SideMenuWorkshop1> {
                                   (Route<dynamic> route) => false);
                         });
                       },
-                      splashColor: Colors.greenAccent,
                       child: ListTile(
                         leading: Icon(Icons.logout),
                         title: Text("خروج"),

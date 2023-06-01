@@ -46,7 +46,7 @@ class _Workshop1HomeScreenState extends State<Workshop1HomeScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.green),
+          iconTheme: IconThemeData(color: Colors.black),
           backgroundColor: Colors.amber,
         ),
         backgroundColor: Colors.white,
