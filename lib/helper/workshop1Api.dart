@@ -42,5 +42,22 @@ class Workshop1Api {
     return response.body;
   }
 
+  static Future<List<orderData>> getPendingOrdersByWorkshop1() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+    dynamic userID =jsonDecode(prefs.getString('user')!)['id'];
+    final response = await http.get(
+      Uri.parse('${dotenv.env['API_URL']}/workshop1/get-all-pending-orders/$userID'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    if (response.statusCode != 200) {
+      List jsonResponse = json.decode(response.body) as List;
+      return jsonResponse.map((myMap) => orderData.fromJson(myMap)).toList();
+    }
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((myMap) => orderData.fromJson(myMap)).toList();
+
+
+  }
 
 }

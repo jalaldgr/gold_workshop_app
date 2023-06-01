@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:gold_workshop/helper/workshop1Api.dart';
 import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/models/userModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
@@ -51,7 +52,7 @@ class _Workshop1OrdersListState extends State<Workshop1OrdersList> {
         backgroundColor: Colors.white,
         body: Center(
           child: FutureBuilder(
-            future: AdminApi.getOrders(),
+            future: Workshop1Api.getPendingOrdersByWorkshop1(),
             builder: (BuildContext context,
                 AsyncSnapshot<List<orderData>> snapshot) =>
             snapshot.hasData && snapshot.data!.isNotEmpty
