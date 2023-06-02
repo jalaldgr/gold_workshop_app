@@ -48,59 +48,62 @@ class _OrdersListState extends State<OrdersList> {
         ),
         drawer: SideMenuAdmin(),
         backgroundColor: Colors.white,
-        body: Center(
-          child: FutureBuilder(
-            future: AdminApi.getOrders(),
-            builder: (BuildContext context,
-                AsyncSnapshot<List<orderData>> snapshot) =>
-            snapshot.hasData && snapshot.data!.isNotEmpty
-                ?
-            Column(
-              children: [
-                ListTile(
+        body:SingleChildScrollView(child:
+          Stack(
+            children: [
+              Center(
+                child: FutureBuilder(
+                  future: AdminApi.getOrders(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<orderData>> snapshot) =>
+                  snapshot.hasData && snapshot.data!.isNotEmpty
+                      ?
+                  Padding(padding: EdgeInsets.all(4),
+                      child:
+                      Column(
+                        children: [
+                          Card(
+                            child: Container(padding: EdgeInsets.all(8),
+                              child: Row(mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    SizedBox(height: 8,),
+                                    Expanded(child: Text("ردیف" ,style: TextStyle(fontStyle: FontStyle.italic),)),
+                                    Expanded(child: Text("نام مشتری",style: TextStyle(fontStyle: FontStyle.italic))),
+                                    Expanded(child: Text("نوع محصول",style: TextStyle(fontStyle: FontStyle.italic))),
+                                    Expanded(child: Text("تاریخ تحویل",style: TextStyle(fontStyle: FontStyle.italic))),
+                                    Expanded(child: Text("وضعیت",style: TextStyle(fontStyle: FontStyle.italic))),
+                                    SizedBox(width: 100,)
+                                  ]
+                              ),
+                            ),),
+                          Container(
+                            child:ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: snapshot.data!.length,
+                              itemBuilder: (context, index) {
+                                return _buildPaymentItem(
+                                    context,
+                                    snapshot.data?[index],
+                                    index);
+                              }),
+                          ),
+                        ],
+                      )
+                  )
+                      : snapshot.hasError
+                      ? Center(
+                    child: Text('Error: ${snapshot.error}'),
+                  )
+                      : snapshot.data != null
+                      ? const Center(
+                    child: Text("بدون طراح..."),
+                  )
+                      : CircularProgressIndicator(),
+                ),
+              )
+            ],),)
 
-                title: Row(mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(height: 8,),
-                      Expanded(child: Text("ردیف" ,style: TextStyle(fontStyle: FontStyle.italic),)),
-                      Expanded(child: Text("نام مشتری",style: TextStyle(fontStyle: FontStyle.italic))),
-                      Expanded(child: Text("نوع محصول",style: TextStyle(fontStyle: FontStyle.italic))),
-                      Expanded(child: Text("تاریخ تحویل",style: TextStyle(fontStyle: FontStyle.italic))),
-                      Expanded(child: Text("وضعیت",style: TextStyle(fontStyle: FontStyle.italic))),
-                      SizedBox(width: 100,)
-                    ]
-                ),),
-
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.87,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                    BorderRadius.only(topLeft: Radius.circular(1.0)),
-                  ),
-                  child: ListView.builder(
-
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        return _buildPaymentItem(
-                            context,
-                            snapshot.data?[index],
-                            index);
-                      }),
-                )
-              ],
-            )
-                : snapshot.hasError
-                ? Center(
-              child: Text('Error: ${snapshot.error}'),
-            )
-                : snapshot.data != null
-                ? const Center(
-              child: Text("بدون طراح..."),
-            )
-                : CircularProgressIndicator(),
-          ),
-        ),
+        ,
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
@@ -153,15 +156,17 @@ class _OrdersListState extends State<OrdersList> {
       Container( color: (index! % 2 == 0) ? Colors.brown.shade50 : Colors.lightBlue.shade50,height: 100,
         child:
         Card(
-            child: Row(
+            child: Container(padding: EdgeInsets.all(8),
+              child:Row(
                 children: <Widget>[
                   Expanded(child: Text("${index}")),
                   Expanded(child: Text("${order?.clientFullName}")),
                   Expanded(child: Text("${order?.productType}")),
                   Expanded(child: Text("${order?.deliveryDate}")),
                   Expanded(child: Text("${order?.status}")),
-                  SizedBox(width: 100,
+                  SizedBox(width: 150,
                     child:Row(children: [
+                      IconButton(onPressed: (){}, icon: Icon(Icons.remove_red_eye)),
                       IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
@@ -182,6 +187,7 @@ class _OrdersListState extends State<OrdersList> {
                       ),
                     ],),)
                 ]
+            ),
             ),
         ),
       )
