@@ -95,6 +95,10 @@ class NewOrderFormState extends State<NewOrderForm> {
       widget.order.clientMobile =  contactEditTextController.text;
       widget.order.description = descriptionEditTextController.text;
       widget.order.deliveryDate = deliverDateEditTextController.text;
+      widget.order.clientType = customerTypeDropDownValue;
+      widget.order.status = statusDropDownValue;
+      widget.order.productType = productTypeDropDownValue;
+
     });
   }
   openDatePicker() async {
@@ -168,7 +172,6 @@ class NewOrderFormState extends State<NewOrderForm> {
                               items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                               onChanged: (String? value) {setState(() {
                                 customerTypeDropDownValue = value!;
-                                widget.order.clientType = value;
                               });},
                             )),
                             Expanded(child:
@@ -177,7 +180,6 @@ class NewOrderFormState extends State<NewOrderForm> {
                               items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                               onChanged: (String? value) {setState(() {
                                 statusDropDownValue = value!;
-                                widget.order.status = value;
                               });},)
 
                             ),
@@ -308,7 +310,6 @@ class NewOrderFormState extends State<NewOrderForm> {
                               items: productTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                               onChanged: (String? value) {setState(() {
                                 productTypeDropDownValue = value!;
-                                widget.order.productType = value;
                               });},
                             ))
                           ],),
