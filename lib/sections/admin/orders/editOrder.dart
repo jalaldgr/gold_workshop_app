@@ -135,6 +135,9 @@ class EditOrderScreenState extends State<EditOrderScreen> {
     deliveryByCustomerCheckBoxValue = widget.order.customerDelivery=="true"? true : false ;
     deliveryPaperCheckBoxValue = widget.order.paperDelivery=="true"? true : false ;
     feeCheckBoxValue = widget.order.feeOrder=="true"? true : false ;
+    customerTypeDropDownValue = widget.order.clientType!;
+    statusDropDownValue = widget.order.status!;
+    productTypeDropDownValue = widget.order.productType!;
   }
 
 
