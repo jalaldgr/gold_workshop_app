@@ -1,5 +1,7 @@
 
 
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
@@ -56,7 +58,7 @@ class NewOrderFormState extends State<NewOrderForm> {
   TextEditingController deliverDateEditTextController=TextEditingController();
   TextEditingController imageEditTextController=TextEditingController();
   TextEditingController fileEditTextController=TextEditingController();
-
+  File? _imageFile;
 
 
 
@@ -125,6 +127,7 @@ class NewOrderFormState extends State<NewOrderForm> {
     setState(() {
       imageEditTextController.text = "${result?.paths[0]}";
       widget.order.image = "${result?.paths[0]}".replaceAll("\\", "\\\\");
+      _imageFile = File(result!.paths[0]!);
     });
   }
   @override
@@ -243,7 +246,12 @@ class NewOrderFormState extends State<NewOrderForm> {
                         child: Container(padding: EdgeInsets.all(8),
                           child:
                           Row(children: [
-                            Expanded(child:TextFormField(onTap: openImagePicker,controller: imageEditTextController,),),
+                            InkWell(
+                              onTap: (){openImagePicker();},
+                              child:
+                              _imageFile != null ? Image.file(_imageFile!, fit: BoxFit.cover): const Text('برای انتخاب عکس کلیک کنید'),
+                            ),
+
                             Expanded(child:
                             Column(children: [
                               Row(
