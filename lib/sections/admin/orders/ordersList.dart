@@ -6,6 +6,7 @@ import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/models/userModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:gold_workshop/sections/admin/orders/addNewOrder.dart';
+import 'package:gold_workshop/sections/admin/orders/editOrder.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../helper/serverApi.dart';
@@ -170,8 +171,10 @@ class _OrdersListState extends State<OrdersList> {
                       IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
-                          // userData user =new  userData(userName, fullName,"Workshop1",id,"");
-                          // _showForm(user);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EditOrderScreen(order: order!,)));
                         },
                       ),
                       IconButton(
