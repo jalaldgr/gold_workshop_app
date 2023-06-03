@@ -299,9 +299,9 @@ class NewOrderFormState extends State<NewOrderForm> {
                 Padding(padding: EdgeInsets.all(16),
                   child:
                         Row(children: [
-                          Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,),),
-                          Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,),),
-                          Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,),),
+                          Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown, hint: "طراح"),),
+                          Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: "کارگاه 1",),),
+                          Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: "کارگاه 2",),),
                           ],)
                   ,),
                  ElevatedButton(onPressed: () async {

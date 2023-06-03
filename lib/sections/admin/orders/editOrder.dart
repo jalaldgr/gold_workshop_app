@@ -319,9 +319,9 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                 Padding(padding: EdgeInsets.all(16),
                   child:
                         Row(children: [
-                          Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,),),
-                          Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,),),
-                          Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,),),
+                          Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,hint: widget.order.designerFullName!,),),
+                          Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: widget.order.workshop1fullName!,),),
+                          Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: widget.order.workshop2fullName!,),),
                           ],)
                   ,),
                  ElevatedButton(onPressed: () async {

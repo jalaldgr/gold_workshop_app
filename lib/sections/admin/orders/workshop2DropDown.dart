@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import '../../../helper/serverApi.dart';
 
 class Workshop2DropDown extends StatefulWidget {
-
+  final String hint;
   final Function callback;
-  Workshop2DropDown({super.key , required this.callback});
+  Workshop2DropDown({super.key , required this.callback, required this.hint});
 
 
   @override
@@ -46,6 +46,8 @@ class _Workshop2DropDownState extends State<Workshop2DropDown> {
             });
           },
           value: dropdownvalue,
+          hint: Text(widget.hint),
+
         ),
       ],
     );
