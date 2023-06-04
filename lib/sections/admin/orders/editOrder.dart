@@ -58,7 +58,8 @@ class EditOrderScreenState extends State<EditOrderScreen> {
   TextEditingController descriptionEditTextController=TextEditingController();
   TextEditingController deliverDateEditTextController=TextEditingController();
   TextEditingController imageEditTextController=TextEditingController();
-  File? _imageFile;
+  File? _imageFile ;
+  bool selectImage = false;
 
 
 
@@ -113,8 +114,10 @@ class EditOrderScreenState extends State<EditOrderScreen> {
         print("${result?.paths[0]}");
 
         setState(() {
-          widget.order.image = "${result?.paths[0]}".replaceAll("\\", "\\\\");
+          _imageFile = File(result!.paths[0]!);
+          widget.order.image = "${result.paths[0]}".replaceAll("\\", "\\\\");
         });
+        selectImage = true;
       }
 
   }
@@ -254,14 +257,17 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                     child: Container(padding: EdgeInsets.all(8),
                     child:
                     Row(children: [
-
-                      Column(
-                        children: [
-                          Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"),
-                          InkWell(child: Text("تغییر عکس"),onTap: openImagePicker,)
-                        ],
+                      Visibility(visible: !selectImage,
+                        child: InkWell(
+                            child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}",width: 256,),
+                            onTap: openImagePicker)
                       ),
-                                            
+                      Visibility(visible: selectImage,
+                          child: InkWell(
+                              child: _imageFile!=null ?Image.file(_imageFile!,height: 256,  ):Text(""),
+                              onTap: openImagePicker)
+                      ),
+
                       Expanded(child:
                       Column(children: [
                         Row(
