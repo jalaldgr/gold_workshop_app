@@ -120,10 +120,10 @@ class EditOrderScreenState extends State<EditOrderScreen> {
   }
 
   initialize_form(){
-    nameEditTextController.text=widget.order.clientFullName!;
-    contactEditTextController.text=widget.order.clientMobile!;
-    descriptionEditTextController.text=widget.order.description!;
-    deliverDateEditTextController.text=widget.order.deliveryDate!;
+    nameEditTextController.text="${widget.order.clientFullName}";
+    contactEditTextController.text="${widget.order.clientMobile}";
+    descriptionEditTextController.text="${widget.order.description}";
+    deliverDateEditTextController.text="${widget.order.deliveryDate}";
     instantDeliveryCheckBoxValue = widget.order.instantDelivery=="true"? true : false ;
     deliveryByCustomerCheckBoxValue = widget.order.customerDelivery=="true"? true : false ;
     deliveryPaperCheckBoxValue = widget.order.paperDelivery=="true"? true : false ;
@@ -329,9 +329,9 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                   child:Card(
                     child: Container(padding: EdgeInsets.all(8),
                       child: Row(children: [
-                        Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,hint: widget.order.designerFullName!,),),
-                        Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: widget.order.workshop1fullName!,),),
-                        Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: widget.order.workshop2fullName!,),),
+                        Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,hint: "${widget.order.designerFullName}",),),
+                        Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: "${widget.order.workshop1fullName}",),),
+                        Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: "${widget.order.workshop2fullName}",),),
                       ],),
                     ),
                   )
