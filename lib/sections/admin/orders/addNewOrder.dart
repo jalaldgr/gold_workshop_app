@@ -137,6 +137,7 @@ class NewOrderFormState extends State<NewOrderForm> {
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black87),
@@ -331,13 +332,23 @@ class NewOrderFormState extends State<NewOrderForm> {
                       )
 
                       ,),
-                    ElevatedButton(onPressed: () async {
-                      collectFields();
-                      print(widget.order.toJson());
+                    Container(padding: EdgeInsets.all(4),
+                    child:SizedBox(height: 64,width: size.width,
+                      child:
+                      ElevatedButton(onPressed: () async {
+                        collectFields();
+                        print(widget.order.toJson());
 
-                      var res = await AdminApi.addOrder(widget.order);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                    }, child: Text("ثبت سفارش"),)
+                        var res = await AdminApi.addOrder(widget.order);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+
+                        Navigator.pop(context);
+
+                      }, child: Expanded(child: Text("ثبت سفارش"),),)
+                      ,)
+                      ,)
+                    ,
+
                     // Add TextFormFields and ElevatedButton here.
                   ],
                 ),
