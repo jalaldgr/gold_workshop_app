@@ -216,64 +216,41 @@ class AdminApi {
       Uri.parse('${dotenv.env['API_URL']}/admin/get-all-order'),
       headers: {'Authorization': 'Bearer $token'},
     );
-    if (response.statusCode != 200) {
-      List jsonResponse = json.decode(response.body) as List;
-      return jsonResponse.map((myMap) => orderData.fromJson(myMap)).toList();
-    }
+
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((myMap) => orderData.fromJson(myMap)).toList();
 
 
   }
 
-  static Future<String> updateOrders(orderData user) async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    dynamic token = prefs.getString("jwt");
-
-    print(user.toJson());
-    final response = await http.post(
-        Uri.parse('${dotenv.env['API_URL']}/admin/update-order/${user.id}'),
-        headers: {'Authorization': 'Bearer $token'},
-        body: user.toJson()
-    );
-    return response.body;
-  }
-
-  static Future<String> deleteOrder(String? id) async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    dynamic token = prefs.getString("jwt");
-    final response = await http.delete(
-      Uri.parse('${dotenv.env['API_URL']}/admin/delete-order/${id}'),
-      headers: {'Authorization': 'Bearer $token'},
-    );
-    return response.body;
-  }
-
-  static Future<String> addOrder(orderData order) async{
-
+  static Future<String> updateOrder(orderData order) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
     var stringResponse="no response";
-    // var request =  http.MultipartRequest("POST", Uri.parse('${dotenv.env['API_URL']}/admin/create-order'));
-    // request.headers.addAll({'Authorization': 'Bearer $token'});
-    // if(order.image!="" && order.image!="null"){
-    //   http.MultipartFile file = await http.MultipartFile.fromPath('file', "${order.image}");
-    //   request.files.add(file);
-    // }
-    // order.toJson().forEach((key, value) {
-    //   request.fields[key] = value;
-    // });
-    //
-    //  request.send().then((response) {
-    //
-    // });
-    // final response = await request.send();
-    // response.stream.transform(utf8.decoder).listen((value) {
-    //   stringResponse = value;
-    // });
+    var uri = Uri.parse('${dotenv.env['API_URL']}/admin/update-order/${order.id}');
+    var request2 = http.MultipartRequest('POST', uri)
+      ..headers.addAll({'Authorization': 'Bearer $token'});
+
+    if(order.image!="" && order.image!="null"){
+      http.MultipartFile file = await http.MultipartFile.fromPath('image', "${order.image}");
+      request2.files.add(file);
+    }
+    order.toJson().forEach((key, value) {
+      request2.fields[key] = value;
+    });
+    final response = await request2.send();
+    response.stream.transform(utf8.decoder).listen((value) {
+      stringResponse = value;
+    });
+    return stringResponse;
+  }
 
 
 
+  static Future<String> addOrder(orderData order) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+    var stringResponse="no response";
     var uri = Uri.parse('${dotenv.env['API_URL']}/admin/create-order');
     var request2 = http.MultipartRequest('POST', uri)
       ..headers.addAll({'Authorization': 'Bearer $token'});
@@ -286,17 +263,21 @@ class AdminApi {
       request2.fields[key] = value;
     });
     final response = await request2.send();
-
     await response.stream.transform(utf8.decoder).listen((value) {
       stringResponse = value;
-      print(value);
     });
-
     return stringResponse;
-
   }
 
-
+  static Future<String> deleteOrder(String? id) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+    final response = await http.delete(
+      Uri.parse('${dotenv.env['API_URL']}/admin/delete-order/${id}'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    return response.body;
+  }
 
 
   /////////////////////////// Orders ////////////////////////
