@@ -94,6 +94,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
       widget.order.clientMobile =  contactEditTextController.text;
       widget.order.description = descriptionEditTextController.text;
       widget.order.deliveryDate = deliverDateEditTextController.text;
+      if(!selectImage)widget.order.image="";
     });
   }
   openDatePicker() async {
@@ -145,7 +146,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey created above.
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black87),
@@ -342,13 +343,19 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                     ),
                   )
                   ,),
-                 ElevatedButton(onPressed: () async {
-                   collectFields();
-                   print(widget.order.toJson());
+                 Padding(padding: const EdgeInsets.all(4)
+                 ,child:SizedBox(width: size.width-4,height: 64,
+                     child: ElevatedButton(onPressed: () async {
+                       collectFields();
+                       print("${widget.order.toJson()}");
 
-                   var res = await AdminApi.addOrder(widget.order);
-                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                   }, child: Text("ثبت سفارش"),)
+                       var res = await AdminApi.updateOrder(widget.order);
+                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                       Navigator.pop(context);
+
+                     }, child: Text("بروزرسانی"),),
+                   ),
+                 )
                 // Add TextFormFields and ElevatedButton here.
               ],
             ),
