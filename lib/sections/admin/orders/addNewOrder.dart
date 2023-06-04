@@ -251,7 +251,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                             InkWell(
                               onTap: (){openImagePicker();},
                               child:
-                              _imageFile != null ? Image.file(_imageFile!, fit: BoxFit.cover): const Text('برای انتخاب عکس کلیک کنید'),
+                              _imageFile != null ? Image.file(_imageFile!,height: 256,  ): const Text('برای انتخاب عکس کلیک کنید'),
                             ),
 
                             Expanded(child:
