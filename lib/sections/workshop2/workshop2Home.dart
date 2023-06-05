@@ -9,6 +9,8 @@ import 'package:gold_workshop/sections/workshop2/draw_menu_workshop2.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'workshop2OrdersList.dart';
+
 
 
 class Workshop2HomeScreen extends StatefulWidget {
@@ -50,10 +52,37 @@ class _Workshop2HomeScreenState extends State<Workshop2HomeScreen> {
         ),
         backgroundColor: Colors.white,
         drawer: SideMenuWorkshop2(),
-        body: Column(children: <Widget>[
-          ElevatedButton(onPressed: logOut, child: Text("خروج کارگاه 2"))
-
-        ]));
+        body: Center(
+            child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(32),
+                        child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Workshop2OrdersList()));
+                            },
+                            child: Text("سفارش ها",style: TextStyle(fontSize: 32),)),
+                      )),
+                  Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(32),
+                        child: OutlinedButton(
+                            onPressed: () {
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => Workshop1OrdersList()));
+                            },
+                            child: Text("جدول ها",style: TextStyle(fontSize: 32),)),
+                      ))
+                ]
+            )
+        )
+    );
   }
 
   logOut() async {

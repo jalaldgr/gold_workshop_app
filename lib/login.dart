@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gold_workshop/sections/workshop1/workshop1Home.dart';
-import 'package:gold_workshop/sections/workshop2/workshop2.dart';
+import 'package:gold_workshop/sections/workshop2/workshop2Home.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

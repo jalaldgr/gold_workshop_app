@@ -38,7 +38,7 @@ class _Workshop2OrdersListState extends State<Workshop2OrdersList> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black87),
-          backgroundColor: Colors.amber,
+          backgroundColor: Colors.cyan,
           actions: <Widget>[IconButton(onPressed: (){setState(() {});}, icon: Icon(Icons.refresh))],
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),

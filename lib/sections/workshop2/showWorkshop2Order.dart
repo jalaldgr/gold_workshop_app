@@ -67,7 +67,7 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black87),
-          backgroundColor: Colors.amber,
+          backgroundColor: Colors.cyan,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
