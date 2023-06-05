@@ -38,6 +38,7 @@ class _Workshop1OrdersListState extends State<Workshop1OrdersList> {
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black87),
           backgroundColor: Colors.amber,
+          actions: <Widget>[IconButton(onPressed: (){setState(() {});}, icon: Icon(Icons.refresh))],
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
