@@ -60,4 +60,28 @@ class Workshop1Api {
 
   }
 
+  static Future<String> sendFileWorkshop1(orderData order) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+
+    final response = await http.post(
+        Uri.parse('${dotenv.env['API_URL']}/workshop1/send-file/${order.id}'),
+        headers: {'Authorization': 'Bearer $token'},
+        body: order.toJson()
+    );
+    return response.body;
+  }
+
+  static Future<String> completeOrderWorkshop1(orderData order) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+
+    final response = await http.post(
+        Uri.parse('${dotenv.env['API_URL']}/workshop1/complete-order/${order.id}'),
+        headers: {'Authorization': 'Bearer $token'},
+        body: order.toJson()
+    );
+    return response.body;
+  }
+
 }

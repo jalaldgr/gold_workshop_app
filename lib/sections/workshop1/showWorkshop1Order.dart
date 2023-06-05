@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
+import 'package:gold_workshop/helper/workshop1Api.dart';
 import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
@@ -172,13 +173,17 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                               Expanded(child:TextFormField(onTap: openImagePicker,controller: imageEditTextController,),),
                               Expanded(child:
                               Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
-                                OutlinedButton(onPressed: (){
+                                OutlinedButton(onPressed: () async {
+
+
 
                                 }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("ارسال فایل")  ,))
                                 ),
                                 SizedBox(height: 16,),
-                                ElevatedButton(onPressed: (){
-
+                                ElevatedButton(onPressed: () async {
+                                  var res = await Workshop1Api.completeOrderWorkshop1(widget.order);
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                  Navigator.pop(context);
                                 }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("تکمیل سفارش")  ,))
                                 ),
                               ],)
