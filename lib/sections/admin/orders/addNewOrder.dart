@@ -43,15 +43,16 @@ class NewOrderFormState extends State<NewOrderForm> {
     "پا بند طلا","رو لباسی طلا","جواهرات","ساعت طلا","دستبند چرمی طلا","دستبند مهره ای فانتزی طلا","تک پوش طلا","گردنبند","حلقه ست",
     "اکسسوری طلا","محصولات نفره","آویز ساعت و دستبند طلا","پیرسینگ طلا","زنجیر طلا","سنجاق سینه طلا","مد روز","کودک و نوزاد",
     "طلای مناسبتی","طوق و بنگل طلا","تمیمه","انگشتر مردانه","زنجیر مردانه","دستبند مردانه","انگشتر زنانه","هدایای اقتصادی","برند ها"];
-  String orderMetaDropDownValue = 'وزن';
-  var orderMetaDropDownItems = [ 'وزن','کد' ];
+  String orderMetaDropDownValue = 'کد';
+  var orderMetaDropDownItems = [ 'کد','وزن','سایز','ابعاد','رنگ','سایر', ];
   bool instantDeliveryCheckBoxValue = false;
   bool deliveryByCustomerCheckBoxValue = false;
   bool feeCheckBoxValue = false;
   bool deliveryPaperCheckBoxValue = false;
   List<DataRow> tableItem=[];
 
-  TextEditingController orderMetaEditTextController=TextEditingController();
+  TextEditingController orderMetaKeyEditTextController=TextEditingController();
+  TextEditingController orderMetaValueEditTextController=TextEditingController();
   TextEditingController nameEditTextController=TextEditingController();
   TextEditingController contactEditTextController=TextEditingController();
   TextEditingController descriptionEditTextController=TextEditingController();
@@ -256,52 +257,63 @@ class NewOrderFormState extends State<NewOrderForm> {
                             ),
 
                             Expanded(child:
-                            Column(children: [
-                              Row(
-                                children: [
-                                  Expanded(child:DropdownButton(
-                                    hint: Text("ویژگی"),
-                                    value: orderMetaDropDownValue,
-                                    items: orderMetaDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                                    onChanged: (String? value) {
+                            Container(padding: EdgeInsets.all(8),
+                              child:Column(children: [
+                                Row(
+                                  children: [
+                                    Expanded(child:DropdownButton(
+                                      hint: Text("ویژگی"),
+                                      value: orderMetaDropDownValue,
+                                      items: orderMetaDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                                      onChanged: (String? value) {
+                                        setState(() {
+                                          orderMetaDropDownValue = value!;
+                                          orderMetaKeyEditTextController.text=value;
+                                          orderMetaValueEditTextController.text='';
+
+                                        });
+                                        // widget.order
+                                      },
+                                    )),
+
+
+                                    Expanded(child:IconButton( onPressed: (){
                                       setState(() {
-                                        orderMetaDropDownValue = value!;
-                                        orderMetaEditTextController.text='';});
-                                      // widget.order
-                                    },
-                                  )),
-                                  Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "مقدار"),controller: orderMetaEditTextController,)),
-                                  Expanded(child:IconButton( onPressed: (){
-                                    setState(() {
-                                      tableItem.add(DataRow(cells: [DataCell(Text("${orderMetaDropDownValue}")),DataCell(Text("${orderMetaEditTextController.text}"))]
-                                        // ,onSelectChanged:(b) {onSelectedRow("asd");}
-                                      ));
+                                        tableItem.add(DataRow(cells: [DataCell(Text("${orderMetaKeyEditTextController.text}")),DataCell(Text("${orderMetaValueEditTextController.text}"))]
+                                          // ,onSelectChanged:(b) {onSelectedRow("asd");}
+                                        ));
 
-                                    });
-                                  }, icon: Icon(Icons.add),),
-                                  )
-                                ],
-                              ),
+                                      });
+                                    }, icon: Icon(Icons.add),),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(height: 16,),
+                                Row(children: [
+                                  Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "ویژگی"),controller: orderMetaKeyEditTextController,)),
+                                  Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "مقدار"),controller: orderMetaValueEditTextController,)),
+                                ],),
 
-                              DataTable(
-                                columns: const <DataColumn>[
-                                  DataColumn(
-                                    label: Text(
-                                      'ویژگی',
-                                      style: TextStyle(fontStyle: FontStyle.italic),
+                                DataTable(
+                                  columns: const <DataColumn>[
+                                    DataColumn(
+                                      label: Text(
+                                        'ویژگی',
+                                        style: TextStyle(fontStyle: FontStyle.italic),
+                                      ),
                                     ),
-                                  ),
-                                  DataColumn(
-                                    label: Text(
-                                      'مقدار',
-                                      style: TextStyle(fontStyle: FontStyle.italic),
+                                    DataColumn(
+                                      label: Text(
+                                        'مقدار',
+                                        style: TextStyle(fontStyle: FontStyle.italic),
+                                      ),
                                     ),
-                                  ),
 
-                                ],
-                                rows: tableItem,
-                              )
-                            ],)
+                                  ],
+                                  rows: tableItem,
+                                )
+                              ],) ,
+                            )
 
 
 
