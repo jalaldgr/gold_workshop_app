@@ -13,7 +13,7 @@ import 'package:persian_fonts/persian_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
 
-import 'sections/admin/admin.dart';
+import 'sections/admin/adminHome.dart';
 import 'login.dart';
 import 'sections/designer/designerHome.dart';
 
