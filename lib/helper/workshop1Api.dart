@@ -84,4 +84,29 @@ class Workshop1Api {
     return response.body;
   }
 
+  static Future<String> SendOrderFileWorkshop1(orderData order) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+    var stringResponse="no response";
+    var uri = Uri.parse('${dotenv.env['API_URL']}/workshop1/send-file/${order.id}/workshop1File/');
+    var request2 = http.MultipartRequest('POST', uri)
+      ..headers.addAll({'Authorization': 'Bearer $token'});
+
+    if(order.workshop1File!="" && order.workshop1File!="null"){
+      http.MultipartFile file = await http.MultipartFile.fromPath('workshop1File', "${order.workshop1File}");
+      request2.files.add(file);
+    }
+
+    final response = await request2.send();
+    await response.stream.transform(utf8.decoder).listen((value) {
+      stringResponse = value;
+    });
+    print(stringResponse);
+    return stringResponse;
+
+  }
+
+
+
+
 }

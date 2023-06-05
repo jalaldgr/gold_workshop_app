@@ -44,7 +44,7 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
     );
     setState(() {
       imageEditTextController.text = "${result?.paths[0]}";
-      widget.order.designerFile = "${result?.paths[0]}".replaceAll("\\", "\\\\");
+      widget.order.workshop1File = "${result?.paths[0]}".replaceAll("\\", "\\\\");
     });
   }
 
@@ -174,9 +174,9 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                               Expanded(child:
                               Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
                                 OutlinedButton(onPressed: () async {
-
-
-
+                                  var res = await Workshop1Api.SendOrderFileWorkshop1(widget.order);
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                  Navigator.pop(context);
                                 }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("ارسال فایل")  ,))
                                 ),
                                 SizedBox(height: 16,),
