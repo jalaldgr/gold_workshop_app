@@ -27,7 +27,7 @@ class ShowWorkshop1OrderScreen extends StatefulWidget {
 
 class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
 
-  List<DataRow> tableItem=[DataRow(cells: [DataCell(Text(";کلید")),DataCell(Text("مقدار"))])];
+  List<DataRow> tableItem=[DataRow(cells: [DataCell(Text("کلید")),DataCell(Text("مقدار"))])];
   TextEditingController imageEditTextController=TextEditingController();
 
 
@@ -170,7 +170,7 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                           child:
                           Row(
                             children: [
-                              Expanded(child:TextFormField(onTap: openImagePicker,controller: imageEditTextController,),),
+                              Expanded(child:TextFormField(onTap: openImagePicker,controller: imageEditTextController,decoration: InputDecoration(hintText: "انتخاب فایل"),),),
                               Expanded(child:
                               Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
                                 OutlinedButton(onPressed: () async {
