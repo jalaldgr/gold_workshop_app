@@ -10,6 +10,7 @@ import 'package:gold_workshop/sections/admin/orders/editOrder.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../helper/serverApi.dart';
+import 'showOrder.dart';
 
 
 
@@ -168,7 +169,12 @@ class _OrdersListState extends State<OrdersList> {
                   Expanded(child: Text("${order?.status}")),
                   SizedBox(width: 150,
                     child:Row(children: [
-                      IconButton(onPressed: (){}, icon: Icon(Icons.remove_red_eye)),
+                      IconButton(onPressed: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShowOrderScreen(order: order!,)));
+                      }, icon: Icon(Icons.remove_red_eye)),
                       IconButton(
                         icon: const Icon(Icons.edit),
                         onPressed: () {
