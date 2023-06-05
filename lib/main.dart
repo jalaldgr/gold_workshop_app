@@ -15,7 +15,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 import 'sections/admin/admin.dart';
 import 'login.dart';
-import 'sections/designer/designer.dart';
+import 'sections/designer/designerHome.dart';
 
 Future<void> main() async {
   runApp(MyApp());

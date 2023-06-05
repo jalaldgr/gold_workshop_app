@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'sections/admin/admin.dart';
-import 'sections/designer/designer.dart';
+import 'sections/designer/designerHome.dart';
 
 
 class LoginPage extends StatefulWidget {
