@@ -57,7 +57,7 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
                     Column(
                       children: [
                         Card(
-                          child: Container(alignment: Alignment.centerRight,padding: EdgeInsets.all(8),
+                          child: Container(alignment: Alignment.center,padding: EdgeInsets.all(8),
                             child: Column(children: [
                               DataTable(columns: const <DataColumn>[
                                         DataColumn(
@@ -138,7 +138,22 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
         ,
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () {},
+          onPressed: () {
+            int rowNumber = tableItem.length+1;
+            setState(() {
+              tableItem.add(DataRow(cells: [
+                DataCell(Text("${rowNumber}")) ,
+                DataCell(Text("0")),
+                DataCell(Text("0")),
+                DataCell(Text("0")),
+                DataCell(Text("0")),
+                DataCell(Text("0")),
+                DataCell(Text("0")),
+                DataCell(Text("0"))
+              ]));
+
+            });
+          },
         )
 
     );
