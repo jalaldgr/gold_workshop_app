@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gold_workshop/helper/serverApi.dart';
+import 'package:gold_workshop/models/tableModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 
 class AdminTableScreen extends StatefulWidget {
@@ -41,8 +43,31 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
         body:SingleChildScrollView(child:
           Stack(
             children: [
-              Center(
-
+              FutureBuilder(
+                future: AdminApi.getTable(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<tableData> snapshot) =>
+                snapshot.hasData
+                    ?
+                Padding(padding: EdgeInsets.all(4),
+                    child:
+                    Column(
+                      children: [
+                        Card(
+                          child: Container(padding: EdgeInsets.all(8),
+                            child: Text("${snapshot.data?.status}"),
+                          ),
+                        ),
+                      ],
+                    )
+                )
+                    : snapshot.hasError
+                    ? Center(
+                      child: Text('Error: ${snapshot.error}'),)
+                    : snapshot.data != null
+                    ? const Center(
+                      child: Text("..."),)
+                    : CircularProgressIndicator(),
               )
             ],),)
 
@@ -54,7 +79,6 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
 
     );
   }
-
 
 
 

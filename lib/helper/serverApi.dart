@@ -1,13 +1,11 @@
 
 
 import 'dart:convert';
-import 'package:http_parser/http_parser.dart';
-import 'package:flutter/material.dart';
+import 'package:gold_workshop/models/tableModel.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gold_workshop/models/orderModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
 import '../models/userModel.dart';
 
 class AdminApi {
@@ -301,7 +299,17 @@ class AdminApi {
 
 
 
-
+  /////////////////////////// Orders ////////////////////////
+  static Future<tableData> getTable() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+    final response = await http.get(
+      Uri.parse('${dotenv.env['API_URL']}/admin/get-table/'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    tableData table = tableData.fromJson(json.decode(response.body));
+    return  table;
+  }
 
 
 
