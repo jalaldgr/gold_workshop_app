@@ -37,7 +37,7 @@ class NewOrderFormState extends State<NewOrderForm> {
   String customerTypeDropDownValue = 'مشتری';
   var customerTypeDropDownItems = [ 'مشتری','همکار' ];
   String statusDropDownValue = 'در انتظار بررسی';
-  var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'در حال طراحی','در کارگاه 1','در کارگاه 2','تکمیل طراحی','تکمیل کارگاه 1','تکمیل کارگاه 2' ,'لغو شده'];
+  var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'در حال طراحی','در کارگاه','تکمیل طراحی','تکمیل کارگاه' ,'لغو شده'];
   String productTypeDropDownValue = 'پلاک اسم';
   var productTypeDropDownItems = ["پلاک اسم","انگشتر","النگو","دستبند","گوشواره","دوره سنگ","سرویس طلا","نیم ست طلا","آویز طلا",
     "پا بند طلا","رو لباسی طلا","جواهرات","ساعت طلا","دستبند چرمی طلا","دستبند مهره ای فانتزی طلا","تک پوش طلا","گردنبند","حلقه ست",
