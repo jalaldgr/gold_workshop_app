@@ -45,6 +45,7 @@ dependencies:
   persian_datetime_picker: ^2.6.0
   file_picker: ^5.3.1
   url_launcher: ^6.1.11
+  pluto_grid: ^5.4.9
 
 dev_dependencies:
   flutter_test:
