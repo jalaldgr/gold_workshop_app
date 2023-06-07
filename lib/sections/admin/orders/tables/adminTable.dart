@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/tableModel.dart';
@@ -14,6 +16,7 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
   TextEditingController fullNameController=TextEditingController();
   TextEditingController userNameController=TextEditingController();
   TextEditingController passwordController=TextEditingController();
+  List<DataRow> tableItem=[];
 
 
   @override
@@ -54,8 +57,69 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
                     Column(
                       children: [
                         Card(
-                          child: Container(padding: EdgeInsets.all(8),
-                            child: Text("${snapshot.data?.status}"),
+                          child: Container(alignment: Alignment.centerRight,padding: EdgeInsets.all(8),
+                            child: Column(children: [
+                              DataTable(columns: const <DataColumn>[
+                                        DataColumn(
+                                          label: Text(
+                                            'ردیف',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'متفرقه',
+                                            style: TextStyle(
+                                                fontStyle: FontStyle.italic),
+                                          ),
+                                        ),
+                                DataColumn(
+                                  label: Text(
+                                    'بار مصرفی',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'مجموع متفرقه و بار',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'بعد از ذوب',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'اختلاف',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'بعد از صفحه گیری',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    'اختلاف نهایی',
+                                    style: TextStyle(
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+
+                                      ], rows: tableItem
+                              )
+                            ]),
                           ),
                         ),
                       ],
