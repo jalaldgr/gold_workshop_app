@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../workshop1/workshop1OrdersList.dart';
 import 'draw_menu_admin.dart';
 import 'orders/ordersList.dart';
+import 'orders/tables/adminTable.dart';
 
 
 
@@ -74,10 +75,10 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                 padding: EdgeInsets.all(32),
                                 child: OutlinedButton(
                                     onPressed: () {
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) => OrdersList()));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => AdminTableScreen()));
                                     },
                                     child: Text("جدول ها",style: TextStyle(fontSize: 32),)),
                               )),

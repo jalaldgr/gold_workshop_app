@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/sections/admin/designers/designersList.dart';
+import 'package:gold_workshop/sections/admin/orders/tables/adminTable.dart';
 import 'package:gold_workshop/sections/admin/profile.dart';
 import 'package:gold_workshop/sections/admin/workshop1/wokshop1List.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,6 +88,10 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                                 trailing: Icon(Icons.chevron_right),
                                 onTap: (){
 
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AdminTableScreen()));
                                 },
                               ),
                               ListTile(
