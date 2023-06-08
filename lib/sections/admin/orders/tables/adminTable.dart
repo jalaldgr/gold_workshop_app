@@ -187,6 +187,8 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
         child: PlutoGrid(
           columns: columns,
           rows: rows,
+          createHeader:  (stateManager) => _Header(stateManager: stateManager),
+
 
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
@@ -247,5 +249,56 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
     );
   }
 
+}
 
+
+class _Header extends StatefulWidget {
+  const _Header({
+    required this.stateManager,
+    Key? key,
+  }) : super(key: key);
+
+  final PlutoGridStateManager stateManager;
+
+  @override
+  State<_Header> createState() => _HeaderState();
+}
+
+class _HeaderState extends State<_Header> {
+
+  PlutoGridSelectingMode gridSelectingMode = PlutoGridSelectingMode.row;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      widget.stateManager.setSelectingMode(gridSelectingMode);
+    });
+  }
+
+
+  void handleRemoveCurrentColumnButton() {
+    final currentColumn = widget.stateManager.currentColumn;
+
+    if (currentColumn == null) {
+      return;
+    }
+
+    widget.stateManager.removeColumns([currentColumn]);
+  }
+
+  void handleRemoveCurrentRowButton() {
+    widget.stateManager.removeCurrentRow();
+  }
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return  ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+      onPressed: handleRemoveCurrentRowButton,
+      child: const Text('حذف سطر انتخاب شده',style: TextStyle(color: Colors.black),),
+    );
+  }
 }
