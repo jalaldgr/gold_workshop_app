@@ -148,7 +148,7 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
     }
 
     stateManager.refRows.clear();
-    stateManager.refRows.addAll(updatedRows);
+    stateManager.insertRows(0, updatedRows);
     stateManager.setShowLoading(false);
 
   }
