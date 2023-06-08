@@ -312,5 +312,19 @@ class AdminApi {
   }
 
 
+  static Future<tableData> postTable(tableData data) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+    final response = await http.post(
+      Uri.parse('${dotenv.env['API_URL']}/admin/post-table/'),
+      headers: {'Authorization': 'Bearer $token'},
+      body: data.toJson()
+    );
+    tableData table = tableData.fromJson(json.decode(response.body));
+    return  table;
+  }
+
+
+
 
 }
