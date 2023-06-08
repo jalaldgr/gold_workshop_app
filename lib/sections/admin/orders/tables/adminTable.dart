@@ -115,41 +115,45 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
 
   /// columnGroups that can group columns can be omitted.
   updateTable() async {
-    stateManager.setShowLoading(true);
+
+
     var tables = await AdminApi.getTable();
-    dynamic table1 =json.decode(tables.table1!);
-    List rowNumber = table1["row"];
-    List other = table1["other"];
-    List consumption_loads = table1["consumption_load"];
-    List consumptions_load_and_other = table1["consumptions_load_and_other"];
-    List after_melt = table1["after_melt"];
-    List difference = table1["difference"];
-    List after_paging = table1["after_paging"];
-    List final_difference = table1["final_difference"];
+    if(tables.table1!.length>10){
+      stateManager.setShowLoading(true);
+      dynamic table1 =json.decode(tables.table1!);
+      List rowNumber = table1["row"];
+      List other = table1["other"];
+      List consumption_loads = table1["consumption_load"];
+      List consumptions_load_and_other = table1["consumptions_load_and_other"];
+      List after_melt = table1["after_melt"];
+      List difference = table1["difference"];
+      List after_paging = table1["after_paging"];
+      List final_difference = table1["final_difference"];
+
+      List<PlutoRow> updatedRows=[];
+      for (var i = 0; i < rowNumber.length; i++) {
+        updatedRows.add(PlutoRow(
+          cells: {
+            'row': PlutoCell(value:rowNumber[i] ),
+            'other': PlutoCell(value: other[i]),
+            'consumption_load': PlutoCell(value: consumption_loads[i]),
+            'consumptions_load_and_other': PlutoCell(value: consumptions_load_and_other[i]),
+            'after_melt': PlutoCell(value: after_melt[i]),
+            'difference': PlutoCell(value: difference[i]),
+            'after_paging': PlutoCell(value: after_paging[i]),
+            'final_difference': PlutoCell(value: final_difference[i]),
+
+          },
+        ));
+      }
+
+      stateManager.refRows.clear();
+      stateManager.insertRows(0, updatedRows);
+      stateManager.setShowLoading(false);
 
 
-    List<PlutoRow> updatedRows=[];
-
-    for (var i = 0; i < rowNumber.length; i++) {
-
-      updatedRows.add(PlutoRow(
-        cells: {
-          'row': PlutoCell(value:rowNumber[i] ),
-          'other': PlutoCell(value: other[i]),
-          'consumption_load': PlutoCell(value: consumption_loads[i]),
-          'consumptions_load_and_other': PlutoCell(value: consumptions_load_and_other[i]),
-          'after_melt': PlutoCell(value: after_melt[i]),
-          'difference': PlutoCell(value: difference[i]),
-          'after_paging': PlutoCell(value: after_paging[i]),
-          'final_difference': PlutoCell(value: final_difference[i]),
-
-        },
-      ));
     }
 
-    stateManager.refRows.clear();
-    stateManager.insertRows(0, updatedRows);
-    stateManager.setShowLoading(false);
 
   }
 
