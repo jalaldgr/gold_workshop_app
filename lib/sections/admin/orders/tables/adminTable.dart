@@ -100,14 +100,14 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
   List<PlutoRow> rows = [
     PlutoRow(
       cells: {
-        'row': PlutoCell(value: 2020),
-        'other': PlutoCell(value: 2020),
-        'consumption_load': PlutoCell(value: 2020),
-        'consumptions_load_and_others': PlutoCell(value: 2020),
-        'after_melt': PlutoCell(value: 2020),
-        'difference': PlutoCell(value: 2020),
-        'after_paging': PlutoCell(value: 2020),
-        'final_difference': PlutoCell(value: 2020),
+        'row': PlutoCell(value: 0),
+        'other': PlutoCell(value: 0),
+        'consumption_load': PlutoCell(value: 0),
+        'consumptions_load_and_others': PlutoCell(value: 0),
+        'after_melt': PlutoCell(value: 0),
+        'difference': PlutoCell(value: 0),
+        'after_paging': PlutoCell(value: 0),
+        'final_difference': PlutoCell(value: 0),
 
       },
     ),
@@ -144,23 +144,50 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        stateManager.insertRows(0, [
+      floatingActionButton: FloatingActionButton(onPressed: () async {
+        stateManager.insertRows(stateManager.rows.length, [
           PlutoRow(
             cells: {
-              'row': PlutoCell(value: 2020),
-              'other': PlutoCell(value: 2020),
-              'consumption_load': PlutoCell(value: 2020),
-              'consumptions_load_and_others': PlutoCell(value: 2020),
-              'after_melt': PlutoCell(value: 2020),
-              'difference': PlutoCell(value: 2020),
-              'after_paging': PlutoCell(value: 2020),
-              'final_difference': PlutoCell(value: 2020),
+              'row': PlutoCell(value: 1+stateManager.rows.length),
+              'other': PlutoCell(value: 2),
+              'consumption_load': PlutoCell(value: 3),
+              'consumptions_load_and_others': PlutoCell(value: 4),
+              'after_melt': PlutoCell(value: 5),
+              'difference': PlutoCell(value: 6),
+              'after_paging': PlutoCell(value: 7),
+              'final_difference': PlutoCell(value: 8),
 
             },
           ),
         ]);
-        print("gihiii");
+        Map<String,dynamic> table1 ={};
+
+        List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
+        List others = stateManager.rows.map((e) => e.cells['other']?.value).toList();
+        List consumption_loads = stateManager.rows.map((e) => e.cells['consumption_load']?.value).toList();
+        List consumptions_load_and_otherss = stateManager.rows.map((e) => e.cells['consumptions_load_and_others']?.value).toList();
+        List after_melts = stateManager.rows.map((e) => e.cells['after_melt']?.value).toList();
+        List differences = stateManager.rows.map((e) => e.cells['difference']?.value).toList();
+        List after_pagings = stateManager.rows.map((e) => e.cells['after_paging']?.value).toList();
+        List final_differences = stateManager.rows.map((e) => e.cells['final_difference']?.value).toList();
+
+        table1["row"]=rows.toList();
+        table1["others"]=others.toList();
+        table1["consumption_loads"]=consumption_loads.toList();
+        table1["consumption_loads"]=consumption_loads.toList();
+        table1["consumptions_load_and_otherss"]=consumptions_load_and_otherss.toList();
+        table1["after_melts"]=after_melts.toList();
+        table1["differences"]=differences.toList();
+        table1["differences"]=differences.toList();
+        table1["after_pagings"]=after_pagings.toList();
+        table1["final_differences"]=final_differences.toList();
+
+
+
+
+        tableData t = new tableData("تکمیل کارگاه 1", table1.toString(), "table2", "table3", "table4", "table5", "table6");
+
+       var respo = await AdminApi.postTable(t);
         },child: const Icon(Icons.add)),
 
     );
