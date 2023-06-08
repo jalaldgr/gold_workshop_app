@@ -204,13 +204,13 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
           PlutoRow(
             cells: {
               'row': PlutoCell(value: 1+stateManager.rows.length),
-              'other': PlutoCell(value: 2),
-              'consumption_load': PlutoCell(value: 3),
-              'consumptions_load_and_other': PlutoCell(value: 4),
-              'after_melt': PlutoCell(value: 5),
-              'difference': PlutoCell(value: 6),
-              'after_paging': PlutoCell(value: 7),
-              'final_difference': PlutoCell(value: 8),
+              'other': PlutoCell(value: 0),
+              'consumption_load': PlutoCell(value: 0),
+              'consumptions_load_and_other': PlutoCell(value: 0),
+              'after_melt': PlutoCell(value: 0),
+              'difference': PlutoCell(value: 0),
+              'after_paging': PlutoCell(value: 0),
+              'final_difference': PlutoCell(value: 0),
 
             },
           ),
