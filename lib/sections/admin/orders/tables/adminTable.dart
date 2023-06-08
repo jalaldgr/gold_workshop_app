@@ -157,7 +157,6 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
   void initState() {
 
     super.initState();
-    // updateTable();
   }
 
   late final PlutoGridStateManager stateManager;
@@ -188,7 +187,7 @@ class _AdminTableScreenState extends State<AdminTableScreen> {
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
 
-            // stateManager.setShowColumnFilter(true);
+            updateTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
             print(event);
