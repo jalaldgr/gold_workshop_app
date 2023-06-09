@@ -32,9 +32,9 @@ class _Table5ScreenState extends State<Table5Screen> {
     ),
     /// Select Column definition
     PlutoColumn(
-        title: 'متفرقه',
-        field: 'other',
-        type: PlutoColumnType.number(),
+        title: 'سفارش دهنده',
+        field: 'client_name',
+        type: PlutoColumnType.text(),
         enableEditingMode: true,
         width: 100
 
@@ -47,7 +47,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoRow(
       cells: {
         'row': PlutoCell(value: 1),
-        'other': PlutoCell(value: 0),
+        'client_name': PlutoCell(value: ""),
 
 
       },
@@ -59,31 +59,18 @@ class _Table5ScreenState extends State<Table5Screen> {
 
 
     var tables = await AdminApi.getTable();
-    if(tables.table1!.length>10){
+    if(tables.table5!.length>10){
       stateManager.setShowLoading(true);
-      dynamic table1 =json.decode(tables.table1!);
-      List rowNumber = table1["row"];
-      List other = table1["other"];
-      List consumption_loads = table1["consumption_load"];
-      List consumptions_load_and_other = table1["consumptions_load_and_other"];
-      List after_melt = table1["after_melt"];
-      List difference = table1["difference"];
-      List after_paging = table1["after_paging"];
-      List final_difference = table1["final_difference"];
+      dynamic table5 =json.decode(tables.table5!);
+      List rowNumber = table5["row"];
+      List client_name = table5["client_name"];
 
       List<PlutoRow> updatedRows=[];
       for (var i = 0; i < rowNumber.length; i++) {
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value:rowNumber[i] ),
-            'other': PlutoCell(value: other[i]),
-            'consumption_load': PlutoCell(value: consumption_loads[i]),
-            'consumptions_load_and_other': PlutoCell(value: consumptions_load_and_other[i]),
-            'after_melt': PlutoCell(value: after_melt[i]),
-            'difference': PlutoCell(value: difference[i]),
-            'after_paging': PlutoCell(value: after_paging[i]),
-            'final_difference': PlutoCell(value: final_difference[i]),
-
+            'client_name': PlutoCell(value: client_name[i]),
           },
         ));
       }
@@ -147,40 +134,21 @@ class _Table5ScreenState extends State<Table5Screen> {
           PlutoRow(
             cells: {
               'row': PlutoCell(value: 1+stateManager.rows.length),
-              'other': PlutoCell(value: 0),
-              'consumption_load': PlutoCell(value: 0),
-              'consumptions_load_and_other': PlutoCell(value: 0),
-              'after_melt': PlutoCell(value: 0),
-              'difference': PlutoCell(value: 0),
-              'after_paging': PlutoCell(value: 0),
-              'final_difference': PlutoCell(value: 0),
-
+              'client_name': PlutoCell(value: 0),
             },
           ),
         ]);
-        Map<String,dynamic> table1 = {};
+        Map<String,dynamic> table5 = {};
 
         List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
-        List others = stateManager.rows.map((e) => e.cells['other']?.value).toList();
-        List consumption_loads = stateManager.rows.map((e) => e.cells['consumption_load']?.value).toList();
-        List consumptions_load_and_others = stateManager.rows.map((e) => e.cells['consumptions_load_and_other']?.value).toList();
-        List after_melts = stateManager.rows.map((e) => e.cells['after_melt']?.value).toList();
-        List differences = stateManager.rows.map((e) => e.cells['difference']?.value).toList();
-        List after_pagings = stateManager.rows.map((e) => e.cells['after_paging']?.value).toList();
-        List final_differences = stateManager.rows.map((e) => e.cells['final_difference']?.value).toList();
+        List client_name = stateManager.rows.map((e) => e.cells['client_name']?.value).toList();
 
-        table1["row"]=rows.toList();
-        table1["other"]=others.toList();
-        table1["consumption_load"]=consumption_loads.toList();
-        table1["consumption_load"]=consumption_loads.toList();
-        table1["consumptions_load_and_other"]=consumptions_load_and_others.toList();
-        table1["after_melt"]=after_melts.toList();
-        table1["difference"]=differences.toList();
-        table1["difference"]=differences.toList();
-        table1["after_paging"]=after_pagings.toList();
-        table1["final_difference"]=final_differences.toList();
 
-        tableData t = new tableData("تکمیل کارگاه 1", jsonEncode(table1), "", "","", "", "", "");
+        table5["row"]=rows.toList();
+        table5["client_name"]=client_name.toList();
+
+
+        tableData t = new tableData("تکمیل کارگاه 1", "", "", "","", "", jsonEncode(table5), "");
 
         var respo = await AdminApi.postTable(t);
 
