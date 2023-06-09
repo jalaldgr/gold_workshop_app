@@ -52,55 +52,136 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
           backgroundColor: Colors.pink,
         ),
         backgroundColor: Colors.white,
-        body: Center(
-            child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(32),
-                        child: OutlinedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => OrdersList()));
-                            },
-                            child: Text("سفارش ها",style: TextStyle(fontSize: 32),)),
-                      )),
-                  Expanded(
-                      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.all(32),
-                                child: OutlinedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Table1Screen()));
-                                    },
-                                    child: Text("جدول ها",style: TextStyle(fontSize: 32),)),
-                              )),
-                          Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.all(32),
-                                child: OutlinedButton(
-                                    onPressed: () {
-                                      // Navigator.push(
-                                      //     context,
-                                      //     MaterialPageRoute(
-                                      //         builder: (context) => OrdersList()));
-                                    },
-                                    child: Text("آرشیو جدول ها",style: TextStyle(fontSize: 32),)),
-                              ))
+      body: Center(
+          child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.all(32),
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                      child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        children: [
+                                          Expanded(child:Padding(padding: EdgeInsets.all(4),child:
+                                          OutlinedButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => Table1Screen()));
+                                              },
+                                              child: Text("جدول 1",style: TextStyle(fontSize: 32),))
+                                            ,)),
+                                          Expanded(child:
+                                          Padding(padding: EdgeInsets.all(4),
+                                            child: OutlinedButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) => Table1Screen()));
+                                                },
+                                                child: Text("جدول 2",style: TextStyle(fontSize: 32),))
+                                            ,)
 
-                        ],
-                      ))
-                ]
-            )
-        ),
-        drawer: SideMenuAdmin(),
+                                          ),
+                                          Expanded(child:
+                                          Padding(padding: EdgeInsets.all(4),child:
+                                          OutlinedButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => Table1Screen()));
+                                              },
+                                              child: Text("جدول 2",style: TextStyle(fontSize: 32),))
+                                            ,)
+                                          )
+                                        ],
+                                      )),
+                                  Expanded(
+                                      child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        children: [
+                                          Expanded(child:Padding(padding: EdgeInsets.all(4),child:
+                                          OutlinedButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => Table1Screen()));
+                                              },
+                                              child: Text("جدول 4",style: TextStyle(fontSize: 32),))
+                                            ,)),
+                                          Expanded(child:
+                                          Padding(padding: EdgeInsets.all(4),
+                                            child: OutlinedButton(
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) => Table1Screen()));
+                                                },
+                                                child: Text("جدول 5",style: TextStyle(fontSize: 32),))
+                                            ,)
+
+                                          ),
+                                          Expanded(child:
+                                          Padding(padding: EdgeInsets.all(4),child:
+                                          OutlinedButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) => Table1Screen()));
+                                              },
+                                              child: Text("جدول 6",style: TextStyle(fontSize: 32),))
+                                            ,)
+                                          )
+                                        ],
+                                      )),
+
+                                ],
+                              ),
+                            )),
+                        Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.all(32),
+                              child: OutlinedButton(
+                                  onPressed: () {
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => OrdersList()));
+                                  },
+                                  child: Text(
+                                    "آرشیو جدول ها",
+                                    style: TextStyle(fontSize: 32),
+                                  )),
+                            ))
+                      ],
+                    )),
+            Expanded(
+                child: Padding(
+              padding: EdgeInsets.all(32),
+              child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => OrdersList()));
+                  },
+                  child: Text(
+                    "سفارش ها",
+                    style: TextStyle(fontSize: 32),
+                  )),
+            ))
+
+          ])),
+      drawer: SideMenuAdmin(),
     );
   }
 
