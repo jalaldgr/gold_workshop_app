@@ -7,14 +7,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../tables/Table1.dart';
+import '../tables/Table2.dart';
+import '../tables/Table3.dart';
+import '../tables/Table4.dart';
+import '../tables/Table5.dart';
 import '../workshop1/workshop1OrdersList.dart';
 import 'draw_menu_admin.dart';
 import 'orders/ordersList.dart';
-import 'orders/tables/Table1.dart';
-import 'orders/tables/Table2.dart';
-import 'orders/tables/Table3.dart';
-import 'orders/tables/Table4.dart';
-import 'orders/tables/Table5.dart';
 
 
 
