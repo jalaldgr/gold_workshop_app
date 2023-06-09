@@ -6,14 +6,14 @@ import 'package:gold_workshop/models/tableModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
-class AdminTableScreen extends StatefulWidget {
-  const AdminTableScreen({Key? key}) : super(key: key);
+class Table1Screen extends StatefulWidget {
+  const Table1Screen({Key? key}) : super(key: key);
 
   @override
-  _AdminTableScreenState createState() => _AdminTableScreenState();
+  _Table1ScreenState createState() => _Table1ScreenState();
 }
 
-class _AdminTableScreenState extends State<AdminTableScreen> {
+class _Table1ScreenState extends State<Table1Screen> {
   TextEditingController fullNameController=TextEditingController();
   TextEditingController userNameController=TextEditingController();
   TextEditingController passwordController=TextEditingController();
