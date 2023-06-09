@@ -78,7 +78,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                        builder: (context) => Table1Screen()));
+                                                        builder: (context) => Table1Screen(headerColor: Colors.pink,)));
                                               },
                                               child: Text("جدول 1",style: TextStyle(fontSize: 32),))
                                             ,)),
@@ -89,7 +89,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => Table2Screen()));
+                                                          builder: (context) => Table2Screen(headerColor: Colors.pink)));
                                                 },
                                                 child: Text("جدول 2",style: TextStyle(fontSize: 32),))
                                             ,)
@@ -102,7 +102,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                        builder: (context) => Table3Screen()));
+                                                        builder: (context) => Table3Screen(headerColor: Colors.pink)));
                                               },
                                               child: Text("جدول 3",style: TextStyle(fontSize: 32),))
                                             ,)
@@ -118,7 +118,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                        builder: (context) => Table4Screen()));
+                                                        builder: (context) => Table4Screen(headerColor: Colors.pink)));
                                               },
                                               child: Text("جدول 4",style: TextStyle(fontSize: 32),))
                                             ,)),
@@ -129,7 +129,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => Table5Screen()));
+                                                          builder: (context) => Table5Screen(headerColor: Colors.pink)));
                                                 },
                                                 child: Text("جدول 5",style: TextStyle(fontSize: 32),))
                                             ,)
@@ -142,7 +142,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                        builder: (context) => Table5Screen()));
+                                                        builder: (context) => Table5Screen(headerColor: Colors.pink)));
                                               },
                                               child: Text("جدول 6",style: TextStyle(fontSize: 32),))
                                             ,)

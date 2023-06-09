@@ -7,7 +7,9 @@ import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 class Table1Screen extends StatefulWidget {
-  const Table1Screen({Key? key}) : super(key: key);
+  final Color headerColor;
+
+  const Table1Screen({Key? key, required this.headerColor}) : super(key: key);
 
   @override
   _Table1ScreenState createState() => _Table1ScreenState();
@@ -170,7 +172,7 @@ class _Table1ScreenState extends State<Table1Screen> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
-        backgroundColor: Colors.pink,
+        backgroundColor: widget.headerColor?? Colors.pink,
         actions: [IconButton(onPressed: (){updateTable();}, icon: Icon(Icons.refresh))],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),

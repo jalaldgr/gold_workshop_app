@@ -91,7 +91,7 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Table1Screen()));
+                                          builder: (context) => Table1Screen(headerColor: Colors.pink,)));
                                 },
                               ),
                               ListTile(

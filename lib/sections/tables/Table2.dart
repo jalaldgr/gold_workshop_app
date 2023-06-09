@@ -5,7 +5,8 @@ import 'package:gold_workshop/models/tableModel.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 class Table2Screen extends StatefulWidget {
-  const Table2Screen({Key? key}) : super(key: key);
+  final Color headerColor;
+  const Table2Screen({Key? key, required this.headerColor}) : super(key: key);
 
   @override
   _Table2ScreenState createState() => _Table2ScreenState();
@@ -161,7 +162,7 @@ class _Table2ScreenState extends State<Table2Screen> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
-        backgroundColor: Colors.pink,
+        backgroundColor: widget.headerColor??Colors.pink,
         actions: [IconButton(onPressed: (){updateTable();}, icon: Icon(Icons.refresh))],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
