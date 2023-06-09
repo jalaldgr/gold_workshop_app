@@ -239,7 +239,7 @@ class _Table1ScreenState extends State<Table1Screen> {
         table1["after_paging"]=after_pagings.toList();
         table1["final_difference"]=final_differences.toList();
 
-        tableData t = new tableData("تکمیل کارگاه 1", jsonEncode(table1), "table2", "table3", "table4", "table5", "table6");
+        tableData t = new tableData("تکمیل کارگاه 1", jsonEncode(table1), "", "", "", "", "");
 
         var respo = await AdminApi.postTable(t);
 
