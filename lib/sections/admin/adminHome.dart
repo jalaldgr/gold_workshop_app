@@ -11,6 +11,10 @@ import '../workshop1/workshop1OrdersList.dart';
 import 'draw_menu_admin.dart';
 import 'orders/ordersList.dart';
 import 'orders/tables/Table1.dart';
+import 'orders/tables/Table2.dart';
+import 'orders/tables/Table3.dart';
+import 'orders/tables/Table4.dart';
+import 'orders/tables/Table5.dart';
 
 
 
@@ -85,7 +89,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => Table1Screen()));
+                                                          builder: (context) => Table2Screen()));
                                                 },
                                                 child: Text("جدول 2",style: TextStyle(fontSize: 32),))
                                             ,)
@@ -98,9 +102,9 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                        builder: (context) => Table1Screen()));
+                                                        builder: (context) => Table3Screen()));
                                               },
-                                              child: Text("جدول 2",style: TextStyle(fontSize: 32),))
+                                              child: Text("جدول 3",style: TextStyle(fontSize: 32),))
                                             ,)
                                           )
                                         ],
@@ -114,7 +118,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                        builder: (context) => Table1Screen()));
+                                                        builder: (context) => Table4Screen()));
                                               },
                                               child: Text("جدول 4",style: TextStyle(fontSize: 32),))
                                             ,)),
@@ -125,7 +129,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => Table1Screen()));
+                                                          builder: (context) => Table5Screen()));
                                                 },
                                                 child: Text("جدول 5",style: TextStyle(fontSize: 32),))
                                             ,)
@@ -138,7 +142,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                                 Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
-                                                        builder: (context) => Table1Screen()));
+                                                        builder: (context) => Table5Screen()));
                                               },
                                               child: Text("جدول 6",style: TextStyle(fontSize: 32),))
                                             ,)
