@@ -60,7 +60,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
           child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -135,20 +135,14 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                             ,)
 
                                           ),
-                                          Expanded(child:
-                                          Padding(padding: EdgeInsets.all(4),child:
-                                          OutlinedButton(
-                                              onPressed: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) => Table5Screen(headerColor: Colors.pink)));
-                                              },
-                                              child: Text("جدول 6",style: TextStyle(fontSize: 32),))
-                                            ,)
-                                          )
                                         ],
                                       )),
+                                  Expanded(
+                                      child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        children: [Card()]
+                                        ,
+                                      )),
+
 
                                 ],
                               ),
@@ -170,7 +164,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                             ))
                       ],
                     )),
-            Expanded(
+                  Expanded(
                 child: Padding(
               padding: EdgeInsets.all(32),
               child: OutlinedButton(
