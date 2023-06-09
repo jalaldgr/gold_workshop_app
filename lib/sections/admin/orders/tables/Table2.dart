@@ -1,4 +1,4 @@
-  import 'dart:convert';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/tableModel.dart';
@@ -230,7 +230,7 @@ class _Table2ScreenState extends State<Table2Screen> {
         table2["balance"]=balance.toList();
         table2["difference"]=difference.toList();
 
-        tableData t = new tableData("تکمیل کارگاه 1","" , jsonEncode(table2), "","", "", "");
+        tableData t = new tableData("تکمیل کارگاه 1","" , jsonEncode(table2), "","","", "", "");
 
         var respo = await AdminApi.postTable(t);
 

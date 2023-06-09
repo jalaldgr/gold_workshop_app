@@ -254,7 +254,7 @@ class _Table3ScreenState extends State<Table3Screen> {
         table3["work_made"]=work_made.toList();
         table3["sum"]=sum.toList();
 
-        tableData t = new tableData("تکمیل کارگاه 2", "", "", jsonEncode(table3), "", "", "");
+        tableData t = new tableData("تکمیل کارگاه 2", "", "", jsonEncode(table3), "","", "", "");
 
         var respo = await AdminApi.postTable(t);
 
