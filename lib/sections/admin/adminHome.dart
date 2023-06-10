@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:gold_workshop/sections/admin/orders/tablesArchiveList.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -157,7 +158,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                             ,)
                           ,
                               SizedBox(height: 4,),
-                        Container(decoration: BoxDecoration(color: Colors.pink.shade100
+                        Container(decoration: BoxDecoration(color: Colors.blue.shade100
                         ),
                           child: Row(
                                   children: [
@@ -209,10 +210,10 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                               padding: EdgeInsets.all(32),
                               child: OutlinedButton(
                                   onPressed: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => OrdersList()));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => TableArchiveListScreen()));
                                   },
                                   child: Text(
                                     "آرشیو جدول ها",
