@@ -137,15 +137,72 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                           ),
                                         ],
                                       )),
-                                  Expanded(
-                                      child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
-                                        children: [Card()]
-                                        ,
-                                      )),
-
-
-                                ],
-                              ),
+                      Card(color: Colors.blue.shade100,
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          child: Column(
+                            children: [
+                          Container(
+                          child:
+                          Row(crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(child: Text("ذوب روزانه",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                              Expanded(child: Text("کسر پرداخت",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                              Expanded(child: Text("کسر ذوب",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                              Expanded(child: Text("کسر برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                              Expanded(child: Text("اختلاف برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                              Expanded(child: Text("مجموع",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                            ],
+                          )
+                            ,)
+                          ,
+                              SizedBox(height: 4,),
+                        Container(decoration: BoxDecoration(color: Colors.pink.shade100
+                        ),
+                          child: Row(
+                                  children: [
+                                    Expanded(
+                                        child: Text("20",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.center)),
+                                    Expanded(
+                                        child: Text("20",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.center)),
+                                    Expanded(
+                                        child: Text("20",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.center)),
+                                    Expanded(
+                                        child: Text("20",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.center)),
+                                    Expanded(
+                                        child: Text("20",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.center)),
+                                    Expanded(
+                                        child: Text(
+                                      "20",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    )),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                             )),
                         Expanded(
                             child: Padding(
