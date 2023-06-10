@@ -1,6 +1,9 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/models/orderModel.dart';
+import 'package:gold_workshop/models/tableModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:gold_workshop/sections/admin/orders/addNewOrder.dart';
 import 'package:gold_workshop/sections/admin/orders/editOrder.dart';
@@ -37,7 +40,6 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          actions: <Widget>[IconButton(onPressed: (){setState(() {});}, icon: Icon(Icons.refresh))],
           title: const Text('آرشیو جدول ها',
               style: TextStyle(
                   color: Colors.black87,
@@ -51,9 +53,9 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
             children: [
               Center(
                 child: FutureBuilder(
-                  future: AdminApi.getOrders(),
+                  future: AdminApi.getTables(),
                   builder: (BuildContext context,
-                      AsyncSnapshot<List<orderData>> snapshot) =>
+                      AsyncSnapshot<List<tableData>> snapshot) =>
                   snapshot.hasData && snapshot.data!.isNotEmpty
                       ?
                   Padding(padding: EdgeInsets.all(4),
@@ -85,48 +87,7 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
                       : CircularProgressIndicator(),
                 ),
               )
-            ],),)
-
-        ,
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => NewOrderForm(order: orderData.fromJson({
-                      "clientFullName":"",
-                      "plateName":"",
-                      "description":"",
-                      "image":"",
-                      "code":"",
-                      "weight":"",
-                      "status":"",
-                      "workshop1fullName":"",
-                      "workshop1Id":"",
-                      "workshop1File":"",
-                      "workshop2fullName":"",
-                      "workshop2Id":"",
-                      "workshop2File":"",
-                      "designerFullName":"",
-                      "designerId":"",
-                      "designerFile":"",
-                      "createdDate":"",
-                      "id":"",
-                      "instantDelivery":"",
-                      "customerDelivery":"",
-                      "paperDelivery":"",
-                      "feeOrder":"",
-                      "orderMeta":"",
-                      "woocommerceOrderId":"",
-                      "clientMobile":"",
-                      "clientType":"",
-                      "productType":""
-
-                    }),)));
-          } ,
-        )
-
+            ],),),
     );
   }
 
@@ -134,73 +95,95 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
 
 
   Widget _buildPaymentItem(BuildContext context,
-       orderData? order,int? index) {
+       tableData? table,int? index) {
     return Padding(padding: EdgeInsets.all(4),
       child:
-      Container( color: (index! % 2 == 0) ? Colors.brown.shade50 : Colors.lightBlue.shade50,height: 100,
+      Container( color: (index! % 2 == 0) ? Colors.black12 : Colors.indigo.shade100,height: 100,
         child:
         Card(color: Colors.blue.shade100,
           child:
           Container(padding: EdgeInsets.all(8),
-            child: Column(
-              children: [
-                Container(
-                  child:
-                  Row(crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(child: Text("ذوب روزانه",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                      Expanded(child: Text("کسر پرداخت",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                      Expanded(child: Text("کسر ذوب",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                      Expanded(child: Text("کسر برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                      Expanded(child: Text("اختلاف برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                      Expanded(child: Text("مجموع",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                    ],
-                  )
-                  ,)
-                ,
-                SizedBox(height: 4,),
-                Container(decoration: BoxDecoration(color: Colors.blue.shade100
-                ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: Text("20",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center)),
-                      Expanded(
-                          child: Text("20",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center)),
-                      Expanded(
-                          child: Text("20",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center)),
-                      Expanded(
-                          child: Text("20",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center)),
-                      Expanded(
-                          child: Text("20",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                              textAlign: TextAlign.center)),
-                      Expanded(
-                          child: Text(
-                            "20",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
-                          )),
-                    ],
+            child: Row(children: [
+              Text("${table?.status}"),
+
+              Expanded(child:
+              Column(
+                children: [
+                    Container(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                              child: Text("ذوب روزانه",
+                                  style: TextStyle(fontWeight: FontWeight.w100),
+                                  textAlign: TextAlign.center)),
+                          Expanded(
+                              child: Text("کسر پرداخت",
+                                  style: TextStyle(fontWeight: FontWeight.w100),
+                                  textAlign: TextAlign.center)),
+                          Expanded(
+                              child: Text("کسر ذوب",
+                                  style: TextStyle(fontWeight: FontWeight.w100),
+                                  textAlign: TextAlign.center)),
+                          Expanded(
+                              child: Text("کسر برش",
+                                  style: TextStyle(fontWeight: FontWeight.w100),
+                                  textAlign: TextAlign.center)),
+                          Expanded(
+                              child: Text("اختلاف برش",
+                                  style: TextStyle(fontWeight: FontWeight.w100),
+                                  textAlign: TextAlign.center)),
+                          Expanded(
+                              child: Text("مجموع",
+                                  style: TextStyle(fontWeight: FontWeight.w100),
+                                  textAlign: TextAlign.center)),
+                        ],
+                      ),
+                    ),
+                  SizedBox(height: 4,),
+                  Container(decoration: BoxDecoration(color: Colors.blue.shade100
                   ),
-                )
-              ],
-            ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Text("${table?.table6}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text("20",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text("20",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text("20",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text("20",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text(
+                              "20",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            )),
+                      ],
+                    ),
+                  )
+                ],
+              ))
+            ]),
           ),
         )
       )
