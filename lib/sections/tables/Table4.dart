@@ -496,7 +496,7 @@ class _Table4ScreenState extends State<Table4Screen> {
         table41["description"]=description.toList();
         table41["import_weight"]=import_weight.toList();
         table41["summary"]=summary.toList();
-        tableData t = new tableData("تکمیل کارگاه 1", "", "", "",jsonEncode(table41), "", "", "");
+        tableData t = new tableData("تکمیل کارگاه 1", "", "", "",jsonEncode(table41), "", "", "","","","");
         var respo = await AdminApi.postTable(t);
 
 
@@ -512,7 +512,7 @@ class _Table4ScreenState extends State<Table4Screen> {
         table42["system_balance"]=system_balance.toList();
         table42["difference"]=difference.toList();
         table42["summary"]=summary42.toList();
-        tableData t42 = new tableData("تکمیل کارگاه 1", "", "", "","", jsonEncode(table42), "", "");
+        tableData t42 = new tableData("تکمیل کارگاه 1", "", "", "","", jsonEncode(table42), "", "","","","");
         var respo42 = await AdminApi.postTable(t42);
 
         },child: const Icon(Icons.add)),

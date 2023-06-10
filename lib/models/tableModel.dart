@@ -5,11 +5,11 @@ class tableData {
   String? table3="";
   String? table41="";
   String? table42="";
-
   String? table5="";
   String? table6="";
-
-
+  String? date="";
+  String? createdAt="";
+  String? updatedAt="";
 
   tableData(
       this.status,
@@ -19,8 +19,10 @@ class tableData {
       this.table41,
       this.table42,
       this.table5,
-      this.table6
-
+      this.table6,
+      this.date,
+      this.createdAt,
+      this.updatedAt
 );
 
   tableData.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,9 @@ class tableData {
     table42 = json['table42'] ?? "";
     table5 = json['table5'] ?? "";
     table6 = json['table6'] ?? "";
+    date = json['date'] ?? "";
+    createdAt = json['createdAt'] ?? "";
+    updatedAt = json['updatedDate'] ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -44,8 +49,9 @@ class tableData {
     data['table42']= table42;
     data['table5']= table5;
     data['table6']= table6;
-
-
+    data['date']= date;
+    data['createdAt']= createdAt;
+    data['updatedAt']= updatedAt;
     return data;
   }
 }

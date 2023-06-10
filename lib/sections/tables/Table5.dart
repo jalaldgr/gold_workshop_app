@@ -441,7 +441,7 @@ class _Table5ScreenState extends State<Table5Screen> {
 
 
 
-        tableData t = new tableData("تکمیل کارگاه 1", "", "", "","", "", jsonEncode(table5), "");
+        tableData t = new tableData("تکمیل کارگاه 1", "", "", "","", "", jsonEncode(table5), "","","","");
 
         var respo = await AdminApi.postTable(t);
 
