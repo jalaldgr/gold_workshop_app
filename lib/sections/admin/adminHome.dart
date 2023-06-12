@@ -170,18 +170,25 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                             ,)
                           ,
                               SizedBox(height: 4,),
-                          Container(
-                            decoration:
+                              InkWell(child:
+                              Container(
+                                decoration:
                                 BoxDecoration(color: Colors.blue.shade100),
-                            child: FutureBuilder(
-                              future: fetchTables(),
-                              builder: (BuildContext context,
+                                child: FutureBuilder(
+                                  future: fetchTables(),
+                                  builder: (BuildContext context,
                                       AsyncSnapshot<dynamic> snapshot) =>
                                   snapshot.hasData
                                       ? _buildTableItem(context, snapshot.data)
                                       : CircularProgressIndicator(),
-                            ),
-                          )
+                                ),
+                              )
+                                ,
+                                onTap: (){setState(() {
+
+                                });},
+                              )
+
                         ],
                           ),
                         ),
