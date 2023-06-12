@@ -71,7 +71,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'وزن',
         field: 'weight',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
@@ -79,6 +79,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -95,7 +96,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'کسر برش',
         field: 'cut_deficiency',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
@@ -103,6 +104,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -118,7 +120,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'کسر پاپیون',
         field: 'popion_deficiency',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
@@ -126,6 +128,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -141,7 +144,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'وزن نگین',
         field: 'jewel_weight',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
@@ -149,6 +152,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -170,7 +174,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'ذوب',
         field: 'melting',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
@@ -178,6 +182,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -193,7 +198,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'مفتول گیری',
         field: 'wiring',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 110,
         footerRenderer: (rendererContext) {
@@ -201,6 +206,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -216,7 +222,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'برش',
         field: 'cut',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
@@ -224,6 +230,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -239,13 +246,14 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'پاپیون',
         field: 'popion',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
+            format: "#.###",
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
@@ -262,13 +270,14 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'حلقه',
         field: 'ring',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
+            format: "#.###",
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
@@ -285,13 +294,14 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'زنجیر',
         field: 'chain',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
+            format: "#.###",
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
@@ -308,13 +318,14 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'تکه زنجیر',
         field: 'piece_chain',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
+            format: "#.###",
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
@@ -331,7 +342,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'عصایی',
         field: 'cane',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
@@ -339,6 +350,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -354,13 +366,14 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'مدبر',
         field: 'lock',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
+            format: "#.###",
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
@@ -377,7 +390,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'مفتول',
         field: 'wire',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
@@ -385,6 +398,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -400,13 +414,14 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'لحیم',
         field: 'solder',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
+            format: "#.###",
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
@@ -423,7 +438,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'گوی',
         field: 'ball',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
@@ -431,6 +446,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -446,7 +462,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'سرسنجاق',
         field: 'pin',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
@@ -454,6 +470,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -469,12 +486,13 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'رینگ',
         field: 'ring2',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
+            format: "#.###",
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
@@ -492,7 +510,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'نیم ساخته',
         field: 'half_made',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
@@ -500,6 +518,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -516,7 +535,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'مفتول کشی',
         field: 'wire_pulling',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 110,
         footerRenderer: (rendererContext) {
@@ -524,6 +543,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -539,13 +559,14 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'وزن نهایی',
         field: 'final_weight',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
+            format: "#.###",
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
@@ -562,7 +583,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'کسر پرداخت',
         field: 'burnish_deficiency',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 110,
         footerRenderer: (rendererContext) {
@@ -570,6 +591,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
+              format: "#.###",
             titleSpanBuilder: (text) {
               return [
                 const TextSpan(
@@ -872,7 +894,10 @@ class _Table5ScreenState extends State<Table5Screen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
         backgroundColor: widget.headerColor?? Colors.pink,
-        actions: [IconButton(onPressed: (){updateTable();}, icon: Icon(Icons.refresh))],
+        actions: [IconButton(tooltip: "حذف سطر انتخاب شده",
+            onPressed: (){
+          stateManager.removeCurrentRow();
+          updateTable();}, icon: Icon(Icons.delete_forever))],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -883,12 +908,12 @@ class _Table5ScreenState extends State<Table5Screen> {
                 fontWeight: FontWeight.bold,
                 fontSize: 22.0)),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: Container(
         padding: const EdgeInsets.all(15),
         child: PlutoGrid(
           columns: columns,
           rows: rows,
-          createHeader:  (stateManager) => _Header(stateManager: stateManager),
 
 
           onLoaded: (PlutoGridOnLoadedEvent event) {
@@ -903,7 +928,8 @@ class _Table5ScreenState extends State<Table5Screen> {
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
+      floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",
+          onPressed: () async {
         stateManager.insertRows(stateManager.rows.length, [
           PlutoRow(
             cells: {
@@ -946,125 +972,3 @@ class _Table5ScreenState extends State<Table5Screen> {
 
 }
 
-
-class _Header extends StatefulWidget {
-  const _Header({
-    required this.stateManager,
-    Key? key,
-  }) : super(key: key);
-
-  final PlutoGridStateManager stateManager;
-
-  @override
-  State<_Header> createState() => _HeaderState();
-}
-
-class _HeaderState extends State<_Header> {
-
-  PlutoGridSelectingMode gridSelectingMode = PlutoGridSelectingMode.row;
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      widget.stateManager.setSelectingMode(gridSelectingMode);
-    });
-  }
-
-
-  void handleRemoveCurrentColumnButton() {
-    final currentColumn = widget.stateManager.currentColumn;
-
-    if (currentColumn == null) {
-      return;
-    }
-
-    widget.stateManager.removeColumns([currentColumn]);
-  }
-
-  void handleRemoveCurrentRowButton() {
-    widget.stateManager.removeCurrentRow();
-    updateTable();
-
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return  ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-      onPressed: handleRemoveCurrentRowButton,
-      child: const Text('حذف سطر انتخاب شده',style: TextStyle(color: Colors.black),),
-    );
-  }
-
-
-  updateTable()async{
-    Map<String,dynamic> table5 = {};
-    List rows = widget.stateManager.rows.map((e) => e.cells['row']?.value).toList();
-    List client_name = widget.stateManager.rows.map((e) => e.cells['client_name']?.value).toList();
-    List description = widget.stateManager.rows.map((e) => e.cells['description']?.value).toList();
-    List code = widget.stateManager.rows.map((e) => e.cells['code']?.value).toList();
-    List weight = widget.stateManager.rows.map((e) => e.cells['weight']?.value).toList();
-    List cut_deficiency = widget.stateManager.rows.map((e) => e.cells['cut_deficiency']?.value).toList();
-    List popion_deficiency = widget.stateManager.rows.map((e) => e.cells['popion_deficiency']?.value).toList();
-    List jewel_weight = widget.stateManager.rows.map((e) => e.cells['jewel_weight']?.value).toList();
-    List summary = widget.stateManager.rows.map((e) => e.cells['summary']?.value).toList();
-    List melting = widget.stateManager.rows.map((e) => e.cells['melting']?.value).toList();
-    List wire_pulling = widget.stateManager.rows.map((e) => e.cells['wire_pulling']?.value).toList();
-    List cut = widget.stateManager.rows.map((e) => e.cells['cut']?.value).toList();
-    List popion = widget.stateManager.rows.map((e) => e.cells['popion']?.value).toList();
-    List ring = widget.stateManager.rows.map((e) => e.cells['ring']?.value).toList();
-    List chain = widget.stateManager.rows.map((e) => e.cells['chain']?.value).toList();
-    List piece_chain = widget.stateManager.rows.map((e) => e.cells['piece_chain']?.value).toList();
-    List cane = widget.stateManager.rows.map((e) => e.cells['cane']?.value).toList();
-    List lock = widget.stateManager.rows.map((e) => e.cells['lock']?.value).toList();
-    List wire = widget.stateManager.rows.map((e) => e.cells['wire']?.value).toList();
-    List solder = widget.stateManager.rows.map((e) => e.cells['solder']?.value).toList();
-    List ball = widget.stateManager.rows.map((e) => e.cells['ball']?.value).toList();
-    List pin = widget.stateManager.rows.map((e) => e.cells['pin']?.value).toList();
-    List ring2 = widget.stateManager.rows.map((e) => e.cells['ring2']?.value).toList();
-    List half_made = widget.stateManager.rows.map((e) => e.cells['half_made']?.value).toList();
-    List wiring = widget.stateManager.rows.map((e) => e.cells['wiring']?.value).toList();
-    List final_weight = widget.stateManager.rows.map((e) => e.cells['final_weight']?.value).toList();
-    List burnish_deficiency = widget.stateManager.rows.map((e) => e.cells['burnish_deficiency']?.value).toList();
-
-    table5["row"]=rows.toList();
-    table5["client_name"]=client_name.toList();
-    table5["description"]=description.toList();
-    table5["code"]=code.toList();
-    table5["weight"]=weight.toList();
-    table5["cut_deficiency"]=cut_deficiency.toList();
-    table5["popion_deficiency"]=popion_deficiency.toList();
-    table5["jewel_weight"]=jewel_weight.toList();
-    table5["summary"]=summary.toList();
-    table5["melting"]=melting.toList();
-    table5["wire_pulling"]=wire_pulling.toList();
-    table5["cut"]=cut.toList();
-    table5["popion"]=popion.toList();
-    table5["ring"]=ring.toList();
-    table5["chain"]=chain.toList();
-    table5["piece_chain"]=piece_chain.toList();
-    table5["cane"]=cane.toList();
-    table5["lock"]=lock.toList();
-    table5["wire"]=wire.toList();
-    table5["solder"]=solder.toList();
-    table5["ball"]=ball.toList();
-    table5["pin"]=pin.toList();
-    table5["ring2"]=ring2.toList();
-    table5["half_made"]=half_made.toList();
-    table5["wiring"]=wiring.toList();
-    table5["final_weight"]=final_weight.toList();
-    table5["burnish_deficiency"]=burnish_deficiency.toList();
-
-
-
-    tableData t = new tableData("تکمیل کارگاه 1", "", "", "","", "", jsonEncode(table5), "","","","");
-
-    var respo = await AdminApi.postTable(t);
-
-  }
-
-
-}
