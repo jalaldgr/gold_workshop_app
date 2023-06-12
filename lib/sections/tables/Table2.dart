@@ -21,13 +21,13 @@ class _Table2ScreenState extends State<Table2Screen> {
       field: 'row',
       type: PlutoColumnType.number(),
         enableEditingMode: true,
-      width: 100
+      width: 100,
 
     ),
     PlutoColumn (
         title: 'توضیحات',
         field: 'description',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.text(),
         enableEditingMode: true,
         width: 100
 
@@ -55,10 +55,8 @@ class _Table2ScreenState extends State<Table2Screen> {
         title: 'مانده نهایی',
         field: 'final_balance',
         type: PlutoColumnType.number(),
-        enableEditingMode: true,
-        width: 200
-
-
+        width: 200,
+        readOnly: true
     ),
     PlutoColumn(
         title: 'مانده واقعی',
@@ -66,17 +64,13 @@ class _Table2ScreenState extends State<Table2Screen> {
         type: PlutoColumnType.number(),
         enableEditingMode: true,
         width: 100
-
-
     ),
     PlutoColumn(
         title: 'مانده',
         field: 'balance',
         type: PlutoColumnType.number(),
-        enableEditingMode: true,
-        width: 100
-
-
+        width: 100,
+        readOnly: true
     ),
     PlutoColumn(
         title: 'اختلاف',
@@ -84,16 +78,40 @@ class _Table2ScreenState extends State<Table2Screen> {
         type: PlutoColumnType.number(),
         enableEditingMode: true,
         width: 150
-
-
     ),
   ];
 
   List<PlutoRow> rows = [
     PlutoRow(
       cells: {
-        'row': PlutoCell(value: 1),
-        'description': PlutoCell(value: 2),
+        'row': PlutoCell(value: 0),
+        'description': PlutoCell(value: "مانده روز قبل"),
+        'import': PlutoCell(value: 0),
+        'export': PlutoCell(value: 0),
+        'final_balance': PlutoCell(value: 0),
+        'real_balance': PlutoCell(value: 0),
+        'balance': PlutoCell(value: 0),
+        'difference': PlutoCell(value: 0),
+
+      },
+    ),
+    PlutoRow(
+      cells: {
+        'row': PlutoCell(value: 2),
+        'description': PlutoCell(value: "کسر برش"),
+        'import': PlutoCell(value: 0),
+        'export': PlutoCell(value: 0),
+        'final_balance': PlutoCell(value: 0),
+        'real_balance': PlutoCell(value: 0),
+        'balance': PlutoCell(value: 0),
+        'difference': PlutoCell(value: 0),
+
+      },
+    ),
+    PlutoRow(
+      cells: {
+        'row': PlutoCell(value: 3),
+        'description': PlutoCell(value: "کسر ذوب"),
         'import': PlutoCell(value: 0),
         'export': PlutoCell(value: 0),
         'final_balance': PlutoCell(value: 0),
@@ -128,8 +146,7 @@ class _Table2ScreenState extends State<Table2Screen> {
     tableData t = new tableData("تکمیل کارگاه 1","" , jsonEncode(table2), "","","", "", "","","","");
     var respo = await AdminApi.postTable(t);
     stateManager.setShowLoading(false);
-    print(respo.toJson());
-  }
+   }
 
   calculateTable() async {
 
@@ -145,18 +162,64 @@ class _Table2ScreenState extends State<Table2Screen> {
 
     List<PlutoRow> updatedRows=[];
     for (var i = 0; i < rowNumber.length; i++) {
-      updatedRows.add(PlutoRow(
-        cells: {
-          'row': PlutoCell(value:rowNumber[i] ),
-          'description': PlutoCell(value: description[i]),
-          'import': PlutoCell(value: import[i]),
-          'export': PlutoCell(value: export[i]),
-          'final_balance': PlutoCell(value: final_balance[i]),
-          'real_balance': PlutoCell(value: real_balance[i]),
-          'balance': PlutoCell(value: balance[i]),
-          'difference': PlutoCell(value: difference[i]),
-        },
-      ));
+
+      if (i == 0) {// if row 1
+        final_balance[i] = import[i]-export[i];
+        balance[i]=final_balance[i]-real_balance[i];
+
+        updatedRows.add(PlutoRow(
+          cells: {
+            'row': PlutoCell(value: rowNumber[i]),
+            'description': PlutoCell(value: description[i]),
+            'import': PlutoCell(value: import[i]),
+            'export': PlutoCell(value: 0),
+            'final_balance': PlutoCell(value: final_balance[i]),
+            'real_balance': PlutoCell(value: real_balance[i]),
+            'balance': PlutoCell(value: balance[i]),
+            'difference': PlutoCell(value: 0),
+          },
+        ));
+      }else if (i == 1) {// if row 2
+        updatedRows.add(PlutoRow(
+          cells: {
+            'row': PlutoCell(value: rowNumber[i]),
+            'description': PlutoCell(value: description[i]),
+            'import': PlutoCell(value: 0),
+            'export': PlutoCell(value: export[i]),
+            'final_balance': PlutoCell(value: import[i]-export[i]+final_balance[i-1]),
+            'real_balance': PlutoCell(value: real_balance[i]),
+            'balance': PlutoCell(value: final_balance[i]-real_balance[i]  ),
+            'difference': PlutoCell(value: balance[i]),
+          },
+        ));
+      }else if(i==2){ // row is greater than 2
+        updatedRows.add(PlutoRow(
+          cells: {
+            'row': PlutoCell(value: rowNumber[i]),
+            'description': PlutoCell(value: description[i]),
+            'import': PlutoCell(value: 0),
+            'export': PlutoCell(value:0),
+            'final_balance': PlutoCell(value: import[i]-export[i]+final_balance[i-1]),
+            'real_balance': PlutoCell(value: real_balance[i]),
+            'balance': PlutoCell(value: final_balance[i]-real_balance[i] ),
+            'difference': PlutoCell(value: balance[i]+difference[i-1]),
+          },
+        ));
+      }else{
+        updatedRows.add(PlutoRow(
+          cells: {
+            'row': PlutoCell(value: rowNumber[i]),
+            'description': PlutoCell(value: description[i]),
+            'import': PlutoCell(value: import[i]),
+            'export': PlutoCell(value:export[i]),
+            'final_balance': PlutoCell(value: import[i]-export[i]+final_balance[i-1]),
+            'real_balance': PlutoCell(value: real_balance[i]),
+            'balance': PlutoCell(value: final_balance[i]-real_balance[i] ),
+            'difference': PlutoCell(value: balance[i]+difference[i-1]),
+          },
+        ));
+      }
+
     }
     stateManager.refRows.clear();
     stateManager.insertRows(0, updatedRows);
