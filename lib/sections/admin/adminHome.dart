@@ -8,6 +8,7 @@ import 'package:gold_workshop/sections/tables/tablesArchiveList.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../helper/serverApi.dart';
 import '../tables/Table1.dart';
 import '../tables/Table2.dart';
 import '../tables/Table3.dart';
@@ -35,7 +36,7 @@ class AdminHomeScreen extends StatefulWidget {
 }
 
 class _AdminHomeScreenState extends State<AdminHomeScreen> {
-
+  dynamic table6;
 
   @override
   void dispose() {
@@ -45,6 +46,16 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
   @override
   void initState() {
     super.initState();
+
+  }
+
+  Future fetchTables() async {
+    var tables = await AdminApi.getTable();
+    table6 =json.decode(tables.table6!);
+    if(tables.table6!.length>10){
+      return  table6 =json.decode(tables.table6!);
+    }
+
 
   }
 
@@ -159,52 +170,24 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                             ,)
                           ,
                               SizedBox(height: 4,),
-                        Container(decoration: BoxDecoration(color: Colors.blue.shade100
-                        ),
-                          child: Row(
-                                  children: [
-                                    Expanded(
-                                        child: Text("20",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center)),
-                                    Expanded(
-                                        child: Text("20",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center)),
-                                    Expanded(
-                                        child: Text("20",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center)),
-                                    Expanded(
-                                        child: Text("20",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center)),
-                                    Expanded(
-                                        child: Text("20",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center)),
-                                    Expanded(
-                                        child: Text(
-                                      "20",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    )),
-                                  ],
-                                ),
-                              )
-                            ],
+                          Container(
+                            decoration:
+                                BoxDecoration(color: Colors.blue.shade100),
+                            child: FutureBuilder(
+                              future: fetchTables(),
+                              builder: (BuildContext context,
+                                      AsyncSnapshot<dynamic> snapshot) =>
+                                  snapshot.hasData
+                                      ? _buildTableItem(context, snapshot.data)
+                                      : CircularProgressIndicator(),
+                            ),
+                          )
+                        ],
                           ),
                         ),
                       )
-                    ],
-                  ),
+                                ],
+                              ),
                             )),
                         Expanded(
                             child: Padding(
@@ -248,5 +231,46 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
     Navigator.of(context).maybePop();
   }
 
+
+
+  Widget _buildTableItem(BuildContext context, dynamic table) {
+    return Row(
+      children: [
+        Expanded(
+            child: Text("${table["daily_melt"]!=null? table["daily_melt"]: "0"}",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center)),
+        Expanded(
+            child: Text("${table["burnish_deficiency"]?? "0"}",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center)),
+        Expanded(
+            child: Text("${table["melt_deficiency"]?? "0"}",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center)),
+        Expanded(
+            child: Text("${table["cut_deficiency"]?? "0"}",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center)),
+        Expanded(
+            child: Text("${table["cut_deference"]?? "0"}",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center)),
+        Expanded(
+            child: Text(
+              "${table["sum"]?? "0"}",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            )),
+      ],
+    );
+  }
 
 }
