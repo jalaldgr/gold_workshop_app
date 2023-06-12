@@ -131,6 +131,38 @@ class _Table2ScreenState extends State<Table2Screen> {
     print(respo.toJson());
   }
 
+  calculateTable() async {
+
+    stateManager.setShowLoading(true);
+    List rowNumber = stateManager.rows.map((e) => e.cells['row']?.value).toList();
+    List description = stateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List import = stateManager.rows.map((e) => e.cells['import']?.value).toList();
+    List export = stateManager.rows.map((e) => e.cells['export']?.value).toList();
+    List final_balance = stateManager.rows.map((e) => e.cells['final_balance']?.value).toList();
+    List real_balance = stateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
+    List balance = stateManager.rows.map((e) => e.cells['balance']?.value).toList();
+    List difference = stateManager.rows.map((e) => e.cells['difference']?.value).toList();
+
+    List<PlutoRow> updatedRows=[];
+    for (var i = 0; i < rowNumber.length; i++) {
+      updatedRows.add(PlutoRow(
+        cells: {
+          'row': PlutoCell(value:rowNumber[i] ),
+          'description': PlutoCell(value: description[i]),
+          'import': PlutoCell(value: import[i]),
+          'export': PlutoCell(value: export[i]),
+          'final_balance': PlutoCell(value: final_balance[i]),
+          'real_balance': PlutoCell(value: real_balance[i]),
+          'balance': PlutoCell(value: balance[i]),
+          'difference': PlutoCell(value: difference[i]),
+        },
+      ));
+    }
+    stateManager.refRows.clear();
+    stateManager.insertRows(0, updatedRows);
+    stateManager.setShowLoading(false);
+
+  }
 
   fetchTable() async {
     var tables = await AdminApi.getTable();
@@ -199,13 +231,13 @@ class _Table2ScreenState extends State<Table2Screen> {
           columns: columns,
           rows: rows,
           createHeader:  (stateManager) => _Header(stateManager: stateManager),
-
-
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
             fetchTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
+            calculateTable();
+
             updateTable();
           },
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
