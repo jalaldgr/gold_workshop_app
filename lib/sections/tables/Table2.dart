@@ -107,11 +107,34 @@ class _Table2ScreenState extends State<Table2Screen> {
 
   /// columnGroups that can group columns can be omitted.
   updateTable() async {
+    Map<String,dynamic> table2 = {};
+    stateManager.setShowLoading(true);
+    List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
+    List description = stateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List import = stateManager.rows.map((e) => e.cells['import']?.value).toList();
+    List export = stateManager.rows.map((e) => e.cells['export']?.value).toList();
+    List final_balance = stateManager.rows.map((e) => e.cells['final_balance']?.value).toList();
+    List real_balance = stateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
+    List balance = stateManager.rows.map((e) => e.cells['balance']?.value).toList();
+    List difference = stateManager.rows.map((e) => e.cells['difference']?.value).toList();
+    table2["row"]=rows.toList();
+    table2["description"]=description.toList();
+    table2["import"]=import.toList();
+    table2["export"]=export.toList();
+    table2["final_balance"]=final_balance.toList();
+    table2["real_balance"]=real_balance.toList();
+    table2["balance"]=balance.toList();
+    table2["difference"]=difference.toList();
+    tableData t = new tableData("تکمیل کارگاه 1","" , jsonEncode(table2), "","","", "", "","","","");
+    var respo = await AdminApi.postTable(t);
+    stateManager.setShowLoading(false);
+    print(respo.toJson());
+  }
 
 
+  fetchTable() async {
     var tables = await AdminApi.getTable();
     if(tables.table2!.length>10){
-      print("yesssssssssssssss");
       stateManager.setShowLoading(true);
       dynamic table2 =json.decode(tables.table2!);
       List rowNumber = table2["row"];
@@ -138,17 +161,13 @@ class _Table2ScreenState extends State<Table2Screen> {
           },
         ));
       }
-
       stateManager.refRows.clear();
       stateManager.insertRows(0, updatedRows);
       stateManager.setShowLoading(false);
-
-
     }
 
 
   }
-
   @override
   void initState() {
 
@@ -163,7 +182,7 @@ class _Table2ScreenState extends State<Table2Screen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
         backgroundColor: widget.headerColor??Colors.pink,
-        actions: [IconButton(onPressed: (){updateTable();}, icon: Icon(Icons.refresh))],
+        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.refresh))],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -184,18 +203,16 @@ class _Table2ScreenState extends State<Table2Screen> {
 
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
-
-            updateTable();
+            fetchTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
-            print(event);
+            updateTable();
           },
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
       ),
       floatingActionButton: FloatingActionButton(onPressed: () async {
-
-          stateManager.insertRows(stateManager.rows.length, [
+        stateManager.insertRows(stateManager.rows.length, [
             PlutoRow(
               cells: {
                 'row': PlutoCell(value: 1),
@@ -210,32 +227,6 @@ class _Table2ScreenState extends State<Table2Screen> {
               }
             )
           ]);
-
-        Map<String,dynamic> table2 = {};
-
-        List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
-        List description = stateManager.rows.map((e) => e.cells['description']?.value).toList();
-        List import = stateManager.rows.map((e) => e.cells['import']?.value).toList();
-        List export = stateManager.rows.map((e) => e.cells['export']?.value).toList();
-        List final_balance = stateManager.rows.map((e) => e.cells['final_balance']?.value).toList();
-        List real_balance = stateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
-        List balance = stateManager.rows.map((e) => e.cells['balance']?.value).toList();
-        List difference = stateManager.rows.map((e) => e.cells['difference']?.value).toList();
-
-        table2["row"]=rows.toList();
-        table2["description"]=description.toList();
-        table2["import"]=import.toList();
-        table2["export"]=export.toList();
-        table2["final_balance"]=final_balance.toList();
-        table2["real_balance"]=real_balance.toList();
-        table2["balance"]=balance.toList();
-        table2["difference"]=difference.toList();
-
-        tableData t = new tableData("تکمیل کارگاه 1","" , jsonEncode(table2), "","","", "", "","","","");
-
-        var respo = await AdminApi.postTable(t);
-
-
         },child: const Icon(Icons.add)),
 
     );
