@@ -783,7 +783,10 @@ class _Table5ScreenState extends State<Table5Screen> {
   }
   calculateTable()async{
 
-      Map<String,dynamic> table5 = {};
+    var tables = await AdminApi.getTable();
+    dynamic table6 =json.decode(tables.table6!);
+    dynamic table2 =json.decode(tables.table2!);
+
 
       List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
       List client_name = stateManager.rows.map((e) => e.cells['client_name']?.value).toList();
@@ -826,15 +829,23 @@ class _Table5ScreenState extends State<Table5Screen> {
         }
         if(popion[i]>0){
           popion_deficiency[i] = popion[i]*0.03;
-          //TODO update table 2
+          table6["cut_deficiency"] +=popion_deficiency[i];
+          table2["import"][1] +=popion_deficiency[i];
+
         }else popion_deficiency[i]=0;
         if(melting[i]>0){
           cut_deficiency[i] = melting[i];
+          table6["cut_deficiency"] +=popion_deficiency[i];
+          table2["import"][1] +=popion_deficiency[i];
+
           //TODO update table 2
         }else cut_deficiency[i] = 0;
         if( (popion[i]>0 && cut[i]>0) || (popion[i]>0 && melting[i]>0) ){
           cut_deficiency[i] = cut_deficiency[i] + popion_deficiency[i];
           //TODO update table 2
+          table6["cut_deficiency"] +=popion_deficiency[i];
+          table2["import"][1] +=popion_deficiency[i];
+
         }else cut_deficiency[i]=0;
         updatedRows.add(PlutoRow(
           cells: {
@@ -873,7 +884,8 @@ class _Table5ScreenState extends State<Table5Screen> {
       stateManager.setShowLoading(false);
 
 
-
+    tableData t = new tableData("تکمیل کارگاه 1", "", jsonEncode(table2), "","", "","",  jsonEncode(table6),"","","");
+    var respo = await AdminApi.postTable(t);
   }
 
 
@@ -965,4 +977,3 @@ class _Table5ScreenState extends State<Table5Screen> {
   }
 
 }
-
