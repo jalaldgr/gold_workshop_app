@@ -244,33 +244,33 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
     return Row(
       children: [
         Expanded(
-            child: Text("${table["daily_melt"]!=null? table["daily_melt"]: "0"}",
+            child: Text("${table["daily_melt"]!=null? table["daily_melt"].toStringAsFixed(3): "0"}",
                 style: TextStyle(
                     fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center)),
         Expanded(
-            child: Text("${table["burnish_deficiency"]?? "0"}",
+            child: Text("${table["burnish_deficiency"].toStringAsFixed(3)?? "0"}",
                 style: TextStyle(
                     fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center)),
         Expanded(
-            child: Text("${table["melt_deficiency"]?? "0"}",
+            child: Text("${table["melt_deficiency"].toStringAsFixed(3)?? "0"}",
                 style: TextStyle(
                     fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center)),
         Expanded(
-            child: Text("${table["cut_deficiency"]?? "0"}",
+            child: Text("${table["cut_deficiency"].toStringAsFixed(3)?? "0"}",
                 style: TextStyle(
                     fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center)),
         Expanded(
-            child: Text("${table["cut_deference"]?? "0"}",
+            child: Text("${table["cut_deference"].toStringAsFixed(3)?? "0"}",
                 style: TextStyle(
                     fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center)),
         Expanded(
             child: Text(
-              "${table["sum"]?? "0"}",
+              "${table["sum"].toStringAsFixed(3)?? "0"}",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
