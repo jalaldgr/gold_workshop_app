@@ -307,16 +307,19 @@ class _Table1ScreenState extends State<Table1Screen> {
 
       List<PlutoRow> updatedRows=[];
       for (var i = 0; i < rows.length; i++) {
+        consumptions_load_and_others[i] = others[i]+consumption_loads[i];
+        differences[i] = consumptions_load_and_others[i]-after_melts[i];
+        final_differences[i] = others[i]-after_pagings[i];
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value:rows[i] ),
             'other': PlutoCell(value: others[i]),
             'consumption_load': PlutoCell(value: consumption_loads[i]),
-            'consumptions_load_and_other': PlutoCell(value: others[i]+consumption_loads[i]),
+            'consumptions_load_and_other': PlutoCell(value: consumptions_load_and_others[i]),
             'after_melt': PlutoCell(value: after_melts[i]),
-            'difference': PlutoCell(value: consumptions_load_and_others[i]-after_melts[i]),
+            'difference': PlutoCell(value: differences[i]),
             'after_paging': PlutoCell(value: after_pagings[i]),
-            'final_difference': PlutoCell(value: others[i]-after_pagings[i]),
+            'final_difference': PlutoCell(value: final_differences[i]),
 
           },
         ));
