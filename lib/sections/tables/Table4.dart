@@ -106,7 +106,7 @@ class _Table4ScreenState extends State<Table4Screen> {
         title: 'مانده سیستم',
         field: 'system_balance',
         type: PlutoColumnType.number( format: "#.###"),
-        enableEditingMode: true,
+        readOnly: true,
         width: 120,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
@@ -132,7 +132,7 @@ class _Table4ScreenState extends State<Table4Screen> {
         title: 'اختلاف',
         field: 'difference',
         type: PlutoColumnType.number( format: "#.###"),
-        enableEditingMode: true,
+        readOnly: true,
         width: 100,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
@@ -597,9 +597,12 @@ class _Table4ScreenState extends State<Table4Screen> {
             fetchTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
-            print(event);
-            calculateTable();
-            updateTable();
+
+            if(event.column.readOnly==false){
+              calculateTable();
+              updateTable();
+            }
+
           },
         ),
 
