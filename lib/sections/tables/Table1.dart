@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/tableModel.dart';
-import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 class Table1Screen extends StatefulWidget {
@@ -86,7 +84,7 @@ class _Table1ScreenState extends State<Table1Screen> {
         title: 'مجموع بار مصرفی و متفرقه',
         field: 'consumptions_load_and_other',
         type: PlutoColumnType.number(format: "#.###"),
-        enableEditingMode: true,
+        readOnly: true,
         width: 200,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
@@ -136,7 +134,7 @@ class _Table1ScreenState extends State<Table1Screen> {
         title: 'اختلاف',
         field: 'difference',
         type: PlutoColumnType.number(format: "#.###"),
-        enableEditingMode: true,
+        readOnly: true,
         width: 100,
       footerRenderer: (rendererContext) {
         return PlutoAggregateColumnFooter(
@@ -186,7 +184,7 @@ class _Table1ScreenState extends State<Table1Screen> {
         title: 'اختلاف نهایی',
         field: 'final_difference',
         type: PlutoColumnType.number(format: "#.###"),
-        enableEditingMode: true,
+        readOnly: true,
         width: 120,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
@@ -378,8 +376,10 @@ class _Table1ScreenState extends State<Table1Screen> {
             fetchTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
-            calculateTable();
-            updateTable();
+            if(event.column.readOnly==false){
+              calculateTable();
+              updateTable();
+            }
           },
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
