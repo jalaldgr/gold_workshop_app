@@ -1,16 +1,8 @@
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/models/tableModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
-import 'package:gold_workshop/sections/admin/orders/addNewOrder.dart';
-import 'package:gold_workshop/sections/admin/orders/editOrder.dart';
 import '../../helper/serverApi.dart';
-import '../admin/orders/showOrder.dart';
-
-
 
 class TableArchiveListScreen extends StatefulWidget {
   const TableArchiveListScreen({Key? key}) : super(key: key);
@@ -20,10 +12,6 @@ class TableArchiveListScreen extends StatefulWidget {
 }
 
 class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
-  TextEditingController fullNameController=TextEditingController();
-  TextEditingController userNameController=TextEditingController();
-  TextEditingController passwordController=TextEditingController();
-
 
   @override
   void initState() {
@@ -96,6 +84,7 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
 
   Widget _buildPaymentItem(BuildContext context,
        tableData? table,int? index) {
+    var table6 =json.decode("${table!.table6!}");
     return Padding(padding: EdgeInsets.all(4),
       child:
       Container( color: (index! % 2 == 0) ? Colors.black12 : Colors.indigo.shade100,height: 100,
@@ -104,75 +93,42 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
           child:
           Container(padding: EdgeInsets.all(8),
             child: Row(children: [
-              Text("${table?.date}"),
+              Text("${table.date}"),
 
               Expanded(child:
               Column(
                 children: [
-                    Container(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                              child: Text("ذوب روزانه",
-                                  style: TextStyle(fontWeight: FontWeight.w100),
-                                  textAlign: TextAlign.center)),
-                          Expanded(
-                              child: Text("کسر پرداخت",
-                                  style: TextStyle(fontWeight: FontWeight.w100),
-                                  textAlign: TextAlign.center)),
-                          Expanded(
-                              child: Text("کسر ذوب",
-                                  style: TextStyle(fontWeight: FontWeight.w100),
-                                  textAlign: TextAlign.center)),
-                          Expanded(
-                              child: Text("کسر برش",
-                                  style: TextStyle(fontWeight: FontWeight.w100),
-                                  textAlign: TextAlign.center)),
-                          Expanded(
-                              child: Text("اختلاف برش",
-                                  style: TextStyle(fontWeight: FontWeight.w100),
-                                  textAlign: TextAlign.center)),
-                          Expanded(
-                              child: Text("مجموع",
-                                  style: TextStyle(fontWeight: FontWeight.w100),
-                                  textAlign: TextAlign.center)),
-                        ],
-                      ),
-                    ),
-                  SizedBox(height: 4,),
-                  Container(decoration: BoxDecoration(color: Colors.blue.shade100
-                  ),
+                  Container(decoration: BoxDecoration(color: Colors.blue.shade100),
                     child: Row(
                       children: [
                         Expanded(
-                            child: Text("${table?.table6}",
+                            child: Text("ذوب روزانه",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center)),
                         Expanded(
-                            child: Text("20",
+                            child: Text("کسر پرداخت",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center)),
                         Expanded(
-                            child: Text("20",
+                            child: Text("کسر ذوب",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center)),
                         Expanded(
-                            child: Text("20",
+                            child: Text("کسر برش",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center)),
                         Expanded(
-                            child: Text("20",
+                            child: Text("اختلاف برش",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold),
                                 textAlign: TextAlign.center)),
                         Expanded(
                             child: Text(
-                              "20",
+                              "جمع",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -180,7 +136,47 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
                             )),
                       ],
                     ),
-                  )
+                  ),
+                  SizedBox(height: 4,),
+                  Container(
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Text("${table6["daily_melt"].toStringAsFixed(3)?? "0"}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text("${table6["burnish_deficiency"].toStringAsFixed(3)?? "0"}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text("${table6["melt_deficiency"].toStringAsFixed(3)?? "0"}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text("${table6["cut_deficiency"].toStringAsFixed(3)?? "0"}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text("${table6["cut_deference"].toStringAsFixed(3)?? "0"}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center)),
+                        Expanded(
+                            child: Text(
+                              "${table6["sum"].toStringAsFixed(3)?? "0"}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            )),
+                      ],
+                    ),
+                  ),
                 ],
               ))
             ]),
