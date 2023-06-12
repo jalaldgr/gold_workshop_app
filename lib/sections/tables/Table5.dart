@@ -664,7 +664,7 @@ class _Table5ScreenState extends State<Table5Screen> {
 
   fetchTable() async {
     var tables = await AdminApi.getTable();
-    if(tables.table5!.length>10){
+    if(tables.table5!.length>371){// 371 is length of a row with empty column
       stateManager.setShowLoading(true);
       dynamic table5 =json.decode(tables.table5!);
       List rowNumber = table5["row"];
