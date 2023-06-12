@@ -166,7 +166,7 @@ class _Table2ScreenState extends State<Table2Screen> {
         title: 'اختلاف',
         field: 'difference',
         type: PlutoColumnType.number(format: "#.###"),
-        enableEditingMode: true,
+        readOnly: true,
         width: 150,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
@@ -411,9 +411,11 @@ class _Table2ScreenState extends State<Table2Screen> {
             fetchTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
-            calculateTable();
+            if(event.column.readOnly==false){
+              calculateTable();
+              updateTable();
+            }
 
-            updateTable();
           },
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
