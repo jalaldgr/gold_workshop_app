@@ -116,8 +116,7 @@ class _Table1ScreenState extends State<Table1Screen> {
   ];
 
   /// columnGroups that can group columns can be omitted.
-  updateTable() async {
-
+  fetchTable() async {
 
     var tables = await AdminApi.getTable();
     if(tables.table1!.length>10){
@@ -153,11 +152,73 @@ class _Table1ScreenState extends State<Table1Screen> {
       stateManager.insertRows(0, updatedRows);
       stateManager.setShowLoading(false);
 
-
     }
+  }
 
+  updateTable()async{
+    Map<String,dynamic> table1 = {};
+
+    List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
+    List others = stateManager.rows.map((e) => e.cells['other']?.value).toList();
+    List consumption_loads = stateManager.rows.map((e) => e.cells['consumption_load']?.value).toList();
+    List consumptions_load_and_others = stateManager.rows.map((e) => e.cells['consumptions_load_and_other']?.value).toList();
+    List after_melts = stateManager.rows.map((e) => e.cells['after_melt']?.value).toList();
+    List differences = stateManager.rows.map((e) => e.cells['difference']?.value).toList();
+    List after_pagings = stateManager.rows.map((e) => e.cells['after_paging']?.value).toList();
+    List final_differences = stateManager.rows.map((e) => e.cells['final_difference']?.value).toList();
+
+    table1["row"]=rows.toList();
+    table1["other"]=others.toList();
+    table1["consumption_load"]=consumption_loads.toList();
+    table1["consumption_load"]=consumption_loads.toList();
+    table1["consumptions_load_and_other"]=consumptions_load_and_others.toList();
+    table1["after_melt"]=after_melts.toList();
+    table1["difference"]=differences.toList();
+    table1["difference"]=differences.toList();
+    table1["after_paging"]=after_pagings.toList();
+    table1["final_difference"]=final_differences.toList();
+
+    tableData t = new tableData("تکمیل کارگاه 1", jsonEncode(table1), "", "","", "", "", "","","","");
+
+    var respo = await AdminApi.postTable(t);
+  }
+  calculateTable() async {
+
+
+
+      stateManager.setShowLoading(true);
+      List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
+      List others = stateManager.rows.map((e) => e.cells['other']?.value).toList();
+      List consumption_loads = stateManager.rows.map((e) => e.cells['consumption_load']?.value).toList();
+      List consumptions_load_and_others = stateManager.rows.map((e) => e.cells['consumptions_load_and_other']?.value).toList();
+      List after_melts = stateManager.rows.map((e) => e.cells['after_melt']?.value).toList();
+      List differences = stateManager.rows.map((e) => e.cells['difference']?.value).toList();
+      List after_pagings = stateManager.rows.map((e) => e.cells['after_paging']?.value).toList();
+      List final_differences = stateManager.rows.map((e) => e.cells['final_difference']?.value).toList();
+
+      List<PlutoRow> updatedRows=[];
+      for (var i = 0; i < rows.length; i++) {
+        updatedRows.add(PlutoRow(
+          cells: {
+            'row': PlutoCell(value:rows[i] ),
+            'other': PlutoCell(value: others[i]),
+            'consumption_load': PlutoCell(value: consumption_loads[i]),
+            'consumptions_load_and_other': PlutoCell(value: others[i]+consumption_loads[i]),
+            'after_melt': PlutoCell(value: after_melts[i]),
+            'difference': PlutoCell(value: consumptions_load_and_others[i]-after_melts[i]),
+            'after_paging': PlutoCell(value: after_pagings[i]),
+            'final_difference': PlutoCell(value: others[i]-after_pagings[i]),
+
+          },
+        ));
+      }
+
+      stateManager.refRows.clear();
+      stateManager.insertRows(0, updatedRows);
+      stateManager.setShowLoading(false);
 
   }
+
 
   @override
   void initState() {
@@ -173,7 +234,7 @@ class _Table1ScreenState extends State<Table1Screen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
         backgroundColor: widget.headerColor?? Colors.pink,
-        actions: [IconButton(onPressed: (){updateTable();}, icon: Icon(Icons.refresh))],
+        actions: [IconButton(onPressed: (){fetchTable();}, icon: Icon(Icons.refresh))],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -195,10 +256,11 @@ class _Table1ScreenState extends State<Table1Screen> {
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
 
-            updateTable();
+            fetchTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
-            print(event);
+            calculateTable();
+            updateTable();
           },
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
@@ -219,31 +281,7 @@ class _Table1ScreenState extends State<Table1Screen> {
             },
           ),
         ]);
-        Map<String,dynamic> table1 = {};
 
-        List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
-        List others = stateManager.rows.map((e) => e.cells['other']?.value).toList();
-        List consumption_loads = stateManager.rows.map((e) => e.cells['consumption_load']?.value).toList();
-        List consumptions_load_and_others = stateManager.rows.map((e) => e.cells['consumptions_load_and_other']?.value).toList();
-        List after_melts = stateManager.rows.map((e) => e.cells['after_melt']?.value).toList();
-        List differences = stateManager.rows.map((e) => e.cells['difference']?.value).toList();
-        List after_pagings = stateManager.rows.map((e) => e.cells['after_paging']?.value).toList();
-        List final_differences = stateManager.rows.map((e) => e.cells['final_difference']?.value).toList();
-
-        table1["row"]=rows.toList();
-        table1["other"]=others.toList();
-        table1["consumption_load"]=consumption_loads.toList();
-        table1["consumption_load"]=consumption_loads.toList();
-        table1["consumptions_load_and_other"]=consumptions_load_and_others.toList();
-        table1["after_melt"]=after_melts.toList();
-        table1["difference"]=differences.toList();
-        table1["difference"]=differences.toList();
-        table1["after_paging"]=after_pagings.toList();
-        table1["final_difference"]=final_differences.toList();
-
-        tableData t = new tableData("تکمیل کارگاه 1", jsonEncode(table1), "", "","", "", "", "","","","");
-
-        var respo = await AdminApi.postTable(t);
 
 
         },child: const Icon(Icons.add)),
