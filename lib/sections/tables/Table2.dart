@@ -345,7 +345,8 @@ class _Table2ScreenState extends State<Table2Screen> {
 
   fetchTable() async {
     var tables = await AdminApi.getTable();
-    if(tables.table2!.length>10){
+    print(tables.table2!.length);
+    if(tables.table2!.length>117){// an empty rows with only columns name length
       stateManager.setShowLoading(true);
       dynamic table2 =json.decode(tables.table2!);
       List rowNumber = table2["row"];
