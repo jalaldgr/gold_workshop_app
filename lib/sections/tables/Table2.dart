@@ -280,11 +280,11 @@ class _Table2ScreenState extends State<Table2Screen> {
             'row': PlutoCell(value: rowNumber[i]),
             'description': PlutoCell(value: description[i]),
             'import': PlutoCell(value: import[i]),
-            'export': PlutoCell(value: 0),
+            'export': PlutoCell(value: export[i]),
             'final_balance': PlutoCell(value: final_balance[i]),
             'real_balance': PlutoCell(value: real_balance[i]),
             'balance': PlutoCell(value: balance[i]),
-            'difference': PlutoCell(value: 0),
+            'difference': PlutoCell(value: difference[i]),
           },
         ));
       }else if (i == 1) {// if row 2
@@ -294,7 +294,7 @@ class _Table2ScreenState extends State<Table2Screen> {
           cells: {
             'row': PlutoCell(value: rowNumber[i]),
             'description': PlutoCell(value: description[i]),
-            'import': PlutoCell(value: 0),
+            'import': PlutoCell(value: import[i]),
             'export': PlutoCell(value: export[i]),
             'final_balance': PlutoCell(value: final_balance[i]),
             'real_balance': PlutoCell(value: real_balance[i]),
@@ -310,8 +310,8 @@ class _Table2ScreenState extends State<Table2Screen> {
           cells: {
             'row': PlutoCell(value: rowNumber[i]),
             'description': PlutoCell(value: description[i]),
-            'import': PlutoCell(value: 0),
-            'export': PlutoCell(value:0),
+            'import': PlutoCell(value: import[i]),
+            'export': PlutoCell(value:export[i]),
             'final_balance': PlutoCell(value: final_balance[i]),
             'real_balance': PlutoCell(value: real_balance[i]),
             'balance': PlutoCell(value: balance[i] ),
@@ -345,7 +345,6 @@ class _Table2ScreenState extends State<Table2Screen> {
 
   fetchTable() async {
     var tables = await AdminApi.getTable();
-    print(tables.table2!.length);
     if(tables.table2!.length>117){// an empty rows with only columns name length
       stateManager.setShowLoading(true);
       dynamic table2 =json.decode(tables.table2!);
@@ -420,7 +419,11 @@ class _Table2ScreenState extends State<Table2Screen> {
             fetchTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
-            if(event.column.readOnly==false){
+            if((event.columnIdx==3 && event.rowIdx==0)||(event.columnIdx==3 && event.rowIdx==2)||
+                (event.columnIdx==2 && event.rowIdx==1)||(event.columnIdx==2 && event.rowIdx==2)){
+              stateManager.rows[event.rowIdx].cells[event.column.field]!.value = 0;
+
+            }else if(event.column.readOnly==false){
               calculateTable();
               updateTable();
             }
