@@ -96,6 +96,12 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                             ,)
 
                                           ),
+
+                                        ],
+                                      )),
+                                  Expanded(
+                                      child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        children: [
                                           Expanded(child:
                                           Padding(padding: EdgeInsets.all(4),child:
                                           OutlinedButton(
@@ -107,12 +113,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
                                               },
                                               child: Text("جدول 3",style: TextStyle(fontSize: 32),))
                                             ,)
-                                          )
-                                        ],
-                                      )),
-                                  Expanded(
-                                      child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
-                                        children: [
+                                          ),
                                           Expanded(child:Padding(padding: EdgeInsets.all(4),child:
                                           OutlinedButton(
                                               onPressed: () {
