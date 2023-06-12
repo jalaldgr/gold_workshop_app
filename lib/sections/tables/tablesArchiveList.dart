@@ -7,8 +7,8 @@ import 'package:gold_workshop/models/tableModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:gold_workshop/sections/admin/orders/addNewOrder.dart';
 import 'package:gold_workshop/sections/admin/orders/editOrder.dart';
-import '../../../helper/serverApi.dart';
-import 'showOrder.dart';
+import '../../helper/serverApi.dart';
+import '../admin/orders/showOrder.dart';
 
 
 
@@ -104,7 +104,7 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
           child:
           Container(padding: EdgeInsets.all(8),
             child: Row(children: [
-              Text("${table?.status}"),
+              Text("${table?.date}"),
 
               Expanded(child:
               Column(
