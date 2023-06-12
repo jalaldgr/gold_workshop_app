@@ -381,7 +381,7 @@ class _Table1ScreenState extends State<Table1Screen> {
               updateTable();
             }
           },
-          configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
+          configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
         ),
       ),
       floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",onPressed: () async {

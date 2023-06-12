@@ -30,23 +30,7 @@ class _Table5ScreenState extends State<Table5Screen> {
         type: PlutoColumnType.number(),
         enableEditingMode: true,
         width: 100,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },),
+),
 
     /// Select Column definition
     PlutoColumn(
@@ -914,8 +898,6 @@ class _Table5ScreenState extends State<Table5Screen> {
         child: PlutoGrid(
           columns: columns,
           rows: rows,
-
-
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
 
@@ -925,7 +907,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             calculateTable();
             updateTable();
           },
-          configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
+          configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
         ),
       ),
       floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",

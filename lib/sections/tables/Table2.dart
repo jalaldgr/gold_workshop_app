@@ -417,7 +417,7 @@ class _Table2ScreenState extends State<Table2Screen> {
             }
 
           },
-          configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
+          configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
         ),
       ),
       floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",
