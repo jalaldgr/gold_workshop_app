@@ -786,7 +786,10 @@ class _Table5ScreenState extends State<Table5Screen> {
     var tables = await AdminApi.getTable();
     dynamic table6 =json.decode(tables.table6!);
     dynamic table2 =json.decode(tables.table2!);
-
+    table6["daily_melt"]=0;
+    table6["burnish_deficiency"]=0;
+    table6["cut_deficiency"]=0;
+    table2["import"][1]=0;
 
       List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
       List client_name = stateManager.rows.map((e) => e.cells['client_name']?.value).toList();
@@ -832,21 +835,20 @@ class _Table5ScreenState extends State<Table5Screen> {
           table6["cut_deficiency"] +=popion_deficiency[i];
           table2["import"][1] +=popion_deficiency[i];
 
-        }else popion_deficiency[i]=0;
-        if(melting[i]>0){
-          cut_deficiency[i] = melting[i];
-          table6["cut_deficiency"] +=popion_deficiency[i];
-          table2["import"][1] +=popion_deficiency[i];
+        }
+        if(cut[i]>0){
+          table6["cut_deficiency"] +=cut_deficiency[i];
+          table2["import"][1] +=cut_deficiency[i];
 
           //TODO update table 2
-        }else cut_deficiency[i] = 0;
+        }
         if( (popion[i]>0 && cut[i]>0) || (popion[i]>0 && melting[i]>0) ){
           cut_deficiency[i] = cut_deficiency[i] + popion_deficiency[i];
           //TODO update table 2
           table6["cut_deficiency"] +=popion_deficiency[i];
           table2["import"][1] +=popion_deficiency[i];
 
-        }else cut_deficiency[i]=0;
+        }
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value:rows[i] ),
