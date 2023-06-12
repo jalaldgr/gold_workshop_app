@@ -293,7 +293,12 @@ class _Table1ScreenState extends State<Table1Screen> {
   }
   calculateTable() async {
 
+    var tables = await AdminApi.getTable();
+    dynamic table6 =json.decode(tables.table6!);
+    dynamic table2 =json.decode(tables.table2!);
 
+    table6["melt_deficiency"]=0;
+    table2["export"][2]=0;
 
       stateManager.setShowLoading(true);
       List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
@@ -307,6 +312,8 @@ class _Table1ScreenState extends State<Table1Screen> {
 
       List<PlutoRow> updatedRows=[];
       for (var i = 0; i < rows.length; i++) {
+        table2["export"][2]+=final_differences[i];
+        table6["melt_deficiency"]+=final_differences[i];
         consumptions_load_and_others[i] = others[i]+consumption_loads[i];
         differences[i] = consumptions_load_and_others[i]-after_melts[i];
         final_differences[i] = others[i]-after_pagings[i];
@@ -328,7 +335,8 @@ class _Table1ScreenState extends State<Table1Screen> {
       stateManager.refRows.clear();
       stateManager.insertRows(0, updatedRows);
       stateManager.setShowLoading(false);
-
+      tableData t = new tableData("تکمیل کارگاه 1", "", jsonEncode(table2), "","", "","",  jsonEncode(table6),"","","");
+      var respo = await AdminApi.postTable(t);
   }
 
 
