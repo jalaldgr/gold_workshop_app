@@ -92,49 +92,49 @@ class _Workshop1HomeScreenState extends State<Workshop1HomeScreen> {
                               ],)),
                               Expanded(child: Column(children: [
                                 Expanded(child:
-                                Card(color: Colors.blue.shade100,
-                                  child: Container(
-                                    padding: EdgeInsets.all(8),
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          child:
-                                          Row(crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              Expanded(child: Text("ذوب روزانه",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                              Expanded(child: Text("کسر پرداخت",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                              Expanded(child: Text("کسر ذوب",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                              Expanded(child: Text("کسر برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                              Expanded(child: Text("اختلاف برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                              Expanded(child: Text("مجموع",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                            ],
-                                          )
-                                          ,)
-                                        ,
-                                        SizedBox(height: 4,),
-                                        InkWell(child:
-                                        Container(
-                                          decoration:
-                                          BoxDecoration(color: Colors.blue.shade100),
-                                          child: FutureBuilder(
-                                            future: fetchTables(),
-                                            builder: (BuildContext context,
-                                                AsyncSnapshot<dynamic> snapshot) =>
-                                            snapshot.hasData
-                                                ? _buildTableItem(context, snapshot.data)
-                                                : CircularProgressIndicator(),
-                                          ),
-                                        )
-                                          ,
-                                          onTap: (){setState(() {
+                                    InkWell(child:
+                                    Card(color: Colors.blue.shade100,
+                                      child: Container(
+                                        padding: EdgeInsets.all(8),
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              child:
+                                              Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Expanded(child: Text("ذوب روزانه",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                                  Expanded(child: Text("کسر پرداخت",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                                  Expanded(child: Text("کسر ذوب",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                                  Expanded(child: Text("کسر برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                                  Expanded(child: Text("اختلاف برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                                  Expanded(child: Text("مجموع",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                                ],
+                                              )
+                                              ,)
+                                            ,
+                                            SizedBox(height: 4,),
 
-                                          });},
-                                        )
-
-                                      ],
+                                            Container(
+                                              decoration:
+                                              BoxDecoration(color: Colors.blue.shade100),
+                                              child: FutureBuilder(
+                                                future: fetchTables(),
+                                                builder: (BuildContext context,
+                                                    AsyncSnapshot<dynamic> snapshot) =>
+                                                snapshot.hasData
+                                                    ? _buildTableItem(context, snapshot.data)
+                                                    : CircularProgressIndicator(),
+                                              ),
+                                            )
+                                            ,
+                                          ],
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ))
+                                    onTap: (){setState(() {
+
+                                    });},)
+                                )
                               ],))
                             ],
                         ),
