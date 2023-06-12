@@ -824,6 +824,18 @@ class _Table5ScreenState extends State<Table5Screen> {
         }else{
           burnish_deficiency[i] = final_weight[i] - (popion[i]+ring[i]+chain[i]+piece_chain[i]+cane[i]+lock[i]+wire[i]+solder[i]+ball[i]+ring2[i]+half_made[i]);
         }
+        if(popion[i]>0){
+          popion_deficiency[i] = popion[i]*0.03;
+          //TODO update table 2
+        }else popion_deficiency[i]=0;
+        if(melting[i]>0){
+          cut_deficiency[i] = melting[i];
+          //TODO update table 2
+        }else cut_deficiency[i] = 0;
+        if( (popion[i]>0 && cut[i]>0) || (popion[i]>0 && melting[i]>0) ){
+          cut_deficiency[i] = cut_deficiency[i] + popion_deficiency[i];
+          //TODO update table 2
+        }else cut_deficiency[i]=0;
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value:rows[i] ),
