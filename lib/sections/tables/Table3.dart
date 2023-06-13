@@ -30,72 +30,252 @@ class _Table3ScreenState extends State<Table3Screen> {
     PlutoColumn(
         title: 'متفرقه',
         field: 'other',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'حلقه',
         field: 'ring',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'مفتول',
         field: 'wire',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'گوی',
         field: 'ball',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'لحیم',
         field: 'solder',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'زنجیر',
         field: 'chain',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'تکه زنجیر',
         field: 'piece_chain',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'مدبر',
         field: 'lock',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'کارساخت',
         field: 'work_made',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'مجموع',
         field: 'sum',
         type: PlutoColumnType.number(),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     )
 
 
