@@ -49,7 +49,7 @@ class _DesignerOrdersListState extends State<DesignerOrdersList> {
             children: [
               Center(
                 child: FutureBuilder(
-                  future: DesignerApi.getPendingOrdersByDesigner(),
+                  future: DesignerApi.getOrders(),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<orderData>> snapshot) =>
                   snapshot.hasData && snapshot.data!.isNotEmpty
