@@ -37,7 +37,7 @@ class _Table5ScreenState extends State<Table5Screen> {
         field: 'client_name',
         type: PlutoColumnType.text(),
         enableEditingMode: true,
-        width: 100),
+        width: 120),
     PlutoColumn(
         title: 'شرح',
         field: 'description',
@@ -87,11 +87,11 @@ class _Table5ScreenState extends State<Table5Screen> {
         enableEditingMode: true,
         width: 100),
     PlutoColumn(
-        title: 'مفتول کشی',
-        field: 'wire_pulling',
+        title: 'مفتول گیری',
+        field: 'wiring',
         type: PlutoColumnType.number(),
         enableEditingMode: true,
-        width: 100),
+        width: 110),
     PlutoColumn(
         title: 'برش',
         field: 'cut',
@@ -170,12 +170,13 @@ class _Table5ScreenState extends State<Table5Screen> {
         type: PlutoColumnType.number(),
         enableEditingMode: true,
         width: 100),
+
     PlutoColumn(
         title: 'مفتول کشی',
-        field: 'wiring',
+        field: 'wire_pulling',
         type: PlutoColumnType.number(),
         enableEditingMode: true,
-        width: 100),
+        width: 110),
     PlutoColumn(
         title: 'وزن نهایی',
         field: 'final_weight',
@@ -187,7 +188,7 @@ class _Table5ScreenState extends State<Table5Screen> {
         field: 'burnish_deficiency',
         type: PlutoColumnType.number(),
         enableEditingMode: true,
-        width: 100),
+        width: 110),
   ];
 
   List<PlutoRow> rows = [];
@@ -419,6 +420,11 @@ class _Table5ScreenState extends State<Table5Screen> {
       List<PlutoRow> updatedRows=[];
       for (var i = 0; i < rows.length; i++) {
         // code[i]=(double.parse(code[i])/2).toStringAsFixed(2);
+        if(wiring[i]>0){
+          burnish_deficiency[i] = wiring[i] - wire_pulling[i];
+        }else{
+          burnish_deficiency[i] = final_weight[i] - (popion[i]+ring[i]+chain[i]+piece_chain[i]+cane[i]+lock[i]+wire[i]+solder[i]+ball[i]+ring2[i]+half_made[i]);
+        }
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value:rows[i] ),
