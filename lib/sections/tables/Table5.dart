@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
+import 'package:gold_workshop/helper/workshop1Api.dart';
+import 'package:gold_workshop/helper/workshop2Api.dart';
 import 'package:gold_workshop/models/tableModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:pluto_grid/pluto_grid.dart';
@@ -188,39 +190,7 @@ class _Table5ScreenState extends State<Table5Screen> {
         width: 100),
   ];
 
-  List<PlutoRow> rows = [
-    PlutoRow(
-      cells: {
-        'row': PlutoCell(value: 1),
-        'client_name': PlutoCell(value: ""),
-        'description':PlutoCell(value: ""),
-        'code':PlutoCell(value: ""),
-        'weight':PlutoCell(value: 0),
-        'cut_deficiency':PlutoCell(value: 0),
-        'popion_deficiency':PlutoCell(value: 0),
-        'jewel_weight':PlutoCell(value: 0),
-        'summary':PlutoCell(value: ""),
-        'melting':PlutoCell(value: 0),
-        'wire_pulling':PlutoCell(value: 0),
-        'cut':PlutoCell(value: 0),
-        'popion':PlutoCell(value: 0),
-        'ring':PlutoCell(value:0),
-        'chain':PlutoCell(value: 0),
-        'piece_chain':PlutoCell(value: 0),
-        'cane':PlutoCell(value: 0),
-        'lock':PlutoCell(value: 0),
-        'wire':PlutoCell(value: 0),
-        'solder':PlutoCell(value: 0),
-        'ball':PlutoCell(value: 0),
-        'pin':PlutoCell(value: 0),
-        'ring2':PlutoCell(value: 0),
-        'half_made':PlutoCell(value: 0),
-        'wiring':PlutoCell(value: 0),
-        'final_weight':PlutoCell(value: 0),
-        'burnish_deficiency':PlutoCell(value: 0),
-      },
-    ),
-  ];
+  List<PlutoRow> rows = [];
 
   updateTable()async{
     Map<String,dynamic> table5 = {};
@@ -293,8 +263,6 @@ class _Table5ScreenState extends State<Table5Screen> {
   }
 
   fetchTable() async {
-
-
     var tables = await AdminApi.getTable();
     if(tables.table5!.length>10){
       stateManager.setShowLoading(true);
@@ -326,8 +294,6 @@ class _Table5ScreenState extends State<Table5Screen> {
       List wiring = table5["wiring"];
       List final_weight = table5["final_weight"];
       List burnish_deficiency = table5["burnish_deficiency"];
-
-
 
       List<PlutoRow> updatedRows=[];
       for (var i = 0; i < rowNumber.length; i++) {
@@ -366,9 +332,55 @@ class _Table5ScreenState extends State<Table5Screen> {
       stateManager.refRows.clear();
       stateManager.insertRows(0, updatedRows);
       stateManager.setShowLoading(false);
-    }
+    }else fetchOrders();
   }
+  fetchOrders()async{
+    var orders =await Workshop2Api.getAllActiveOrders() ;
+    if(orders.length>0){
+      int index =0;
+      rows=[];
+      orders.forEach((element) {
+        index = index+1;
+        rows.add(
+          PlutoRow(
+            cells: {
+              'row': PlutoCell(value: element),
+              'client_name': PlutoCell(value: element.clientFullName),
+              'description':PlutoCell(value: element.description),
+              'code':PlutoCell(value: element.code),
+              'weight':PlutoCell(value: element.weight),
+              'cut_deficiency':PlutoCell(value: 0),
+              'popion_deficiency':PlutoCell(value: 0),
+              'jewel_weight':PlutoCell(value: 0),
+              'summary':PlutoCell(value: ""),
+              'melting':PlutoCell(value: 0),
+              'wire_pulling':PlutoCell(value: 0),
+              'cut':PlutoCell(value: 0),
+              'popion':PlutoCell(value: 0),
+              'ring':PlutoCell(value:0),
+              'chain':PlutoCell(value: 0),
+              'piece_chain':PlutoCell(value: 0),
+              'cane':PlutoCell(value: 0),
+              'lock':PlutoCell(value: 0),
+              'wire':PlutoCell(value: 0),
+              'solder':PlutoCell(value: 0),
+              'ball':PlutoCell(value: 0),
+              'pin':PlutoCell(value: 0),
+              'ring2':PlutoCell(value: 0),
+              'half_made':PlutoCell(value: 0),
+              'wiring':PlutoCell(value: 0),
+              'final_weight':PlutoCell(value: 0),
+              'burnish_deficiency':PlutoCell(value: 0),
+            },
+          ),
+        );
+      });
+      stateManager.refRows.clear();
+      stateManager.insertRows(0, rows);
 
+    }else rows=[];
+
+  }
   calculateTable()async{
 
       Map<String,dynamic> table5 = {};
@@ -406,7 +418,7 @@ class _Table5ScreenState extends State<Table5Screen> {
 
       List<PlutoRow> updatedRows=[];
       for (var i = 0; i < rows.length; i++) {
-        code[i]=(double.parse(code[i])/2).toStringAsFixed(2);
+        // code[i]=(double.parse(code[i])/2).toStringAsFixed(2);
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value:rows[i] ),
@@ -450,7 +462,6 @@ class _Table5ScreenState extends State<Table5Screen> {
 
   @override
   void initState() {
-
     super.initState();
   }
 
