@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/tableModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
+import 'package:gold_workshop/sections/tables/header.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 class Table3Screen extends StatefulWidget {
@@ -122,6 +123,40 @@ class _Table3ScreenState extends State<Table3Screen> {
 
   /// columnGroups that can group columns can be omitted.
   updateTable() async {
+    Map<String,dynamic> table3 = {};
+
+    List description = stateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List other = stateManager.rows.map((e) => e.cells['other']?.value).toList();
+    List ring = stateManager.rows.map((e) => e.cells['ring']?.value).toList();
+    List wire = stateManager.rows.map((e) => e.cells['wire']?.value).toList();
+    List ball = stateManager.rows.map((e) => e.cells['ball']?.value).toList();
+    List solder = stateManager.rows.map((e) => e.cells['solder']?.value).toList();
+    List chain = stateManager.rows.map((e) => e.cells['chain']?.value).toList();
+    List piece_chain = stateManager.rows.map((e) => e.cells['piece_chain']?.value).toList();
+    List lock = stateManager.rows.map((e) => e.cells['lock']?.value).toList();
+    List work_made = stateManager.rows.map((e) => e.cells['work_made']?.value).toList();
+    List sum = stateManager.rows.map((e) => e.cells['sum']?.value).toList();
+
+
+    table3["description"]=description.toList();
+    table3["other"]=other.toList();
+    table3["ring"]=ring.toList();
+    table3["wire"]=wire.toList();
+    table3["ball"]=ball.toList();
+    table3["solder"]=solder.toList();
+    table3["chain"]=chain.toList();
+    table3["piece_chain"]=piece_chain.toList();
+    table3["lock"]=lock.toList();
+    table3["work_made"]=work_made.toList();
+    table3["sum"]=sum.toList();
+
+    tableData t = new tableData("تکمیل کارگاه 2", "", "", jsonEncode(table3), "","", "", "","","","");
+
+    var respo = await AdminApi.postTable(t);
+
+  }
+
+  fetchTable() async {
 
 
     var tables = await AdminApi.getTable();
@@ -165,6 +200,86 @@ class _Table3ScreenState extends State<Table3Screen> {
     }
   }
 
+
+  calculateTable()async{
+
+    List description = stateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List other = stateManager.rows.map((e) => e.cells['other']?.value).toList();
+    List ring = stateManager.rows.map((e) => e.cells['ring']?.value).toList();
+    List wire = stateManager.rows.map((e) => e.cells['wire']?.value).toList();
+    List ball = stateManager.rows.map((e) => e.cells['ball']?.value).toList();
+    List solder = stateManager.rows.map((e) => e.cells['solder']?.value).toList();
+    List chain = stateManager.rows.map((e) => e.cells['chain']?.value).toList();
+    List piece_chain = stateManager.rows.map((e) => e.cells['piece_chain']?.value).toList();
+    List lock = stateManager.rows.map((e) => e.cells['lock']?.value).toList();
+    List work_made = stateManager.rows.map((e) => e.cells['work_made']?.value).toList();
+    List sum = stateManager.rows.map((e) => e.cells['sum']?.value).toList();
+
+    List<PlutoRow> updatedRows=[];
+      for (var i = 0; i < description.length; i++) {
+
+        if(stateManager.rows[i].cells["other"]?.column.title==description[i]){
+          var summ = ring[i] + wire[i] + ball[i] + solder[i] + chain[i] + piece_chain[i] + lock[i] + work_made[i];
+          sum[i]=summ;
+          other[i] = summ*-1;
+        }else if(stateManager.rows[i].cells["ring"]?.column.title==description[i]){
+          var summ = other[i] + wire[i] + ball[i] + solder[i] + chain[i] + piece_chain[i] + lock[i] + work_made[i];
+          sum[i]=summ;
+          ring[i] = summ*-1;
+        }else if(stateManager.rows[i].cells["wire"]?.column.title==description[i]){
+          var summ = ring[i] + other[i] + ball[i] + solder[i] + chain[i] + piece_chain[i] + lock[i] + work_made[i];
+          sum[i]=summ;
+          wire[i] = summ*-1;
+        }else if(stateManager.rows[i].cells["ball"]?.column.title==description[i]){
+          var summ = ring[i] + wire[i] + other[i] + solder[i] + chain[i] + piece_chain[i] + lock[i] + work_made[i];
+          sum[i]=summ;
+          ball[i] = summ*-1;
+        }else if(stateManager.rows[i].cells["solder"]?.column.title==description[i]){
+          var summ = ring[i] + wire[i] + ball[i] + other[i] + chain[i] + piece_chain[i] + lock[i] + work_made[i];
+          sum[i]=summ;
+          solder[i] = summ*-1;
+        }else if(stateManager.rows[i].cells["chain"]?.column.title==description[i]){
+          var summ = ring[i] + wire[i] + ball[i] + solder[i] + other[i] + piece_chain[i] + lock[i] + work_made[i];
+          sum[i]=summ;
+          chain[i] = summ*-1;
+        }else if(stateManager.rows[i].cells["piece_chain"]?.column.title==description[i]){
+          var summ = ring[i] + wire[i] + ball[i] + solder[i] + chain[i] + other[i] + lock[i] + work_made[i];
+          sum[i]=summ;
+          piece_chain[i] = summ*-1;
+        }else if(stateManager.rows[i].cells["lock"]?.column.title==description[i]){
+          var summ = ring[i] + wire[i] + ball[i] + solder[i] + chain[i] + piece_chain[i] + other[i] + work_made[i];
+          sum[i]=summ;
+          lock[i] = summ*-1;
+        }else if(stateManager.rows[i].cells["work_made"]?.column.title==description[i]){
+          var summ = ring[i] + wire[i] + ball[i] + solder[i] + chain[i] + piece_chain[i] + lock[i] + other[i];
+          sum[i]=summ;
+          work_made[i] = summ*-1;
+        }
+
+
+        updatedRows.add(PlutoRow(
+          cells: {
+            'description': PlutoCell(value:description[i] ),
+            'other': PlutoCell(value: other[i]),
+            'ring': PlutoCell(value: ring[i]),
+            'wire': PlutoCell(value: wire[i]),
+            'ball': PlutoCell(value: ball[i]),
+            'solder': PlutoCell(value: solder[i]),
+            'chain': PlutoCell(value: chain[i]),
+            'piece_chain': PlutoCell(value: piece_chain[i]),
+            'lock': PlutoCell(value: lock[i]),
+            'work_made': PlutoCell(value: work_made[i]),
+            'sum': PlutoCell(value: sum[i]),
+          },
+        ));
+      }
+
+      stateManager.refRows.clear();
+      stateManager.insertRows(0, updatedRows);
+      stateManager.setShowLoading(false);
+
+  }
+
   @override
   void initState() {
     super.initState();
@@ -194,16 +309,18 @@ class _Table3ScreenState extends State<Table3Screen> {
         child: PlutoGrid(
           columns: columns,
           rows: rows,
-          createHeader:  (stateManager) => _Header(stateManager: stateManager),
+          createHeader:  (stateManager) => Header(stateManager: stateManager),
 
 
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
 
-            updateTable();
+            fetchTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
             print(event);
+            calculateTable();
+            updateTable();
           },
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
@@ -228,36 +345,6 @@ class _Table3ScreenState extends State<Table3Screen> {
             },
           ),
         ]);
-        Map<String,dynamic> table3 = {};
-
-        List description = stateManager.rows.map((e) => e.cells['description']?.value).toList();
-        List other = stateManager.rows.map((e) => e.cells['other']?.value).toList();
-        List ring = stateManager.rows.map((e) => e.cells['ring']?.value).toList();
-        List wire = stateManager.rows.map((e) => e.cells['wire']?.value).toList();
-        List ball = stateManager.rows.map((e) => e.cells['ball']?.value).toList();
-        List solder = stateManager.rows.map((e) => e.cells['solder']?.value).toList();
-        List chain = stateManager.rows.map((e) => e.cells['chain']?.value).toList();
-        List piece_chain = stateManager.rows.map((e) => e.cells['piece_chain']?.value).toList();
-        List lock = stateManager.rows.map((e) => e.cells['lock']?.value).toList();
-        List work_made = stateManager.rows.map((e) => e.cells['work_made']?.value).toList();
-        List sum = stateManager.rows.map((e) => e.cells['sum']?.value).toList();
-
-
-        table3["description"]=description.toList();
-        table3["other"]=other.toList();
-        table3["ring"]=ring.toList();
-        table3["wire"]=wire.toList();
-        table3["ball"]=ball.toList();
-        table3["solder"]=solder.toList();
-        table3["chain"]=chain.toList();
-        table3["piece_chain"]=piece_chain.toList();
-        table3["lock"]=lock.toList();
-        table3["work_made"]=work_made.toList();
-        table3["sum"]=sum.toList();
-
-        tableData t = new tableData("تکمیل کارگاه 2", "", "", jsonEncode(table3), "","", "", "","","","");
-
-        var respo = await AdminApi.postTable(t);
 
 
       },child: const Icon(Icons.add)),
@@ -267,54 +354,3 @@ class _Table3ScreenState extends State<Table3Screen> {
 
 }
 
-
-class _Header extends StatefulWidget {
-  const _Header({
-    required this.stateManager,
-    Key? key,
-  }) : super(key: key);
-
-  final PlutoGridStateManager stateManager;
-
-  @override
-  State<_Header> createState() => _HeaderState();
-}
-
-class _HeaderState extends State<_Header> {
-
-  PlutoGridSelectingMode gridSelectingMode = PlutoGridSelectingMode.row;
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      widget.stateManager.setSelectingMode(gridSelectingMode);
-    });
-  }
-
-
-  void handleRemoveCurrentColumnButton() {
-    final currentColumn = widget.stateManager.currentColumn;
-
-    if (currentColumn == null) {
-      return;
-    }
-
-    widget.stateManager.removeColumns([currentColumn]);
-  }
-
-  void handleRemoveCurrentRowButton() {
-    widget.stateManager.removeCurrentRow();
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return  ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-      onPressed: handleRemoveCurrentRowButton,
-      child: const Text('حذف سطر انتخاب شده',style: TextStyle(color: Colors.black),),
-    );
-  }
-}
