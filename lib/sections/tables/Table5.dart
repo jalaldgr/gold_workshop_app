@@ -222,8 +222,77 @@ class _Table5ScreenState extends State<Table5Screen> {
     ),
   ];
 
-  /// columnGroups that can group columns can be omitted.
-  updateTable() async {
+  updateTable()async{
+    Map<String,dynamic> table5 = {};
+
+    List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
+    List client_name = stateManager.rows.map((e) => e.cells['client_name']?.value).toList();
+    List description = stateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List code = stateManager.rows.map((e) => e.cells['code']?.value).toList();
+    List weight = stateManager.rows.map((e) => e.cells['weight']?.value).toList();
+    List cut_deficiency = stateManager.rows.map((e) => e.cells['cut_deficiency']?.value).toList();
+    List popion_deficiency = stateManager.rows.map((e) => e.cells['popion_deficiency']?.value).toList();
+    List jewel_weight = stateManager.rows.map((e) => e.cells['jewel_weight']?.value).toList();
+    List summary = stateManager.rows.map((e) => e.cells['summary']?.value).toList();
+    List melting = stateManager.rows.map((e) => e.cells['melting']?.value).toList();
+    List wire_pulling = stateManager.rows.map((e) => e.cells['wire_pulling']?.value).toList();
+    List cut = stateManager.rows.map((e) => e.cells['cut']?.value).toList();
+    List popion = stateManager.rows.map((e) => e.cells['popion']?.value).toList();
+    List ring = stateManager.rows.map((e) => e.cells['ring']?.value).toList();
+    List chain = stateManager.rows.map((e) => e.cells['chain']?.value).toList();
+    List piece_chain = stateManager.rows.map((e) => e.cells['piece_chain']?.value).toList();
+    List cane = stateManager.rows.map((e) => e.cells['cane']?.value).toList();
+    List lock = stateManager.rows.map((e) => e.cells['lock']?.value).toList();
+    List wire = stateManager.rows.map((e) => e.cells['wire']?.value).toList();
+    List solder = stateManager.rows.map((e) => e.cells['solder']?.value).toList();
+    List ball = stateManager.rows.map((e) => e.cells['ball']?.value).toList();
+    List pin = stateManager.rows.map((e) => e.cells['pin']?.value).toList();
+    List ring2 = stateManager.rows.map((e) => e.cells['ring2']?.value).toList();
+    List half_made = stateManager.rows.map((e) => e.cells['half_made']?.value).toList();
+    List wiring = stateManager.rows.map((e) => e.cells['wiring']?.value).toList();
+    List final_weight = stateManager.rows.map((e) => e.cells['final_weight']?.value).toList();
+    List burnish_deficiency = stateManager.rows.map((e) => e.cells['burnish_deficiency']?.value).toList();
+
+
+
+
+    table5["row"]=rows.toList();
+    table5["client_name"]=client_name.toList();
+    table5["description"]=description.toList();
+    table5["code"]=code.toList();
+    table5["weight"]=weight.toList();
+    table5["cut_deficiency"]=cut_deficiency.toList();
+    table5["popion_deficiency"]=popion_deficiency.toList();
+    table5["jewel_weight"]=jewel_weight.toList();
+    table5["summary"]=summary.toList();
+    table5["melting"]=melting.toList();
+    table5["wire_pulling"]=wire_pulling.toList();
+    table5["cut"]=cut.toList();
+    table5["popion"]=popion.toList();
+    table5["ring"]=ring.toList();
+    table5["chain"]=chain.toList();
+    table5["piece_chain"]=piece_chain.toList();
+    table5["cane"]=cane.toList();
+    table5["lock"]=lock.toList();
+    table5["wire"]=wire.toList();
+    table5["solder"]=solder.toList();
+    table5["ball"]=ball.toList();
+    table5["pin"]=pin.toList();
+    table5["ring2"]=ring2.toList();
+    table5["half_made"]=half_made.toList();
+    table5["wiring"]=wiring.toList();
+    table5["final_weight"]=final_weight.toList();
+    table5["burnish_deficiency"]=burnish_deficiency.toList();
+
+
+
+    tableData t = new tableData("تکمیل کارگاه 1", "", "", "","", "", jsonEncode(table5), "","","","");
+
+    var respo = await AdminApi.postTable(t);
+
+  }
+
+  fetchTable() async {
 
 
     var tables = await AdminApi.getTable();
@@ -336,10 +405,10 @@ class _Table5ScreenState extends State<Table5Screen> {
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
 
-            updateTable();
+            fetchTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
-            print(event);
+            updateTable();
           },
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
@@ -378,72 +447,6 @@ class _Table5ScreenState extends State<Table5Screen> {
             },
           ),
         ]);
-        Map<String,dynamic> table5 = {};
-
-        List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
-        List client_name = stateManager.rows.map((e) => e.cells['client_name']?.value).toList();
-        List description = stateManager.rows.map((e) => e.cells['description']?.value).toList();
-        List code = stateManager.rows.map((e) => e.cells['code']?.value).toList();
-        List weight = stateManager.rows.map((e) => e.cells['weight']?.value).toList();
-        List cut_deficiency = stateManager.rows.map((e) => e.cells['cut_deficiency']?.value).toList();
-        List popion_deficiency = stateManager.rows.map((e) => e.cells['popion_deficiency']?.value).toList();
-        List jewel_weight = stateManager.rows.map((e) => e.cells['jewel_weight']?.value).toList();
-        List summary = stateManager.rows.map((e) => e.cells['summary']?.value).toList();
-        List melting = stateManager.rows.map((e) => e.cells['melting']?.value).toList();
-        List wire_pulling = stateManager.rows.map((e) => e.cells['wire_pulling']?.value).toList();
-        List cut = stateManager.rows.map((e) => e.cells['cut']?.value).toList();
-        List popion = stateManager.rows.map((e) => e.cells['popion']?.value).toList();
-        List ring = stateManager.rows.map((e) => e.cells['ring']?.value).toList();
-        List chain = stateManager.rows.map((e) => e.cells['chain']?.value).toList();
-        List piece_chain = stateManager.rows.map((e) => e.cells['piece_chain']?.value).toList();
-        List cane = stateManager.rows.map((e) => e.cells['cane']?.value).toList();
-        List lock = stateManager.rows.map((e) => e.cells['lock']?.value).toList();
-        List wire = stateManager.rows.map((e) => e.cells['wire']?.value).toList();
-        List solder = stateManager.rows.map((e) => e.cells['solder']?.value).toList();
-        List ball = stateManager.rows.map((e) => e.cells['ball']?.value).toList();
-        List pin = stateManager.rows.map((e) => e.cells['pin']?.value).toList();
-        List ring2 = stateManager.rows.map((e) => e.cells['ring2']?.value).toList();
-        List half_made = stateManager.rows.map((e) => e.cells['half_made']?.value).toList();
-        List wiring = stateManager.rows.map((e) => e.cells['wiring']?.value).toList();
-        List final_weight = stateManager.rows.map((e) => e.cells['final_weight']?.value).toList();
-        List burnish_deficiency = stateManager.rows.map((e) => e.cells['burnish_deficiency']?.value).toList();
-
-
-
-
-        table5["row"]=rows.toList();
-        table5["client_name"]=client_name.toList();
-        table5["description"]=description.toList();
-        table5["code"]=code.toList();
-        table5["weight"]=weight.toList();
-        table5["cut_deficiency"]=cut_deficiency.toList();
-        table5["popion_deficiency"]=popion_deficiency.toList();
-        table5["jewel_weight"]=jewel_weight.toList();
-        table5["summary"]=summary.toList();
-        table5["melting"]=melting.toList();
-        table5["wire_pulling"]=wire_pulling.toList();
-        table5["cut"]=cut.toList();
-        table5["popion"]=popion.toList();
-        table5["ring"]=ring.toList();
-        table5["chain"]=chain.toList();
-        table5["piece_chain"]=piece_chain.toList();
-        table5["cane"]=cane.toList();
-        table5["lock"]=lock.toList();
-        table5["wire"]=wire.toList();
-        table5["solder"]=solder.toList();
-        table5["ball"]=ball.toList();
-        table5["pin"]=pin.toList();
-        table5["ring2"]=ring2.toList();
-        table5["half_made"]=half_made.toList();
-        table5["wiring"]=wiring.toList();
-        table5["final_weight"]=final_weight.toList();
-        table5["burnish_deficiency"]=burnish_deficiency.toList();
-
-
-
-        tableData t = new tableData("تکمیل کارگاه 1", "", "", "","", "", jsonEncode(table5), "","","","");
-
-        var respo = await AdminApi.postTable(t);
 
 
         },child: const Icon(Icons.add)),
@@ -492,6 +495,8 @@ class _HeaderState extends State<_Header> {
 
   void handleRemoveCurrentRowButton() {
     widget.stateManager.removeCurrentRow();
+    updateTable();
+
   }
 
 
@@ -503,4 +508,73 @@ class _HeaderState extends State<_Header> {
       child: const Text('حذف سطر انتخاب شده',style: TextStyle(color: Colors.black),),
     );
   }
+
+
+  updateTable()async{
+    Map<String,dynamic> table5 = {};
+    List rows = widget.stateManager.rows.map((e) => e.cells['row']?.value).toList();
+    List client_name = widget.stateManager.rows.map((e) => e.cells['client_name']?.value).toList();
+    List description = widget.stateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List code = widget.stateManager.rows.map((e) => e.cells['code']?.value).toList();
+    List weight = widget.stateManager.rows.map((e) => e.cells['weight']?.value).toList();
+    List cut_deficiency = widget.stateManager.rows.map((e) => e.cells['cut_deficiency']?.value).toList();
+    List popion_deficiency = widget.stateManager.rows.map((e) => e.cells['popion_deficiency']?.value).toList();
+    List jewel_weight = widget.stateManager.rows.map((e) => e.cells['jewel_weight']?.value).toList();
+    List summary = widget.stateManager.rows.map((e) => e.cells['summary']?.value).toList();
+    List melting = widget.stateManager.rows.map((e) => e.cells['melting']?.value).toList();
+    List wire_pulling = widget.stateManager.rows.map((e) => e.cells['wire_pulling']?.value).toList();
+    List cut = widget.stateManager.rows.map((e) => e.cells['cut']?.value).toList();
+    List popion = widget.stateManager.rows.map((e) => e.cells['popion']?.value).toList();
+    List ring = widget.stateManager.rows.map((e) => e.cells['ring']?.value).toList();
+    List chain = widget.stateManager.rows.map((e) => e.cells['chain']?.value).toList();
+    List piece_chain = widget.stateManager.rows.map((e) => e.cells['piece_chain']?.value).toList();
+    List cane = widget.stateManager.rows.map((e) => e.cells['cane']?.value).toList();
+    List lock = widget.stateManager.rows.map((e) => e.cells['lock']?.value).toList();
+    List wire = widget.stateManager.rows.map((e) => e.cells['wire']?.value).toList();
+    List solder = widget.stateManager.rows.map((e) => e.cells['solder']?.value).toList();
+    List ball = widget.stateManager.rows.map((e) => e.cells['ball']?.value).toList();
+    List pin = widget.stateManager.rows.map((e) => e.cells['pin']?.value).toList();
+    List ring2 = widget.stateManager.rows.map((e) => e.cells['ring2']?.value).toList();
+    List half_made = widget.stateManager.rows.map((e) => e.cells['half_made']?.value).toList();
+    List wiring = widget.stateManager.rows.map((e) => e.cells['wiring']?.value).toList();
+    List final_weight = widget.stateManager.rows.map((e) => e.cells['final_weight']?.value).toList();
+    List burnish_deficiency = widget.stateManager.rows.map((e) => e.cells['burnish_deficiency']?.value).toList();
+
+    table5["row"]=rows.toList();
+    table5["client_name"]=client_name.toList();
+    table5["description"]=description.toList();
+    table5["code"]=code.toList();
+    table5["weight"]=weight.toList();
+    table5["cut_deficiency"]=cut_deficiency.toList();
+    table5["popion_deficiency"]=popion_deficiency.toList();
+    table5["jewel_weight"]=jewel_weight.toList();
+    table5["summary"]=summary.toList();
+    table5["melting"]=melting.toList();
+    table5["wire_pulling"]=wire_pulling.toList();
+    table5["cut"]=cut.toList();
+    table5["popion"]=popion.toList();
+    table5["ring"]=ring.toList();
+    table5["chain"]=chain.toList();
+    table5["piece_chain"]=piece_chain.toList();
+    table5["cane"]=cane.toList();
+    table5["lock"]=lock.toList();
+    table5["wire"]=wire.toList();
+    table5["solder"]=solder.toList();
+    table5["ball"]=ball.toList();
+    table5["pin"]=pin.toList();
+    table5["ring2"]=ring2.toList();
+    table5["half_made"]=half_made.toList();
+    table5["wiring"]=wiring.toList();
+    table5["final_weight"]=final_weight.toList();
+    table5["burnish_deficiency"]=burnish_deficiency.toList();
+
+
+
+    tableData t = new tableData("تکمیل کارگاه 1", "", "", "","", "", jsonEncode(table5), "","","","");
+
+    var respo = await AdminApi.postTable(t);
+
+  }
+
+
 }
