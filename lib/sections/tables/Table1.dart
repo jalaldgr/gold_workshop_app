@@ -234,7 +234,17 @@ class _Table1ScreenState extends State<Table1Screen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
         backgroundColor: widget.headerColor?? Colors.pink,
-        actions: [IconButton(onPressed: (){fetchTable();}, icon: Icon(Icons.refresh))],
+        actions: [
+          SizedBox(width: 32,),
+          IconButton(onPressed: (){
+            setState(() {
+              stateManager.removeCurrentRow();
+              updateTable();
+            });
+
+          }, icon: Icon(Icons.delete_forever),tooltip: "حذف سطر انتخاب شده"),
+
+        ],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -245,14 +255,12 @@ class _Table1ScreenState extends State<Table1Screen> {
                 fontWeight: FontWeight.bold,
                 fontSize: 22.0)),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: Container(
         padding: const EdgeInsets.all(15),
         child: PlutoGrid(
           columns: columns,
           rows: rows,
-          createHeader:  (stateManager) => _Header(stateManager: stateManager),
-
-
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
 
@@ -291,54 +299,3 @@ class _Table1ScreenState extends State<Table1Screen> {
 
 }
 
-
-class _Header extends StatefulWidget {
-  const _Header({
-    required this.stateManager,
-    Key? key,
-  }) : super(key: key);
-
-  final PlutoGridStateManager stateManager;
-
-  @override
-  State<_Header> createState() => _HeaderState();
-}
-
-class _HeaderState extends State<_Header> {
-
-  PlutoGridSelectingMode gridSelectingMode = PlutoGridSelectingMode.row;
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      widget.stateManager.setSelectingMode(gridSelectingMode);
-    });
-  }
-
-
-  void handleRemoveCurrentColumnButton() {
-    final currentColumn = widget.stateManager.currentColumn;
-
-    if (currentColumn == null) {
-      return;
-    }
-
-    widget.stateManager.removeColumns([currentColumn]);
-  }
-
-  void handleRemoveCurrentRowButton() {
-    widget.stateManager.removeCurrentRow();
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return  ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-      onPressed: handleRemoveCurrentRowButton,
-      child: const Text('حذف سطر انتخاب شده',style: TextStyle(color: Colors.black),),
-    );
-  }
-}
