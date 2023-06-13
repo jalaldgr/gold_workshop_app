@@ -66,14 +66,14 @@ class _Table4ScreenState extends State<Table4Screen> {
         field: 'real_balance',
         type: PlutoColumnType.number(),
         enableEditingMode: true,
-        width: 100
+        width: 120
     ),
     PlutoColumn(
         title: 'مانده سیستم',
         field: 'system_balance',
         type: PlutoColumnType.number(),
         enableEditingMode: true,
-        width: 100
+        width: 120
     ),
     PlutoColumn(
         title: 'اختلاف',
@@ -354,9 +354,37 @@ class _Table4ScreenState extends State<Table4Screen> {
       },
     ),
   ];
-
-  /// columnGroups that can group columns can be omitted.
   updateTable() async {
+    Map<String,dynamic> table41 = {};
+    List row = gridAStateManager.rows.map((e) => e.cells['row']?.value).toList();
+    List description = gridAStateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List import_weight = gridAStateManager.rows.map((e) => e.cells['import_weight']?.value).toList();
+    List summary = gridAStateManager.rows.map((e) => e.cells['summary']?.value).toList();
+    table41["row"]=row.toList();
+    table41["description"]=description.toList();
+    table41["import_weight"]=import_weight.toList();
+    table41["summary"]=summary.toList();
+    tableData t = new tableData("تکمیل کارگاه 1", "", "", "",jsonEncode(table41), "", "", "","","","");
+    var respo = await AdminApi.postTable(t);
+
+
+
+    Map<String,dynamic> table42 = {};
+    List description42 = gridBStateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List real_balance = gridBStateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
+    List system_balance = gridBStateManager.rows.map((e) => e.cells['system_balance']?.value).toList();
+    List difference = gridBStateManager.rows.map((e) => e.cells['difference']?.value).toList();
+    List summary42 = gridBStateManager.rows.map((e) => e.cells['summary']?.value).toList();
+    table42["description"]=description42.toList();
+    table42["real_balance"]=real_balance.toList();
+    table42["system_balance"]=system_balance.toList();
+    table42["difference"]=difference.toList();
+    table42["summary"]=summary42.toList();
+    tableData t42 = new tableData("تکمیل کارگاه 1", "", "", "","", jsonEncode(table42), "", "","","","");
+    var respo42 = await AdminApi.postTable(t42);
+  }
+
+  fetchTable() async {
     var tables = await AdminApi.getTable();
 
     if(tables.table41!.length>10){
@@ -420,6 +448,45 @@ class _Table4ScreenState extends State<Table4Screen> {
 
   }
 
+
+  calculateTable()async{
+print("gewr");
+    Map<String,dynamic> table42 = {};
+    List description42 = gridBStateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List real_balance = gridBStateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
+    List system_balance = gridBStateManager.rows.map((e) => e.cells['system_balance']?.value).toList();
+    List difference = gridBStateManager.rows.map((e) => e.cells['difference']?.value).toList();
+    List summary42 = gridBStateManager.rows.map((e) => e.cells['summary']?.value).toList();
+    table42["description"]=description42.toList();
+    table42["real_balance"]=real_balance.toList();
+    table42["system_balance"]=system_balance.toList();
+    table42["difference"]=difference.toList();
+    table42["summary"]=summary42.toList();
+
+
+    List<PlutoRow> updatedRows=[];
+    for (var i = 0; i < description42.length; i++) {
+      difference[i] = real_balance[i] - system_balance[i];
+      updatedRows.add(PlutoRow(
+        cells: {
+          'description': PlutoCell(value:description42[i] ),
+          'real_balance': PlutoCell(value: real_balance[i]),
+          'system_balance': PlutoCell(value: system_balance[i]),
+          'difference': PlutoCell(value: difference[i]),
+          'summary': PlutoCell(value: summary42[i]),
+
+        },
+      ));
+    }
+
+    gridBStateManager.refRows.clear();
+    gridBStateManager.insertRows(0, updatedRows);
+    gridBStateManager.setShowLoading(false);
+
+
+  }
+
+
   @override
   void initState() {
 
@@ -449,11 +516,14 @@ class _Table4ScreenState extends State<Table4Screen> {
           columns: gridAColumns,
           rows: gridARows,
           createHeader:  (stateManager) => _Header(stateManager: stateManager),
-          onSorted: (PlutoGridOnSortedEvent event) {
-            print('Grid A : $event');
-          },
+
           onLoaded: (PlutoGridOnLoadedEvent event) {
             gridAStateManager = event.stateManager;
+            fetchTable();
+          },
+          onChanged: (PlutoGridOnChangedEvent event) {
+            print(event);
+            calculateTable();
             updateTable();
           },
         ),
@@ -463,8 +533,9 @@ class _Table4ScreenState extends State<Table4Screen> {
          PlutoDualGridProps(
            columns: gridBColumns,
            rows: gridBRows,
-           onSorted: (PlutoGridOnSortedEvent event) {
-             print('Grid B : $event');
+           onChanged: (event)  {
+           calculateTable();
+             updateTable();
            },
            onLoaded: (PlutoGridOnLoadedEvent event) {
              gridBStateManager = event.stateManager;
@@ -561,6 +632,7 @@ class _HeaderState extends State<_Header> {
 
   void handleRemoveCurrentRowButton() {
     widget.stateManager.removeCurrentRow();
+    updateTableA();
   }
 
 
@@ -571,5 +643,20 @@ class _HeaderState extends State<_Header> {
       onPressed: handleRemoveCurrentRowButton,
       child: const Text('حذف سطر انتخاب شده',style: TextStyle(color: Colors.black),),
     );
+  }
+
+  updateTableA() async {
+    Map<String,dynamic> table41 = {};
+    List row = widget.stateManager.rows.map((e) => e.cells['row']?.value).toList();
+    List description = widget.stateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List import_weight = widget.stateManager.rows.map((e) => e.cells['import_weight']?.value).toList();
+    List summary = widget.stateManager.rows.map((e) => e.cells['summary']?.value).toList();
+    table41["row"]=row.toList();
+    table41["description"]=description.toList();
+    table41["import_weight"]=import_weight.toList();
+    table41["summary"]=summary.toList();
+    tableData t = new tableData("تکمیل کارگاه 1", "", "", "",jsonEncode(table41), "", "", "","","","");
+    var respo = await AdminApi.postTable(t);
+
   }
 }
