@@ -369,6 +369,85 @@ class _Table5ScreenState extends State<Table5Screen> {
     }
   }
 
+  calculateTable()async{
+
+      Map<String,dynamic> table5 = {};
+
+      List rows = stateManager.rows.map((e) => e.cells['row']?.value).toList();
+      List client_name = stateManager.rows.map((e) => e.cells['client_name']?.value).toList();
+      List description = stateManager.rows.map((e) => e.cells['description']?.value).toList();
+      List code = stateManager.rows.map((e) => e.cells['code']?.value).toList();
+      List weight = stateManager.rows.map((e) => e.cells['weight']?.value).toList();
+      List cut_deficiency = stateManager.rows.map((e) => e.cells['cut_deficiency']?.value).toList();
+      List popion_deficiency = stateManager.rows.map((e) => e.cells['popion_deficiency']?.value).toList();
+      List jewel_weight = stateManager.rows.map((e) => e.cells['jewel_weight']?.value).toList();
+      List summary = stateManager.rows.map((e) => e.cells['summary']?.value).toList();
+      List melting = stateManager.rows.map((e) => e.cells['melting']?.value).toList();
+      List wire_pulling = stateManager.rows.map((e) => e.cells['wire_pulling']?.value).toList();
+      List cut = stateManager.rows.map((e) => e.cells['cut']?.value).toList();
+      List popion = stateManager.rows.map((e) => e.cells['popion']?.value).toList();
+      List ring = stateManager.rows.map((e) => e.cells['ring']?.value).toList();
+      List chain = stateManager.rows.map((e) => e.cells['chain']?.value).toList();
+      List piece_chain = stateManager.rows.map((e) => e.cells['piece_chain']?.value).toList();
+      List cane = stateManager.rows.map((e) => e.cells['cane']?.value).toList();
+      List lock = stateManager.rows.map((e) => e.cells['lock']?.value).toList();
+      List wire = stateManager.rows.map((e) => e.cells['wire']?.value).toList();
+      List solder = stateManager.rows.map((e) => e.cells['solder']?.value).toList();
+      List ball = stateManager.rows.map((e) => e.cells['ball']?.value).toList();
+      List pin = stateManager.rows.map((e) => e.cells['pin']?.value).toList();
+      List ring2 = stateManager.rows.map((e) => e.cells['ring2']?.value).toList();
+      List half_made = stateManager.rows.map((e) => e.cells['half_made']?.value).toList();
+      List wiring = stateManager.rows.map((e) => e.cells['wiring']?.value).toList();
+      List final_weight = stateManager.rows.map((e) => e.cells['final_weight']?.value).toList();
+      List burnish_deficiency = stateManager.rows.map((e) => e.cells['burnish_deficiency']?.value).toList();
+
+
+
+
+      List<PlutoRow> updatedRows=[];
+      for (var i = 0; i < rows.length; i++) {
+        code[i]=(double.parse(code[i])/2).toStringAsFixed(2);
+        updatedRows.add(PlutoRow(
+          cells: {
+            'row': PlutoCell(value:rows[i] ),
+            'client_name': PlutoCell(value: client_name[i]),
+            'description': PlutoCell(value: description[i]),
+            'code': PlutoCell(value: code[i]),
+            'weight': PlutoCell(value: weight[i]),
+            'cut_deficiency': PlutoCell(value: cut_deficiency[i]),
+            'popion_deficiency': PlutoCell(value: popion_deficiency[i]),
+            'jewel_weight': PlutoCell(value: jewel_weight[i]),
+            'summary': PlutoCell(value: summary[i]),
+            'melting': PlutoCell(value: melting[i]),
+            'wire_pulling': PlutoCell(value: wire_pulling[i]),
+            'cut': PlutoCell(value: cut[i]),
+            'popion': PlutoCell(value: popion[i]),
+            'ring': PlutoCell(value: ring[i]),
+            'chain': PlutoCell(value: chain[i]),
+            'piece_chain': PlutoCell(value: piece_chain[i]),
+            'cane': PlutoCell(value: cane[i]),
+            'lock': PlutoCell(value: lock[i]),
+            'wire': PlutoCell(value: wire[i]),
+            'solder': PlutoCell(value: solder[i]),
+            'ball': PlutoCell(value: ball[i]),
+            'pin': PlutoCell(value: pin[i]),
+            'ring2': PlutoCell(value: ring2[i]),
+            'half_made': PlutoCell(value: half_made[i]),
+            'wiring': PlutoCell(value: wiring[i]),
+            'final_weight': PlutoCell(value: final_weight[i]),
+            'burnish_deficiency': PlutoCell(value: burnish_deficiency[i]),
+          },
+        ));
+      }
+      stateManager.refRows.clear();
+      stateManager.insertRows(0, updatedRows);
+      stateManager.setShowLoading(false);
+
+
+
+  }
+
+
   @override
   void initState() {
 
@@ -408,6 +487,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             fetchTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
+            calculateTable();
             updateTable();
           },
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
