@@ -189,7 +189,7 @@ class _Table2ScreenState extends State<Table2Screen> {
             'final_balance': PlutoCell(value: import[i]-export[i]+final_balance[i-1]),
             'real_balance': PlutoCell(value: real_balance[i]),
             'balance': PlutoCell(value: final_balance[i]-real_balance[i]  ),
-            'difference': PlutoCell(value: final_balance[i]-real_balance[i] ),
+            'difference': PlutoCell(value: balance[i]),
           },
         ));
       }else if(i==2){ // row is greater than 2
