@@ -30,71 +30,182 @@ class _Table1ScreenState extends State<Table1Screen> {
       type: PlutoColumnType.number(),
         enableEditingMode: true,
       width: 100
-
     ),
     /// Select Column definition
     PlutoColumn(
         title: 'متفرقه',
         field: 'other',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
-
-
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'بار مصرفی',
         field: 'consumption_load',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
-
-
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'مجموع بار مصرفی و متفرقه',
         field: 'consumptions_load_and_other',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 200
-
-
+        width: 200,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'بعد از ذوب',
         field: 'after_melt',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
-
-
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'اختلاف',
         field: 'difference',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
-
-
+        width: 100,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          titleSpanBuilder: (text) {
+            return [
+              const TextSpan(
+                text: 'جمع',
+                style: TextStyle(color: Colors.red),
+              ),
+              const TextSpan(text: ' : '),
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
     ),
     PlutoColumn(
         title: 'بعد از صفحه گیری',
         field: 'after_paging',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 150
-
-
+        width: 150,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'اختلاف نهایی',
         field: 'final_difference',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 120
-
-
+        width: 120,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
 
   ];
@@ -273,7 +384,7 @@ class _Table1ScreenState extends State<Table1Screen> {
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
+      floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",onPressed: () async {
         stateManager.insertRows(stateManager.rows.length, [
           PlutoRow(
             cells: {
