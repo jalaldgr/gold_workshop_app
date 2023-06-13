@@ -55,7 +55,25 @@ class _Table5ScreenState extends State<Table5Screen> {
         field: 'weight',
         type: PlutoColumnType.number(),
         enableEditingMode: true,
-        width: 100),
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'مجموع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
+    ),
     PlutoColumn(
         title: 'کسر برش',
         field: 'cut_deficiency',
