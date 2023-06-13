@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/tableModel.dart';
-import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
-import 'package:gold_workshop/sections/tables/header.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 class Table3Screen extends StatefulWidget {
@@ -473,7 +471,17 @@ class _Table3ScreenState extends State<Table3Screen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
         backgroundColor: widget.headerColor?? Colors.pink,
-        actions: [IconButton(onPressed: (){updateTable();}, icon: Icon(Icons.refresh))],
+        actions: [
+          SizedBox(width: 32,),
+          IconButton(onPressed: (){
+            setState(() {
+              stateManager.removeCurrentRow();
+              updateTable();
+            });
+
+            }, icon: Icon(Icons.delete_forever),tooltip: "حذف سطر انتخاب شده"),
+
+        ],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -484,14 +492,12 @@ class _Table3ScreenState extends State<Table3Screen> {
                 fontWeight: FontWeight.bold,
                 fontSize: 22.0)),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: Container(
         padding: const EdgeInsets.all(15),
         child: PlutoGrid(
           columns: columns,
           rows: rows,
-          createHeader:  (stateManager) => Header(stateManager: stateManager),
-
-
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
 
@@ -505,7 +511,8 @@ class _Table3ScreenState extends State<Table3Screen> {
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
+      floatingActionButton: FloatingActionButton(
+          onPressed: () async {
         stateManager.insertRows(stateManager.rows.length, [
           PlutoRow(
             cells: {
