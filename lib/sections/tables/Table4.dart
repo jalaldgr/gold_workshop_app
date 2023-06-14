@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/tableModel.dart';
-import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 class Table4Screen extends StatefulWidget {
@@ -40,9 +38,27 @@ class _Table4ScreenState extends State<Table4Screen> {
     PlutoColumn(
         title: 'وزن ورودی',
         field: 'import_weight',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number( format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'توضیحات',
@@ -64,23 +80,79 @@ class _Table4ScreenState extends State<Table4Screen> {
     PlutoColumn(
         title: 'مانده واقعی',
         field: 'real_balance',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number( format: "#.###"),
         enableEditingMode: true,
-        width: 120
+        width: 120,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'مانده سیستم',
         field: 'system_balance',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number( format: "#.###"),
         enableEditingMode: true,
-        width: 120
+        width: 120,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
+
     ),
     PlutoColumn(
         title: 'اختلاف',
         field: 'difference',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number( format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
+
     ),
     PlutoColumn(
         title: 'توضیحات',
@@ -450,7 +522,6 @@ class _Table4ScreenState extends State<Table4Screen> {
 
 
   calculateTable()async{
-print("gewr");
     Map<String,dynamic> table42 = {};
     List description42 = gridBStateManager.rows.map((e) => e.cells['description']?.value).toList();
     List real_balance = gridBStateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
@@ -500,7 +571,11 @@ print("gewr");
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
         backgroundColor: widget.headerColor?? Colors.pink,
-        actions: [IconButton(onPressed: (){updateTable();}, icon: Icon(Icons.refresh))],
+        actions: [IconButton(tooltip: "حذف سطر انتخاب شده",
+          onPressed: (){
+          gridAStateManager.removeCurrentRow();
+          updateTable();
+          }, icon: Icon(Icons.delete_forever))],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -511,11 +586,11 @@ print("gewr");
                 fontWeight: FontWeight.bold,
                 fontSize: 22.0)),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: PlutoDualGrid(
         gridPropsA: PlutoDualGridProps(
           columns: gridAColumns,
           rows: gridARows,
-          createHeader:  (stateManager) => _Header(stateManager: stateManager),
 
           onLoaded: (PlutoGridOnLoadedEvent event) {
             gridAStateManager = event.stateManager;
@@ -545,7 +620,8 @@ print("gewr");
          )
 
         ,),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
+      floatingActionButton: FloatingActionButton(tooltip: "افزوردن سطر جدید",
+          onPressed: () async {
         gridAStateManager.insertRows(gridAStateManager.rows.length, [
           PlutoRow(
             cells: {
@@ -589,74 +665,5 @@ print("gewr");
         },child: const Icon(Icons.add)),
 
     );
-  }
-
-}
-
-
-class _Header extends StatefulWidget {
-  const _Header({
-    required this.stateManager,
-    Key? key,
-  }) : super(key: key);
-
-  final PlutoGridStateManager stateManager;
-
-  @override
-  State<_Header> createState() => _HeaderState();
-}
-
-class _HeaderState extends State<_Header> {
-
-  PlutoGridSelectingMode gridSelectingMode = PlutoGridSelectingMode.row;
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      widget.stateManager.setSelectingMode(gridSelectingMode);
-    });
-  }
-
-
-  void handleRemoveCurrentColumnButton() {
-    final currentColumn = widget.stateManager.currentColumn;
-
-    if (currentColumn == null) {
-      return;
-    }
-
-    widget.stateManager.removeColumns([currentColumn]);
-  }
-
-  void handleRemoveCurrentRowButton() {
-    widget.stateManager.removeCurrentRow();
-    updateTableA();
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return  ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-      onPressed: handleRemoveCurrentRowButton,
-      child: const Text('حذف سطر انتخاب شده',style: TextStyle(color: Colors.black),),
-    );
-  }
-
-  updateTableA() async {
-    Map<String,dynamic> table41 = {};
-    List row = widget.stateManager.rows.map((e) => e.cells['row']?.value).toList();
-    List description = widget.stateManager.rows.map((e) => e.cells['description']?.value).toList();
-    List import_weight = widget.stateManager.rows.map((e) => e.cells['import_weight']?.value).toList();
-    List summary = widget.stateManager.rows.map((e) => e.cells['summary']?.value).toList();
-    table41["row"]=row.toList();
-    table41["description"]=description.toList();
-    table41["import_weight"]=import_weight.toList();
-    table41["summary"]=summary.toList();
-    tableData t = new tableData("تکمیل کارگاه 1", "", "", "",jsonEncode(table41), "", "", "","","","");
-    var respo = await AdminApi.postTable(t);
-
   }
 }
