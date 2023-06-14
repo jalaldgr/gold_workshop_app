@@ -742,34 +742,34 @@ class _Table4ScreenState extends State<Table4Screen> {
     List<PlutoRow> updatedRows42=[];
     for (var i = 0; i < description42.length; i++) {
       if(table42["description"][i]=="متفرقه"){
-        system_balance[i]=otherSumTable3 + popionSumTable5 + wiringSumTable5 + meltingSumTable5+cutSumTable5;
+        system_balance[i]=otherSumTable3 +import_weight[i] - (popionSumTable5 + wiringSumTable5 + meltingSumTable5+cutSumTable5);
       }
       if(table42["description"][i]=="حلقه"){
-        system_balance[i] = ringSumTable3 + ringSumTable5;
+        system_balance[i] =import_weight[i] + ringSumTable3 - ringSumTable5;
       }
       if(table42["description"][i]=="مفتول"){
-        system_balance[i]= caneSumTable5 + wireSumTable3 + wireSumTable5 + pinSumTable5;
+        system_balance[i]=import_weight[i]+wireSumTable3- (caneSumTable5  + wireSumTable5 + pinSumTable5);
       }
       if(table42["description"][i]=="گوی"){
-        system_balance[i] = ballSumTable3+ballSumTable5;
+        system_balance[i] = import_weight[i]+ballSumTable3-ballSumTable5;
       }
       if(table42["description"][i]=="لحیم"){
-        system_balance[i] = solderSumTable3+solderSumTable5;
+        system_balance[i] =import_weight[i] +solderSumTable3-solderSumTable5;
       }
       if(table42["description"][i]=="زنجیر"){
-        system_balance[i] = chainSumTable3 + chainSumTable5;
+        system_balance[i] =import_weight[i] + chainSumTable3 - chainSumTable5;
       }
       if(table42["description"][i]=="تکه زنجیر"){
-        system_balance[i] = piece_chainSumTable3 + piece_chainSumTable5;
+        system_balance[i] =import_weight[i] + piece_chainSumTable3 - piece_chainSumTable5;
       }
       if(table42["description"][i]=="مدبر"){
-        system_balance[i] = lockSumTable3 + lockSumTable5;
+        system_balance[i] =import_weight[i] + lockSumTable3 - lockSumTable5;
       }
       if(table42["description"][i]=="کارساخت"){
-        system_balance[i] = work_madeSumTable3 + half_madeSumTable5;
+        system_balance[i] =import_weight[i] + work_madeSumTable3 - half_madeSumTable5;
       }
       if(table42["description"][i]=="سرسنجاق"){
-        system_balance[i]=pinSumTable5;
+        system_balance[i]=import_weight[i]-pinSumTable5;
       }
       updatedRows42.add(PlutoRow(
         cells: {
