@@ -21,11 +21,11 @@ class _Table4ScreenState extends State<Table4Screen> {
   List<PlutoColumn> gridAColumns = [
 
     PlutoColumn (
-      title: 'ردیف',
-      field: 'row',
-      type: PlutoColumnType.number(),
+        title: 'ردیف',
+        field: 'row',
+        type: PlutoColumnType.number(),
         enableEditingMode: true,
-      width: 100
+        width: 100
     ),
     /// Select Column definition
     PlutoColumn(
@@ -36,29 +36,29 @@ class _Table4ScreenState extends State<Table4Screen> {
         width: 100
     ),
     PlutoColumn(
-        title: 'وزن ورودی',
-        field: 'import_weight',
-        type: PlutoColumnType.number( format: "#.###"),
-        enableEditingMode: true,
-        width: 100,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            format: "#.###",
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
+      title: 'وزن ورودی',
+      field: 'import_weight',
+      type: PlutoColumnType.number( format: "#.###"),
+      enableEditingMode: true,
+      width: 100,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          titleSpanBuilder: (text) {
+            return [
+              const TextSpan(
+                text: 'جمع',
+                style: TextStyle(color: Colors.red),
+              ),
+              const TextSpan(text: ' : '),
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
     ),
     PlutoColumn(
         title: 'توضیحات',
@@ -78,80 +78,80 @@ class _Table4ScreenState extends State<Table4Screen> {
         width: 100
     ),
     PlutoColumn(
-        title: 'مانده واقعی',
-        field: 'real_balance',
-        type: PlutoColumnType.number( format: "#.###"),
-        enableEditingMode: true,
-        width: 120,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            format: "#.###",
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
+      title: 'مانده واقعی',
+      field: 'real_balance',
+      type: PlutoColumnType.number( format: "#.###"),
+      enableEditingMode: true,
+      width: 120,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          titleSpanBuilder: (text) {
+            return [
+              const TextSpan(
+                text: 'جمع',
+                style: TextStyle(color: Colors.red),
+              ),
+              const TextSpan(text: ' : '),
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
     ),
     PlutoColumn(
-        title: 'مانده سیستم',
-        field: 'system_balance',
-        type: PlutoColumnType.number( format: "#.###"),
-        readOnly: true,
-        width: 120,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            format: "#.###",
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
+      title: 'مانده سیستم',
+      field: 'system_balance',
+      type: PlutoColumnType.number( format: "#.###"),
+      readOnly: true,
+      width: 120,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          titleSpanBuilder: (text) {
+            return [
+              const TextSpan(
+                text: 'جمع',
+                style: TextStyle(color: Colors.red),
+              ),
+              const TextSpan(text: ' : '),
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
 
     ),
     PlutoColumn(
-        title: 'اختلاف',
-        field: 'difference',
-        type: PlutoColumnType.number( format: "#.###"),
-        readOnly: true,
-        width: 100,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            format: "#.###",
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
+      title: 'اختلاف',
+      field: 'difference',
+      type: PlutoColumnType.number( format: "#.###"),
+      readOnly: true,
+      width: 100,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          titleSpanBuilder: (text) {
+            return [
+              const TextSpan(
+                text: 'جمع',
+                style: TextStyle(color: Colors.red),
+              ),
+              const TextSpan(text: ' : '),
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
 
     ),
     PlutoColumn(
@@ -551,7 +551,6 @@ class _Table4ScreenState extends State<Table4Screen> {
         },
       ));
     }
-
     gridBStateManager.refRows.clear();
     gridBStateManager.insertRows(0, updatedRows);
     gridBStateManager.setShowLoading(false);
@@ -571,6 +570,7 @@ class _Table4ScreenState extends State<Table4Screen> {
     dynamic table5 =json.decode(tables.table5!);
 
     dynamic cutSumTable5=0;
+    dynamic meltingSumTable5=0;
     dynamic popionSumTable5=0;
     dynamic ringSumTable5=0;
     dynamic chainSumTable5=0;
@@ -586,8 +586,8 @@ class _Table4ScreenState extends State<Table4Screen> {
     dynamic wiringSumTable5=0;
     dynamic final_weightSumTable5=0;
     dynamic burnish_deficiencySumTable5=0;
-
     List cutListTable5=table5["cut"];
+    List meltingListTable5=table5["melting"];
     List popionListTable5=table5["popion"];
     List ringListTable5=table5["ring"];
     List chainListTable5=table5["chain"];
@@ -620,6 +620,8 @@ class _Table4ScreenState extends State<Table4Screen> {
     wiringListTable5.forEach((element) {wiringSumTable5+=element;});
     final_weightListTable5.forEach((element) {final_weightSumTable5+=element;});
     burnish_deficiencyListTable5.forEach((element) {burnish_deficiencySumTable5;});
+    meltingListTable5.forEach((element) {meltingSumTable5+=element;});
+
 
     dynamic descriptionSumTable3=0;
     dynamic otherSumTable3=0;
@@ -699,7 +701,7 @@ class _Table4ScreenState extends State<Table4Screen> {
         work_madeSumTable3 += import_weight[i];
       }
       if(description[i]=="سرسنجاق"){
-      //TODO
+        //TODO
       }
 //formula
       updatedRows.add(PlutoRow(
@@ -719,16 +721,96 @@ class _Table4ScreenState extends State<Table4Screen> {
 
 
     }
-    // update table 41
-    print("other overal is ${otherSumTable3 + caneSumTable5+ wireSumTable5+pinSumTable5}");
-    print("cut sum from table  ${otherSumTable3}");
+
 
 
     gridAStateManager.refRows.clear();
     gridAStateManager.insertRows(0, updatedRows);
-    gridAStateManager.setShowLoading(false);
-    tableData t = new tableData("تکمیل کارگاه 1","","","", jsonEncode(table41),"","", "","","","");
+
+
+
+    List description42 = gridBStateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List real_balance = gridBStateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
+    List system_balance = gridBStateManager.rows.map((e) => e.cells['system_balance']?.value).toList();
+    List difference = gridBStateManager.rows.map((e) => e.cells['difference']?.value).toList();
+    List summary42 = gridBStateManager.rows.map((e) => e.cells['summary']?.value).toList();
+    table42["description"]=description42.toList();
+    table42["real_balance"]=real_balance.toList();
+    table42["system_balance"]=system_balance.toList();
+    table42["difference"]=difference.toList();
+    table42["summary"]=summary42.toList();
+    List<PlutoRow> updatedRows42=[];
+    for (var i = 0; i < description42.length; i++) {
+      if(table42["description"][i]=="متفرقه"){
+        system_balance[i]=otherSumTable3 + popionSumTable5 + wiringSumTable5 + meltingSumTable5+cutSumTable5;
+      }
+      if(table42["description"][i]=="حلقه"){
+        system_balance[i] = ringSumTable3 + ringSumTable5;
+      }
+      if(table42["description"][i]=="مفتول"){
+        system_balance[i]= caneSumTable5 + wireSumTable3 + wireSumTable5 + pinSumTable5;
+      }
+      if(table42["description"][i]=="گوی"){
+        system_balance[i] = ballSumTable3+ballSumTable5;
+      }
+      if(table42["description"][i]=="لحیم"){
+        system_balance[i] = solderSumTable3+solderSumTable5;
+      }
+      if(table42["description"][i]=="زنجیر"){
+        system_balance[i] = chainSumTable3 + chainSumTable5;
+      }
+      if(table42["description"][i]=="تکه زنجیر"){
+        system_balance[i] = piece_chainSumTable3 + piece_chainSumTable5;
+      }
+      if(table42["description"][i]=="مدبر"){
+        system_balance[i] = lockSumTable3 + lockSumTable5;
+      }
+      if(table42["description"][i]=="کارساخت"){
+        system_balance[i] = work_madeSumTable3 + half_madeSumTable5;
+      }
+      if(table42["description"][i]=="سرسنجاق"){
+        system_balance[i]=pinSumTable5;
+      }
+      updatedRows42.add(PlutoRow(
+        cells: {
+          'description': PlutoCell(value:description42[i] ),
+          'real_balance': PlutoCell(value: real_balance[i]),
+          'system_balance': PlutoCell(value: system_balance[i]),
+          'difference': PlutoCell(value: difference[i]),
+          'summary': PlutoCell(value: summary42[i]),
+
+        },
+      ));
+
+    }
+    gridBStateManager.refRows.clear();
+    gridBStateManager.insertRows(0, updatedRows42);
+
+
+
+    tableData t = new tableData("تکمیل کارگاه 1","","", "", jsonEncode(table41),jsonEncode(table42),"", "","","","");
     var respo = await AdminApi.postTable(t);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -750,10 +832,10 @@ class _Table4ScreenState extends State<Table4Screen> {
         iconTheme: IconThemeData(color: Colors.black87),
         backgroundColor: widget.headerColor?? Colors.pink,
         actions: [IconButton(tooltip: "حذف سطر انتخاب شده",
-          onPressed: (){
-          gridAStateManager.removeCurrentRow();
-          updateTable();
-          }, icon: Icon(Icons.delete_forever))],
+            onPressed: (){
+              gridAStateManager.removeCurrentRow();
+              updateTable();
+            }, icon: Icon(Icons.delete_forever))],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -785,40 +867,40 @@ class _Table4ScreenState extends State<Table4Screen> {
         ),
 
 
-         gridPropsB:
-         PlutoDualGridProps(
-           columns: gridBColumns,
-           rows: gridBRows,
-           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
-           onChanged: (event)  {
-           calculateTableB();
-           },
-           onLoaded: (PlutoGridOnLoadedEvent event) {
-             gridBStateManager = event.stateManager;
-           },
+        gridPropsB:
+        PlutoDualGridProps(
+          columns: gridBColumns,
+          rows: gridBRows,
+          configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
+          onChanged: (event)  {
+            calculateTableB();
+          },
+          onLoaded: (PlutoGridOnLoadedEvent event) {
+            gridBStateManager = event.stateManager;
+          },
 
 
-         )
+        )
 
         ,),
       floatingActionButton: FloatingActionButton(tooltip: "افزوردن سطر جدید",
           onPressed: () async {
-        gridAStateManager.insertRows(gridAStateManager.rows.length, [
-          PlutoRow(
-            cells: {
-              'row': PlutoCell(value: gridAStateManager.rows.length+1),
-              'description': PlutoCell(value: 'متفرقه'),
-              'import_weight': PlutoCell(value: 0),
-              'summary': PlutoCell(value: ""),
+            gridAStateManager.insertRows(gridAStateManager.rows.length, [
+              PlutoRow(
+                cells: {
+                  'row': PlutoCell(value: gridAStateManager.rows.length+1),
+                  'description': PlutoCell(value: 'متفرقه'),
+                  'import_weight': PlutoCell(value: 0),
+                  'summary': PlutoCell(value: ""),
 
 
-            },
-          ),
-        ]);
-        updateTable();
+                },
+              ),
+            ]);
+            updateTable();
 
 
-        },child: const Icon(Icons.add)),
+          },child: const Icon(Icons.add)),
 
     );
   }
