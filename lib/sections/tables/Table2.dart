@@ -257,6 +257,10 @@ class _Table2ScreenState extends State<Table2Screen> {
    }
 
   calculateTable() async {
+    var tables = await AdminApi.getTable();
+    dynamic table6 =json.decode(tables.table6!);
+    dynamic table2 =json.decode(tables.table2!);
+    table6["cut_deficiency"]=0;
 
     stateManager.setShowLoading(true);
     List rowNumber = stateManager.rows.map((e) => e.cells['row']?.value).toList();
@@ -290,6 +294,7 @@ class _Table2ScreenState extends State<Table2Screen> {
       }else if (i == 1) {// if row 2
         final_balance[i] = import[i]-export[i]+final_balance[i-1];
         balance[i] = final_balance[i]-real_balance[i];
+        difference[i] = balance[i];
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value: rowNumber[i]),
@@ -302,6 +307,7 @@ class _Table2ScreenState extends State<Table2Screen> {
             'difference': PlutoCell(value: balance[i]),
           },
         ));
+        table6["cut_deficiency"] +=difference[i];
       }else if(i==2){ // row is greater than 2
         final_balance[i] = import[i]-export[i]+final_balance[i-1];
         balance[i] = final_balance[i]-real_balance[i];
@@ -318,6 +324,7 @@ class _Table2ScreenState extends State<Table2Screen> {
             'difference': PlutoCell(value: difference[i]),
           },
         ));
+        table6["cut_deficiency"] +=difference[i];
       }else{
         difference[i] = balance[i]+difference[i-1];
         balance[i] = final_balance[i]-real_balance[i];
@@ -334,12 +341,25 @@ class _Table2ScreenState extends State<Table2Screen> {
             'difference': PlutoCell(value: difference[i]),
           },
         ));
+        table6["cut_deficiency"] +=difference[i];
       }
+// update table
+      table2["row"][i]=rowNumber[i];
+      table2["description"][i]=description[i];
+      table2["import"][i]=import[i];
+      table2["export"][i]=export[i];
+      table2["final_balance"][i]=final_balance[i];
+      table2["real_balance"][i]=real_balance[i];
+      table2["balance"][i]=balance[i];
+      table2["difference"][i]=difference[i];
 
     }
+
     stateManager.refRows.clear();
     stateManager.insertRows(0, updatedRows);
     stateManager.setShowLoading(false);
+    tableData t = new tableData("تکمیل کارگاه 1","",jsonEncode(table2), "","", "","",  jsonEncode(table6),"","","");
+    var respo = await AdminApi.postTable(t);
 
   }
 
@@ -425,7 +445,6 @@ class _Table2ScreenState extends State<Table2Screen> {
 
             }else if(event.column.readOnly==false){
               calculateTable();
-              updateTable();
             }
 
           },
@@ -449,6 +468,7 @@ class _Table2ScreenState extends State<Table2Screen> {
               }
             )
           ]);
+        updateTable();
         },child: const Icon(Icons.add)),
 
     );
