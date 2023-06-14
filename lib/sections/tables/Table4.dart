@@ -463,6 +463,7 @@ class _Table4ScreenState extends State<Table4Screen> {
       gridAStateManager.setShowLoading(true);
 
       dynamic table1 =json.decode(tables.table41!);
+      print(table1);
       List rowNumber = table1["row"];
       List description = table1["description"];
       List import_weight = table1["import_weight"];
@@ -570,6 +571,9 @@ class _Table4ScreenState extends State<Table4Screen> {
     dynamic table3 =json.decode(tables.table3!);
     dynamic table5 =json.decode(tables.table5!);
 
+    ///////fields//////
+    dynamic otherOveral=0;
+
     print("table 5 is : ${table5}");
     print("table 3 is : ${table3}");
 //     print(table3);
@@ -581,6 +585,12 @@ class _Table4ScreenState extends State<Table4Screen> {
     List summary = gridAStateManager.rows.map((e) => e.cells['summary']?.value).toList();
     List<PlutoRow> updatedRows=[];
     for (var i = 0; i < row.length; i++) {
+
+      if(description[i]=="متفرقه"){
+        print(description[i]);
+        otherOveral += import_weight[i];
+
+      }
 //formula
       updatedRows.add(PlutoRow(
         cells: {
@@ -596,7 +606,13 @@ class _Table4ScreenState extends State<Table4Screen> {
       table41["import_weight"][i]=import_weight[i];
       table41["summary"][i]=summary[i];
 
+
+
     }
+    // update table 41
+    print("other overal is ${otherOveral}");
+
+
     gridAStateManager.refRows.clear();
     gridAStateManager.insertRows(0, updatedRows);
     gridAStateManager.setShowLoading(false);
