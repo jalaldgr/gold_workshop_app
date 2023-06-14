@@ -36,48 +36,156 @@ class _Table2ScreenState extends State<Table2Screen> {
     PlutoColumn(
         title: 'ورود',
         field: 'import',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
 
 
     ),
     PlutoColumn(
         title: 'خروج',
         field: 'export',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 100,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
 
 
     ),
     PlutoColumn(
         title: 'مانده نهایی',
         field: 'final_balance',
-        type: PlutoColumnType.number(),
-        width: 200,
-        readOnly: true
+        type: PlutoColumnType.number(format: "#.###"),
+        width: 120,
+        readOnly: true,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'مانده واقعی',
         field: 'real_balance',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100
+        width: 120,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'مانده',
         field: 'balance',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         width: 100,
-        readOnly: true
+        readOnly: true,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
     PlutoColumn(
         title: 'اختلاف',
         field: 'difference',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 150
+        width: 150,
+        footerRenderer: (rendererContext) {
+          return PlutoAggregateColumnFooter(
+            format: "#.###",
+            rendererContext: rendererContext,
+            type: PlutoAggregateColumnType.sum,
+            alignment: Alignment.center,
+            titleSpanBuilder: (text) {
+              return [
+                const TextSpan(
+                  text: 'جمع',
+                  style: TextStyle(color: Colors.red),
+                ),
+                const TextSpan(text: ' : '),
+                TextSpan(text: text),
+              ];
+            },
+          );
+        },
     ),
   ];
 
@@ -277,7 +385,11 @@ class _Table2ScreenState extends State<Table2Screen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
         backgroundColor: widget.headerColor??Colors.pink,
-        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.refresh))],
+        actions: [IconButton(tooltip: "حذف سطر انتخاب شده",
+       onPressed: (){
+          stateManager.removeCurrentRow();
+          updateTable();
+        }, icon: Icon(Icons.delete_forever))],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -288,12 +400,12 @@ class _Table2ScreenState extends State<Table2Screen> {
                 fontWeight: FontWeight.bold,
                 fontSize: 22.0)),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: Container(
         padding: const EdgeInsets.all(15),
         child: PlutoGrid(
           columns: columns,
           rows: rows,
-          createHeader:  (stateManager) => _Header(stateManager: stateManager),
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
             fetchTable();
@@ -306,7 +418,8 @@ class _Table2ScreenState extends State<Table2Screen> {
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
+      floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",
+          onPressed: () async {
         stateManager.insertRows(stateManager.rows.length, [
             PlutoRow(
               cells: {
@@ -329,54 +442,3 @@ class _Table2ScreenState extends State<Table2Screen> {
 
 }
 
-
-class _Header extends StatefulWidget {
-  const _Header({
-    required this.stateManager,
-    Key? key,
-  }) : super(key: key);
-
-  final PlutoGridStateManager stateManager;
-
-  @override
-  State<_Header> createState() => _HeaderState();
-}
-
-class _HeaderState extends State<_Header> {
-
-  PlutoGridSelectingMode gridSelectingMode = PlutoGridSelectingMode.row;
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      widget.stateManager.setSelectingMode(gridSelectingMode);
-    });
-  }
-
-
-  void handleRemoveCurrentColumnButton() {
-    final currentColumn = widget.stateManager.currentColumn;
-
-    if (currentColumn == null) {
-      return;
-    }
-
-    widget.stateManager.removeColumns([currentColumn]);
-  }
-
-  void handleRemoveCurrentRowButton() {
-    widget.stateManager.removeCurrentRow();
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return  ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-      onPressed: handleRemoveCurrentRowButton,
-      child: const Text('حذف سطر انتخاب شده',style: TextStyle(color: Colors.black),),
-    );
-  }
-}
