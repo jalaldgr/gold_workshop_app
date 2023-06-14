@@ -652,7 +652,15 @@ class _Table4ScreenState extends State<Table4Screen> {
     piece_chainListTable3.forEach((element) {piece_chainSumTable3+=element;});
     lockListTable3.forEach((element) {lockSumTable3+=element;});
     work_madeListTable3.forEach((element) {work_madeSumTable3+=element;});
-
+    if(otherSumTable3<0)otherSumTable3=otherSumTable3*-1;
+    if(ringSumTable3<0)ringSumTable3=ringSumTable3*-1;
+    if(wireSumTable3<0)wireSumTable3=wireSumTable3*-1;
+    if(ballSumTable3<0)ballSumTable3=ballSumTable3*-1;
+    if(solderSumTable3<0)solderSumTable3=solderSumTable3*-1;
+    if(chainSumTable3<0)chainSumTable3=chainSumTable3*-1;
+    if(piece_chainSumTable3<0)piece_chainSumTable3=piece_chainSumTable3*-1;
+    if(lockSumTable3<0)lockSumTable3=lockSumTable3*-1;
+    if(work_madeSumTable3<0)work_madeSumTable3=work_madeSumTable3*-1;
 
 
 
@@ -665,7 +673,33 @@ class _Table4ScreenState extends State<Table4Screen> {
 
       if(description[i]=="متفرقه"){
         otherSumTable3 += import_weight[i];
-
+      }
+      if(description[i]=="حلقه"){
+        ringSumTable3 += import_weight[i];
+      }
+      if(description[i]=="مفتول"){
+        wireSumTable3 += import_weight[i];
+      }
+      if(description[i]=="گوی"){
+        ballSumTable3 += import_weight[i];
+      }
+      if(description[i]=="لحیم"){
+        solderSumTable3 += import_weight[i];
+      }
+      if(description[i]=="زنجیر"){
+        chainSumTable3 += import_weight[i];
+      }
+      if(description[i]=="تکه زنجیر"){
+        piece_chainSumTable3 += import_weight[i];
+      }
+      if(description[i]=="مدبر"){
+        lockSumTable3 += import_weight[i];
+      }
+      if(description[i]=="کارساخت"){
+        work_madeSumTable3 += import_weight[i];
+      }
+      if(description[i]=="سرسنجاق"){
+      //TODO
       }
 //formula
       updatedRows.add(PlutoRow(
@@ -686,8 +720,8 @@ class _Table4ScreenState extends State<Table4Screen> {
 
     }
     // update table 41
-    print("other overal is ${otherSumTable3}");
-    print("cut sum from table 5 ${cutSumTable5}");
+    print("other overal is ${otherSumTable3 + caneSumTable5+ wireSumTable5+pinSumTable5}");
+    print("cut sum from table  ${otherSumTable3}");
 
 
     gridAStateManager.refRows.clear();
