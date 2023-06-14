@@ -461,7 +461,9 @@ class _Table4ScreenState extends State<Table4Screen> {
 
     if(tables.table41!.length>10){
       gridAStateManager.setShowLoading(true);
+
       dynamic table1 =json.decode(tables.table41!);
+      print(table1);
       List rowNumber = table1["row"];
       List description = table1["description"];
       List import_weight = table1["import_weight"];
@@ -521,8 +523,11 @@ class _Table4ScreenState extends State<Table4Screen> {
   }
 
 
-  calculateTable()async{
-    Map<String,dynamic> table42 = {};
+  calculateTableB()async{
+    var tables = await AdminApi.getTable();
+    dynamic table41 =json.decode(tables.table41!);
+    dynamic table42 =json.decode(tables.table42!);
+
     List description42 = gridBStateManager.rows.map((e) => e.cells['description']?.value).toList();
     List real_balance = gridBStateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
     List system_balance = gridBStateManager.rows.map((e) => e.cells['system_balance']?.value).toList();
@@ -533,8 +538,6 @@ class _Table4ScreenState extends State<Table4Screen> {
     table42["system_balance"]=system_balance.toList();
     table42["difference"]=difference.toList();
     table42["summary"]=summary42.toList();
-
-
     List<PlutoRow> updatedRows=[];
     for (var i = 0; i < description42.length; i++) {
       difference[i] = real_balance[i] - system_balance[i];
@@ -554,8 +557,50 @@ class _Table4ScreenState extends State<Table4Screen> {
     gridBStateManager.insertRows(0, updatedRows);
     gridBStateManager.setShowLoading(false);
 
+    tableData t = new tableData("تکمیل کارگاه 1","","", "", jsonEncode(table41),jsonEncode(table42),"", "","","","");
+    var respo = await AdminApi.postTable(t);
+
+
 
   }
+
+  calculateTableA()async{
+    var tables = await AdminApi.getTable();
+    dynamic table41 =json.decode(tables.table41!);
+
+
+    List row = gridAStateManager.rows.map((e) => e.cells['row']?.value).toList();
+    List description = gridAStateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List import_weight = gridAStateManager.rows.map((e) => e.cells['import_weight']?.value).toList();
+    List summary = gridAStateManager.rows.map((e) => e.cells['summary']?.value).toList();
+    List<PlutoRow> updatedRows=[];
+    for (var i = 0; i < row.length; i++) {
+//formula
+      updatedRows.add(PlutoRow(
+        cells: {
+          'row': PlutoCell(value:row[i] ),
+          'description': PlutoCell(value: description[i]),
+          'import_weight': PlutoCell(value: import_weight[i]),
+          'summary': PlutoCell(value: summary[i]),
+        },
+      ));
+      //update table41
+      table41["row"][i]=row[i];
+      table41["description"][i]=description[i];
+      table41["import_weight"][i]=import_weight[i];
+      table41["summary"][i]=summary[i];
+
+    }
+    gridAStateManager.refRows.clear();
+    gridAStateManager.insertRows(0, updatedRows);
+    gridAStateManager.setShowLoading(false);
+    tableData t = new tableData("تکمیل کارگاه 1","","","", jsonEncode(table41),"","", "","","","");
+    var respo = await AdminApi.postTable(t);
+
+
+
+  }
+
 
 
   @override
@@ -600,8 +645,7 @@ class _Table4ScreenState extends State<Table4Screen> {
           onChanged: (PlutoGridOnChangedEvent event) {
 
             if(event.column.readOnly==false){
-              calculateTable();
-              updateTable();
+              calculateTableA();
             }
 
           },
@@ -614,8 +658,7 @@ class _Table4ScreenState extends State<Table4Screen> {
            rows: gridBRows,
            configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
            onChanged: (event)  {
-           calculateTable();
-             updateTable();
+           calculateTableB();
            },
            onLoaded: (PlutoGridOnLoadedEvent event) {
              gridBStateManager = event.stateManager;
@@ -639,33 +682,8 @@ class _Table4ScreenState extends State<Table4Screen> {
             },
           ),
         ]);
-        Map<String,dynamic> table41 = {};
-        List row = gridAStateManager.rows.map((e) => e.cells['row']?.value).toList();
-        List description = gridAStateManager.rows.map((e) => e.cells['description']?.value).toList();
-        List import_weight = gridAStateManager.rows.map((e) => e.cells['import_weight']?.value).toList();
-        List summary = gridAStateManager.rows.map((e) => e.cells['summary']?.value).toList();
-        table41["row"]=row.toList();
-        table41["description"]=description.toList();
-        table41["import_weight"]=import_weight.toList();
-        table41["summary"]=summary.toList();
-        tableData t = new tableData("تکمیل کارگاه 1", "", "", "",jsonEncode(table41), "", "", "","","","");
-        var respo = await AdminApi.postTable(t);
+        updateTable();
 
-
-
-        Map<String,dynamic> table42 = {};
-        List description42 = gridBStateManager.rows.map((e) => e.cells['description']?.value).toList();
-        List real_balance = gridBStateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
-        List system_balance = gridBStateManager.rows.map((e) => e.cells['system_balance']?.value).toList();
-        List difference = gridBStateManager.rows.map((e) => e.cells['difference']?.value).toList();
-        List summary42 = gridBStateManager.rows.map((e) => e.cells['summary']?.value).toList();
-        table42["description"]=description42.toList();
-        table42["real_balance"]=real_balance.toList();
-        table42["system_balance"]=system_balance.toList();
-        table42["difference"]=difference.toList();
-        table42["summary"]=summary42.toList();
-        tableData t42 = new tableData("تکمیل کارگاه 1", "", "", "","", jsonEncode(table42), "", "","","","");
-        var respo42 = await AdminApi.postTable(t42);
 
         },child: const Icon(Icons.add)),
 
