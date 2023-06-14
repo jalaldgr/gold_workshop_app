@@ -294,6 +294,7 @@ class _Table1ScreenState extends State<Table1Screen> {
   calculateTable() async {
 
     var tables = await AdminApi.getTable();
+    dynamic table1 =json.decode(tables.table1!);
     dynamic table6 =json.decode(tables.table6!);
     dynamic table2 =json.decode(tables.table2!);
 
@@ -312,11 +313,22 @@ class _Table1ScreenState extends State<Table1Screen> {
 
       List<PlutoRow> updatedRows=[];
       for (var i = 0; i < rows.length; i++) {
-        table2["export"][2]+=final_differences[i];
-        table6["melt_deficiency"]+=final_differences[i];
+        // update this table
         consumptions_load_and_others[i] = others[i]+consumption_loads[i];
         differences[i] = consumptions_load_and_others[i]-after_melts[i];
         final_differences[i] = others[i]-after_pagings[i];
+
+        table1["row"][i] = rows[i];
+        table1["other"][i] = others[i];
+        table1["consumption_load"][i] = consumption_loads[i];
+        table1["consumptions_load_and_other"][i] = consumptions_load_and_others[i];
+        table1["after_melt"][i] = after_melts[i];
+        table1["difference"][i] = differences[i];
+        table1["after_paging"][i] = after_pagings[i];
+        table1["final_difference"][i] = final_differences[i];
+        //update other tables
+        table2["export"][2]+=final_differences[i];
+        table6["melt_deficiency"]+=final_differences[i];
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value:rows[i] ),
@@ -332,10 +344,14 @@ class _Table1ScreenState extends State<Table1Screen> {
         ));
       }
 
-      stateManager.refRows.clear();
+
+    stateManager.refRows.clear();
       stateManager.insertRows(0, updatedRows);
       stateManager.setShowLoading(false);
-      tableData t = new tableData("تکمیل کارگاه 1", "", jsonEncode(table2), "","", "","",  jsonEncode(table6),"","","");
+
+
+
+      tableData t = new tableData("تکمیل کارگاه 1",jsonEncode(table1), jsonEncode(table2), "","", "","",  jsonEncode(table6),"","","");
       var respo = await AdminApi.postTable(t);
   }
 
@@ -357,10 +373,8 @@ class _Table1ScreenState extends State<Table1Screen> {
         actions: [
           SizedBox(width: 32,),
           IconButton(onPressed: (){
-            setState(() {
               stateManager.removeCurrentRow();
               updateTable();
-            });
 
           }, icon: Icon(Icons.delete_forever),tooltip: "حذف سطر انتخاب شده"),
 
@@ -389,7 +403,6 @@ class _Table1ScreenState extends State<Table1Screen> {
           onChanged: (PlutoGridOnChangedEvent event) {
             if(event.column.readOnly==false){
               calculateTable();
-              updateTable();
             }
           },
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
@@ -411,6 +424,7 @@ class _Table1ScreenState extends State<Table1Screen> {
             },
           ),
         ]);
+        updateTable();
 
 
 
