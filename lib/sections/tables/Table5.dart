@@ -845,6 +845,8 @@ class _Table5ScreenState extends State<Table5Screen> {
           table2["export"][1] +=cut_deficiency[i] ;
 
         }
+        table6["burnish_deficiency"]+=burnish_deficiency[i];
+        table6["daily_melt"]+=melting[i];
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value:rows[i] ),
