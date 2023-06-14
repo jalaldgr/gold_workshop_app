@@ -463,7 +463,6 @@ class _Table4ScreenState extends State<Table4Screen> {
       gridAStateManager.setShowLoading(true);
 
       dynamic table1 =json.decode(tables.table41!);
-      print(table1);
       List rowNumber = table1["row"];
       List description = table1["description"];
       List import_weight = table1["import_weight"];
@@ -571,12 +570,90 @@ class _Table4ScreenState extends State<Table4Screen> {
     dynamic table3 =json.decode(tables.table3!);
     dynamic table5 =json.decode(tables.table5!);
 
-    ///////fields//////
-    dynamic otherOveral=0;
+    dynamic cutSumTable5=0;
+    dynamic popionSumTable5=0;
+    dynamic ringSumTable5=0;
+    dynamic chainSumTable5=0;
+    dynamic piece_chainSumTable5=0;
+    dynamic caneSumTable5=0;
+    dynamic lockSumTable5=0;
+    dynamic wireSumTable5=0;
+    dynamic solderSumTable5=0;
+    dynamic ballSumTable5=0;
+    dynamic pinSumTable5=0;
+    dynamic ring2SumTable5=0;
+    dynamic half_madeSumTable5=0;
+    dynamic wiringSumTable5=0;
+    dynamic final_weightSumTable5=0;
+    dynamic burnish_deficiencySumTable5=0;
 
-    print("table 5 is : ${table5}");
-    print("table 3 is : ${table3}");
-//     print(table3);
+    List cutListTable5=table5["cut"];
+    List popionListTable5=table5["popion"];
+    List ringListTable5=table5["ring"];
+    List chainListTable5=table5["chain"];
+    List piece_chainListTable5=table5["piece_chain"];
+    List caneListTable5=table5["cane"];
+    List lockListTable5=table5["lock"];
+    List wireListTable5=table5["wire"];
+    List solderListTable5=table5["solder"];
+    List ballListTable5=table5["ball"];
+    List pinListTable5=table5["pin"];
+    List ring2ListTable5=table5["ring2"];
+    List half_madeListTable5=table5["half_made"];
+    List wiringListTable5=table5["wiring"];
+    List final_weightListTable5=table5["final_weight"];
+    List burnish_deficiencyListTable5=table5["burnish_deficiency"];
+
+    cutListTable5.forEach((element) {cutSumTable5+=element;});
+    popionListTable5.forEach((element) {popionSumTable5+=element;});
+    ringListTable5.forEach((element) {ringSumTable5+=element;});
+    chainListTable5.forEach((element) {chainSumTable5+=element;});
+    piece_chainListTable5.forEach((element) {piece_chainSumTable5+=element;});
+    caneListTable5.forEach((element) {caneSumTable5+=element;});
+    lockListTable5.forEach((element) {lockSumTable5+=element;});
+    wireListTable5.forEach((element) {wireSumTable5+=element;});
+    solderListTable5.forEach((element) {solderSumTable5+=element;});
+    ballListTable5.forEach((element) {ballSumTable5+=element;});
+    pinListTable5.forEach((element) {pinSumTable5+=element;});
+    ring2ListTable5.forEach((element) {ring2SumTable5+=element;});
+    half_madeListTable5.forEach((element) {half_madeSumTable5+=element;});
+    wiringListTable5.forEach((element) {wiringSumTable5+=element;});
+    final_weightListTable5.forEach((element) {final_weightSumTable5+=element;});
+    burnish_deficiencyListTable5.forEach((element) {burnish_deficiencySumTable5;});
+
+    dynamic descriptionSumTable3=0;
+    dynamic otherSumTable3=0;
+    dynamic ringSumTable3=0;
+    dynamic wireSumTable3=0;
+    dynamic ballSumTable3=0;
+    dynamic solderSumTable3=0;
+    dynamic chainSumTable3=0;
+    dynamic piece_chainSumTable3=0;
+    dynamic lockSumTable3=0;
+    dynamic work_madeSumTable3=0;
+
+    List descriptionListTable3=table3["description"];
+    List otherListTable3=table3["other"];
+    List ringListTable3=table3["ring"];
+    List wireListTable3=table3["wire"];
+    List ballListTable3=table3["ball"];
+    List solderListTable3=table3["solder"];
+    List chainListTable3=table3["chain"];
+    List piece_chainListTable3=table3["piece_chain"];
+    List lockListTable3=table3["lock"];
+    List work_madeListTable3=table3["work_made"];
+
+    otherListTable3.forEach((element) {otherSumTable3+=element;});
+    ringListTable3.forEach((element) {ringSumTable3+=element;});
+    wireListTable3.forEach((element) {wireSumTable3+=element;});
+    ballListTable3.forEach((element) {ballSumTable3+=element;});
+    solderListTable3.forEach((element) {solderSumTable3+=element;});
+    chainListTable3.forEach((element) {chainSumTable3+=element;});
+    piece_chainListTable3.forEach((element) {piece_chainSumTable3+=element;});
+    lockListTable3.forEach((element) {lockSumTable3+=element;});
+    work_madeListTable3.forEach((element) {work_madeSumTable3+=element;});
+
+
 
 
     List row = gridAStateManager.rows.map((e) => e.cells['row']?.value).toList();
@@ -587,8 +664,7 @@ class _Table4ScreenState extends State<Table4Screen> {
     for (var i = 0; i < row.length; i++) {
 
       if(description[i]=="متفرقه"){
-        print(description[i]);
-        otherOveral += import_weight[i];
+        otherSumTable3 += import_weight[i];
 
       }
 //formula
@@ -610,7 +686,8 @@ class _Table4ScreenState extends State<Table4Screen> {
 
     }
     // update table 41
-    print("other overal is ${otherOveral}");
+    print("other overal is ${otherSumTable3}");
+    print("cut sum from table 5 ${cutSumTable5}");
 
 
     gridAStateManager.refRows.clear();
