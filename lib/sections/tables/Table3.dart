@@ -511,7 +511,7 @@ class _Table3ScreenState extends State<Table3Screen> {
           configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig()),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",
           onPressed: () async {
         stateManager.insertRows(stateManager.rows.length, [
           PlutoRow(
