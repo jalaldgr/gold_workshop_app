@@ -67,18 +67,7 @@ class _DesignerHomeScreenState extends State<DesignerHomeScreen> {
                             },
                             child: Text("سفارش ها",style: TextStyle(fontSize: 32),)),
                       )),
-                  Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.all(32),
-                        child: OutlinedButton(
-                            onPressed: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => Workshop1OrdersList()));
-                            },
-                            child: Text("جدول ها",style: TextStyle(fontSize: 32),)),
-                      ))        ])));
+                        ])));
   }
 
   logOut() async {
