@@ -60,7 +60,7 @@ class Workshop2Api {
   static Future<String> SendOrderFileWorkshop2(orderData order) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
-    var stringResponse="no response";
+    var stringResponse="default response";
     var uri = Uri.parse('${dotenv.env['API_URL']}/workshop2/send-file/${order.id}/workshop2File/');
     var request2 = http.MultipartRequest('POST', uri)
       ..headers.addAll({'Authorization': 'Bearer $token'});

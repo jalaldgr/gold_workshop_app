@@ -224,7 +224,7 @@ class AdminApi {
   static Future<String> updateOrder(orderData order) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
-    var stringResponse="no response";
+    var stringResponse="default response";
     var uri = Uri.parse('${dotenv.env['API_URL']}/admin/update-order/${order.id}');
     var request2 = http.MultipartRequest('POST', uri)
       ..headers.addAll({'Authorization': 'Bearer $token'});
@@ -248,7 +248,7 @@ class AdminApi {
   static Future<String> addOrder(orderData order) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
-    var stringResponse="no response";
+    var stringResponse="default response";
     var uri = Uri.parse('${dotenv.env['API_URL']}/admin/create-order');
     var request2 = http.MultipartRequest('POST', uri)
       ..headers.addAll({'Authorization': 'Bearer $token'});

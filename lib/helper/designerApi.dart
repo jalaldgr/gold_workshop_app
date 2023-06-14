@@ -60,7 +60,7 @@ class DesignerApi {
   static Future<String> SendOrderFileDesigner(orderData order) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
-    var stringResponse="no response";
+    var stringResponse="default response";
     var uri = Uri.parse('${dotenv.env['API_URL']}/designer/send-file/${order.id}/designerFile/');
     var request2 = http.MultipartRequest('POST', uri)
       ..headers.addAll({'Authorization': 'Bearer $token'});
