@@ -504,7 +504,6 @@ class _Table3ScreenState extends State<Table3Screen> {
             fetchTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
-            print(event);
             calculateTable();
             updateTable();
           },
@@ -532,8 +531,7 @@ class _Table3ScreenState extends State<Table3Screen> {
             },
           ),
         ]);
-
-
+        updateTable();
       },child: const Icon(Icons.add)),
 
     );
