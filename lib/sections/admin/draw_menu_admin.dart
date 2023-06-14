@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gold_workshop/sections/admin/designers/designersList.dart';
 import 'package:gold_workshop/sections/admin/profile.dart';
 import 'package:gold_workshop/sections/admin/workshop1/wokshop1List.dart';
+import 'package:gold_workshop/sections/tables/tablesArchiveList.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../login.dart';
@@ -84,22 +85,13 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                               ),
                               ListTile(
                                 leading: Icon(Icons.account_box),
-                                title: Text("جدول های روزانه"),
-                                trailing: Icon(Icons.chevron_right),
-                                onTap: (){
-
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Table1Screen(headerColor: Colors.pink,)));
-                                },
-                              ),
-                              ListTile(
-                                leading: Icon(Icons.account_box),
                                 title: Text("آرشیو جدول های روزانه"),
                                 trailing: Icon(Icons.chevron_right),
                                 onTap: (){
-
+                                Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                builder: (context) => TableArchiveListScreen()));
                                 },
                               ),
                               ListTile(
