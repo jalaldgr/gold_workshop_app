@@ -128,8 +128,9 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                               InkWell(onTap: (){
                                 launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"));
 
-                              },child: Expanded(child: 
-                              FadeInImage(width:256,image: NetworkImage("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"), placeholder: AssetImage("assets/images/placeholder.png"),)),),
+                              },child: Expanded(child:
+                              Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}",width: 256,),
+                              ),),
                               Expanded(child:
                               Column(children: [
                                 Row(
