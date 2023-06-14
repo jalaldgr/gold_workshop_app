@@ -463,7 +463,6 @@ class _Table4ScreenState extends State<Table4Screen> {
       gridAStateManager.setShowLoading(true);
 
       dynamic table1 =json.decode(tables.table41!);
-      print(table1);
       List rowNumber = table1["row"];
       List description = table1["description"];
       List import_weight = table1["import_weight"];
@@ -567,6 +566,13 @@ class _Table4ScreenState extends State<Table4Screen> {
   calculateTableA()async{
     var tables = await AdminApi.getTable();
     dynamic table41 =json.decode(tables.table41!);
+    dynamic table42 =json.decode(tables.table42!);
+    dynamic table3 =json.decode(tables.table3!);
+    dynamic table5 =json.decode(tables.table5!);
+
+    print("table 5 is : ${table5}");
+    print("table 3 is : ${table3}");
+//     print(table3);
 
 
     List row = gridAStateManager.rows.map((e) => e.cells['row']?.value).toList();
