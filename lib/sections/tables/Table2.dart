@@ -260,7 +260,7 @@ class _Table2ScreenState extends State<Table2Screen> {
     var tables = await AdminApi.getTable();
     dynamic table6 =json.decode(tables.table6!);
     dynamic table2 =json.decode(tables.table2!);
-    table6["cut_deficiency"]=0;
+    table6["cut_deference"]=0;
 
     stateManager.setShowLoading(true);
     List rowNumber = stateManager.rows.map((e) => e.cells['row']?.value).toList();
@@ -307,7 +307,7 @@ class _Table2ScreenState extends State<Table2Screen> {
             'difference': PlutoCell(value: balance[i]),
           },
         ));
-        table6["cut_deficiency"] +=difference[i];
+        table6["cut_deference"] +=difference[i];
       }else if(i==2){ // row is greater than 2
         final_balance[i] = import[i]-export[i]+final_balance[i-1];
         balance[i] = final_balance[i]-real_balance[i];
@@ -324,7 +324,7 @@ class _Table2ScreenState extends State<Table2Screen> {
             'difference': PlutoCell(value: difference[i]),
           },
         ));
-        table6["cut_deficiency"] +=difference[i];
+        table6["cut_deference"] +=difference[i];
       }else{
         difference[i] = balance[i]+difference[i-1];
         balance[i] = final_balance[i]-real_balance[i];
@@ -341,7 +341,7 @@ class _Table2ScreenState extends State<Table2Screen> {
             'difference': PlutoCell(value: difference[i]),
           },
         ));
-        table6["cut_deficiency"] +=difference[i];
+        table6["cut_deference"] +=difference[i];
       }
 // update table
       table2["row"][i]=rowNumber[i];
