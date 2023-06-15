@@ -46,7 +46,8 @@ class _DesignersListState extends State<DesignersList> {
       ),
       drawer: SideMenuAdmin(),
       backgroundColor: Colors.white,
-      body: Center(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        body: Center(
         child: FutureBuilder(
           future: AdminApi.getDesigners(),
           builder: (BuildContext context,

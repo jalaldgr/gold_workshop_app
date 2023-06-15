@@ -51,6 +51,7 @@ class _OrdersListState extends State<OrdersList> {
         ),
         drawer: SideMenuAdmin(),
         backgroundColor: Colors.white,
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         body:SingleChildScrollView(child:
           Stack(
             children: [

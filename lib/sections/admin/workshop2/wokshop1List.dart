@@ -44,7 +44,8 @@ class _Workshop2sListState extends State<Workshop2sList> {
       ),
       drawer: SideMenuAdmin(),
       backgroundColor: Colors.white,
-      body: Center(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        body: Center(
         child: FutureBuilder(
           future: AdminApi.getWorkshop2s(),
           builder: (BuildContext context,

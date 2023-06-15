@@ -117,7 +117,8 @@ class _AdminProfileScreenState extends State<AdminProfileScreen> {
       ),
       drawer: SideMenuAdmin(),
       backgroundColor: Colors.white,
-      body: Center(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        body: Center(
         child: FutureBuilder(
             future: fetchUserData(),
             builder: (BuildContext context, AsyncSnapshot<userData> snapshot) =>

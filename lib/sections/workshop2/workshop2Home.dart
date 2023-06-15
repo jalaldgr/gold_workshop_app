@@ -59,6 +59,7 @@ class _Workshop2HomeScreenState extends State<Workshop2HomeScreen> {
         ),
         backgroundColor: Colors.white,
         drawer: SideMenuWorkshop2(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         body: Center(
             child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[

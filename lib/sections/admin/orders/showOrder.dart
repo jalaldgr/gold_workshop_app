@@ -161,6 +161,7 @@ class ShowOrderScreenState extends State<ShowOrderScreen> {
                   fontWeight: FontWeight.bold,
                   fontSize: 22.0)),
         ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         body: Container(
           decoration: BoxDecoration(color: Colors.white38),
           child:Form(

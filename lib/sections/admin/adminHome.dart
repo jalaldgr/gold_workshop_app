@@ -62,6 +62,7 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
           backgroundColor: Colors.pink,
         ),
         backgroundColor: Colors.white,
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: Center(
           child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -118,7 +118,8 @@ class _Workshop1ProfileScreenState extends State<Workshop1ProfileScreen> {
       ),
       drawer: SideMenuAdmin(),
       backgroundColor: Colors.white,
-      body: Center(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+        body: Center(
         child: FutureBuilder(
             future: fetchUserData(),
             builder: (BuildContext context, AsyncSnapshot<userData> snapshot) =>

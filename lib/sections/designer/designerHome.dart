@@ -52,6 +52,7 @@ class _DesignerHomeScreenState extends State<DesignerHomeScreen> {
         ),
         drawer:SideMenuDesigner(),
         backgroundColor: Colors.white,
+        floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
         body: Center(
             child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
