@@ -155,7 +155,12 @@ class _OrdersListState extends State<OrdersList> {
 
   Widget _buildOrderItem(BuildContext context,
        orderData? order,int? index) {
-    return Padding(padding: EdgeInsets.all(4),
+    return InkWell(onTap: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ShowOrderScreen(order: order!,)));
+    },child: Padding(padding: EdgeInsets.all(4),
       child:
       Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 100,
         child:
@@ -166,8 +171,8 @@ class _OrdersListState extends State<OrdersList> {
         order?.status=="برگشت از طراح"?Colors.lightBlue:
         order?.status=="برگشت از کارگاه"?Colors.amber  :
         Colors.redAccent.shade100,
-            child: Container(padding: EdgeInsets.all(8),
-              child:Row(
+          child: Container(padding: EdgeInsets.all(8),
+            child:Row(
                 children: <Widget>[
                   Expanded(child: Text("${index}")),
                   Expanded(child: Text("${order?.clientFullName}")),
@@ -176,14 +181,9 @@ class _OrdersListState extends State<OrdersList> {
                   Expanded(child: Text("${order?.status}")),
                   SizedBox(width: 150,
                     child:Row(children: [
-                      IconButton(onPressed: (){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShowOrderScreen(order: order!,)));
-                      }, icon: Icon(Icons.remove_red_eye)),
                       IconButton(
                         icon: const Icon(Icons.edit),
+                        tooltip: "ویراش",
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -193,6 +193,7 @@ class _OrdersListState extends State<OrdersList> {
                       ),
                       IconButton(
                         icon: const Icon(Icons.delete),
+                        tooltip: "حذف",
                         onPressed: () async {
 
                           if(order?.id != null){
@@ -205,10 +206,10 @@ class _OrdersListState extends State<OrdersList> {
                     ],),)
                 ]
             ),
-            ),
+          ),
         ),
       )
 
-      ,);
+      ,),);
   }
 }
