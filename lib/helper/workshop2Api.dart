@@ -31,7 +31,7 @@ class Workshop2Api {
     dynamic token = prefs.getString("jwt");
     dynamic userID =jsonDecode(prefs.getString('user')!)['id'];
     final response = await http.get(
-      Uri.parse('${dotenv.env['API_URL']}/workshop2/get-all-pending-orders/$userID/در کارگاه/'),
+      Uri.parse('${dotenv.env['API_URL']}/workshop2/get-all-pending-orders/$userID/ارسال به کارگاه/'),
       headers: {'Authorization': 'Bearer $token'},
     );
     if (response.statusCode != 200) {

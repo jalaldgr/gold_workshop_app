@@ -163,7 +163,7 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                       ),
                     ),
                     Padding(padding: EdgeInsets.all(4),
-                      child:Visibility(visible: widget.order.status=="در حال طراحی"?true:false,
+                      child:Visibility(visible: widget.order.status=="ارسال به طراح"?true:false,
                         child:Card(
                           child: Container(margin: EdgeInsets.all(16),
                             child:

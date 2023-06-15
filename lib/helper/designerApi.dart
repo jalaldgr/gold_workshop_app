@@ -31,7 +31,7 @@ class DesignerApi {
     dynamic token = prefs.getString("jwt");
     dynamic userID =jsonDecode(prefs.getString('user')!)['id'];
     final response = await http.get(
-      Uri.parse('${dotenv.env['API_URL']}/designer/get-all-pending-orders/$userID/در حال طراحی/'),
+      Uri.parse('${dotenv.env['API_URL']}/designer/get-all-pending-orders/$userID/ارسال به طراح/'),
       headers: {'Authorization': 'Bearer $token'},
     );
     if (response.statusCode != 200) {

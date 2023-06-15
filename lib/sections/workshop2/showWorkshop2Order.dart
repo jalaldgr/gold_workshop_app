@@ -166,9 +166,9 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
                         ),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.all(4),                      child:Visibility(visible: widget.order.status=="در کارگاه"? true:false,
+                    Padding(padding: EdgeInsets.all(4),                      child:Visibility(visible: widget.order.status=="ارسال به کارگاه"? true:false,
 
-                      child:Visibility(visible: widget.order.status=="در کارگاه"? true:false,
+                      child:Visibility(visible: widget.order.status=="ارسال به کارگاه"? true:false,
                         child:Card(
                         child: Container(margin: EdgeInsets.all(16),
                           child:

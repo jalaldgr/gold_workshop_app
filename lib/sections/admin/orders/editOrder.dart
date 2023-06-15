@@ -38,7 +38,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
   String customerTypeDropDownValue = 'مشتری';
   var customerTypeDropDownItems = [ 'مشتری','همکار' ];
   String statusDropDownValue = 'در انتظار بررسی';
-  var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'در حال طراحی','در کارگاه','تکمیل طراحی','تکمیل کارگاه' ,'لغو شده'];
+  var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'ارسال به طراح','ارسال به کارگاه','برگشت از طراح','برگشت از کارگاه' ,'لغو شده'];
   String productTypeDropDownValue = 'پلاک اسم';
   var productTypeDropDownItems = ["پلاک اسم","انگشتر","النگو","دستبند","گوشواره","دوره سنگ","سرویس طلا","نیم ست طلا","آویز طلا",
     "پا بند طلا","رو لباسی طلا","جواهرات","ساعت طلا","دستبند چرمی طلا","دستبند مهره ای فانتزی طلا","تک پوش طلا","گردنبند","حلقه ست",
