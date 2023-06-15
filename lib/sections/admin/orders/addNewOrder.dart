@@ -356,7 +356,7 @@ class NewOrderFormState extends State<NewOrderForm> {
 
                         Navigator.pop(context);
 
-                      }, child: Expanded(child: Text("ثبت سفارش"),),)
+                      }, child: Text("ثبت سفارش"),)
                       ,)
                       ,)
                     ,

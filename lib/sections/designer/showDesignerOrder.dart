@@ -176,14 +176,14 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                                     var res = await DesignerApi.SendOrderFileDesigner(widget.order);
                                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
                                     Navigator.pop(context);
-                                  }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("ارسال فایل")  ,))
+                                  }, child: Padding(padding: EdgeInsets.all(16),child:  Text("ارسال فایل") )
                                   ),
                                   SizedBox(height: 16,),
                                   ElevatedButton(onPressed: () async {
                                     var res = await DesignerApi.completeOrderDesigner(widget.order);
                                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
                                     Navigator.pop(context);
-                                  }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("تکمیل سفارش")  ,))
+                                  }, child: Padding(padding: EdgeInsets.all(16),child: Text("تکمیل سفارش"))
                                   ),
                                 ],)
                                 ),

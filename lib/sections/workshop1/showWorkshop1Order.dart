@@ -179,14 +179,14 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                                   var res = await Workshop1Api.SendOrderFileWorkshop1(widget.order);
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
                                   Navigator.pop(context);
-                                }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("ارسال فایل")  ,))
+                                }, child: Padding(padding: EdgeInsets.all(16),child:  Text("ارسال فایل"))
                                 ),
                                 SizedBox(height: 16,),
                                 ElevatedButton(onPressed: () async {
                                   var res = await Workshop1Api.completeOrderWorkshop1(widget.order);
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
                                   Navigator.pop(context);
-                                }, child: Padding(padding: EdgeInsets.all(16),child: Expanded(child: Text("تکمیل سفارش")  ,))
+                                }, child: Padding(padding: EdgeInsets.all(16),child:  Text("تکمیل سفارش") )
                                 ),
                               ],)
                               ),
