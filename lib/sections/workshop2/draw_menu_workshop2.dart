@@ -76,14 +76,6 @@ class _SideMenuWorkshop2State extends State<SideMenuWorkshop2> {
                                 builder: (context) => Workshop2OrdersList()));
                       },
                     ),
-                    ListTile(
-                      leading: Icon(Icons.account_box),
-                      title: Text("جدول های روزانه"),
-                      trailing: Icon(Icons.chevron_right),
-                      onTap: (){
-
-                      },
-                    ),
                     Divider(),
                     InkWell(
                       onTap: () {
