@@ -397,7 +397,7 @@ class _Table1ScreenState extends State<Table1Screen> {
               stateManager.removeCurrentRow();
               updateTable();
 
-          }, icon: Icon(Icons.delete_forever),tooltip: "حذف سطر انتخاب شده"),
+          }, icon: Icon(Icons.delete),tooltip: "حذف سطر انتخاب شده"),
         ],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),

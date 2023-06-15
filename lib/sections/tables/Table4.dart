@@ -1085,7 +1085,7 @@ class _Table4ScreenState extends State<Table4Screen> {
             onPressed: (){
               gridAStateManager.removeCurrentRow();
               updateTable();
-            }, icon: Icon(Icons.delete_forever)),
+            }, icon: Icon(Icons.delete)),
           SizedBox(width: 16,),
           IconButton(onPressed: (){
             resetTable();

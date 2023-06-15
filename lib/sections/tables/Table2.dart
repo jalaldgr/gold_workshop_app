@@ -464,7 +464,7 @@ class _Table2ScreenState extends State<Table2Screen> {
        onPressed: (){
           stateManager.removeCurrentRow();
           updateTable();
-        }, icon: Icon(Icons.delete_forever)),
+        }, icon: Icon(Icons.delete)),
           SizedBox(width: 16,),
           IconButton(onPressed: (){
             resetTable();

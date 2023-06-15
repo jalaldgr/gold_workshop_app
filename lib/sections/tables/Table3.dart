@@ -479,7 +479,7 @@ class _Table3ScreenState extends State<Table3Screen> {
               updateTable();
             });
 
-            }, icon: Icon(Icons.delete_forever),tooltip: "حذف سطر انتخاب شده"),
+            }, icon: Icon(Icons.delete),tooltip: "حذف سطر انتخاب شده"),
 
         ],
         leading: IconButton(

@@ -905,7 +905,7 @@ class _Table5ScreenState extends State<Table5Screen> {
         actions: [IconButton(tooltip: "حذف سطر انتخاب شده",
             onPressed: (){
           stateManager.removeCurrentRow();
-          updateTable();}, icon: Icon(Icons.delete_forever))],
+          updateTable();}, icon: Icon(Icons.delete))],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
