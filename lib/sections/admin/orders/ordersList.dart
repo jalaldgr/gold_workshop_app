@@ -39,6 +39,7 @@ class _OrdersListState extends State<OrdersList> {
           iconTheme: IconThemeData(color: Colors.black87),
           backgroundColor: Colors.pink,
           leading: IconButton(
+            tooltip: "بروزرسانی",
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
@@ -110,6 +111,7 @@ class _OrdersListState extends State<OrdersList> {
         ,
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
+          tooltip: "سفارش جدید",
           onPressed: () {
             Navigator.push(
                 context,
@@ -159,7 +161,7 @@ class _OrdersListState extends State<OrdersList> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => ShowOrderScreen(order: order!,)));
+              builder: (context) => EditOrderScreen(order: order!,)));
     },child: Padding(padding: EdgeInsets.all(4),
       child:
       Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 100,
@@ -179,18 +181,8 @@ class _OrdersListState extends State<OrdersList> {
                   Expanded(child: Text("${order?.productType}")),
                   Expanded(child: Text("${order?.deliveryDate}")),
                   Expanded(child: Text("${order?.status}")),
-                  SizedBox(width: 150,
+                  SizedBox(width: 64,
                     child:Row(children: [
-                      IconButton(
-                        icon: const Icon(Icons.edit),
-                        tooltip: "ویراش",
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EditOrderScreen(order: order!,)));
-                        },
-                      ),
                       IconButton(
                         icon: const Icon(Icons.delete),
                         tooltip: "حذف",
