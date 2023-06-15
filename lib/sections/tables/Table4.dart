@@ -163,7 +163,7 @@ class _Table4ScreenState extends State<Table4Screen> {
     )
   ];
 
-  List<PlutoRow> gridARows = [
+   List<PlutoRow> gridARows = [
     PlutoRow(
       cells: {
         'row': PlutoCell(value: 1),
@@ -562,6 +562,281 @@ class _Table4ScreenState extends State<Table4Screen> {
 
   }
 
+  resetTable(){
+
+
+    List<PlutoRow> gridARows = [
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 1),
+          'description': PlutoCell(value: 'متفرقه'),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 2),
+          'description': PlutoCell(value: "حلقه"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 3),
+          'description': PlutoCell(value: "مفتول"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 4),
+          'description': PlutoCell(value: "گوی"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 5),
+          'description': PlutoCell(value: "لحیم"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 6),
+          'description': PlutoCell(value: "زنجیر"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 7),
+          'description': PlutoCell(value: "تکه زنجیر"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 8),
+          'description': PlutoCell(value: "مدبر"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 9),
+          'description': PlutoCell(value: "کارساخت"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 10),
+          'description': PlutoCell(value: "کارساخت"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 11),
+          'description': PlutoCell(value: "کارساخت"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 12),
+          'description': PlutoCell(value: "کارساخت"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 13),
+          'description': PlutoCell(value: "متفرقه"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 14),
+          'description': PlutoCell(value: "متفرقه"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 15),
+          'description': PlutoCell(value: "متفرقه"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 16),
+          'description': PlutoCell(value: "متفرقه"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 17),
+          'description': PlutoCell(value: "متفرقه"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 18),
+          'description': PlutoCell(value: "متفرقه"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 19),
+          'description': PlutoCell(value: "متفرقه"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 20),
+          'description': PlutoCell(value: "متفرقه"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 21),
+          'description': PlutoCell(value: "سرسنجاق"),
+          'import_weight': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+    ];
+
+    List<PlutoRow> gridBRows = [
+      PlutoRow(
+        cells: {
+          'description': PlutoCell(value: "متفرقه"),
+          'real_balance': PlutoCell(value: 0),
+          'system_balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'description': PlutoCell(value: "حلقه"),
+          'real_balance': PlutoCell(value: 0),
+          'system_balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'description': PlutoCell(value: "مفتول"),
+          'real_balance': PlutoCell(value: 0),
+          'system_balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'description': PlutoCell(value: "گوی"),
+          'real_balance': PlutoCell(value: 0),
+          'system_balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'description': PlutoCell(value: "لحیم"),
+          'real_balance': PlutoCell(value: 0),
+          'system_balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'description': PlutoCell(value: "زنجیر"),
+          'real_balance': PlutoCell(value: 0),
+          'system_balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'description': PlutoCell(value: "تکه زنجیر"),
+          'real_balance': PlutoCell(value: 0),
+          'system_balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'description': PlutoCell(value: "مدبر"),
+          'real_balance': PlutoCell(value: 0),
+          'system_balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'description': PlutoCell(value: "کارساخت",),
+          'real_balance': PlutoCell(value: 0),
+          'system_balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'description': PlutoCell(value: "سرسنجاق"),
+          'real_balance': PlutoCell(value: 0),
+          'system_balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+          'summary': PlutoCell(value: ""),
+        },
+      ),
+    ];
+
+    gridBStateManager.refRows.clear();
+    gridBStateManager.insertRows(0, gridBRows);
+
+    gridAStateManager.refRows.clear();
+    gridAStateManager.insertRows(0, gridARows);
+    updateTable();
+  }
+
   calculateTableA()async{
     var tables = await AdminApi.getTable();
     dynamic table41 =json.decode(tables.table41!);
@@ -786,33 +1061,8 @@ class _Table4ScreenState extends State<Table4Screen> {
     gridBStateManager.refRows.clear();
     gridBStateManager.insertRows(0, updatedRows42);
 
-
-
     tableData t = new tableData("تکمیل کارگاه 1","","", "", jsonEncode(table41),jsonEncode(table42),"", "","","","");
     var respo = await AdminApi.postTable(t);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   }
 
@@ -835,7 +1085,14 @@ class _Table4ScreenState extends State<Table4Screen> {
             onPressed: (){
               gridAStateManager.removeCurrentRow();
               updateTable();
-            }, icon: Icon(Icons.delete_forever))],
+            }, icon: Icon(Icons.delete_forever)),
+          SizedBox(width: 16,),
+          IconButton(onPressed: (){
+            resetTable();
+
+          }, icon: Icon(Icons.cleaning_services_rounded),tooltip: "ریست کردن جدول"),
+
+        ],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),

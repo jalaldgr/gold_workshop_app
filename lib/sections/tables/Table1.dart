@@ -398,12 +398,6 @@ class _Table1ScreenState extends State<Table1Screen> {
               updateTable();
 
           }, icon: Icon(Icons.delete_forever),tooltip: "حذف سطر انتخاب شده"),
-          SizedBox(width: 16,),
-          IconButton(onPressed: (){
-            resetTable();
-
-          }, icon: Icon(Icons.cleaning_services_rounded),tooltip: "ریست کردن جدول"),
-
         ],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
