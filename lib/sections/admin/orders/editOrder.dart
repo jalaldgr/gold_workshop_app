@@ -172,28 +172,22 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                 ,child:Card(
                     child:Container( padding: EdgeInsets.all(8),
                       child: Row(children: [
-                        Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "نام مشتری"),controller: nameEditTextController,),),
-                        Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "شماره تماس"),controller: contactEditTextController,),),
-                        Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration.collapsed(hintText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
-                        Expanded(child:
-                        DropdownButton(
-                          value: customerTypeDropDownValue,
-                          items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                          onChanged: (String? value) {setState(() {
-                            customerTypeDropDownValue = value!;
-                            widget.order.clientType = value;
-                          });},
+                        Expanded(child: TextFormField(decoration: InputDecoration(hintText: "نام مشتری",labelText: "نام مشتری"),controller: nameEditTextController,),),
+                        Expanded(child: TextFormField(decoration: InputDecoration(hintText: "شماره تماس",labelText: "شماره تماس"),controller: contactEditTextController,),),
+                        Expanded(child:Column(
+                          children: [
+                            Text("نوع مشتری"),
+                            DropdownButton(
+                              value: customerTypeDropDownValue,
+                              items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                              onChanged: (String? value) {setState(() {
+                                customerTypeDropDownValue = value!;
+                                widget.order.clientType = value;
+                              });},
+                            )
+                          ],
                         )),
-                        Expanded(child:
-                        DropdownButton(
-                          value: statusDropDownValue,
-                          items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                          onChanged: (String? value) {setState(() {
-                            statusDropDownValue = value!;
-                            widget.order.status = value;
-                          });},)
-
-                        ),
+                        Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration(hintText: "تاریخ تحویل",labelText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
                       ],),
                     ) ,),
                 ),
@@ -228,7 +222,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                          ),
                          Expanded(child:
                          Row(children: [
-                           Text("بعیانه"),
+                           Text("بیعانه"),
                            Checkbox(
                                value: feeCheckBoxValue,
                                onChanged: (value) {setState(() {feeCheckBoxValue = value!;
@@ -246,7 +240,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                                });})
                          ],)
                          ),],)
-                       )
+                       ),
 
                      ],),
                    ),
@@ -327,8 +321,19 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                           productTypeDropDownValue = value!;
                           widget.order.productType = value;
                         });},
-                      ))
-                    ],)
+                      )),
+    Expanded(child:
+    DropdownButton(
+    value: statusDropDownValue,
+    items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+    onChanged: (String? value) {setState(() {
+    statusDropDownValue = value!;
+    widget.order.status = value;
+    });},)
+
+    )
+
+    ],)
                       ),
                   ),
                 ),
