@@ -291,6 +291,28 @@ class _Table1ScreenState extends State<Table1Screen> {
 
     var respo = await AdminApi.postTable(t);
   }
+
+  resetTable(){
+
+    List<PlutoRow> updatedRows=[];
+      updatedRows.add(PlutoRow(
+        cells: {
+          'row': PlutoCell(value: "1" ),
+          'other': PlutoCell(value: "0"),
+          'consumption_load': PlutoCell(value: "0"),
+          'consumptions_load_and_other': PlutoCell(value: "0"),
+          'after_melt': PlutoCell(value: "0"),
+          'difference': PlutoCell(value: "0"),
+          'after_paging': PlutoCell(value: "0"),
+          'final_difference': PlutoCell(value: "0"),
+
+        },
+      ));
+    stateManager.refRows.clear();
+    stateManager.insertRows(0, updatedRows);
+    updateTable();
+  }
+
   calculateTable() async {
 
     var tables = await AdminApi.getTable();
@@ -371,12 +393,16 @@ class _Table1ScreenState extends State<Table1Screen> {
         iconTheme: IconThemeData(color: Colors.black87),
         backgroundColor: widget.headerColor?? Colors.pink,
         actions: [
-          SizedBox(width: 32,),
           IconButton(onPressed: (){
               stateManager.removeCurrentRow();
               updateTable();
 
           }, icon: Icon(Icons.delete_forever),tooltip: "حذف سطر انتخاب شده"),
+          SizedBox(width: 16,),
+          IconButton(onPressed: (){
+            resetTable();
+
+          }, icon: Icon(Icons.cleaning_services_rounded),tooltip: "ریست کردن جدول"),
 
         ],
         leading: IconButton(
