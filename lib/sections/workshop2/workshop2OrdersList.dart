@@ -52,7 +52,7 @@ class _Workshop2OrdersListState extends State<Workshop2OrdersList> {
         ),
         drawer: SideMenuAdmin(),
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
+        body: SingleChildScrollView(scrollDirection: Axis.vertical,
           child: Stack(
             children: [
               Center(

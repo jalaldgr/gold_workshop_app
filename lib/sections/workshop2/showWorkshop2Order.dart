@@ -78,7 +78,7 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
                   fontWeight: FontWeight.bold,
                   fontSize: 22.0)),
         ),
-        body:SingleChildScrollView(
+        body:SingleChildScrollView(scrollDirection: Axis.vertical,
           child: Stack(
             children: [
               Container(

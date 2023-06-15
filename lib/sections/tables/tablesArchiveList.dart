@@ -36,7 +36,7 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
         ),
         drawer: SideMenuAdmin(),
         backgroundColor: Colors.white,
-        body:SingleChildScrollView(child:
+        body:SingleChildScrollView(scrollDirection: Axis.vertical,child:
           Stack(
             children: [
               Center(

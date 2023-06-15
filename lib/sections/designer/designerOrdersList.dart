@@ -44,7 +44,7 @@ class _DesignerOrdersListState extends State<DesignerOrdersList> {
         ),
         drawer: SideMenuAdmin(),
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
+        body: SingleChildScrollView(scrollDirection: Axis.vertical,
           child: Stack(
             children: [
               Center(

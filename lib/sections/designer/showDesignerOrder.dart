@@ -73,7 +73,7 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                   fontWeight: FontWeight.bold,
                   fontSize: 22.0)),
         ),
-        body:SingleChildScrollView(
+        body:SingleChildScrollView(scrollDirection: Axis.vertical,
           child: Stack(
             children: [
               Container(
