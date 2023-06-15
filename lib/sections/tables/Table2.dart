@@ -490,6 +490,7 @@ class _Table2ScreenState extends State<Table2Screen> {
           onLoaded: (PlutoGridOnLoadedEvent event) {
             stateManager = event.stateManager;
             fetchTable();
+            calculateTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
             if((event.columnIdx==3 && event.rowIdx==0)||(event.columnIdx==3 && event.rowIdx==2)||

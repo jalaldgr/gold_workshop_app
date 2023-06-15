@@ -1113,6 +1113,8 @@ class _Table4ScreenState extends State<Table4Screen> {
           onLoaded: (PlutoGridOnLoadedEvent event) {
             gridAStateManager = event.stateManager;
             fetchTable();
+            calculateTableA();
+            calculateTableB();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
 

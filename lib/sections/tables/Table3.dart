@@ -502,6 +502,7 @@ class _Table3ScreenState extends State<Table3Screen> {
             stateManager = event.stateManager;
 
             fetchTable();
+            calculateTable();
           },
           onChanged: (PlutoGridOnChangedEvent event) {
             calculateTable();
