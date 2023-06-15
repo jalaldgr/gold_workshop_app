@@ -100,7 +100,7 @@ class _OrdersListState extends State<OrdersList> {
                   )
                       : snapshot.data != null
                       ? const Center(
-                    child: Text("بدون طراح..."),
+                    child: Text("بدون سفارش..."),
                   )
                       : CircularProgressIndicator(),
                 ),
