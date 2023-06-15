@@ -159,7 +159,13 @@ class _OrdersListState extends State<OrdersList> {
       child:
       Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 100,
         child:
-        Card(color: order?.status=="تکمیل نهایی"?Colors.lightGreenAccent:order?.status=="لغو شده"?Colors.redAccent:Colors.lightBlueAccent,
+        Card(color: order?.status=="در انتظار بررسی"?Colors.lightGreenAccent.shade100:
+        order?.status=="تکمیل نهایی"?Colors.lightGreen:
+        order?.status=="ارسال به طراح"?Colors.lightBlueAccent.shade100:
+        order?.status=="ارسال به کارگاه"?Colors.amberAccent.shade100:
+        order?.status=="برگشت از طراح"?Colors.lightBlue:
+        order?.status=="برگشت از کارگاه"?Colors.amber  :
+        Colors.redAccent.shade100,
             child: Container(padding: EdgeInsets.all(8),
               child:Row(
                 children: <Widget>[
