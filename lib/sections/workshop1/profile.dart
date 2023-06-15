@@ -172,7 +172,7 @@ class _Workshop1ProfileScreenState extends State<Workshop1ProfileScreen> {
                 : CircularProgressIndicator()),
       ),
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.edit),
           onPressed: () async {
 
             SharedPreferences prefs = await SharedPreferences.getInstance();

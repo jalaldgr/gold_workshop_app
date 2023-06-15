@@ -171,7 +171,7 @@ class _DesignerProfileScreenState extends State<DesignerProfileScreen> {
                 : CircularProgressIndicator()),
       ),
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.edit),
           onPressed: () async {
 
             SharedPreferences prefs = await SharedPreferences.getInstance();
