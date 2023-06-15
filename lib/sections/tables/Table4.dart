@@ -1108,7 +1108,9 @@ class _Table4ScreenState extends State<Table4Screen> {
         gridPropsA: PlutoDualGridProps(
           columns: gridAColumns,
           rows: gridARows,
-          configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
+          configuration: const PlutoGridConfiguration(
+              enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
 
           onLoaded: (PlutoGridOnLoadedEvent event) {
             gridAStateManager = event.stateManager;
@@ -1130,7 +1132,9 @@ class _Table4ScreenState extends State<Table4Screen> {
         PlutoDualGridProps(
           columns: gridBColumns,
           rows: gridBRows,
-          configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
+          configuration: const PlutoGridConfiguration(
+              enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
           onChanged: (event)  {
             calculateTableB();
           },

@@ -426,7 +426,10 @@ class _Table1ScreenState extends State<Table1Screen> {
               calculateTable();
             }
           },
-          configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
+          configuration: const PlutoGridConfiguration(
+              enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
+
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
         ),
       ),
       floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",onPressed: () async {

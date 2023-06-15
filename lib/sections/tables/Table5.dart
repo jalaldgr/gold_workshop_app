@@ -932,7 +932,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             calculateTable();
             updateTable();
           },
-          configuration: const PlutoGridConfiguration(style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
+          configuration: const PlutoGridConfiguration(
+              enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
         ),
       ),
       floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",
