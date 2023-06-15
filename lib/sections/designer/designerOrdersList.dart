@@ -118,7 +118,13 @@ class _DesignerOrdersListState extends State<DesignerOrdersList> {
 
   Widget _buildOrderItem(BuildContext context,
       String? clientFullname,String? status , orderData? order,int? index) {
-    return Padding(padding: EdgeInsets.all(4),
+    return InkWell(
+      onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ShowDesignerOrderScreen(order: order!,)));
+      },child:  Padding(padding: EdgeInsets.all(4),
       child:
       Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 100,
         child:
@@ -129,29 +135,18 @@ class _DesignerOrdersListState extends State<DesignerOrdersList> {
         order?.status=="برگشت از طراح"?Colors.lightBlue:
         order?.status=="برگشت از کارگاه"?Colors.amber  :
         Colors.redAccent.shade100,          child: Row(
-              children: <Widget>[
-                Expanded(child: Text("${index}")),
-                Expanded(child: Text("${order?.clientFullName}")),
-                Expanded(child: Text("${order?.productType}")),
-                Expanded(child: Text("${order?.deliveryDate}")),
-                Expanded(child: Text("${order?.status}")),
-                SizedBox(width: 100,
-                  child:Row(children: [
-                    IconButton(
-                      icon: const Icon(Icons.remove_red_eye),
-                      onPressed: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShowDesignerOrderScreen(order: order!,)));
-                      },
-                    ),
-                  ],),)
-              ]
-          ),
+            children: <Widget>[
+              Expanded(child: Text("${index}")),
+              Expanded(child: Text("${order?.clientFullName}")),
+              Expanded(child: Text("${order?.productType}")),
+              Expanded(child: Text("${order?.deliveryDate}")),
+              Expanded(child: Text("${order?.status}")),
+
+            ]
+        ),
         ),
       )
 
-      ,);
+      ,),);
   }
 }

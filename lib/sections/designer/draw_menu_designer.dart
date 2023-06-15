@@ -5,6 +5,7 @@ import 'package:gold_workshop/sections/designer/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../login.dart';
 import '../../models/userModel.dart';
+import 'designerOrdersList.dart';
 
 
 class SideMenuDesigner extends StatefulWidget {
@@ -69,15 +70,10 @@ class _SideMenuDesignerState extends State<SideMenuDesigner> {
                       title: Text("لیست سفارش ها"),
                       trailing: Icon(Icons.chevron_right),
                       onTap: (){
-
-                      },
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.account_box),
-                      title: Text("جدول های روزانه"),
-                      trailing: Icon(Icons.chevron_right),
-                      onTap: (){
-
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DesignerOrdersList()));
                       },
                     ),
                     Divider(),
