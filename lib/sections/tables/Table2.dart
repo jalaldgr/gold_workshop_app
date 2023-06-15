@@ -399,6 +399,52 @@ class _Table2ScreenState extends State<Table2Screen> {
 
 
   }
+  resetTable(){
+    List<PlutoRow> rows = [
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 0),
+          'description': PlutoCell(value: "مانده روز قبل"),
+          'import': PlutoCell(value: 0),
+          'export': PlutoCell(value: 0),
+          'final_balance': PlutoCell(value: 0),
+          'real_balance': PlutoCell(value: 0),
+          'balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 2),
+          'description': PlutoCell(value: "کسر برش"),
+          'import': PlutoCell(value: 0),
+          'export': PlutoCell(value: 0),
+          'final_balance': PlutoCell(value: 0),
+          'real_balance': PlutoCell(value: 0),
+          'balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+
+        },
+      ),
+      PlutoRow(
+        cells: {
+          'row': PlutoCell(value: 3),
+          'description': PlutoCell(value: "کسر ذوب"),
+          'import': PlutoCell(value: 0),
+          'export': PlutoCell(value: 0),
+          'final_balance': PlutoCell(value: 0),
+          'real_balance': PlutoCell(value: 0),
+          'balance': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+
+        },
+      ),
+    ];
+
+    stateManager.refRows.clear();
+    stateManager.insertRows(0, rows);
+  }
   @override
   void initState() {
 
@@ -417,7 +463,13 @@ class _Table2ScreenState extends State<Table2Screen> {
        onPressed: (){
           stateManager.removeCurrentRow();
           updateTable();
-        }, icon: Icon(Icons.delete_forever))],
+        }, icon: Icon(Icons.delete_forever)),
+          SizedBox(width: 16,),
+          IconButton(onPressed: (){
+            resetTable();
+
+          }, icon: Icon(Icons.cleaning_services_rounded),tooltip: "ریست کردن جدول"),
+        ],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
@@ -457,7 +509,7 @@ class _Table2ScreenState extends State<Table2Screen> {
             PlutoRow(
               cells: {
                 'row': PlutoCell(value: 1),
-                'description': PlutoCell(value: "rth"),
+                'description': PlutoCell(value: ""),
                 'import': PlutoCell(value: 0),
                 'export': PlutoCell(value: 0),
                 'final_balance': PlutoCell(value: 0),
