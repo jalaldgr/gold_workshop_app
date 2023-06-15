@@ -50,7 +50,7 @@ class Workshop2Api {
     dynamic token = prefs.getString("jwt");
 
     final response = await http.post(
-        Uri.parse('${dotenv.env['API_URL']}/workshop2/complete-order/${order.id}'),
+        Uri.parse('${dotenv.env['API_URL']}/workshop2/complete-order/${order.id}/برگشت از کارگاه'),
         headers: {'Authorization': 'Bearer $token'},
         body: order.toJson()
     );

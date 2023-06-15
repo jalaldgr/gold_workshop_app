@@ -50,7 +50,7 @@ class DesignerApi {
     dynamic token = prefs.getString("jwt");
 
     final response = await http.post(
-        Uri.parse('${dotenv.env['API_URL']}/designer/complete-order/${order.id}'),
+        Uri.parse('${dotenv.env['API_URL']}/designer/complete-order/${order.id}/برگشت از طراح'),
         headers: {'Authorization': 'Bearer $token'},
         body: order.toJson()
     );
