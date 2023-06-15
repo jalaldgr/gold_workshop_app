@@ -192,7 +192,7 @@ class _Table2ScreenState extends State<Table2Screen> {
   List<PlutoRow> rows = [
     PlutoRow(
       cells: {
-        'row': PlutoCell(value: 0),
+        'row': PlutoCell(value: 1),
         'description': PlutoCell(value: "مانده روز قبل"),
         'import': PlutoCell(value: 0),
         'export': PlutoCell(value: 0),
@@ -325,13 +325,13 @@ class _Table2ScreenState extends State<Table2Screen> {
           },
         ));
         table6["cut_deference"] +=difference[i];
-      }else{
+      }else if(import[i]>0||export[i]>0){
         difference[i] = balance[i]+difference[i-1];
         balance[i] = final_balance[i]-real_balance[i];
         final_balance[i] = import[i]-export[i]+final_balance[i-1];
         updatedRows.add(PlutoRow(
           cells: {
-            'row': PlutoCell(value: rowNumber[i]),
+            'row': PlutoCell(value: i+1),
             'description': PlutoCell(value: description[i]),
             'import': PlutoCell(value: import[i]),
             'export': PlutoCell(value:export[i]),
@@ -403,7 +403,7 @@ class _Table2ScreenState extends State<Table2Screen> {
     List<PlutoRow> rows = [
       PlutoRow(
         cells: {
-          'row': PlutoCell(value: 0),
+          'row': PlutoCell(value: 1),
           'description': PlutoCell(value: "مانده روز قبل"),
           'import': PlutoCell(value: 0),
           'export': PlutoCell(value: 0),
@@ -510,7 +510,7 @@ class _Table2ScreenState extends State<Table2Screen> {
         stateManager.insertRows(stateManager.rows.length, [
             PlutoRow(
               cells: {
-                'row': PlutoCell(value: 1),
+                'row': PlutoCell(value: 0 ),
                 'description': PlutoCell(value: ""),
                 'import': PlutoCell(value: 0),
                 'export': PlutoCell(value: 0),
