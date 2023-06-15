@@ -444,6 +444,7 @@ class _Table2ScreenState extends State<Table2Screen> {
 
     stateManager.refRows.clear();
     stateManager.insertRows(0, rows);
+    updateTable();
   }
   @override
   void initState() {
