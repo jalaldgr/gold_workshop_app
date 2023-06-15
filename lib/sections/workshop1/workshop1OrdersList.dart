@@ -127,9 +127,9 @@ class _Workshop1OrdersListState extends State<Workshop1OrdersList> {
       String? clientFullname,String? status , orderData? order,int? index) {
     return Padding(padding: EdgeInsets.all(4),
       child:
-      Container( color: (index! % 2 == 0) ? Colors.brown.shade50 : Colors.lightBlue.shade50,height: 100,
+      Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 100,
         child:
-        Card(
+        Card(color: order?.status=="تکمیل نهایی"?Colors.lightGreenAccent:order?.status=="لغو شده"?Colors.redAccent:Colors.lightBlueAccent,
           child: Row(
               children: <Widget>[
                 Expanded(child: Text("${index}")),

@@ -85,7 +85,7 @@ class _OrdersListState extends State<OrdersList> {
                               shrinkWrap: true,
                               itemCount: snapshot.data!.length,
                               itemBuilder: (context, index) {
-                                return _buildPaymentItem(
+                                return _buildOrderItem(
                                     context,
                                     snapshot.data?[index],
                                     index);
@@ -153,13 +153,13 @@ class _OrdersListState extends State<OrdersList> {
 
 
 
-  Widget _buildPaymentItem(BuildContext context,
+  Widget _buildOrderItem(BuildContext context,
        orderData? order,int? index) {
     return Padding(padding: EdgeInsets.all(4),
       child:
-      Container( color: (index! % 2 == 0) ? Colors.brown.shade50 : Colors.lightBlue.shade50,height: 100,
+      Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 100,
         child:
-        Card(
+        Card(color: order?.status=="تکمیل نهایی"?Colors.lightGreenAccent:order?.status=="لغو شده"?Colors.redAccent:Colors.lightBlueAccent,
             child: Container(padding: EdgeInsets.all(8),
               child:Row(
                 children: <Widget>[

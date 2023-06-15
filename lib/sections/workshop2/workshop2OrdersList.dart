@@ -93,7 +93,7 @@ class _Workshop2OrdersListState extends State<Workshop2OrdersList> {
                         child: ListView.builder(
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index) {
-                              return _buildPaymentItem(
+                              return _buildOrderItem(
                                   context,
                                   snapshot.data?[index].clientFullName,
                                   snapshot.data?[index].status,
@@ -124,13 +124,13 @@ class _Workshop2OrdersListState extends State<Workshop2OrdersList> {
 
 
 
-  Widget _buildPaymentItem(BuildContext context,
+  Widget _buildOrderItem(BuildContext context,
       String? clientFullname,String? status , orderData? order,int? index) {
     return Padding(padding: EdgeInsets.all(4),
       child:
-      Container( color: (index! % 2 == 0) ? Colors.brown.shade50 : Colors.lightBlue.shade50,height: 100,
+      Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 100,
         child:
-        Card(
+        Card(color: order?.status=="تکمیل نهایی"?Colors.lightGreenAccent:order?.status=="لغو شده"?Colors.redAccent:Colors.lightBlueAccent,
           child: Row(
               children: <Widget>[
                 Expanded(child: Text("${index}")),
