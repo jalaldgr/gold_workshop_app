@@ -125,9 +125,9 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                               InkWell(onTap: (){
                                 launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"));
 
-                              },child: Expanded(child: 
+                              },child:
                               Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}",width: 256,)
-                              ),),
+                              ),
                               Expanded(child:
                               Column(children: [
                                 Row(
