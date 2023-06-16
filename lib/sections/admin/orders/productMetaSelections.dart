@@ -30,6 +30,10 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
   String bangleSizeDropdownValue="نوزادی-0";
   var bangleSizeTypeItemList = ["نوزادی-0","نوزادی-1","نوزادی-2","نوزادی-3","نوزادی-4","نوزادی-5","بزرگسال-1","بزرگسال-2","بزرگسال-3","بزرگسال-4","بزرگسال-5",];
 
+  String earringsTypeDropDownValUe="عصایی";
+  var earringsTypeItemList = ["عصایی","بخیه ای","بیخ گوشی"];
+  String earringsHackTypeDropdownValue="براق";
+  var earringsHackTypeDropDownItemList=["براق","مات","مات و براق"];
 
 
   Map<String,String>  _metaKeyValue={"plate_language": "انگلیسی", "plate_type": "تک حلقه", "plate_hack_type": "براق"};
@@ -167,6 +171,55 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                     });
                   },
                 )),
+          ],
+        ),
+
+        Row(
+          children: [
+
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(
+                    hintText: "ابعاد محصول", labelText: "ابعاد محصول"),
+              ),
+            ),
+            Expanded(
+                child: DropdownButtonFormField(
+                  decoration: InputDecoration(labelText: "نوع گوشواره"),
+                  value: earringsTypeDropDownValUe,
+                  items: earringsTypeItemList.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      earringsTypeDropDownValUe = value!;
+                      _metaKeyValue["earrings_type"] = value;
+                      widget.callback(_metaKeyValue.toString());
+                    });
+                  },
+                )),
+            Expanded(
+                child: DropdownButtonFormField(
+                  decoration: InputDecoration(labelText: "نوع حک"),
+                  value: earringsHackTypeDropdownValue,
+                  items: earringsHackTypeDropDownItemList.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      earringsHackTypeDropdownValue = value!;
+                      _metaKeyValue["earrings_hack_type"] = value;
+                      widget.callback(_metaKeyValue.toString());
+                    });
+                  },
+                )),
+
           ],
         ),
 
