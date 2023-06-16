@@ -174,22 +174,20 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                       child: Row(children: [
                         Expanded(child: TextFormField(decoration: InputDecoration(hintText: "نام مشتری",labelText: "نام مشتری"),controller: nameEditTextController,),),
                         Expanded(child: TextFormField(decoration: InputDecoration(hintText: "شماره تماس",labelText: "شماره تماس"),controller: contactEditTextController,),),
-                        Expanded(child:Column(
-                          children: [
-                            Text("نوع مشتری",style: TextStyle(fontSize: 13,color: Colors.black54)),
-                            DropdownButton(
-                              value: customerTypeDropDownValue,
-                              items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                              onChanged: (String? value) {setState(() {
-                                customerTypeDropDownValue = value!;
-                                widget.order.clientType = value;
-                              });},
-                            )
-                          ],
+                        Expanded(child:
+                        DropdownButtonFormField(
+                          decoration: InputDecoration(labelText: "نوع مشتری"),
+                          value: customerTypeDropDownValue,
+                          items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                          onChanged: (String? value) {setState(() {
+                            customerTypeDropDownValue = value!;
+                            widget.order.clientType = value;
+                          });},
                         )),
                         Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration(hintText: "تاریخ تحویل",labelText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
                         Expanded(child:
-                        DropdownButton(
+                        DropdownButtonFormField(
+                          decoration: InputDecoration(labelText: "وضعیت سفارش"),
                           value: statusDropDownValue,
                           items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                           onChanged: (String? value) {setState(() {
@@ -317,7 +315,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                                 // widget.order
                               },
                             )),
-                            Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: ""),controller: orderMetaEditTextController,)),
+                            Expanded(child: TextFormField(decoration: InputDecoration(hintText: ""),controller: orderMetaEditTextController,)),
                             Expanded(child:IconButton( onPressed: (){
                               setState(() {
                                 tableItem.add(DataRow(cells: [DataCell(Text("${orderMetaDropDownValue}")),DataCell(Text("${orderMetaEditTextController.text}"))]
