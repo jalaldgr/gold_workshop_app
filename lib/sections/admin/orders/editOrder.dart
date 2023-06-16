@@ -55,6 +55,9 @@ class EditOrderScreenState extends State<EditOrderScreen> {
   TextEditingController orderMetaEditTextController=TextEditingController();
   TextEditingController nameEditTextController=TextEditingController();
   TextEditingController contactEditTextController=TextEditingController();
+  TextEditingController productCodeEditTextController=TextEditingController();
+  TextEditingController productWeightTextController=TextEditingController();
+
   TextEditingController descriptionEditTextController=TextEditingController();
   TextEditingController deliverDateEditTextController=TextEditingController();
   TextEditingController imageEditTextController=TextEditingController();
@@ -299,67 +302,8 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                     child: Container(padding: EdgeInsets.all(8),
                     child:
                     Row(children: [
-                      Visibility(visible: !selectImage,
-                        child: InkWell(
-                            child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}",width: 256,),
-                            onTap: openImagePicker)
-                      ),
-                      Visibility(visible: selectImage,
-                          child: InkWell(
-                              child: _imageFile!=null ?Image.file(_imageFile!,height: 256,  ):Text(""),
-                              onTap: openImagePicker)
-                      ),
-
-                      Expanded(child:
-                      Column(children: [
-                        Row(
-                          children: [
-                            Expanded(child:DropdownButton(
-                              value: orderMetaDropDownValue,
-                              items: orderMetaDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                              onChanged: (String? value) {
-                                setState(() {
-                                  orderMetaDropDownValue = value!;
-                                  orderMetaEditTextController.text='';});
-                                // widget.order
-                              },
-                            )),
-                            Expanded(child: TextFormField(decoration: InputDecoration(hintText: ""),controller: orderMetaEditTextController,)),
-                            Expanded(child:IconButton( onPressed: (){
-                              setState(() {
-                                tableItem.add(DataRow(cells: [DataCell(Text("${orderMetaDropDownValue}")),DataCell(Text("${orderMetaEditTextController.text}"))]
-                                  // ,onSelectChanged:(b) {onSelectedRow("asd");}
-                                ));
-
-                              });
-                            }, icon: Icon(Icons.add),),
-                            )
-                          ],
-                        ),
-
-                        DataTable(
-                          columns: const <DataColumn>[
-                            DataColumn(
-                              label: Text(
-                                'ویژگی',
-                                style: TextStyle(fontStyle: FontStyle.italic),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'عنوان',
-                                style: TextStyle(fontStyle: FontStyle.italic),
-                              ),
-                            ),
-
-                          ],
-                          rows: tableItem,
-                        )
-                      ],)
 
 
-
-                      ),
                       Expanded(child: DropdownButton(
                         value: productTypeDropDownValue,
                         items: productTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
@@ -368,7 +312,18 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                           widget.order.productType = value;
                         });},
                       )),
-
+                      Expanded(child: TextFormField(decoration: InputDecoration(hintText: "کد محصول",labelText: "کد محصول"),controller: productCodeEditTextController,),),
+                      Expanded(child: TextFormField(decoration: InputDecoration(hintText: "وزن محصول",labelText: "وزن محصول"),controller: productWeightTextController,),),
+                      Visibility(visible: !selectImage,
+                          child: InkWell(
+                              child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}",width: 256,),
+                              onTap: openImagePicker)
+                      ),
+                      Visibility(visible: selectImage,
+                          child: InkWell(
+                              child: _imageFile!=null ?Image.file(_imageFile!,height: 256,  ):Text(""),
+                              onTap: openImagePicker)
+                      ),
 
     ],)
                       ),
