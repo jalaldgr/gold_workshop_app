@@ -8,6 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
+import 'package:gold_workshop/sections/admin/orders/productMetaSelections.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
 import 'workshop1DropDown.dart';
@@ -333,9 +334,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                 Padding(padding: EdgeInsets.all(4),
                   child:Card(
                     child: Container(padding: EdgeInsets.all(8),
-                      child: Row(children: [
-
-                      ],),
+                      child:  ProductMetaSelections(callback: (){}, meta: '',),
                     ),
                   )
                   ,),
