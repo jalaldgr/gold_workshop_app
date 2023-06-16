@@ -339,7 +339,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                 Padding(padding: EdgeInsets.all(4),
                   child:Card(
                     child: Container(padding: EdgeInsets.all(8),
-                      child:  ProductMetaSelections(callback: onChangeProductMeta, meta: widget.order.orderMeta ,),
+                      child:  ProductMetaSelections(callback: onChangeProductMeta, meta: widget.order.orderMeta ,productType: productTypeDropDownValue,),
                     ),
                   )
                   ,),

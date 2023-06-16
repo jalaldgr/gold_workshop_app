@@ -6,8 +6,9 @@ import '../../../helper/serverApi.dart';
 
 class ProductMetaSelections extends StatefulWidget {
   String? meta;
+  String? productType;
   final Function callback;
-  ProductMetaSelections({super.key , required this.callback, required this.meta});
+  ProductMetaSelections({super.key , required this.callback, required this.meta,required this.productType});
 
 
   @override
@@ -18,6 +19,7 @@ class ProductMetaSelections extends StatefulWidget {
 class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
   String languageDropdownValue="فارسی";
   var languageItemList = ["انگلیسی","فارسی"];
+  Map<String,String>  _metaKeyValue={};
 
   @override
   void initState() {
@@ -31,17 +33,15 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
     return Column(
       children: [
         DropdownButtonFormField(
-          decoration: InputDecoration(labelText: "نوع مشتری"),
+          decoration: InputDecoration(labelText: "حالت پلاک"),
           value: languageDropdownValue,
           items: languageItemList.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
           onChanged: (String? value) {setState(() {
             languageDropdownValue = value!;
-            widget.meta = value;
-            widget.callback(value);
-
+            _metaKeyValue["plate_language"]= value;
+            widget.callback(_metaKeyValue.toString());
           });},
         )
-
        ],
     );
 
