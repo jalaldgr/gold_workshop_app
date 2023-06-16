@@ -32,7 +32,7 @@ class _Workshop1DropDownState extends State<Workshop1DropDown> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         DropdownButtonFormField(
-          decoration: InputDecoration(labelText: "کار گاه 1"),
+          decoration: InputDecoration(labelText: "کارگاه 1"),
           items: categoryItemlist.map((item) {
             return DropdownMenuItem(
               value: item,
