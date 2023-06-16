@@ -78,6 +78,12 @@ class EditOrderScreenState extends State<EditOrderScreen> {
       widget.order.designerFullName = value["fullName"];
     });
   }
+  onChangeProductMeta(value){
+    setState(() {
+      widget.order.orderMeta = value;
+      print(widget.order.orderMeta);
+    });
+  }
 
   onChangeWorkshop1DropDown(value){
     setState(() {
@@ -116,7 +122,6 @@ class EditOrderScreenState extends State<EditOrderScreen> {
       allowedExtensions: ['*'],
     );
       if(result?.paths[0]!=null){
-        print("${result?.paths[0]}");
 
         setState(() {
           _imageFile = File(result!.paths[0]!);
@@ -334,7 +339,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                 Padding(padding: EdgeInsets.all(4),
                   child:Card(
                     child: Container(padding: EdgeInsets.all(8),
-                      child:  ProductMetaSelections(callback: (){}, meta: '',),
+                      child:  ProductMetaSelections(callback: onChangeProductMeta, meta: widget.order.orderMeta ,),
                     ),
                   )
                   ,),
