@@ -156,6 +156,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    widget.order.orderMeta = {"plate_language": "انگلیسی", "plate_type": "تک حلقه", "plate_hack_type": "براق"}.toString();
     return Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black87),

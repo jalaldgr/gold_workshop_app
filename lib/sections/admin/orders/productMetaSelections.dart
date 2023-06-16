@@ -25,7 +25,7 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
   String plateHackTypeDropdownValue="براق";
   var plateHackTypeItemList = ["براق","مات","مات و براق"];
 
-  Map<String,String>  _metaKeyValue={};
+  Map<String,String>  _metaKeyValue={"plate_language": "انگلیسی", "plate_type": "تک حلقه", "plate_hack_type": "براق"};
 
   @override
   void initState() {
