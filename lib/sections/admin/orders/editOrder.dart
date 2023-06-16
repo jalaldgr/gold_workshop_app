@@ -176,7 +176,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                         Expanded(child: TextFormField(decoration: InputDecoration(hintText: "شماره تماس",labelText: "شماره تماس"),controller: contactEditTextController,),),
                         Expanded(child:Column(
                           children: [
-                            Text("نوع مشتری"),
+                            Text("نوع مشتری",style: TextStyle(fontSize: 13,color: Colors.black54)),
                             DropdownButton(
                               value: customerTypeDropDownValue,
                               items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
@@ -188,6 +188,16 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                           ],
                         )),
                         Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration(hintText: "تاریخ تحویل",labelText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
+                        Expanded(child:
+                        DropdownButton(
+                          value: statusDropDownValue,
+                          items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                          onChanged: (String? value) {setState(() {
+                            statusDropDownValue = value!;
+                            widget.order.status = value;
+                          });},)
+
+                        )
                       ],),
                     ) ,),
                 ),
@@ -351,16 +361,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                           widget.order.productType = value;
                         });},
                       )),
-    Expanded(child:
-    DropdownButton(
-    value: statusDropDownValue,
-    items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-    onChanged: (String? value) {setState(() {
-    statusDropDownValue = value!;
-    widget.order.status = value;
-    });},)
 
-    )
 
     ],)
                       ),
