@@ -174,6 +174,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                       child: Row(children: [
                         Expanded(child: TextFormField(decoration: InputDecoration(hintText: "نام مشتری",labelText: "نام مشتری"),controller: nameEditTextController,),),
                         Expanded(child: TextFormField(decoration: InputDecoration(hintText: "شماره تماس",labelText: "شماره تماس"),controller: contactEditTextController,),),
+                        Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration(hintText: "تاریخ تحویل",labelText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
                         Expanded(child:
                         DropdownButtonFormField(
                           decoration: InputDecoration(labelText: "نوع مشتری"),
@@ -184,7 +185,6 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                             widget.order.clientType = value;
                           });},
                         )),
-                        Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration(hintText: "تاریخ تحویل",labelText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
                         Expanded(child:
                         DropdownButtonFormField(
                           decoration: InputDecoration(labelText: "وضعیت سفارش"),
@@ -205,25 +205,33 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
+
                           Flexible(flex: 5,
-                              child: Row(children: [
-                            Expanded(
-                                child: Row(
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  hintText: "توضیحات سفارش",
+                                  labelText: "توضیحات سفارش",
+                                ),
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                controller: descriptionEditTextController,
+                              )),
+                          Flexible(flex: 2,
+                              child: Column(children: [
+                                Row(
                                   children: [
-                                    Text("تحویل فوری"),
+                                    Text("بیعانه"),
                                     Checkbox(
-                                        value: instantDeliveryCheckBoxValue,
+                                        value: feeCheckBoxValue,
                                         onChanged: (value) {
                                           setState(() {
-                                            instantDeliveryCheckBoxValue = value!;
-                                            widget.order.instantDelivery =
-                                            "${value}";
+                                            feeCheckBoxValue = value!;
+                                            widget.order.feeOrder = "${value}";
                                           });
                                         })
                                   ],
-                                )),
-                            Expanded(
-                                child: Row(
+                                ),
+                                Row(
                                   children: [
                                     Text("کاغذی"),
                                     Checkbox(
@@ -236,23 +244,22 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                                           });
                                         })
                                   ],
-                                )),
-                            Expanded(
-                                child: Row(
+                                ),
+                                Row(
                                   children: [
-                                    Text("بیعانه"),
+                                    Text("تحویل فوری"),
                                     Checkbox(
-                                        value: feeCheckBoxValue,
+                                        value: instantDeliveryCheckBoxValue,
                                         onChanged: (value) {
                                           setState(() {
-                                            feeCheckBoxValue = value!;
-                                            widget.order.feeOrder = "${value}";
+                                            instantDeliveryCheckBoxValue = value!;
+                                            widget.order.instantDelivery =
+                                            "${value}";
                                           });
                                         })
                                   ],
-                                )),
-                            Expanded(
-                                child: Row(
+                                ),
+                                Row(
                                   children: [
                                     Text("تحویل مشتری"),
                                     Checkbox(
@@ -266,22 +273,24 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                                           });
                                         })
                                   ],
-                                )),
-                          ],)),
-                          Flexible(flex: 5,
-                              child: Row(children: [
-                            Expanded(
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    hintText: "توضیحات سفارش",
-                                    labelText: "توضیحات سفارش",
-                                  ),
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: null,
-                                  controller: descriptionEditTextController,
-                                )),
-                          ],))
-                        ],
+                                ),
+
+
+
+                              ],)),
+                          Flexible(
+                                flex: 3,
+                                child: Row(
+                                  children: [
+
+
+
+                                    Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,hint: "${widget.order.designerFullName}",),),
+                                    Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: "${widget.order.workshop1fullName}",),),
+                                    Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: "${widget.order.workshop2fullName}",),),
+                                  ],
+                                ))
+                          ],
                       )
                     ),
                   ),),
@@ -370,9 +379,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                   child:Card(
                     child: Container(padding: EdgeInsets.all(8),
                       child: Row(children: [
-                        Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,hint: "${widget.order.designerFullName}",),),
-                        Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: "${widget.order.workshop1fullName}",),),
-                        Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: "${widget.order.workshop2fullName}",),),
+
                       ],),
                     ),
                   )
