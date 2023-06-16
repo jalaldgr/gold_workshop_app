@@ -310,7 +310,8 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                     Row(children: [
 
 
-                      Expanded(child: DropdownButton(
+                      Expanded(child: DropdownButtonFormField(
+                        decoration: InputDecoration(labelText: "نوع محصول"),
                         value: productTypeDropDownValue,
                         items: productTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                         onChanged: (String? value) {setState(() {
@@ -322,7 +323,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                       Expanded(child: TextFormField(decoration: InputDecoration(hintText: "وزن محصول",labelText: "وزن محصول"),controller: productWeightTextController,),),
                       Visibility(visible: !selectImage,
                           child: InkWell(
-                              child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}",width: 256,),
+                              child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}",width: 128,),
                               onTap: openImagePicker)
                       ),
                       Visibility(visible: selectImage,
