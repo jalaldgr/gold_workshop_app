@@ -38,11 +38,12 @@ class _OrdersListState extends State<OrdersList> {
           iconTheme: IconThemeData(color: Colors.black87),
           backgroundColor: Colors.pink,
           leading: IconButton(
-            tooltip: "بروزرسانی",
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          actions: <Widget>[IconButton(onPressed: (){setState(() {});}, icon: Icon(Icons.refresh))],
+          actions: <Widget>[IconButton(onPressed: (){setState(() {});},
+              tooltip: "بروزرسانی",
+              icon: Icon(Icons.refresh))],
           title: const Text('لیست سفارش ها',
               style: TextStyle(
                   color: Colors.black87,
