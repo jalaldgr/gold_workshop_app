@@ -35,6 +35,15 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
   String earringsHackTypeDropdownValue="براق";
   var earringsHackTypeDropDownItemList=["براق","مات","مات و براق"];
 
+  String braceletTypeDropdownValue="پرچی";
+  var braceletTypeDropDownItemList=["پرچی","دوختی"];
+
+  String braceletLeatherTypeDropdownValue="طبیعی";
+  var braceletleatherTypeDropDownItemList=["طبیعی","مصنوعی"];
+
+  String stoneAroundTypeDropdownValue="ساده";
+  var stoneAroundTypeDropDownItemList=["ساده","لوکس","طرح دار"];
+
 
   Map<String,String>  _metaKeyValue={"plate_language": "انگلیسی", "plate_type": "تک حلقه", "plate_hack_type": "براق"};
 
@@ -222,6 +231,128 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
 
           ],
         ),
+
+        Row(
+          children: [
+
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(
+                    hintText: "نوع سنگ", labelText: "نوع سنگ"),
+              ),
+            ),
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(
+                    hintText: "نوع دسته", labelText: "نوع دسته"),
+              ),
+            ),            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(
+                    hintText: "سایز دسته", labelText: "سایز دسته"),
+              ),
+            ),
+
+
+          ],
+        ),
+
+        Row(
+          children: [
+
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(
+                    hintText: "بخش بندی", labelText: "بخش بندی"),
+              ),
+            ),
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(
+                    hintText: "ابعاد محصول", labelText: "ابعاد محصول"),
+              ),
+            ),
+            Expanded(
+                child: DropdownButtonFormField(
+                  decoration: InputDecoration(labelText: "نوع دستبند"),
+                  value: braceletTypeDropdownValue,
+                  items: braceletTypeDropDownItemList.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      braceletTypeDropdownValue = value!;
+                      _metaKeyValue["bracelet_type"] = value;
+                      widget.callback(_metaKeyValue.toString());
+                    });
+                  },
+                )),
+            Expanded(
+                child: DropdownButtonFormField(
+                  decoration: InputDecoration(labelText: "نوع چرم"),
+                  value: braceletLeatherTypeDropdownValue,
+                  items: braceletleatherTypeDropDownItemList.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      braceletLeatherTypeDropdownValue = value!;
+                      _metaKeyValue["bracelet_leather_type"] = value;
+                      widget.callback(_metaKeyValue.toString());
+                    });
+                  },
+                )),
+
+
+
+          ],
+        ),
+
+        Row(
+          children: [
+
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(
+                    hintText: "نوع سنگ", labelText: "نوع سنگ"),
+              ),
+            ),
+            Expanded(
+              child: TextFormField(
+                decoration: InputDecoration(
+                    hintText: "ابعاد محصول", labelText: "ابعاد محصول"),
+              ),
+            ),
+            Expanded(
+                child: DropdownButtonFormField(
+                  decoration: InputDecoration(labelText: "نوع دوره سنگ"),
+                  value: stoneAroundTypeDropdownValue,
+                  items: stoneAroundTypeDropDownItemList.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    setState(() {
+                      stoneAroundTypeDropdownValue = value!;
+                      _metaKeyValue["stone_around_type"] = value;
+                      widget.callback(_metaKeyValue.toString());
+                    });
+                  },
+                )),
+
+
+
+          ],
+        ),
+
 
       ],
     );
