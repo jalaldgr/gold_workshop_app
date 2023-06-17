@@ -105,6 +105,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
       widget.order.description = descriptionEditTextController.text;
       widget.order.deliveryDate = deliverDateEditTextController.text;
       if(!selectImage)widget.order.image="";
+
     });
   }
   openDatePicker() async {
@@ -171,10 +172,11 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                   fontSize: 22.0)),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-        body: Container(
+        body: SingleChildScrollView(scrollDirection: Axis.vertical,
+          child: Stack(
+              children: [
+          Container(
           decoration: BoxDecoration(color: Colors.white38),
-          child:Form(
-            key: _formKey,
             child: Column(
               children: <Widget>[
                 Padding(padding: EdgeInsets.all(4)
@@ -400,9 +402,9 @@ class EditOrderScreenState extends State<EditOrderScreen> {
               ],
             ),
           )
-      ,)
+      ,])
 
 
-    );
+    ));
   }
 }
