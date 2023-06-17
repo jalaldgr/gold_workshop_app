@@ -216,7 +216,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                       child: Row(
                         children: [
 
-                          Flexible(flex: 5,
+                          Flexible(flex: 3,
                               child: TextFormField(
                                 decoration: InputDecoration(
                                   hintText: "توضیحات سفارش",
@@ -289,7 +289,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
 
                               ],)),
                           Flexible(
-                                flex: 3,
+                                flex: 5,
                                 child: Row(
                                   children: [
 
@@ -318,6 +318,45 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                         onChanged: (String? value) {setState(() {
                           productTypeDropDownValue = value!;
                           widget.order.productType = value;
+
+                          switch (productTypeDropDownValue){
+                            case "پلاک اسم":
+                              setState(() {
+                              widget.order.orderMeta = {"plate_language": "انگلیسی", "plate_type": "تک حلقه", "plate_hack_type": "براق"}.toString();
+                              });
+
+                              break;
+
+                            case "النگو":
+                              setState(() {
+                              widget.order.orderMeta = {"bangle_color": "زرد", "bangl_size": "نوزادی-0"}.toString();
+                              });
+                              break;
+
+                            case "گوشواره":
+                              setState(() {
+                              widget.order.orderMeta = {"earrings_type": "عصایی", "earrings_hack_type": "براق"}.toString();
+                              });
+                              break;
+
+                            case "دستبند":
+                              setState(() {
+                              widget.order.orderMeta = {"bracelet_type": "پرچی", "bracelet_leather_type": "طبیعی"}.toString();
+                              });
+                              break;
+
+                            case "دوره سنگ":
+                              setState(() {
+                              widget.order.orderMeta = {"stone_around_type": "ساده"}.toString();
+                              });
+                              break;
+                            default:
+                              widget.order.orderMeta = {}.toString();
+
+
+                          }
+
+
                         });},
                       )),
                       Expanded(child: TextFormField(decoration: InputDecoration(hintText: "کد محصول",labelText: "کد محصول"),controller: productCodeEditTextController,),),
