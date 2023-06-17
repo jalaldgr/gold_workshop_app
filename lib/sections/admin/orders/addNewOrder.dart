@@ -62,6 +62,7 @@ class NewOrderFormState extends State<NewOrderForm> {
   TextEditingController fileEditTextController=TextEditingController();
   TextEditingController productCodeEditTextController=TextEditingController();
   TextEditingController productWeightTextController=TextEditingController();
+
   File? _imageFile;
 
 
@@ -105,6 +106,8 @@ class NewOrderFormState extends State<NewOrderForm> {
       widget.order.clientMobile =  contactEditTextController.text;
       widget.order.description = descriptionEditTextController.text;
       widget.order.deliveryDate = deliverDateEditTextController.text;
+      widget.order.weight = productWeightTextController.text;
+      widget.order.code = productCodeEditTextController.text;
       widget.order.clientType = customerTypeDropDownValue;
       widget.order.status = statusDropDownValue;
       widget.order.productType = productTypeDropDownValue;

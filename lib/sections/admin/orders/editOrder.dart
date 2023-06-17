@@ -104,6 +104,8 @@ class EditOrderScreenState extends State<EditOrderScreen> {
       widget.order.clientMobile =  contactEditTextController.text;
       widget.order.description = descriptionEditTextController.text;
       widget.order.deliveryDate = deliverDateEditTextController.text;
+      widget.order.code = productCodeEditTextController.text;
+      widget.order.weight = productWeightTextController.text;
       if(!selectImage)widget.order.image="";
 
     });
@@ -138,6 +140,10 @@ class EditOrderScreenState extends State<EditOrderScreen> {
     contactEditTextController.text="${widget.order.clientMobile}";
     descriptionEditTextController.text="${widget.order.description}";
     deliverDateEditTextController.text="${widget.order.deliveryDate}";
+    productWeightTextController.text="${widget.order.weight}";
+    productCodeEditTextController.text="${widget.order.code}";
+
+
     instantDeliveryCheckBoxValue = widget.order.instantDelivery=="true"? true : false ;
     deliveryByCustomerCheckBoxValue = widget.order.customerDelivery=="true"? true : false ;
     deliveryPaperCheckBoxValue = widget.order.paperDelivery=="true"? true : false ;
@@ -145,6 +151,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
     customerTypeDropDownValue = widget.order.clientType!;
     statusDropDownValue = widget.order.status!;
     productTypeDropDownValue = widget.order.productType!;
+
   }
 
 
