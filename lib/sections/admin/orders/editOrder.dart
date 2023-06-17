@@ -223,8 +223,75 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                       padding: EdgeInsets.all(8),
                       child: Row(
                         children: [
+                          Flexible(flex: 2,
+                              child: Row(children: [
+                                Column(children: [
+                                  Row(
+                                    children: [
+                                      Text("بیعانه"),
+                                      Checkbox(
+                                          value: feeCheckBoxValue,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              feeCheckBoxValue = value!;
+                                              widget.order.feeOrder = "${value}";
+                                            });
+                                          })
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text("کاغذی"),
+                                      Checkbox(
+                                          value: deliveryPaperCheckBoxValue,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              deliveryPaperCheckBoxValue = value!;
+                                              widget.order.paperDelivery =
+                                              "${value}";
+                                            });
+                                          })
+                                    ],
+                                  ),
+                                ],),
+                                Column(children: [
+                                  Row(
+                                    children: [
+                                      Text("تحویل فوری"),
+                                      Checkbox(
+                                          value: instantDeliveryCheckBoxValue,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              instantDeliveryCheckBoxValue = value!;
+                                              widget.order.instantDelivery =
+                                              "${value}";
+                                            });
+                                          })
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text("تحویل مشتری"),
+                                      Checkbox(
+                                          value: deliveryByCustomerCheckBoxValue,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              deliveryByCustomerCheckBoxValue =
+                                              value!;
+                                              widget.order.customerDelivery =
+                                              "${value}";
+                                            });
+                                          })
+                                    ],
+                                  ),
 
-                          Flexible(flex: 3,
+                                ],)
+
+
+
+
+                              ],)),
+                          Flexible(flex: 2,
                               child: TextFormField(
                                 decoration: InputDecoration(
                                   hintText: "توضیحات سفارش",
@@ -234,70 +301,8 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                                 maxLines: null,
                                 controller: descriptionEditTextController,
                               )),
-                          Flexible(flex: 2,
-                              child: Column(children: [
-                                Row(
-                                  children: [
-                                    Text("بیعانه"),
-                                    Checkbox(
-                                        value: feeCheckBoxValue,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            feeCheckBoxValue = value!;
-                                            widget.order.feeOrder = "${value}";
-                                          });
-                                        })
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("کاغذی"),
-                                    Checkbox(
-                                        value: deliveryPaperCheckBoxValue,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            deliveryPaperCheckBoxValue = value!;
-                                            widget.order.paperDelivery =
-                                            "${value}";
-                                          });
-                                        })
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("تحویل فوری"),
-                                    Checkbox(
-                                        value: instantDeliveryCheckBoxValue,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            instantDeliveryCheckBoxValue = value!;
-                                            widget.order.instantDelivery =
-                                            "${value}";
-                                          });
-                                        })
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("تحویل مشتری"),
-                                    Checkbox(
-                                        value: deliveryByCustomerCheckBoxValue,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            deliveryByCustomerCheckBoxValue =
-                                            value!;
-                                            widget.order.customerDelivery =
-                                            "${value}";
-                                          });
-                                        })
-                                  ],
-                                ),
-
-
-
-                              ],)),
                           Flexible(
-                                flex: 5,
+                                flex: 4,
                                 child: Row(
                                   children: [
 
