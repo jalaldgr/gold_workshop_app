@@ -66,18 +66,30 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
               children: [
                 Expanded(
                   child: TextFormField(
+                    onChanged: (value){
+                      _metaKeyValue["نام پلاک"] = value;
+                      widget.callback(_metaKeyValue.toString());
+                    },
                     decoration: InputDecoration(
                         hintText: "نام پلاک", labelText: "نام پلاک"),
                   ),
                 ),
                 Expanded(
                   child: TextFormField(
+                    onChanged: (value){
+                      _metaKeyValue["بخش بندی"] = value;
+                      widget.callback(_metaKeyValue.toString());
+                    },
                     decoration: InputDecoration(
                         hintText: "بخش بندی", labelText: "بخش بندی"),
                   ),
                 ),
                 Expanded(
                   child: TextFormField(
+                    onChanged: (value){
+                      _metaKeyValue["ابعاد محصول"] = value;
+                      widget.callback(_metaKeyValue.toString());
+                    },
                     decoration: InputDecoration(
                         hintText: "ابعاد محصول", labelText: "ابعاد محصول"),
                   ),
@@ -95,14 +107,14 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                       onChanged: (String? value) {
                         setState(() {
                           plateLanguageDropdownValue = value!;
-                          _metaKeyValue["plate_language"] = value;
+                          _metaKeyValue["حالت پلاک"] = value;
                           widget.callback(_metaKeyValue.toString());
                         });
                       },
                     )),
                 Expanded(
                     child: DropdownButtonFormField(
-                      decoration: InputDecoration(labelText: "نوع"),
+                      decoration: InputDecoration(labelText: "نوع پلاک"),
                       value: plateTypeDropdownValue,
                       items: plateTypeItemList.map((String items) {
                         return DropdownMenuItem(
@@ -113,7 +125,7 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                       onChanged: (String? value) {
                         setState(() {
                           plateTypeDropdownValue = value!;
-                          _metaKeyValue["plate_type"] = value;
+                          _metaKeyValue["نوع پلاک"] = value;
                           widget.callback(_metaKeyValue.toString());
                         });
                       },
@@ -131,7 +143,7 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                       onChanged: (String? value) {
                         setState(() {
                           plateHackTypeDropdownValue = value!;
-                          _metaKeyValue["plate_hack_type"] = value;
+                          _metaKeyValue["نوع حک"] = value;
                           widget.callback(_metaKeyValue.toString());
                         });
                       },
@@ -147,6 +159,10 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
 
               Expanded(
                 child: TextFormField(
+                  onChanged: (value){
+                    _metaKeyValue["نوع طرح"] = value;
+                    widget.callback(_metaKeyValue.toString());
+                  },
                   decoration: InputDecoration(
                       hintText: "نوع طرح", labelText: "نوع طرح"),
                 ),
@@ -164,7 +180,7 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                     onChanged: (String? value) {
                       setState(() {
                         bangleColorDropdownValue = value!;
-                        _metaKeyValue["bangle_color"] = value;
+                        _metaKeyValue["رنگ"] = value;
                         widget.callback(_metaKeyValue.toString());
                       });
                     },
@@ -182,7 +198,7 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                     onChanged: (String? value) {
                       setState(() {
                         bangleSizeDropdownValue = value!;
-                        _metaKeyValue["bangl_size"] = value;
+                        _metaKeyValue["سایز"] = value;
                         widget.callback(_metaKeyValue.toString());
                       });
                     },
@@ -198,6 +214,10 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
 
             Expanded(
               child: TextFormField(
+                onChanged: (value){
+                  _metaKeyValue["ابعاد محصول"] = value;
+                  widget.callback(_metaKeyValue.toString());
+                },
                 decoration: InputDecoration(
                     hintText: "ابعاد محصول", labelText: "ابعاد محصول"),
               ),
@@ -215,7 +235,7 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                   onChanged: (String? value) {
                     setState(() {
                       earringsTypeDropDownValUe = value!;
-                      _metaKeyValue["earrings_type"] = value;
+                      _metaKeyValue["نوع گوشواره"] = value;
                       widget.callback(_metaKeyValue.toString());
                     });
                   },
@@ -233,7 +253,7 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                   onChanged: (String? value) {
                     setState(() {
                       earringsHackTypeDropdownValue = value!;
-                      _metaKeyValue["earrings_hack_type"] = value;
+                      _metaKeyValue["نوع حک"] = value;
                       widget.callback(_metaKeyValue.toString());
                     });
                   },
@@ -260,7 +280,7 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                     onChanged: (String? value) {
                       setState(() {
                         stoneAroundTypeDropdownValue = value!;
-                        _metaKeyValue["stone_type"] = value;
+                        _metaKeyValue["نوع سنگ"] = value;
                         widget.callback(_metaKeyValue.toString());
                       });
                     },
@@ -268,11 +288,19 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                 ),
                 Expanded(
                   child: TextFormField(
+                    onChanged: (value){
+                      _metaKeyValue["نوع دسته"] = value;
+                      widget.callback(_metaKeyValue.toString());
+                    },
                     decoration: InputDecoration(
                         hintText: "نوع دسته", labelText: "نوع دسته"),
                   ),
                 ),            Expanded(
                   child: TextFormField(
+                    onChanged: (value){
+                      _metaKeyValue["سایز دسته"] = value;
+                      widget.callback(_metaKeyValue.toString());
+                    },
                     decoration: InputDecoration(
                         hintText: "سایز دسته", labelText: "سایز دسته"),
                   ),
@@ -289,6 +317,10 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
 
               Expanded(
                 child: TextFormField(
+                  onChanged: (value){
+                    _metaKeyValue["بخش بندی"] = value;
+                    widget.callback(_metaKeyValue.toString());
+                  },
                   decoration: InputDecoration(
                       hintText: "بخش بندی", labelText: "بخش بندی"),
                 ),
