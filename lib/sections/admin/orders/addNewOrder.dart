@@ -9,6 +9,7 @@ import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 
+import 'productMetaSelections.dart';
 import 'workshop1DropDown.dart';
 import 'workshop2DropDown.dart';
 
@@ -59,6 +60,8 @@ class NewOrderFormState extends State<NewOrderForm> {
   TextEditingController deliverDateEditTextController=TextEditingController();
   TextEditingController imageEditTextController=TextEditingController();
   TextEditingController fileEditTextController=TextEditingController();
+  TextEditingController productCodeEditTextController=TextEditingController();
+  TextEditingController productWeightTextController=TextEditingController();
   File? _imageFile;
 
 
@@ -66,6 +69,12 @@ class NewOrderFormState extends State<NewOrderForm> {
   onSelectedRow( String row) async {
     setState(() {
 
+    });
+  }
+  onChangeProductMeta(value){
+    setState(() {
+      widget.order.orderMeta = value;
+      print(widget.order.orderMeta);
     });
   }
   onChangeDesignerDropDown(value){
@@ -162,187 +171,206 @@ class NewOrderFormState extends State<NewOrderForm> {
                   children: <Widget>[
                     Padding(padding: EdgeInsets.all(4)
                       ,child:
-                      Card(child:
-                        Container(padding: EdgeInsets.all(8),
+                      Card(
+                        child:Container( padding: EdgeInsets.all(8),
                           child: Row(children: [
-                            Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "نام مشتری"),controller: nameEditTextController,),),
-                            Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "شماره تماس"),controller: contactEditTextController,),),
-                            Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration.collapsed(hintText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
+                            Expanded(child: TextFormField(decoration: InputDecoration(hintText: "نام مشتری",labelText: "نام مشتری"),controller: nameEditTextController,),),
+                            Expanded(child: TextFormField(decoration: InputDecoration(hintText: "شماره تماس",labelText: "شماره تماس"),controller: contactEditTextController,),),
+                            Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration(hintText: "تاریخ تحویل",labelText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
                             Expanded(child:
-                            DropdownButton(
+                            DropdownButtonFormField(
+                              decoration: InputDecoration(labelText: "نوع مشتری"),
                               value: customerTypeDropDownValue,
                               items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                               onChanged: (String? value) {setState(() {
                                 customerTypeDropDownValue = value!;
+                                widget.order.clientType = value;
                               });},
                             )),
                             Expanded(child:
-                            DropdownButton(
+                            DropdownButtonFormField(
+                              decoration: InputDecoration(labelText: "وضعیت سفارش"),
                               value: statusDropDownValue,
                               items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                               onChanged: (String? value) {setState(() {
                                 statusDropDownValue = value!;
+                                widget.order.status = value;
                               });},)
 
-                            ),
+                            )
                           ],),
-                        ),),
+                        ) ,),
                     ),
                     Padding(padding: EdgeInsets.all(4),
-                      child:Card(
-                        child: Container( padding: EdgeInsets.all(8),
-                          child:
-                          Row(children: [
-                            Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "توضیحات"),controller: descriptionEditTextController,maxLines: null,)),
-                            Expanded(child:
-                            Row(children: [
-                              Expanded(child:
+                      child: Card(
+                        child: Container(
+                            padding: EdgeInsets.all(8),
+                            child: Row(
+                              children: [
 
-                              Row(children: [
-                                Text("تحویل فوری"),
-                                Checkbox(
-                                    value: instantDeliveryCheckBoxValue,
-                                    onChanged: (value) {setState(() {instantDeliveryCheckBoxValue = value!;
-                                    widget.order.instantDelivery = "${value}";
-                                    });})
-                              ],)
-                              ),
-                              Expanded(
-                                  child:
-                                  Row(children: [
-                                    Text("کاغذی"),
-                                    Checkbox(
-                                        value: deliveryPaperCheckBoxValue,
-                                        onChanged: (value) {setState(() {deliveryPaperCheckBoxValue = value!;
-                                        widget.order.paperDelivery = "${value}";
-                                        });})
-                                  ],)
-                              ),
-                              Expanded(child:
-                              Row(children: [
-                                Text("بیعانه"),
-                                Checkbox(
-                                    value: feeCheckBoxValue,
-                                    onChanged: (value) {setState(() {feeCheckBoxValue = value!;
-                                    widget.order.feeOrder = "${value}";
-                                    });})
-                              ],)
-                              ),
-                              Expanded(child:
-                              Row(children: [
-                                Text("تحویل مشتری"),
-                                Checkbox(
-                                    value: deliveryByCustomerCheckBoxValue,
-                                    onChanged: (value) {setState(() {deliveryByCustomerCheckBoxValue = value!;
-                                    widget.order.customerDelivery = "${value}";
-                                    });})
-                              ],)
-                              ),],)
+                                Flexible(flex: 3,
+                                    child: TextFormField(
+                                      decoration: InputDecoration(
+                                        hintText: "توضیحات سفارش",
+                                        labelText: "توضیحات سفارش",
+                                      ),
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: null,
+                                      controller: descriptionEditTextController,
+                                    )),
+                                Flexible(flex: 2,
+                                    child: Column(children: [
+                                      Row(
+                                        children: [
+                                          Text("بیعانه"),
+                                          Checkbox(
+                                              value: feeCheckBoxValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  feeCheckBoxValue = value!;
+                                                  widget.order.feeOrder = "${value}";
+                                                });
+                                              })
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("کاغذی"),
+                                          Checkbox(
+                                              value: deliveryPaperCheckBoxValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  deliveryPaperCheckBoxValue = value!;
+                                                  widget.order.paperDelivery =
+                                                  "${value}";
+                                                });
+                                              })
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("تحویل فوری"),
+                                          Checkbox(
+                                              value: instantDeliveryCheckBoxValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  instantDeliveryCheckBoxValue = value!;
+                                                  widget.order.instantDelivery =
+                                                  "${value}";
+                                                });
+                                              })
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text("تحویل مشتری"),
+                                          Checkbox(
+                                              value: deliveryByCustomerCheckBoxValue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  deliveryByCustomerCheckBoxValue =
+                                                  value!;
+                                                  widget.order.customerDelivery =
+                                                  "${value}";
+                                                });
+                                              })
+                                        ],
+                                      ),
+
+
+
+                                    ],)),
+                                Flexible(
+                                    flex: 5,
+                                    child: Row(
+                                      children: [
+
+
+
+                                        Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,hint: "${widget.order.designerFullName}",),),
+                                        Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: "${widget.order.workshop1fullName}",),),
+                                        Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: "${widget.order.workshop2fullName}",),),
+                                      ],
+                                    ))
+                              ],
                             )
-
-                          ],),),
-                      )
-
-                      ,),
+                        ),
+                      ),),
                     SizedBox(height: 32,),
                     Padding(padding: EdgeInsets.all(4),
                       child:Card(
                         child: Container(padding: EdgeInsets.all(8),
-                          child:
-                          Row(children: [
-                            InkWell(
-                              onTap: (){openImagePicker();},
-                              child:
-                              _imageFile != null ? Image.file(_imageFile!,height: 256,  ): const Text('برای انتخاب عکس کلیک کنید'),
-                            ),
-
-                            Expanded(child:
-                            Container(padding: EdgeInsets.all(8),
-                              child:Column(children: [
-                                Row(
-                                  children: [
-                                    Expanded(child:DropdownButton(
-                                      hint: Text("ویژگی"),
-                                      value: orderMetaDropDownValue,
-                                      items: orderMetaDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                                      onChanged: (String? value) {
-                                        setState(() {
-                                          orderMetaDropDownValue = value!;
-                                          orderMetaKeyEditTextController.text=value;
-                                          orderMetaValueEditTextController.text='';
-
-                                        });
-                                        // widget.order
-                                      },
-                                    )),
+                            child:
+                            Row(children: [
 
 
-                                    Expanded(child:IconButton( onPressed: (){
+                              Expanded(child: DropdownButtonFormField(
+                                decoration: InputDecoration(labelText: "نوع محصول"),
+                                value: productTypeDropDownValue,
+                                items: productTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                                onChanged: (String? value) {setState(() {
+                                  productTypeDropDownValue = value!;
+                                  widget.order.productType = value;
+
+                                  switch (productTypeDropDownValue){
+                                    case "پلاک اسم":
                                       setState(() {
-                                        tableItem.add(DataRow(cells: [DataCell(Text("${orderMetaKeyEditTextController.text}")),DataCell(Text("${orderMetaValueEditTextController.text}"))]
-                                          // ,onSelectChanged:(b) {onSelectedRow("asd");}
-                                        ));
-
+                                        widget.order.orderMeta = {"plate_language": "انگلیسی", "plate_type": "تک حلقه", "plate_hack_type": "براق"}.toString();
                                       });
-                                    }, icon: Icon(Icons.add),),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(height: 16,),
-                                Row(children: [
-                                  Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "ویژگی"),controller: orderMetaKeyEditTextController,)),
-                                  Expanded(child: TextFormField(decoration: InputDecoration.collapsed(hintText: "مقدار"),controller: orderMetaValueEditTextController,)),
-                                ],),
 
-                                DataTable(
-                                  columns: const <DataColumn>[
-                                    DataColumn(
-                                      label: Text(
-                                        'ویژگی',
-                                        style: TextStyle(fontStyle: FontStyle.italic),
-                                      ),
-                                    ),
-                                    DataColumn(
-                                      label: Text(
-                                        'مقدار',
-                                        style: TextStyle(fontStyle: FontStyle.italic),
-                                      ),
-                                    ),
+                                      break;
 
-                                  ],
-                                  rows: tableItem,
-                                )
-                              ],) ,
-                            )
+                                    case "النگو":
+                                      setState(() {
+                                        widget.order.orderMeta = {"bangle_color": "زرد", "bangl_size": "نوزادی-0"}.toString();
+                                      });
+                                      break;
+
+                                    case "گوشواره":
+                                      setState(() {
+                                        widget.order.orderMeta = {"earrings_type": "عصایی", "earrings_hack_type": "براق"}.toString();
+                                      });
+                                      break;
+
+                                    case "دستبند":
+                                      setState(() {
+                                        widget.order.orderMeta = {"bracelet_type": "پرچی", "bracelet_leather_type": "طبیعی"}.toString();
+                                      });
+                                      break;
+
+                                    case "دوره سنگ":
+                                      setState(() {
+                                        widget.order.orderMeta = {"stone_around_type": "ساده"}.toString();
+                                      });
+                                      break;
+                                    default:
+                                      widget.order.orderMeta = {}.toString();
 
 
+                                  }
 
-                            ),
-                            Expanded(child: DropdownButton(
-                              value: productTypeDropDownValue,
-                              items: productTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                              onChanged: (String? value) {setState(() {
-                                productTypeDropDownValue = value!;
-                              });},
-                            ))
-                          ],),
+
+                                });},
+                              )),
+                              Expanded(child: TextFormField(decoration: InputDecoration(hintText: "کد محصول",labelText: "کد محصول"),controller: productCodeEditTextController,),),
+                              Expanded(child: TextFormField(decoration: InputDecoration(hintText: "وزن محصول",labelText: "وزن محصول"),controller: productWeightTextController,),),
+                              InkWell(
+                                onTap: (){openImagePicker();},
+                                child:
+                                _imageFile != null ? Image.file(_imageFile!,height: 256,  ): const Text('برای انتخاب عکس کلیک کنید'),
+                              ),
+
+                            ],)
                         ),
-                      )
-                      
-                      ,),
+                      ),
+                    ),
 
                     Padding(padding: EdgeInsets.all(4),
                       child:Card(
                         child: Container(padding: EdgeInsets.all(8),
-                          child:
-                          Row(children: [
-                            Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown, hint: "طراح"),),
-                            Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: "کارگاه 1",),),
-                            Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: "کارگاه 2",),),
-                          ],),
+                          child:  ProductMetaSelections(callback: onChangeProductMeta, meta: widget.order.orderMeta ,productType: productTypeDropDownValue,),
                         ),
                       )
-
                       ,),
                     Container(padding: EdgeInsets.all(4),
                     child:SizedBox(height: 64,width: size.width,
