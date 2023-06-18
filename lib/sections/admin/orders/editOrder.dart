@@ -183,12 +183,19 @@ class EditOrderScreenState extends State<EditOrderScreen> {
           child: Stack(
               children: [
           Container(
-          decoration: BoxDecoration(color: Colors.white38),
+          decoration: BoxDecoration(color: widget.order.status=="در انتظار بررسی"?Colors.lightGreenAccent.withOpacity(0.1):
+          widget.order.status=="تکمیل نهایی"?Colors.lightGreen.withOpacity(0.3):
+          widget.order.status=="ارسال به طراح"?Colors.lightBlueAccent.withOpacity(0.1):
+          widget.order.status=="ارسال به کارگاه"?Colors.amberAccent.withOpacity(0.1):
+          widget.order.status=="برگشت از طراح"?Colors.lightBlue.withOpacity(0.3):
+          widget.order.status=="برگشت از کارگاه"?Colors.amber.withOpacity(0.3)  :
+          Colors.redAccent.withOpacity(0.3),
+          ),
             child: Column(
               children: <Widget>[
-                Padding(padding: EdgeInsets.all(4)
+                Padding(padding: EdgeInsets.all(8)
                 ,child:Card(
-                    child:Container( padding: EdgeInsets.all(8),
+                    child:Container( padding: EdgeInsets.all(16),
                       child: Row(children: [
                         Expanded(child: TextFormField(decoration: InputDecoration(hintText: "نام مشتری",labelText: "نام مشتری"),controller: nameEditTextController,),),
                         Expanded(child: TextFormField(decoration: InputDecoration(hintText: "شماره تماس",labelText: "شماره تماس"),controller: contactEditTextController,),),
@@ -217,10 +224,10 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                       ],),
                     ) ,),
                 ),
-                Padding(padding: EdgeInsets.all(4),
+                Padding(padding: EdgeInsets.all(8),
                  child: Card(
                     child: Container(
-                      padding: EdgeInsets.all(8),
+                      padding: EdgeInsets.all(16),
                       child: Row(
                         children: [
                           Flexible(flex: 2,
@@ -317,9 +324,9 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                       )
                     ),
                   ),),
-                Padding(padding: EdgeInsets.all(4),
+                Padding(padding: EdgeInsets.all(8),
                   child:Card(
-                    child: Container(padding: EdgeInsets.all(8),
+                    child: Container(padding: EdgeInsets.all(16),
                     child:
                     Row(children: [
 
@@ -390,26 +397,29 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                   ),
                 ),
 
-                Padding(padding: EdgeInsets.all(4),
+                Padding(padding: EdgeInsets.all(8),
                   child:Card(
-                    child: Container(padding: EdgeInsets.all(8),
+                    child: Container(padding: EdgeInsets.all(16),
                       child:  ProductMetaSelections(callback: onChangeProductMeta, meta: widget.order.orderMeta ,productType: productTypeDropDownValue,),
                     ),
                   )
                   ,),
-                 Padding(padding: const EdgeInsets.all(4)
-                 ,child:SizedBox(width: size.width-4,height: 64,
-                     child: ElevatedButton(onPressed: () async {
-                       collectFields();
-                       print("${widget.order.toJson()}");
+                SizedBox(height: 32,),
+                Padding(padding: const EdgeInsets.all(8)
+                  ,child:SizedBox(width: size.width-8,height: 64,
+                    child: ElevatedButton(onPressed: () async {
+                      collectFields();
+                      print("${widget.order.toJson()}");
 
-                       var res = await AdminApi.updateOrder(widget.order);
-                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                       Navigator.pop(context);
+                      var res = await AdminApi.updateOrder(widget.order);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                      Navigator.pop(context);
 
-                     }, child: Text("بروزرسانی"),),
-                   ),
-                 )
+                    }, child: Text("بروزرسانی"),),
+                  ),
+                ),
+                SizedBox(height: 348,)
+
                 // Add TextFormFields and ElevatedButton here.
               ],
             ),
