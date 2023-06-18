@@ -18,8 +18,8 @@ class OrdersList extends StatefulWidget {
 
 class _OrdersListState extends State<OrdersList> {
 
-
-  TextEditingController _searchController = TextEditingController();
+  String _listState = "orders";
+  String _searchKeyword = "keyword";
 
 
   @override
@@ -39,7 +39,7 @@ class _OrdersListState extends State<OrdersList> {
             onPressed: () => Navigator.of(context).pop(),
           ),
           actions: <Widget>[
-            IconButton(onPressed: (){setState(() {});},
+            IconButton(onPressed: (){setState(() {_listState="orders";});},
               tooltip: "بروزرسانی",
               icon: Icon(Icons.refresh)),
 
@@ -68,7 +68,7 @@ class _OrdersListState extends State<OrdersList> {
             children: [
               Center(
                 child: FutureBuilder(
-                  future: AdminApi.getOrders(),
+                  future:_listState=="orders"? AdminApi.getOrders():AdminApi.searchOrders(_searchKeyword),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<orderData>> snapshot) =>
                   snapshot.hasData && snapshot.data!.isNotEmpty
@@ -162,8 +162,14 @@ class _OrdersListState extends State<OrdersList> {
 
 
   _searchOrders(s)async{
-  var serachResponse = await AdminApi.searchOrders(s);
-    print(serachResponse.length);
+    print("trig search");
+    if(s.toString().length>3){
+      setState(() {
+        _listState="search";
+        _searchKeyword = s;
+      });
+    }
+
   }
 
   Widget _buildOrderItem(BuildContext context,

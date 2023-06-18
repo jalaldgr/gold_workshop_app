@@ -349,7 +349,11 @@ class AdminApi {
     );
 
     List jsonResponse = json.decode(response.body);
-    return jsonResponse.map((myMap) => orderData.fromJson(myMap)).toList();
+    if(jsonResponse.length>0)
+      return jsonResponse.map((myMap) => orderData.fromJson(myMap)).toList();
+    else
+      return jsonResponse.map((myMap) => orderData.fromJson({})).toList();
+
 
 
   }
