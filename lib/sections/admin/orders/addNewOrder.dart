@@ -133,6 +133,7 @@ class NewOrderFormState extends State<NewOrderForm> {
     setState(() {
       fileEditTextController.text = "${result?.paths[0]}";
       widget.order.designerFile = "${result?.paths[0]}".replaceAll("\\", "\\\\");
+
     });
   }
   openImagePicker() async {
@@ -149,6 +150,7 @@ class NewOrderFormState extends State<NewOrderForm> {
   }
   @override
   Widget build(BuildContext context) {
+
     // Build a Form widget using the _formKey created above.
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -169,13 +171,20 @@ class NewOrderFormState extends State<NewOrderForm> {
           child: Stack(
             children: [
               Container(
-                decoration: BoxDecoration(color: Colors.white38),
+                decoration: BoxDecoration(color: widget.order.status=="لغو شده"?Colors.redAccent.withOpacity(0.3):
+                widget.order.status=="تکمیل نهایی"?Colors.lightGreen.withOpacity(0.3):
+                widget.order.status=="ارسال به طراح"?Colors.lightBlueAccent.withOpacity(0.1):
+                widget.order.status=="ارسال به کارگاه"?Colors.amberAccent.withOpacity(0.1):
+                widget.order.status=="برگشت از طراح"?Colors.lightBlue.withOpacity(0.3):
+                widget.order.status=="برگشت از کارگاه"?Colors.amber.withOpacity(0.3)  :
+                Colors.lightGreenAccent.withOpacity(0.1),
+                ),
                 child: Column(
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.all(4)
+                    Padding(padding: EdgeInsets.all(8)
                       ,child:
                       Card(
-                        child:Container( padding: EdgeInsets.all(8),
+                        child:Container( padding: EdgeInsets.all(16),
                           child: Row(children: [
                             Expanded(child: TextFormField(decoration: InputDecoration(hintText: "نام مشتری",labelText: "نام مشتری"),controller: nameEditTextController,),),
                             Expanded(child: TextFormField(decoration: InputDecoration(hintText: "شماره تماس",labelText: "شماره تماس"),controller: contactEditTextController,),),
@@ -204,10 +213,10 @@ class NewOrderFormState extends State<NewOrderForm> {
                           ],),
                         ) ,),
                     ),
-                    Padding(padding: EdgeInsets.all(4),
+                    Padding(padding: EdgeInsets.all(8),
                       child: Card(
                         child: Container(
-                            padding: EdgeInsets.all(8),
+                            padding: EdgeInsets.all(16),
                             child: Row(
                               children: [
                                 Flexible(flex: 2,
@@ -305,9 +314,9 @@ class NewOrderFormState extends State<NewOrderForm> {
                         ),
                       ),),
                     SizedBox(height: 32,),
-                    Padding(padding: EdgeInsets.all(4),
+                    Padding(padding: EdgeInsets.all(8),
                       child:Card(
-                        child: Container(padding: EdgeInsets.all(8),
+                        child: Container(padding: EdgeInsets.all(16),
                             child:
                             Row(children: [
 
@@ -373,14 +382,14 @@ class NewOrderFormState extends State<NewOrderForm> {
                       ),
                     ),
 
-                    Padding(padding: EdgeInsets.all(4),
+                    Padding(padding: EdgeInsets.all(8),
                       child:Card(
-                        child: Container(padding: EdgeInsets.all(8),
+                        child: Container(padding: EdgeInsets.all(16),
                           child:  ProductMetaSelections(callback: onChangeProductMeta, meta: widget.order.orderMeta ,productType: productTypeDropDownValue,),
                         ),
                       )
                       ,),
-                    Container(padding: EdgeInsets.all(4),
+                    Container(padding: EdgeInsets.all(8),
                     child:SizedBox(height: 64,width: size.width,
                       child:
                       ElevatedButton(onPressed: () async {
@@ -394,8 +403,8 @@ class NewOrderFormState extends State<NewOrderForm> {
 
                       }, child: Text("ثبت سفارش"),)
                       ,)
-                      ,)
-                    ,
+                      ,),
+                    SizedBox(height: 348,),
 
                     // Add TextFormFields and ElevatedButton here.
                   ],
