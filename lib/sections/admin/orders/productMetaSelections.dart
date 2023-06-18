@@ -71,9 +71,26 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
       if(meta["سایز دسته"].toString().length>0)stoneHandleSizeTextController.text = meta["سایز دسته"]??"";
       if(meta["بخش بندی"].toString().length>0)braceletSectionTextController.text = meta["بخش بندی"]??"";
 
+      if(meta["حالت پلاک"].toString().length>0)plateLanguageDropdownValue = meta["حالت پلاک"]??"فارسی";
+      if(meta["نوع حک"].toString().length>0)plateHackTypeDropdownValue = meta["نوع حک"]??"براق";
+      if(meta["نوع پلاک"].toString().length>0)plateTypeDropdownValue = meta["نوع پلاک"]??"تک حلقه";
+      if(meta["رنگ"].toString().length>0)bangleColorDropdownValue = meta["رنگ"]??"زرد";
+      if(meta["سایز"].toString().length>0)bangleSizeDropdownValue = meta["سایز"]??"نوزادی-0";
+      if(meta["نوع دستبند"].toString().length>0)braceletTypeDropdownValue = meta["نوع دستبند"]??"پرچی";
+      if(meta["نوع چرم"].toString().length>0)braceletLeatherTypeDropdownValue = meta["نوع چرم"]??"طبیعی";
+      if(meta["نوع گوشواره"].toString().length>0)earringsTypeDropDownValUe = meta["نوع گوشواره"]??"عصایی";
+      if(meta["نوع حک"].toString().length>0)earringsHackTypeDropdownValue = meta["نوع حک"]??"براق";
+      if(meta["نوع سنگ"].toString().length>0)stoneAroundTypeDropdownValue = meta["نوع سنگ"]??"ساده";
+
+
+
+
+
+
+
+
 
     }
-
   }
 
   @override
@@ -377,7 +394,7 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                     onChanged: (String? value) {
                       setState(() {
                         braceletTypeDropdownValue = value!;
-                        _metaKeyValue["bracelet_type"] = value;
+                        _metaKeyValue["نوع دستبند"] = value;
                         widget.callback(jsonEncode(_metaKeyValue));
                       });
                     },
@@ -395,7 +412,7 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                     onChanged: (String? value) {
                       setState(() {
                         braceletLeatherTypeDropdownValue = value!;
-                        _metaKeyValue["bracelet_leather_type"] = value;
+                        _metaKeyValue["نوع چرم"] = value;
                         widget.callback(jsonEncode(_metaKeyValue));
                       });
                     },
