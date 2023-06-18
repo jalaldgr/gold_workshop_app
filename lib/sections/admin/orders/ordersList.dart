@@ -1,14 +1,10 @@
-import 'dart:async';
-import 'dart:convert';
+
+import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gold_workshop/models/orderModel.dart';
-import 'package:gold_workshop/models/userModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:gold_workshop/sections/admin/orders/addNewOrder.dart';
 import 'package:gold_workshop/sections/admin/orders/editOrder.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../helper/serverApi.dart';
 
 
@@ -21,9 +17,9 @@ class OrdersList extends StatefulWidget {
 }
 
 class _OrdersListState extends State<OrdersList> {
-  TextEditingController fullNameController=TextEditingController();
-  TextEditingController userNameController=TextEditingController();
-  TextEditingController passwordController=TextEditingController();
+
+
+  TextEditingController _searchController = TextEditingController();
 
 
   @override
@@ -37,18 +33,32 @@ class _OrdersListState extends State<OrdersList> {
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black87),
           backgroundColor: Colors.pink,
+          flexibleSpace: Container(),
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          actions: <Widget>[IconButton(onPressed: (){setState(() {});},
+          actions: <Widget>[
+            IconButton(onPressed: (){setState(() {});},
               tooltip: "بروزرسانی",
-              icon: Icon(Icons.refresh))],
-          title: const Text('لیست سفارش ها',
-              style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22.0)),
+              icon: Icon(Icons.refresh)),
+
+          ],
+
+          title: Container(
+            height: 48,
+            child:
+            EasySearchBar(
+              onSearch: (s) => _searchOrders(s),
+              title: const Text('لیست سفارش ها',
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.0)),
+            ),
+
+          ),
+
         ),
         drawer: SideMenuAdmin(),
         backgroundColor: Colors.white,
@@ -106,9 +116,7 @@ class _OrdersListState extends State<OrdersList> {
                       : CircularProgressIndicator(),
                 ),
               )
-            ],),)
-
-        ,
+            ],),),
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           tooltip: "سفارش جدید",
@@ -148,12 +156,13 @@ class _OrdersListState extends State<OrdersList> {
                     }),)));
           } ,
         )
-
     );
   }
 
 
-
+  _searchOrders(s)async{
+    print(s);
+  }
 
   Widget _buildOrderItem(BuildContext context,
        orderData? order,int? index) {
@@ -201,7 +210,6 @@ class _OrdersListState extends State<OrdersList> {
           ),
         ),
       )
-
       ,),);
   }
 }
