@@ -111,6 +111,7 @@ class NewOrderFormState extends State<NewOrderForm> {
       widget.order.clientType = customerTypeDropDownValue;
       widget.order.status = statusDropDownValue;
       widget.order.productType = productTypeDropDownValue;
+      widget.order.orderDate = Jalali.now().formatFullDate();
 
     });
   }
