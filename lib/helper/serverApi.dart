@@ -338,4 +338,20 @@ class AdminApi {
 
 
 
+
+  /////////////////////////// Orders ////////////////////////
+  static Future<List<orderData>> searchOrders(s) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+    final response = await http.get(
+      Uri.parse('${dotenv.env['API_URL']}/admin/search/${s}'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((myMap) => orderData.fromJson(myMap)).toList();
+
+
+  }
+
 }

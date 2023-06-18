@@ -160,8 +160,10 @@ class _OrdersListState extends State<OrdersList> {
   }
 
 
+
   _searchOrders(s)async{
-    print(s);
+  var serachResponse = await AdminApi.searchOrders(s);
+    print(serachResponse.length);
   }
 
   Widget _buildOrderItem(BuildContext context,
