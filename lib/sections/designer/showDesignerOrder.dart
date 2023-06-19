@@ -211,29 +211,55 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                       child:Visibility(visible: widget.order.status=="ارسال به طراح"?true:false,
                         child:Card(
                           child: Container(margin: EdgeInsets.all(16),
-                            child:
-                            Row(
-                              children: [
-                                Expanded(child:TextFormField(onTap: openImagePicker,controller: imageEditTextController,decoration: InputDecoration(hintText: "انتخاب فایل"),),),
-                                Expanded(child:
-                                Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
-                                  OutlinedButton(onPressed: () async {
-                                    var res = await DesignerApi.SendOrderFileDesigner(widget.order);
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                                    Navigator.pop(context);
-                                  }, child: Padding(padding: EdgeInsets.all(16),child:  Text("ارسال فایل") )
+                            child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Padding(padding: EdgeInsets.all(16),
+                                    child:
+                                    TextFormField(
+                                      onTap: openImagePicker,
+                                      controller: imageEditTextController,
+                                      decoration: InputDecoration(
+                                          hintText: "انتخاب فایل",
+                                          labelText: "انتخاب فایل"),
+                                      textAlign: TextAlign.center,
+                                    )
+                                      ,),
                                   ),
-                                  SizedBox(height: 16,),
-                                  ElevatedButton(onPressed: () async {
-                                    var res = await DesignerApi.completeOrderDesigner(widget.order);
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                                    Navigator.pop(context);
-                                  }, child: Padding(padding: EdgeInsets.all(16),child: Text("تکمیل سفارش"))
-                                  ),
-                                ],)
-                                ),
-                              ],
-                            ),
+                                  Expanded(
+                                      child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      OutlinedButton(
+                                          onPressed: () async {
+                                            var res = await DesignerApi.SendOrderFileDesigner(widget.order);
+                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                            Navigator.pop(context);
+                                          },
+                                          child: Padding(
+                                              padding: EdgeInsets.all(16),
+                                              child: Text("ارسال فایل"))),
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      ElevatedButton(
+                                          onPressed: () async {
+                                            var res = await DesignerApi
+                                                .completeOrderDesigner(
+                                                    widget.order);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    content: Text("${res}")));
+                                            Navigator.pop(context);
+                                          },
+                                          child: Padding(
+                                              padding: EdgeInsets.all(16),
+                                              child: Text("تکمیل سفارش"))),
+                                    ],
+                                  )),
+                                ],
+                              ),
                           ),
                         )
                         ,),
