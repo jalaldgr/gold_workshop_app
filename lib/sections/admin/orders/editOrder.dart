@@ -10,6 +10,7 @@ import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
 import 'package:gold_workshop/sections/admin/orders/productMetaSelections.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'workshop1DropDown.dart';
 import 'workshop2DropDown.dart';
@@ -366,7 +367,29 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                     ),
                   )
                   ,),
-                SizedBox(height: 32,),
+                Padding(padding: EdgeInsets.all(8),
+                  child:Card(
+                    child: Row(
+                      children: [
+                        Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                          launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.designerFile}"));
+
+                        }, child: Text("فایل طراح"),) ,),),
+                        Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                          launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.workshop1File}"));
+
+                        }, child: Text("فایل کارگاه یک"),) ,),),
+                        Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                          launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.workshop2File}"));
+
+                        }, child: Text("فایل کارگاه دو"),) ,),),
+
+                      ],
+                    ),
+                    
+                  )
+                  ,),
+
                 Padding(padding: const EdgeInsets.all(8)
                   ,child:SizedBox(width: size.width-8,height: 64,
                     child: ElevatedButton(onPressed: () async {
@@ -379,7 +402,8 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                     }, child: Text("بروزرسانی"),),
                   ),
                 ),
-                SizedBox(height: 348,)
+
+                SizedBox(height: 256,)
 
                 // Add TextFormFields and ElevatedButton here.
               ],
