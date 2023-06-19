@@ -339,44 +339,6 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                           productTypeDropDownValue = value!;
                           widget.order.productType = value;
 
-                          switch (productTypeDropDownValue){
-                            case "پلاک اسم":
-                              setState(() {
-                              widget.order.orderMeta = {"plate_language": "انگلیسی", "plate_type": "تک حلقه", "plate_hack_type": "براق"}.toString();
-                              });
-
-                              break;
-
-                            case "النگو":
-                              setState(() {
-                              widget.order.orderMeta = {"bangle_color": "زرد", "bangl_size": "نوزادی-0"}.toString();
-                              });
-                              break;
-
-                            case "گوشواره":
-                              setState(() {
-                              widget.order.orderMeta = {"earrings_type": "عصایی", "earrings_hack_type": "براق"}.toString();
-                              });
-                              break;
-
-                            case "دستبند":
-                              setState(() {
-                              widget.order.orderMeta = {"bracelet_type": "پرچی", "bracelet_leather_type": "طبیعی"}.toString();
-                              });
-                              break;
-
-                            case "دوره سنگ":
-                              setState(() {
-                              widget.order.orderMeta = {"stone_around_type": "ساده"}.toString();
-                              });
-                              break;
-                            default:
-                              widget.order.orderMeta = {}.toString();
-
-
-                          }
-
-
                         });},
                       )),
                       Expanded(child: TextFormField(decoration: InputDecoration(hintText: "کد محصول",labelText: "کد محصول"),controller: productCodeEditTextController,),),
@@ -409,7 +371,6 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                   ,child:SizedBox(width: size.width-8,height: 64,
                     child: ElevatedButton(onPressed: () async {
                       collectFields();
-                      print("${widget.order.toJson()}");
 
                       var res = await AdminApi.updateOrder(widget.order);
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));

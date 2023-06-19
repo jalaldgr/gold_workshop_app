@@ -50,6 +50,7 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
   TextEditingController plateDimensionsTextController = TextEditingController();
   TextEditingController bangleStyleTextController = TextEditingController();
   TextEditingController braceletSectionTextController = TextEditingController();
+  TextEditingController braceletDimensionsTextController = TextEditingController();
   TextEditingController earringsDimensionsTextController = TextEditingController();
   TextEditingController stoneHandleTypeTextController = TextEditingController();
   TextEditingController stoneHandleSizeTextController = TextEditingController();
@@ -59,45 +60,96 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
 
   @override
   void initState() {
-    print(widget.meta);
-    if(widget.meta!.length>0){
-      dynamic meta =json.decode(widget.meta!);
-      if(meta["نام پلاک"].toString().length>0)plateNameTextController.text = meta["نام پلاک"]??"";
-      if(meta["بخش بندی"].toString().length>0)plateSectionTextController.text = meta["بخش بندی"]??"";
-      if(meta["ابعاد محصول"].toString().length>0)plateDimensionsTextController.text = meta["ابعاد محصول"]??"";
-      if(meta["نوع طرح"].toString().length>0)bangleStyleTextController.text = meta["نوع طرح"]??"";
-      if(meta["ابعاد محصول"].toString().length>0)earringsDimensionsTextController.text = meta["ابعاد محصول"]??"";
-      if(meta["نوع دسته"].toString().length>0)stoneHandleTypeTextController.text = meta["نوع دسته"]??"";
-      if(meta["سایز دسته"].toString().length>0)stoneHandleSizeTextController.text = meta["سایز دسته"]??"";
-      if(meta["بخش بندی"].toString().length>0)braceletSectionTextController.text = meta["بخش بندی"]??"";
 
-      if(meta["حالت پلاک"].toString().length>0)plateLanguageDropdownValue = meta["حالت پلاک"]??"فارسی";
-      if(meta["نوع حک"].toString().length>0)plateHackTypeDropdownValue = meta["نوع حک"]??"براق";
-      if(meta["نوع پلاک"].toString().length>0)plateTypeDropdownValue = meta["نوع پلاک"]??"تک حلقه";
-      if(meta["رنگ"].toString().length>0)bangleColorDropdownValue = meta["رنگ"]??"زرد";
-      if(meta["سایز"].toString().length>0)bangleSizeDropdownValue = meta["سایز"]??"نوزادی-0";
-      if(meta["نوع دستبند"].toString().length>0)braceletTypeDropdownValue = meta["نوع دستبند"]??"پرچی";
-      if(meta["نوع چرم"].toString().length>0)braceletLeatherTypeDropdownValue = meta["نوع چرم"]??"طبیعی";
-      if(meta["نوع گوشواره"].toString().length>0)earringsTypeDropDownValUe = meta["نوع گوشواره"]??"عصایی";
-      if(meta["نوع حک"].toString().length>0)earringsHackTypeDropdownValue = meta["نوع حک"]??"براق";
-      if(meta["نوع سنگ"].toString().length>0)stoneAroundTypeDropdownValue = meta["نوع سنگ"]??"ساده";
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    switch(widget.productType){
+      case 'پلاک اسم':
+        if(widget.meta!.length>0){
+          dynamic meta =json.decode(widget.meta!);
+          _metaKeyValue={}; //reset order meta list
+          if(meta["نام پلاک"].toString().length>0)plateNameTextController.text = meta["نام پلاک"]??"";
+          if(meta["بخش بندی"].toString().length>0)plateSectionTextController.text = meta["بخش بندی"]??"";
+          if(meta["ابعاد محصول"].toString().length>0)plateDimensionsTextController.text = meta["ابعاد محصول"]??"";
+          if(meta["حالت پلاک"].toString().length>0)plateLanguageDropdownValue = meta["حالت پلاک"]??"فارسی";
+          if(meta["نوع حک"].toString().length>0)plateHackTypeDropdownValue = meta["نوع حک"]??"براق";
+          if(meta["نوع پلاک"].toString().length>0)plateTypeDropdownValue = meta["نوع پلاک"]??"تک حلقه";
+
+          if(meta["نام پلاک"].toString().length>0)_metaKeyValue["نام پلاک"] = meta["نام پلاک"]??"";
+          if(meta["بخش بندی"].toString().length>0)_metaKeyValue["بخش بندی"] = meta["بخش بندی"]??"";
+          if(meta["ابعاد محصول"].toString().length>0)_metaKeyValue["ابعاد محصول"]= meta["ابعاد محصول"]??"";
+          if(meta["حالت پلاک"].toString().length>0)_metaKeyValue["حالت پلاک"] = meta["حالت پلاک"]??"فارسی";
+          if(meta["نوع حک"].toString().length>0)_metaKeyValue["نوع حک"] = meta["نوع حک"]??"براق";
+          if(meta["نوع پلاک"].toString().length>0)_metaKeyValue["نوع پلاک"] = meta["نوع پلاک"]??"تک حلقه";
+        }
+        break;
+      case 'النگو':
+        if(widget.meta!.length>0) {
+          _metaKeyValue={};
+          dynamic meta = json.decode(widget.meta!);
+          if(meta["نوع طرح"].toString().length>0)bangleStyleTextController.text = meta["نوع طرح"]??"";
+          if(meta["رنگ"].toString().length>0)bangleColorDropdownValue = meta["رنگ"]??"زرد";
+          if(meta["سایز"].toString().length>0)bangleSizeDropdownValue = meta["سایز"]??"نوزادی-0";
+
+          if(meta["نوع طرح"].toString().length>0)_metaKeyValue["نوع طرح"] = meta["نوع طرح"]??"";
+          if(meta["رنگ"].toString().length>0)_metaKeyValue["رنگ"]= meta["رنگ"]??"زرد";
+          if(meta["سایز"].toString().length>0)_metaKeyValue["سایز"] = meta["سایز"]??"";
 
 
+        }
+        break;
+      case 'دستبند':
+        if(widget.meta!.length>0) {
+          _metaKeyValue={};
+          dynamic meta = json.decode(widget.meta!);
+          if(meta["نوع دستبند"].toString().length>0)braceletTypeDropdownValue = meta["نوع دستبند"]??"پرچی";
+          if(meta["نوع چرم"].toString().length>0)braceletLeatherTypeDropdownValue = meta["نوع چرم"]??"طبیعی";
+          if(meta["ابعاد محصول"].toString().length>0)braceletDimensionsTextController.text = meta["ابعاد محصول"]??"";
+          if(meta["بخش بندی"].toString().length>0)braceletSectionTextController.text = meta["بخش بندی"]??"";
+
+          if(meta["نوع دستبند"].toString().length>0)_metaKeyValue["نوع دستبند"] = meta["نوع دستبند"]??"پرچی";
+          if(meta["نوع چرم"].toString().length>0)_metaKeyValue["نوع چرم"] = meta["نوع چرم"]??"طبیعی";
+          if(meta["بخش بندی"].toString().length>0)_metaKeyValue["بخش بندی"] = meta["بخش بندی"]??"";
+          if(meta["ابعاد محصول"].toString().length>0)_metaKeyValue["ابعاد محصول"]= meta["ابعاد محصول"]??"";
 
 
+        }
+        break;
+      case 'گوشواره':
+        if(widget.meta!.length>0) {
+          _metaKeyValue={};
+          dynamic meta = json.decode(widget.meta!);
+          if(meta["ابعاد محصول"].toString().length>0)earringsDimensionsTextController.text = meta["ابعاد محصول"]??"";
+          if(meta["نوع گوشواره"].toString().length>0)earringsTypeDropDownValUe = meta["نوع گوشواره"]??"عصایی";
+          if(meta["نوع حک"].toString().length>0)earringsHackTypeDropdownValue = meta["نوع حک"]??"براق";
+          if(meta["ابعاد محصول"].toString().length>0)_metaKeyValue["ابعاد محصول"]= meta["ابعاد محصول"]??"";
+          if(meta["نوع گوشواره"].toString().length>0)_metaKeyValue["نوع گوشواره"] = meta["نوع گوشواره"]??"عصایی";
+          if(meta["نوع حک"].toString().length>0)_metaKeyValue["نوع حک"] = meta["نوع حک"]??"براق";
 
+        }
+        break;
+      case 'دوره سنگ':
+        if(widget.meta!.length>0) {
+          _metaKeyValue={};
+          dynamic meta = json.decode(widget.meta!);
+          if(meta["نوع دسته"].toString().length>0)stoneHandleTypeTextController.text = meta["نوع دسته"]??"";
+          if(meta["سایز دسته"].toString().length>0)stoneHandleSizeTextController.text = meta["سایز دسته"]??"";
+          if(meta["نوع سنگ"].toString().length>0)stoneAroundTypeDropdownValue = meta["نوع سنگ"]??"ساده";
+
+          if(meta["نوع دسته"].toString().length>0)_metaKeyValue["نوع دسته"] = meta["نوع دسته"]??"";
+          if(meta["سایز دسته"].toString().length>0)_metaKeyValue["سایز دسته"] = meta["سایز دسته"]??"";
+          if(meta["نوع سنگ"].toString().length>0)_metaKeyValue["نوع سنگ"] = meta["نوع سنگ"]??"ساده";
+
+        }
+        break;
 
 
 
 
     }
-  }
 
-  @override
-  Widget build(BuildContext context) {
-
-    print(widget.meta);
-    print(widget.productType);
     return Column(
       children: [
         Visibility(
@@ -370,13 +422,18 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                     _metaKeyValue["بخش بندی"] = value;
                     widget.callback(jsonEncode(_metaKeyValue));
                   },
+                  controller: braceletSectionTextController,
                   decoration: InputDecoration(
                       hintText: "بخش بندی", labelText: "بخش بندی"),
                 ),
               ),
               Expanded(
                 child: TextFormField(
-                  controller: braceletSectionTextController,
+                  controller: braceletDimensionsTextController,
+                  onChanged: (value){
+                    _metaKeyValue["ابعاد محصول"] = value;
+                    widget.callback(jsonEncode(_metaKeyValue));
+                  },
                   decoration: InputDecoration(
                       hintText: "ابعاد محصول", labelText: "ابعاد محصول"),
                 ),
