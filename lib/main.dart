@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gold_workshop/sections/workshop1/workshop1Home.dart';
+import 'package:gold_workshop/sections/workshop2/workshop2Home.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:persian_fonts/persian_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -97,7 +98,7 @@ class MyApp extends StatelessWidget {
                               return Scaffold(body:Workshop1HomeScreen(str, payload));
                               break;
                             case "Workshop2":
-                              return Scaffold(body:Workshop1HomeScreen(str, payload));
+                              return Scaffold(body:Workshop2HomeScreen(str, payload));
                               break;
 
                           }
