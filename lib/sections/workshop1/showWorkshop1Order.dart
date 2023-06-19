@@ -1,13 +1,12 @@
 
 
+import 'dart:convert';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/helper/workshop1Api.dart';
 import 'package:gold_workshop/models/orderModel.dart';
-import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
-import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
@@ -27,10 +26,22 @@ class ShowWorkshop1OrderScreen extends StatefulWidget {
 
 class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
 
-  List<DataRow> tableItem=[DataRow(cells: [DataCell(Text("کلید")),DataCell(Text("مقدار"))])];
+  List<DataRow> tableItem=[];
   TextEditingController imageEditTextController=TextEditingController();
 
+  @override
+  void initState() {
+    initOrderMeta();
 
+  }
+
+  initOrderMeta()async{
+    Map<String, dynamic> orderMetaList = json.decode(widget.order.orderMeta!);
+    orderMetaList.forEach((key, value) {
+      tableItem.add(DataRow(cells: [DataCell(Text("${key}")),DataCell(Text("${value}"))]));
+    });
+
+  }
   onChangeDesignerDropDown(value){
     setState(() {
       widget.order.designerId = value["id"];
@@ -48,14 +59,7 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
     });
   }
 
-  Future<void> _launchInBrowser(Uri url) async {
-    if (!await launchUrl(
-      Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"),
-      mode: LaunchMode.externalApplication,
-    )) {
-      throw Exception('Could not launch $url');
-    }
-  }
+
 
 
   @override
@@ -80,26 +84,40 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
           child: Stack(
             children: [
               Container(
-              decoration: BoxDecoration(color: Colors.white38),
+              decoration: BoxDecoration(
+                color: widget.order.status == "در انتظار بررسی"
+                    ? Colors.lightGreenAccent.withOpacity(0.1)
+                    : widget.order.status == "تکمیل نهایی"
+                    ? Colors.lightGreen.withOpacity(0.3)
+                    : widget.order.status == "ارسال به طراح"
+                    ? Colors.lightBlueAccent.withOpacity(0.1)
+                    : widget.order.status == "ارسال به کارگاه"
+                    ? Colors.amberAccent.withOpacity(0.1)
+                    : widget.order.status == "برگشت از طراح"
+                    ? Colors.lightBlue.withOpacity(0.3)
+                    : widget.order.status == "برگشت از کارگاه"
+                    ? Colors.amber.withOpacity(0.3)
+                    : Colors.redAccent.withOpacity(0.3),
+              ),
               child:Center(
                 child: Column(
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.all(4)
+                    Padding(padding: EdgeInsets.all(8)
                       ,child:
                       Card(child:
                       Container(padding:EdgeInsets.all(16),child:
                       Row(
                         children: [
                           Expanded(child: Column(children: [Text("نام مشتری",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.clientFullName}")],)),
-                          Expanded(child: Column(children: [Text("کارگاه1",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.workshop1fullName}")],)),
-                          Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
+                          Expanded(child: Column(children: [Text("کارگاه 1",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.workshop1fullName}")],)),
+                          Expanded(child: Column(children: [Text("تاریخ سفارش",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.orderDate}")],)),
                           Expanded(child: Column(children: [Text("تاریخ تحویل",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.deliveryDate}")],)),
                         ],)
                         ,)
 
                         ,),
                     ),
-                    Padding(padding: EdgeInsets.all(4),
+                    Padding(padding: EdgeInsets.all(8),
                       child:Card(
                         child:
                         Container(margin:EdgeInsets.all(16),child:
@@ -119,23 +137,31 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
 
                       )
                       ,),
-                    Padding(padding: EdgeInsets.all(4),
+                    Padding(padding: EdgeInsets.all(8),
                       child:Card(
                         child: Container(margin: EdgeInsets.all(16),
                           child:
                           Row(
                             children: [
+                              Expanded(child:
                               InkWell(onTap: (){
                                 launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"));
 
-                              },child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}",width: 256,),
+                              },child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"),
+                              )),
+                              Expanded(
+                                  child:
+                                  Column(children: [
+                                    Row(
+                                      children: [
+                                        Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
+                                        Expanded(child: Column(children: [Text("کد",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.code}")],)),
+                                        Expanded(child: Column(children: [Text("محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.weight}")],)),
+                                      ],)
+                                  ],)
                               ),
                               Expanded(child:
                               Column(children: [
-                                Row(
-                                    children: []
-
-                                ),
 
                                 DataTable(
                                   columns: const <DataColumn>[
@@ -164,6 +190,28 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                         ),
                       ),
                     ),
+                    Padding(padding: EdgeInsets.all(8),
+                      child:Card(
+                        child: Row(
+                          children: [
+                            Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                              launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.designerFile}"));
+
+                            }, child: Text("فایل طراح"),) ,),),
+                            Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                              launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.workshop1File}"));
+
+                            }, child: Text("فایل کارگاه یک"),) ,),),
+                            Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                              launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.workshop2File}"));
+
+                            }, child: Text("فایل کارگاه دو"),) ,),),
+
+                          ],
+                        ),
+
+                      )
+                      ,),
                     Padding(padding: EdgeInsets.all(4),
                       child:Visibility(visible: widget.order.status=="ارسال به کارگاه"? true:false,
                         child:Card(
@@ -171,7 +219,11 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                           child:
                           Row(
                             children: [
-                              Expanded(child:TextFormField(onTap: openImagePicker,controller: imageEditTextController,decoration: InputDecoration(hintText: "انتخاب فایل"),),),
+                              Expanded(child:Padding(padding: EdgeInsets.all(8),
+                              child: TextFormField(
+                                onTap: openImagePicker,
+                                controller: imageEditTextController,
+                                decoration: InputDecoration(hintText: "انتخاب فایل",labelText: "انتخاب فایل"),),),),
                               Expanded(child:
                               Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
                                 OutlinedButton(onPressed: () async {
@@ -182,9 +234,14 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                                 ),
                                 SizedBox(height: 16,),
                                 ElevatedButton(onPressed: () async {
-                                  var res = await Workshop1Api.completeOrderWorkshop1(widget.order);
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                                  Navigator.pop(context);
+                                  if(widget.order.workshop1File!="null") {
+                                    var res = await Workshop1Api
+                                        .completeOrderWorkshop1(widget.order);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(content: Text("${res}")));
+                                    Navigator.pop(context);
+                                  }
+
                                 }, child: Padding(padding: EdgeInsets.all(16),child:  Text("تکمیل سفارش") )
                                 ),
                               ],)
