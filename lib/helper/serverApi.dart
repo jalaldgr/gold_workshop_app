@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:gold_workshop/models/tableModel.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gold_workshop/models/orderModel.dart';
+import 'package:pluto_grid/pluto_grid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../models/userModel.dart';
@@ -363,7 +364,7 @@ class AdminApi {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
     final response = await http.get(
-      Uri.parse('${dotenv.env['API_URL']}/admin/get-table/${id}'),
+      Uri.parse('${dotenv.env['API_URL']}/admin/get-table-by-id/${id}'),
       headers: {'Authorization': 'Bearer $token'},
     );
     tableData table = tableData.fromJson(json.decode(response.body));
@@ -375,7 +376,7 @@ class AdminApi {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
     final response = await http.post(
-        Uri.parse('${dotenv.env['API_URL']}/admin/post-table/${data.id}'),
+        Uri.parse('${dotenv.env['API_URL']}/admin/post-table-by-id/${data.id}'),
         headers: {'Authorization': 'Bearer $token'},
         body: data.toJson()
     );
