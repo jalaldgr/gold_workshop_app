@@ -186,6 +186,28 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                       ),
                     ),
                     Padding(padding: EdgeInsets.all(8),
+                      child:Card(
+                        child: Row(
+                          children: [
+                            Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                              launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.designerFile}"));
+
+                            }, child: Text("فایل طراح"),) ,),),
+                            Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                              launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.workshop1File}"));
+
+                            }, child: Text("فایل کارگاه یک"),) ,),),
+                            Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                              launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.workshop2File}"));
+
+                            }, child: Text("فایل کارگاه دو"),) ,),),
+
+                          ],
+                        ),
+
+                      )
+                      ,),
+                    Padding(padding: EdgeInsets.all(8),
                       child:Visibility(visible: widget.order.status=="ارسال به طراح"?true:false,
                         child:Card(
                           child: Container(margin: EdgeInsets.all(16),
@@ -216,9 +238,6 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                         )
                         ,),
                     ),
-
-
-                    // Add TextFormFields and ElevatedButton here.
                   ],
                 ),
               )
