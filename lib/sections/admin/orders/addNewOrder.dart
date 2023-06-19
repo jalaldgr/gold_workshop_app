@@ -1,5 +1,6 @@
 
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -333,36 +334,36 @@ class NewOrderFormState extends State<NewOrderForm> {
                                   switch (productTypeDropDownValue){
                                     case "پلاک اسم":
                                       setState(() {
-                                        widget.order.orderMeta = {"plate_language": "انگلیسی", "plate_type": "تک حلقه", "plate_hack_type": "براق"}.toString();
+                                        widget.order.orderMeta = jsonEncode({"حالت پلاک": "فارسی", "نوع پلاک": "تک حلقه", "نوع حک": "براق"});
                                       });
 
                                       break;
 
                                     case "النگو":
                                       setState(() {
-                                        widget.order.orderMeta = {"bangle_color": "زرد", "bangl_size": "نوزادی-0"}.toString();
+                                        widget.order.orderMeta =jsonEncode({"رنگ": "زرد", "سایز": "نوزادی-0"});
                                       });
                                       break;
 
                                     case "گوشواره":
                                       setState(() {
-                                        widget.order.orderMeta = {"earrings_type": "عصایی", "earrings_hack_type": "براق"}.toString();
+                                        widget.order.orderMeta = jsonEncode({"نوع گوشواره": "عصایی", "نوع حک": "براق"});
                                       });
                                       break;
 
                                     case "دستبند":
                                       setState(() {
-                                        widget.order.orderMeta = {"bracelet_type": "پرچی", "bracelet_leather_type": "طبیعی"}.toString();
+                                        widget.order.orderMeta = jsonEncode({"نوع دستبند": "پرچی", "نوع چرم": "طبیعی"});
                                       });
                                       break;
 
                                     case "دوره سنگ":
                                       setState(() {
-                                        widget.order.orderMeta = {"stone_around_type": "ساده"}.toString();
+                                        widget.order.orderMeta = jsonEncode({"نوع سنگ": "ساده"});
                                       });
                                       break;
                                     default:
-                                      widget.order.orderMeta = {}.toString();
+                                      widget.order.orderMeta = jsonEncode({}.toString());
 
 
                                   }
