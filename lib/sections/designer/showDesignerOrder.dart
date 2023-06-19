@@ -39,7 +39,6 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
 
   initOrderMeta()async{
     Map<String, dynamic> orderMetaList = json.decode(widget.order.orderMeta!);
-    print(orderMetaList.toString());
     orderMetaList.forEach((key, value) {
       tableItem.add(DataRow(cells: [DataCell(Text("${key}")),DataCell(Text("${value}"))]));
     });
@@ -112,7 +111,7 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                         children: [
                           Expanded(child: Column(children: [Text("نام مشتری",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.clientFullName}")],)),
                           Expanded(child: Column(children: [Text("طراح",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.designerFullName}")],)),
-                          Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
+                          Expanded(child: Column(children: [Text("تاریخ سفارش",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.orderDate}")],)),
                           Expanded(child: Column(children: [Text("تاریخ تحویل",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.deliveryDate}")],)),
                         ],)
                         ,)
@@ -145,19 +144,25 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                           child:
                           Row(
                             children: [
+                              Expanded(child:
                               InkWell(onTap: (){
                                 launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"));
 
                               },child:
-                              Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}",width: 256,)
+                              Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}")
+                              )),
+                              Expanded(
+                                  child:
+                                  Column(children: [
+                                    Row(
+                                      children: [
+                                        Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
+                                        Expanded(child: Column(children: [Text("کد",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.code}")],)),
+                                        Expanded(child: Column(children: [Text("محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.weight}")],)),
+                                      ],)
+                                  ],)
                               ),
-                              Expanded(child:
-                              Column(children: [
-                                Row(
-                                    children: []
-
-                                ),
-
+                              Expanded(child:Column(children: [
                                 DataTable(
                                   columns: const <DataColumn>[
                                     DataColumn(
