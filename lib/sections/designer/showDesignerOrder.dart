@@ -77,11 +77,25 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
           child: Stack(
             children: [
               Container(
-              decoration: BoxDecoration(color: Colors.white38),
-              child:Center(
+                decoration: BoxDecoration(
+                  color: widget.order.status == "در انتظار بررسی"
+                      ? Colors.lightGreenAccent.withOpacity(0.1)
+                      : widget.order.status == "تکمیل نهایی"
+                          ? Colors.lightGreen.withOpacity(0.3)
+                          : widget.order.status == "ارسال به طراح"
+                              ? Colors.lightBlueAccent.withOpacity(0.1)
+                              : widget.order.status == "ارسال به کارگاه"
+                                  ? Colors.amberAccent.withOpacity(0.1)
+                                  : widget.order.status == "برگشت از طراح"
+                                      ? Colors.lightBlue.withOpacity(0.3)
+                                      : widget.order.status == "برگشت از کارگاه"
+                                          ? Colors.amber.withOpacity(0.3)
+                                          : Colors.redAccent.withOpacity(0.3),
+                ),
+                child:Center(
                 child: Column(
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.all(4)
+                    Padding(padding: EdgeInsets.all(8)
                       ,child:
                       Card(child:
                       Container(padding:EdgeInsets.all(16),child:
@@ -96,7 +110,7 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
 
                         ,),
                     ),
-                    Padding(padding: EdgeInsets.all(4),
+                    Padding(padding: EdgeInsets.all(8),
                       child:Card(
                         child:
                         Container(margin:EdgeInsets.all(16),child:
@@ -116,7 +130,7 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
 
                       )
                       ,),
-                    Padding(padding: EdgeInsets.all(4),
+                    Padding(padding: EdgeInsets.all(8),
                       child:Card(
                         child: Container(margin: EdgeInsets.all(16),
                           child:
@@ -162,7 +176,7 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                         ),
                       ),
                     ),
-                    Padding(padding: EdgeInsets.all(4),
+                    Padding(padding: EdgeInsets.all(8),
                       child:Visibility(visible: widget.order.status=="ارسال به طراح"?true:false,
                         child:Card(
                           child: Container(margin: EdgeInsets.all(16),
