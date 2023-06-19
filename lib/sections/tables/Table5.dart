@@ -656,7 +656,7 @@ class _Table5ScreenState extends State<Table5Screen> {
 
 
 
-    tableData t = new tableData("تکمیل کارگاه 1", "", "", "","", "", jsonEncode(table5), "","","","");
+    tableData t = new tableData("تکمیل کارگاه 1", "", "", "","", "", jsonEncode(table5), "","","","","");
 
     var respo = await AdminApi.postTable(t);
 
@@ -884,7 +884,7 @@ class _Table5ScreenState extends State<Table5Screen> {
       stateManager.setShowLoading(false);
 
 
-    tableData t = new tableData("تکمیل کارگاه 1", "", jsonEncode(table2), "","", "","",  jsonEncode(table6),"","","");
+    tableData t = new tableData("تکمیل کارگاه 1", "", jsonEncode(table2), "","", "","",  jsonEncode(table6),"","","","");
     var respo = await AdminApi.postTable(t);
   }
 

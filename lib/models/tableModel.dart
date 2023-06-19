@@ -10,6 +10,7 @@ class tableData {
   String? date="";
   String? createdAt="";
   String? updatedAt="";
+  String? id="";
 
   tableData(
       this.status,
@@ -22,8 +23,10 @@ class tableData {
       this.table6,
       this.date,
       this.createdAt,
-      this.updatedAt
-);
+      this.updatedAt,
+      this.id,
+
+      );
 
   tableData.fromJson(Map<String, dynamic> json) {
     status = json['status'] ?? "";
@@ -37,6 +40,8 @@ class tableData {
     date = json['date'] ?? "";
     createdAt = json['createdAt'] ?? "";
     updatedAt = json['updatedDate'] ?? "";
+    id = json['id'] ?? "";
+
   }
 
   Map<String, dynamic> toJson() {
@@ -52,6 +57,8 @@ class tableData {
     data['date']= date;
     data['createdAt']= createdAt;
     data['updatedAt']= updatedAt;
+    data['id'] = id;
+
     return data;
   }
 }

@@ -251,7 +251,7 @@ class _Table2ScreenState extends State<Table2Screen> {
     table2["real_balance"]=real_balance.toList();
     table2["balance"]=balance.toList();
     table2["difference"]=difference.toList();
-    tableData t = new tableData("تکمیل کارگاه 1","" , jsonEncode(table2), "","","", "", "","","","");
+    tableData t = new tableData("تکمیل کارگاه 1","" , jsonEncode(table2), "","","", "", "","","","","");
     var respo = await AdminApi.postTable(t);
     stateManager.setShowLoading(false);
    }
@@ -358,7 +358,7 @@ class _Table2ScreenState extends State<Table2Screen> {
     stateManager.refRows.clear();
     stateManager.insertRows(0, updatedRows);
     stateManager.setShowLoading(false);
-    tableData t = new tableData("تکمیل کارگاه 1","",jsonEncode(table2), "","", "","",  jsonEncode(table6),"","","");
+    tableData t = new tableData("تکمیل کارگاه 1","",jsonEncode(table2), "","", "","",  jsonEncode(table6),"","","","");
     var respo = await AdminApi.postTable(t);
 
   }
