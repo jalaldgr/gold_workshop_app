@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:gold_workshop/models/tableModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import '../../helper/serverApi.dart';
-
+import 'archiveTables/TableArchive1.dart';
+import 'archiveTables/TableArchive2.dart';
+import 'archiveTables/TableArchive3.dart';
+import 'archiveTables/TableArchive4.dart';
+import 'archiveTables/TableArchive5.dart';
 class TableArchiveListScreen extends StatefulWidget {
   const TableArchiveListScreen({Key? key}) : super(key: key);
 
@@ -24,6 +28,12 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.black87),
           backgroundColor: Colors.pink,
+          actions: <Widget>[
+            IconButton(onPressed: (){setState(() {});},
+                tooltip: "بروزرسانی",
+                icon: Icon(Icons.refresh)),
+
+          ],
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
@@ -87,14 +97,49 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
     var table6 =json.decode("${table!.table6!}");
     return Padding(padding: EdgeInsets.all(4),
       child:
-      Container( color: (index! % 2 == 0) ? Colors.black12 : Colors.indigo.shade100,height: 100,
+      Container( color: (index! % 2 == 0) ? Colors.black12 : Colors.indigo.shade100,height: 84,
         child:
         Card(color: Colors.blue.shade100,
           child:
           Container(padding: EdgeInsets.all(8),
             child: Row(children: [
-              Text("${table.date}"),
+              Column(children: [
+                Text("${table.date}"),
+                SizedBox(height: 4,),
+                Row(children: [
+                  TextButton(onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Table1ArchiveScreen(headerColor: Colors.pink, table: table,)));
+                  }, child: Text("1",style: TextStyle(fontSize: 20))),
+                  TextButton(onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Table2ArchiveScreen(headerColor: Colors.pink, table:  table,)));
+                  }, child: Text("2",style: TextStyle(fontSize: 20))),
+                  TextButton(onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Table3ArchiveScreen(headerColor: Colors.pink, table:  table,)));
+                  }, child: Text("3",style: TextStyle(fontSize: 20))),
+                  TextButton(onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Table4ArchiveScreen(headerColor: Colors.pink, table:  table,)));
+                  }, child: Text("4",style: TextStyle(fontSize: 20))),
+                  TextButton(onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Table5ArchiveScreen(headerColor: Colors.pink, table:  table,)));
+                  }, child: Text("5",style: TextStyle(fontSize: 20),))
+                ],),
 
+                ],),
               Expanded(child:
               Column(
                 children: [
