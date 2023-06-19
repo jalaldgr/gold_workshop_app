@@ -252,8 +252,7 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                       )
                         ,),
                     ),
-
-
+                    SizedBox(height: 32,),
                     // Add TextFormFields and ElevatedButton here.
                   ],
                 ),

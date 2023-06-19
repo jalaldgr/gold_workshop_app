@@ -102,7 +102,7 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
               child:Center(
                 child: Column(
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.all(4)
+                    Padding(padding: EdgeInsets.all(8)
                       ,child:
                       Card(child:
                       Container(padding:EdgeInsets.all(16),child:
@@ -244,6 +244,7 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
                                 }
                                 }, child: Padding(padding: EdgeInsets.all(16),child:  Text("تکمیل سفارش"))
                                 ),
+
                               ],)
                               ),
                             ],
@@ -251,6 +252,7 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
                         ),
                       )
                         ,)),
+                    SizedBox(height: 32,),
                     // Add TextFormFields and ElevatedButton here.
                   ],
                 ),

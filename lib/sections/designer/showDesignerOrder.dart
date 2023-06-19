@@ -275,6 +275,8 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                         )
                         ,),
                     ),
+                    SizedBox(height: 32,),
+
                   ],
                 ),
               )
