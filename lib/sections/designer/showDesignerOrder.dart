@@ -1,5 +1,7 @@
 
 
+import 'dart:convert';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -24,10 +26,25 @@ class ShowDesignerOrderScreen extends StatefulWidget {
 
 class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
 
-  List<DataRow> tableItem=[DataRow(cells: [DataCell(Text("کلید")),DataCell(Text("مقدار"))])];
+  List<DataRow> tableItem=[];
+
   TextEditingController imageEditTextController=TextEditingController();
 
 
+  @override
+  void initState() {
+    initOrderMeta();
+
+  }
+
+  initOrderMeta()async{
+    Map<String, dynamic> orderMetaList = json.decode(widget.order.orderMeta!);
+    print(orderMetaList.toString());
+    orderMetaList.forEach((key, value) {
+      tableItem.add(DataRow(cells: [DataCell(Text("${key}")),DataCell(Text("${value}"))]));
+    });
+
+  }
   onChangeDesignerDropDown(value){
     setState(() {
       widget.order.designerId = value["id"];
@@ -45,14 +62,6 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
     });
   }
 
-  Future<void> _launchInBrowser(Uri url) async {
-    if (!await launchUrl(
-      Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"),
-      mode: LaunchMode.externalApplication,
-    )) {
-      throw Exception('Could not launch $url');
-    }
-  }
 
 
   @override
