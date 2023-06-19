@@ -238,9 +238,15 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                                     children: [
                                       OutlinedButton(
                                           onPressed: () async {
-                                            var res = await DesignerApi.SendOrderFileDesigner(widget.order);
-                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                                            Navigator.pop(context);
+                                            if(widget.order.designerFile!="null"){
+                                              var res = await DesignerApi.SendOrderFileDesigner(widget.order);
+                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                              setState(() {
+                                                Navigator.pop(context);
+
+                                              });
+                                            }
+
                                           },
                                           child: Padding(
                                               padding: EdgeInsets.all(16),
