@@ -127,6 +127,10 @@ class _Workshop2OrdersListState extends State<Workshop2OrdersList> {
   Widget _buildOrderItem(BuildContext context,
       String? clientFullname,String? status , orderData? order,int? index) {
     return InkWell(onTap: (){
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ShowWorkshop2OrderScreen(order: order!,)));
 
     },child:
     Padding(padding: EdgeInsets.all(4),
