@@ -65,11 +65,6 @@ class _Table3ArchiveScreenState extends State<Table3ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -90,11 +85,6 @@ class _Table3ArchiveScreenState extends State<Table3ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -115,11 +105,6 @@ class _Table3ArchiveScreenState extends State<Table3ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -140,11 +125,6 @@ class _Table3ArchiveScreenState extends State<Table3ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -165,11 +145,6 @@ class _Table3ArchiveScreenState extends State<Table3ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -190,11 +165,6 @@ class _Table3ArchiveScreenState extends State<Table3ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -215,11 +185,6 @@ class _Table3ArchiveScreenState extends State<Table3ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -240,11 +205,6 @@ class _Table3ArchiveScreenState extends State<Table3ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -265,11 +225,6 @@ class _Table3ArchiveScreenState extends State<Table3ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -487,7 +442,7 @@ class _Table3ArchiveScreenState extends State<Table3ArchiveScreen> {
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title:  Text('جدول   3 ${widget.table.date}',
+        title:  Text('جدول 3    ${widget.table.date}',
             style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.bold,
@@ -511,8 +466,11 @@ class _Table3ArchiveScreenState extends State<Table3ArchiveScreen> {
           },
           configuration: const PlutoGridConfiguration(
               enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
-              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
-        ),
+
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12,
+                cellTextStyle: TextStyle(fontSize: 16),
+
+              )),        ),
       ),
       floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",
           onPressed: () async {

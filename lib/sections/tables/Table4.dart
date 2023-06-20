@@ -26,7 +26,7 @@ class _Table4ScreenState extends State<Table4Screen> {
         field: 'row',
         type: PlutoColumnType.number(),
         enableEditingMode: true,
-        width: 100
+        width: 70
     ),
     /// Select Column definition
     PlutoColumn(
@@ -117,11 +117,6 @@ class _Table4ScreenState extends State<Table4Screen> {
           alignment: Alignment.center,
           titleSpanBuilder: (text) {
             return [
-              const TextSpan(
-                text: 'جمع',
-                style: TextStyle(color: Colors.red),
-              ),
-              const TextSpan(text: ' : '),
               TextSpan(text: text),
             ];
           },
@@ -143,11 +138,6 @@ class _Table4ScreenState extends State<Table4Screen> {
           alignment: Alignment.center,
           titleSpanBuilder: (text) {
             return [
-              const TextSpan(
-                text: 'جمع',
-                style: TextStyle(color: Colors.red),
-              ),
-              const TextSpan(text: ' : '),
               TextSpan(text: text),
             ];
           },
@@ -1111,8 +1101,11 @@ class _Table4ScreenState extends State<Table4Screen> {
           rows: gridARows,
           configuration: const PlutoGridConfiguration(
               enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
-              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
 
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12,
+                cellTextStyle: TextStyle(fontSize: 16),
+
+              )),
           onLoaded: (PlutoGridOnLoadedEvent event) {
             gridAStateManager = event.stateManager;
             fetchTable();
@@ -1135,8 +1128,10 @@ class _Table4ScreenState extends State<Table4Screen> {
           rows: gridBRows,
           configuration: const PlutoGridConfiguration(
               enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
-              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
-          onChanged: (event)  {
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12,
+                cellTextStyle: TextStyle(fontSize: 16),
+
+              )),          onChanged: (event)  {
             calculateTableB();
           },
           onLoaded: (PlutoGridOnLoadedEvent event) {

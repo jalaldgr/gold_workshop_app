@@ -26,20 +26,20 @@ class _Table5ScreenState extends State<Table5Screen> {
 
   List<PlutoColumn> columns = [
     PlutoColumn(
-        title: 'ردیف',
-        field: 'row',
-        type: PlutoColumnType.number(),
-        enableEditingMode: true,
-        width: 100,
-),
+      title: 'ردیف',
+      field: 'row',
+      type: PlutoColumnType.number(),
+      enableEditingMode: true,
+      width: 70,
+    ),
 
     /// Select Column definition
     PlutoColumn(
-        title: 'سفارش دهنده',
-        field: 'client_name',
-        type: PlutoColumnType.text(),
-        enableEditingMode: true,
-        width: 120,
+      title: 'سفارش دهنده',
+      field: 'client_name',
+      type: PlutoColumnType.text(),
+      enableEditingMode: true,
+      width: 120,
     ),
     PlutoColumn(
         title: 'شرح',
@@ -54,29 +54,29 @@ class _Table5ScreenState extends State<Table5Screen> {
         enableEditingMode: true,
         width: 100),
     PlutoColumn(
-        title: 'وزن',
-        field: 'weight',
-        type: PlutoColumnType.number(format: "#.###"),
-        enableEditingMode: true,
-        width: 100,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            format: "#.###",
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
+      title: 'وزن',
+      field: 'weight',
+      type: PlutoColumnType.number(format: "#.###"),
+      enableEditingMode: true,
+      width: 100,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          format: "#.###",
+          titleSpanBuilder: (text) {
+            return [
+              const TextSpan(
+                text: 'مجموع',
+                style: TextStyle(color: Colors.red),
+              ),
+              const TextSpan(text: ' : '),
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
     ),
     PlutoColumn(
         title: 'کسر برش',
@@ -89,14 +89,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -113,14 +108,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -137,14 +127,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -153,7 +138,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'توضیحات',
         field: 'summary',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.text(),
         enableEditingMode: true,
         width: 100),
     PlutoColumn(
@@ -167,14 +152,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -191,14 +171,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -215,14 +190,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -242,11 +212,6 @@ class _Table5ScreenState extends State<Table5Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -266,11 +231,6 @@ class _Table5ScreenState extends State<Table5Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -290,11 +250,6 @@ class _Table5ScreenState extends State<Table5Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -314,11 +269,6 @@ class _Table5ScreenState extends State<Table5Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -335,14 +285,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -362,11 +307,6 @@ class _Table5ScreenState extends State<Table5Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -383,14 +323,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -410,11 +345,6 @@ class _Table5ScreenState extends State<Table5Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -431,14 +361,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -455,14 +380,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -482,11 +402,6 @@ class _Table5ScreenState extends State<Table5Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -503,14 +418,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -528,14 +438,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -555,11 +460,6 @@ class _Table5ScreenState extends State<Table5Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -576,14 +476,9 @@ class _Table5ScreenState extends State<Table5Screen> {
             rendererContext: rendererContext,
             type: PlutoAggregateColumnType.sum,
             alignment: Alignment.center,
-              format: "#.###",
+            format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -935,8 +830,10 @@ class _Table5ScreenState extends State<Table5Screen> {
           },
           configuration: const PlutoGridConfiguration(
               enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
-              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
-        ),
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12,
+                cellTextStyle: TextStyle(fontSize: 16),
+
+              )),        ),
       ),
       floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",
           onPressed: () async {

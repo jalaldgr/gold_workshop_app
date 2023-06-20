@@ -27,7 +27,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
         field: 'row',
         type: PlutoColumnType.number(),
         enableEditingMode: true,
-        width: 100
+        width: 70
     ),
     /// Select Column definition
     PlutoColumn(
@@ -118,11 +118,6 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
           alignment: Alignment.center,
           titleSpanBuilder: (text) {
             return [
-              const TextSpan(
-                text: 'جمع',
-                style: TextStyle(color: Colors.red),
-              ),
-              const TextSpan(text: ' : '),
               TextSpan(text: text),
             ];
           },
@@ -144,11 +139,6 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
           alignment: Alignment.center,
           titleSpanBuilder: (text) {
             return [
-              const TextSpan(
-                text: 'جمع',
-                style: TextStyle(color: Colors.red),
-              ),
-              const TextSpan(text: ' : '),
               TextSpan(text: text),
             ];
           },
@@ -1099,7 +1089,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title:  Text('جدول   4 ${widget.table.date}',
+        title:  Text('جدول 4    ${widget.table.date}',
             style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.bold,
@@ -1112,8 +1102,10 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
           rows: gridARows,
           configuration: const PlutoGridConfiguration(
               enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
-              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12,
+                cellTextStyle: TextStyle(fontSize: 16),
 
+              )),
           onLoaded: (PlutoGridOnLoadedEvent event) {
             gridAStateManager = event.stateManager;
             fetchTable();
@@ -1136,8 +1128,10 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
           rows: gridBRows,
           configuration: const PlutoGridConfiguration(
               enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
-              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
-          onChanged: (event)  {
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12,
+                cellTextStyle: TextStyle(fontSize: 16),
+
+              )),          onChanged: (event)  {
             calculateTableB();
           },
           onLoaded: (PlutoGridOnLoadedEvent event) {

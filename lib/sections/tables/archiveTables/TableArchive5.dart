@@ -31,7 +31,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'row',
         type: PlutoColumnType.number(),
         enableEditingMode: true,
-        width: 100,
+        width: 70,
 ),
 
     /// Select Column definition
@@ -93,11 +93,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -117,11 +112,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -141,11 +131,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -154,7 +139,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
     PlutoColumn(
         title: 'توضیحات',
         field: 'summary',
-        type: PlutoColumnType.number(),
+        type: PlutoColumnType.text(),
         enableEditingMode: true,
         width: 100),
     PlutoColumn(
@@ -171,11 +156,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -195,11 +175,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -219,11 +194,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -243,11 +213,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -267,11 +232,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -291,11 +251,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -315,11 +270,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -339,11 +289,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -363,11 +308,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -387,11 +327,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -411,11 +346,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -435,11 +365,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -459,11 +384,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -483,11 +403,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -507,11 +422,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -532,11 +442,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -556,11 +461,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -580,11 +480,6 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               format: "#.###",
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'مجموع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -912,7 +807,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title:  Text('جدول   5 ${widget.table.date}',
+        title:  Text('جدول 5    ${widget.table.date}',
             style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.bold,
@@ -936,8 +831,10 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
           },
           configuration: const PlutoGridConfiguration(
               enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
-              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
-        ),
+
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12,
+                cellTextStyle: TextStyle(fontSize: 16),
+              )),        ),
       ),
       floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",
           onPressed: () async {
