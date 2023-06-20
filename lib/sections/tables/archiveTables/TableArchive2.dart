@@ -496,7 +496,9 @@ class _Table2ArchiveScreenState extends State<Table2ArchiveScreen> {
           },
           onChanged: (PlutoGridOnChangedEvent event) {
             if((event.columnIdx==3 && event.rowIdx==0)||(event.columnIdx==3 && event.rowIdx==2)||
-                (event.columnIdx==2 && event.rowIdx==1)||(event.columnIdx==2 && event.rowIdx==2)){
+                (event.columnIdx==2 && event.rowIdx==1)||(event.columnIdx==2 && event.rowIdx==2)
+                || (event.columnIdx==3 && event.rowIdx==1)
+            ){
               stateManager.rows[event.rowIdx].cells[event.column.field]!.value = 0;
 
             }else if(event.column.readOnly==false){
