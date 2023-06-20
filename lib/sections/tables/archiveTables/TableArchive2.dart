@@ -22,8 +22,8 @@ class _Table2ArchiveScreenState extends State<Table2ArchiveScreen> {
       title: 'ردیف',
       field: 'row',
       type: PlutoColumnType.number(),
-        enableEditingMode: true,
-      width: 100,
+      enableEditingMode: true,
+      width: 70,
 
     ),
     PlutoColumn (
@@ -36,158 +36,133 @@ class _Table2ArchiveScreenState extends State<Table2ArchiveScreen> {
     ),
     /// Select Column definition
     PlutoColumn(
-        title: 'ورود',
-        field: 'import',
-        type: PlutoColumnType.number(format: "#.###"),
-        enableEditingMode: true,
-        width: 100,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            format: "#.###",
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
+      title: 'ورود',
+      field: 'import',
+      type: PlutoColumnType.number(format: "#.###"),
+      enableEditingMode: true,
+      width: 100,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          titleSpanBuilder: (text) {
+            return [
+              const TextSpan(
+                text: 'جمع',
+                style: TextStyle(color: Colors.red),
+              ),
+              const TextSpan(text: ' : '),
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
 
 
     ),
     PlutoColumn(
-        title: 'خروج',
-        field: 'export',
-        type: PlutoColumnType.number(format: "#.###"),
-        enableEditingMode: true,
-        width: 100,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            format: "#.###",
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
+      title: 'خروج',
+      field: 'export',
+      type: PlutoColumnType.number(format: "#.###"),
+      enableEditingMode: true,
+      width: 100,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          titleSpanBuilder: (text) {
+            return [
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
 
 
     ),
     PlutoColumn(
-        title: 'مانده نهایی',
-        field: 'final_balance',
-        type: PlutoColumnType.number(format: "#.###"),
-        width: 120,
-        readOnly: true,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            format: "#.###",
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
+      title: 'مانده نهایی',
+      field: 'final_balance',
+      type: PlutoColumnType.number(format: "#.###"),
+      width: 120,
+      readOnly: true,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          titleSpanBuilder: (text) {
+            return [
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
     ),
     PlutoColumn(
-        title: 'مانده واقعی',
-        field: 'real_balance',
-        type: PlutoColumnType.number(format: "#.###"),
-        enableEditingMode: true,
-        width: 120,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            format: "#.###",
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
+      title: 'مانده واقعی',
+      field: 'real_balance',
+      type: PlutoColumnType.number(format: "#.###"),
+      enableEditingMode: true,
+      width: 120,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          titleSpanBuilder: (text) {
+            return [
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
     ),
     PlutoColumn(
-        title: 'مانده',
-        field: 'balance',
-        type: PlutoColumnType.number(format: "#.###"),
-        width: 100,
-        readOnly: true,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            format: "#.###",
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
+      title: 'مانده',
+      field: 'balance',
+      type: PlutoColumnType.number(format: "#.###"),
+      width: 100,
+      readOnly: true,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          titleSpanBuilder: (text) {
+            return [
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
     ),
     PlutoColumn(
-        title: 'اختلاف',
-        field: 'difference',
-        type: PlutoColumnType.number(format: "#.###"),
-        readOnly: true,
-        width: 150,
-        footerRenderer: (rendererContext) {
-          return PlutoAggregateColumnFooter(
-            format: "#.###",
-            rendererContext: rendererContext,
-            type: PlutoAggregateColumnType.sum,
-            alignment: Alignment.center,
-            titleSpanBuilder: (text) {
-              return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
-                TextSpan(text: text),
-              ];
-            },
-          );
-        },
+      title: 'اختلاف',
+      field: 'difference',
+      type: PlutoColumnType.number(format: "#.###"),
+      readOnly: true,
+      width: 150,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
+          titleSpanBuilder: (text) {
+            return [
+              TextSpan(text: text),
+            ];
+          },
+        );
+      },
     ),
   ];
 
@@ -508,8 +483,10 @@ class _Table2ArchiveScreenState extends State<Table2ArchiveScreen> {
           },
           configuration: const PlutoGridConfiguration(
               enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
-              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
-        ),
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12,
+                cellTextStyle: TextStyle(fontSize: 16),
+
+              )),        ),
       ),
       floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",
           onPressed: () async {
