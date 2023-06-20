@@ -81,6 +81,7 @@ class _Workshop2sListState extends State<Workshop2sList> {
         ),
       ),
         floatingActionButton: FloatingActionButton(
+          tooltip: "ساخت کاربر جدید",
           child: const Icon(Icons.add),
           onPressed: () {
             userData user =new userData("", "", "", "", "","");
@@ -170,6 +171,7 @@ class _Workshop2sListState extends State<Workshop2sList> {
             trailing: SizedBox(width: 100,
               child:Row(children: [
                 IconButton(
+                  tooltip: "ویراش کاربر",
                   icon: const Icon(Icons.edit),
                   onPressed: () {
                     userData user =new  userData(userName, fullName,"Workshop2",id,"","");
@@ -177,17 +179,57 @@ class _Workshop2sListState extends State<Workshop2sList> {
                   },
                 ),
                 IconButton(
+                  tooltip: "حذف کاربر",
                   icon: const Icon(Icons.delete),
                   onPressed: () async {
 
                     if(id != null){
-                      String response = await AdminApi.deleteWorkshop2(id);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
+                      deleteDesignerAlertDialog(context,id);
+
                     }
-                    setState(() {});
                   },
                 ),
               ],),)
       ),);
+  }
+
+  deleteDesignerAlertDialog(BuildContext context, String userId) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("انصراف",style: TextStyle(color: Colors.red),),
+      onPressed:  () {Navigator.of(context).pop();},
+    );
+    Widget continueButton = TextButton(
+      child: Text("تایید",style: TextStyle(color: Colors.blue,fontSize: 20)),
+      onPressed:  () async {
+        String response = await AdminApi.deleteWorkshop2(userId);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
+        setState(()  {
+          Navigator.of(context).pop();
+        });
+
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("حذف کاربر"),
+      content: Text("آیا از حذف این کاربر اطمینان دارید؟"),
+      actions: [
+        Column(children: [
+          Row(children: [
+            Expanded(child: cancelButton ),
+            Expanded(child: continueButton )
+          ],)
+        ],)
+
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
