@@ -21,6 +21,8 @@ class _DesignersListState extends State<DesignersList> {
   TextEditingController fullNameController=TextEditingController();
   TextEditingController userNameController=TextEditingController();
   TextEditingController passwordController=TextEditingController();
+  bool? _isAdminCheckbox=false;
+  String? _isAdminString="";
 
 
   @override
@@ -68,7 +70,8 @@ class _DesignersListState extends State<DesignersList> {
                       snapshot.data?[index].fullName,
                       snapshot.data?[index].username,
                       snapshot.data?[index].id,
-                      index);
+                      index,
+                      snapshot.data?[index].isAdmin );
                 }),
           )
               : snapshot.hasError
@@ -97,74 +100,96 @@ class _DesignersListState extends State<DesignersList> {
     userNameController.text = user.username!;
     fullNameController.text = user.fullName!;
     passwordController.text = "";
-
+    _isAdminCheckbox = user.isAdmin=="yes"?true:false;
+    _isAdminString = user.isAdmin;
     showModalBottomSheet(
         context: context,
         elevation: 5,
         isScrollControlled: true,
-        builder: (_) => Container(
-          padding: EdgeInsets.only(
-            top: 15,
-            left: 15,
-            right: 15,
-            // this will prevent the soft keyboard from covering the text fields
-            bottom: MediaQuery.of(context).viewInsets.bottom + 120,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              TextField(
-                decoration: const InputDecoration(hintText: 'نام و نام خانوادگی'),
-                controller: fullNameController,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextField(
-                decoration: const InputDecoration(hintText: 'نام کاربری'),
-                controller: userNameController,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextField(
-                decoration: const InputDecoration(hintText: 'پسورد'),
-                controller: passwordController,
-                obscureText: true,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  // Save new journal
+        builder: (_) =>
+            StatefulBuilder(
+                builder:(BuildContext context, StateSetter state){
+                  return Container(
+                    padding: EdgeInsets.only(
+                      top: 15,
+                      left: 15,
+                      right: 15,
+                      // this will prevent the soft keyboard from covering the text fields
+                      bottom: MediaQuery.of(context).viewInsets.bottom + 120,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        TextField(
+                          decoration: const InputDecoration(hintText: 'نام و نام خانوادگی'),
+                          controller: fullNameController,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(hintText: 'نام کاربری'),
+                          controller: userNameController,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(hintText: 'پسورد'),
+                          controller: passwordController,
+                          obscureText: true,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CheckboxListTile( //checkbox positioned at right
+                          value: _isAdminCheckbox,
+                          onChanged: (bool? value,) {
+                            state(() {
+                              _isAdminCheckbox = value;
+                              _isAdminString = value==true? "yes":"no";
+                            });
+                          },
+                          title: Text("دسترسی های مدیریت"),
+                        ),
 
-                  if(user.id != ""){
-                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Designer",user.id,passwordController.text,"");
-                    String response = await AdminApi.updateDesigner(userUpdated);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
-                  }
-                  if(user.id == ""){
-                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Designer","",passwordController.text,"");
-                    String response = await AdminApi.addDesigner(userUpdated);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
-                  }
-                  // Close the bottom sheet
-                  Navigator.of(context).pop();
-                  setState(() {});
-                },
-                child: Text(user.id == ""  ? 'ایجاد کاربر' : 'بروزرسانی'),
-              )
-            ],
-          ),
-        ));
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
+                            // Save new journal
+
+                            if(user.id != ""){
+                              userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Designer",user.id,passwordController.text,_isAdminString);
+                              String response = await AdminApi.updateDesigner(userUpdated);
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
+                            }
+                            if(user.id == ""){
+                              userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Designer","",passwordController.text,_isAdminString);
+                              String response = await AdminApi.addDesigner(userUpdated);
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
+                            }
+                            // Close the bottom sheet
+                            Navigator.of(context).pop();
+                            setState(() {});
+                          },
+                          child: Text(user.id == ""  ? 'ایجاد کاربر' : 'بروزرسانی'),
+                        )
+                      ],
+                    ),
+                  );
+                }
+
+            )
+    );
   }
 
 
 
   Widget _buildPaymentItem(BuildContext context, String? fullName,
-      String? userName,String? id,int? index) {
+      String? userName,String? id,int? index,String? isAdmin) {
     return Padding(padding: EdgeInsets.all(4),
       child: ListTile(
             title: Text("${fullName}"),
@@ -174,7 +199,7 @@ class _DesignersListState extends State<DesignersList> {
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {
-                    userData user =new  userData(userName, fullName,"Designer",id,"","");
+                    userData user =new  userData(userName, fullName,"Designer",id,"",isAdmin);
                     _showForm(user);
                   },
                 ),
