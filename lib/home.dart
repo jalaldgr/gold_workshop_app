@@ -21,14 +21,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class LoginScreen extends State<HomeScreen> {
+  String? _appVersion="";
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    Timer(Duration(seconds: 2),
+    getVersion();
+    Timer(Duration(seconds: 3),
             ()=>    navigate());
+  }
+
+  getVersion()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _appVersion = prefs.getString('version')?? " ";// if version is empty, prefs.getString return null value and will make error....
+
   }
 
 
@@ -37,13 +44,19 @@ class LoginScreen extends State<HomeScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        child: Center(
-          child:Column(children: [
+          child:Center(
+            child:
+            Column(crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
 
-            Image.asset("assets/images/logo.png",width: 768,),
-            SizedBox(height: 32),
-          ],)
-        ),
+                Image.asset("assets/images/logo.png",width: 512,),
+                Text("مینیاتور",style: TextStyle(fontWeight: FontWeight.w900,fontSize: 32),),
+                SizedBox(height: 8,),
+                Text("ورژن   ${_appVersion}",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16),)
+
+              ],),
+          )
+
       ),
     );
   }
