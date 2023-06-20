@@ -313,17 +313,17 @@ class _Table3ScreenState extends State<Table3Screen> {
       for (var i = 0; i < description.length; i++) {
         updatedRows.add(PlutoRow(
           cells: {
-            'description': PlutoCell(value:description[i] ),
-            'other': PlutoCell(value: other[i]),
-            'ring': PlutoCell(value: ring[i]),
-            'wire': PlutoCell(value: wire[i]),
-            'ball': PlutoCell(value: ball[i]),
-            'solder': PlutoCell(value: solder[i]),
-            'chain': PlutoCell(value: chain[i]),
-            'piece_chain': PlutoCell(value: piece_chain[i]),
-            'lock': PlutoCell(value: lock[i]),
-            'work_made': PlutoCell(value: work_made[i]),
-            'sum': PlutoCell(value: sum[i]),
+            'description': PlutoCell(value: 'متفرقه'),
+            'other': PlutoCell(value: 0),
+            'ring': PlutoCell(value: 0),
+            'wire': PlutoCell(value: 0),
+            'ball': PlutoCell(value: 0),
+            'solder': PlutoCell(value: 0),
+            'chain': PlutoCell(value: 0),
+            'piece_chain': PlutoCell(value: 0),
+            'lock': PlutoCell(value: 0),
+            'work_made': PlutoCell(value: 0),
+            'sum': PlutoCell(value: 0),
           },
         ));
       }
@@ -333,7 +333,29 @@ class _Table3ScreenState extends State<Table3Screen> {
       stateManager.setShowLoading(false);
     }
   }
+  resetTable(){
 
+    List<PlutoRow> updatedRows=[];
+    updatedRows.add(PlutoRow(
+      cells: {
+        'description': PlutoCell(value: 'متفرقه'),
+        'other': PlutoCell(value: 0),
+        'ring': PlutoCell(value: 0),
+        'wire': PlutoCell(value: 0),
+        'ball': PlutoCell(value: 0),
+        'solder': PlutoCell(value: 0),
+        'chain': PlutoCell(value: 0),
+        'piece_chain': PlutoCell(value: 0),
+        'lock': PlutoCell(value: 0),
+        'work_made': PlutoCell(value: 0),
+        'sum': PlutoCell(value: 0),
+
+      },
+    ));
+    stateManager.refRows.clear();
+    stateManager.insertRows(0, updatedRows);
+    updateTable();
+  }
 
   calculateTable()async{
 
@@ -435,6 +457,12 @@ class _Table3ScreenState extends State<Table3Screen> {
             });
 
             }, icon: Icon(Icons.delete),tooltip: "حذف سطر انتخاب شده"),
+          SizedBox(width: 16,),
+          IconButton(onPressed: (){
+            resetTable();
+
+          }, icon: Icon(Icons.cleaning_services_rounded),tooltip: "پاکسازی جدول"),
+
 
         ],
         leading: IconButton(

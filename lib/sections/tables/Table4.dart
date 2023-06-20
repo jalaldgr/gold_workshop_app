@@ -1080,7 +1080,7 @@ class _Table4ScreenState extends State<Table4Screen> {
           IconButton(onPressed: (){
             resetTable();
 
-          }, icon: Icon(Icons.cleaning_services_rounded),tooltip: "ریست کردن جدول"),
+          }, icon: Icon(Icons.cleaning_services_rounded),tooltip: "پاکسازی جدول"),
 
         ],
         leading: IconButton(

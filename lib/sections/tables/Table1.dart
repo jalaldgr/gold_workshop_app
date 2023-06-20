@@ -268,14 +268,14 @@ class _Table1ScreenState extends State<Table1Screen> {
     List<PlutoRow> updatedRows=[];
       updatedRows.add(PlutoRow(
         cells: {
-          'row': PlutoCell(value: "1" ),
-          'other': PlutoCell(value: "0"),
-          'consumption_load': PlutoCell(value: "0"),
-          'consumptions_load_and_other': PlutoCell(value: "0"),
-          'after_melt': PlutoCell(value: "0"),
-          'difference': PlutoCell(value: "0"),
-          'after_paging': PlutoCell(value: "0"),
-          'final_difference': PlutoCell(value: "0"),
+          'row': PlutoCell(value: 1),
+          'other': PlutoCell(value: 0),
+          'consumption_load': PlutoCell(value: 0),
+          'consumptions_load_and_other': PlutoCell(value: 0),
+          'after_melt': PlutoCell(value: 0),
+          'difference': PlutoCell(value: 0),
+          'after_paging': PlutoCell(value: 0),
+          'final_difference': PlutoCell(value: 0),
 
         },
       ));
@@ -367,6 +367,12 @@ class _Table1ScreenState extends State<Table1Screen> {
           IconButton(onPressed: (){
             deleteCurrentRowAlertDialog(context,stateManager );
           }, icon: Icon(Icons.delete),tooltip: "حذف سطر انتخاب شده"),
+          SizedBox(width: 16,),
+          IconButton(onPressed: (){
+            resetTable();
+
+          }, icon: Icon(Icons.cleaning_services_rounded),tooltip: "پاکسازی جدول"),
+
         ],
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),
