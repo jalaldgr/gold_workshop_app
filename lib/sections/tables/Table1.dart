@@ -28,7 +28,7 @@ class _Table1ScreenState extends State<Table1Screen> {
       field: 'row',
       type: PlutoColumnType.number(),
         enableEditingMode: true,
-      width: 100
+      width: 70
     ),
     /// Select Column definition
     PlutoColumn(
@@ -70,11 +70,6 @@ class _Table1ScreenState extends State<Table1Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -95,11 +90,6 @@ class _Table1ScreenState extends State<Table1Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -120,11 +110,6 @@ class _Table1ScreenState extends State<Table1Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -145,11 +130,6 @@ class _Table1ScreenState extends State<Table1Screen> {
           alignment: Alignment.center,
           titleSpanBuilder: (text) {
             return [
-              const TextSpan(
-                text: 'جمع',
-                style: TextStyle(color: Colors.red),
-              ),
-              const TextSpan(text: ' : '),
               TextSpan(text: text),
             ];
           },
@@ -170,11 +150,6 @@ class _Table1ScreenState extends State<Table1Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -195,11 +170,6 @@ class _Table1ScreenState extends State<Table1Screen> {
             alignment: Alignment.center,
             titleSpanBuilder: (text) {
               return [
-                const TextSpan(
-                  text: 'جمع',
-                  style: TextStyle(color: Colors.red),
-                ),
-                const TextSpan(text: ' : '),
                 TextSpan(text: text),
               ];
             },
@@ -429,8 +399,10 @@ class _Table1ScreenState extends State<Table1Screen> {
           },
           configuration: const PlutoGridConfiguration(
               enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
+              style: PlutoGridStyleConfig(evenRowColor: Colors.black12,
+                cellTextStyle: TextStyle(fontSize: 16),
 
-              style: PlutoGridStyleConfig(evenRowColor: Colors.black12)),
+              )),
         ),
       ),
       floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",onPressed: () async {
