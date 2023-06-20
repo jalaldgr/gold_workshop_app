@@ -1,10 +1,12 @@
 
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:gold_workshop/sections/admin/orders/addNewOrder.dart';
 import 'package:gold_workshop/sections/admin/orders/editOrder.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../helper/serverApi.dart';
 
 
@@ -82,9 +84,13 @@ class _OrdersListState extends State<OrdersList> {
                               child: Row(mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
                                     SizedBox(height: 8,),
-                                    Expanded(child: Text("ردیف" ,style: TextStyle(fontStyle: FontStyle.italic),)),
+                                     Text("ردیف" ,style: TextStyle(fontStyle: FontStyle.italic),),
+                                    SizedBox(width: 50,),
+                                    Expanded(child: Text("عکس محصول",style: TextStyle(fontStyle: FontStyle.italic))),
+                                    Expanded(child: Text("فایل طراح",style: TextStyle(fontStyle: FontStyle.italic))),
                                     Expanded(child: Text("نام مشتری",style: TextStyle(fontStyle: FontStyle.italic))),
                                     Expanded(child: Text("نوع محصول",style: TextStyle(fontStyle: FontStyle.italic))),
+                                    Expanded(child: Text("تاریخ سفارش",style: TextStyle(fontStyle: FontStyle.italic))),
                                     Expanded(child: Text("تاریخ تحویل",style: TextStyle(fontStyle: FontStyle.italic))),
                                     Expanded(child: Text("وضعیت",style: TextStyle(fontStyle: FontStyle.italic))),
                                     SizedBox(width: 100,)
@@ -193,11 +199,22 @@ class _OrdersListState extends State<OrdersList> {
           child: Container(padding: EdgeInsets.all(8),
             child:Row(
                 children: <Widget>[
-                  Expanded(child: Text("${index}")),
-                  Expanded(child: Text("${order?.clientFullName}")),
-                  Expanded(child: Text("${order?.productType}")),
-                  Expanded(child: Text("${order?.deliveryDate}")),
-                  Expanded(child: Text("${order?.status}")),
+                  Text("${index}"),
+                  Expanded(child:InkWell(
+                      child: Image.network("${dotenv.env['API_URL']}/public/uploads/${order!.image}"),
+                      onTap: (){
+                        launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${order.image}"));
+                      })),
+                   Expanded(child:
+                   OutlinedButton(onPressed: () {
+                     launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${order.designerFile}"));
+
+                   }, child: Text("فایل طراح"),) ),
+                  Expanded(child: Text("${order.clientFullName}")),
+                  Expanded(child: Text("${order.productType}")),
+                  Expanded(child: Text("${order.orderDate}")),
+                  Expanded(child: Text("${order.deliveryDate}")),
+                  Expanded(child: Text("${order.status}")),
                   SizedBox(width: 64,
                     child:Row(children: [
                       IconButton(
