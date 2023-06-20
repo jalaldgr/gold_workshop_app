@@ -51,45 +51,51 @@ class LoginScreen extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
 
-            DropdownButton<String>(
-              // Step 3.
-              value: dropdownValue,
-              // Step 4.
-              items: <String>['مدیر', 'طراح', 'کارگاه 1', 'کارگاه 2']
-                  .map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: TextStyle(fontSize: 30),
-                  ),
-                );
-              }).toList(),
-              // Step 5.
-              onChanged: (String? newValue) {
-                setState(() {
-                  dropdownValue = newValue!;
-                  switch(newValue){
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: 40),
+              child: Row(children: [
+                Expanded(child: DropdownButton<String>(
+                  // Step 3.
+                  value: dropdownValue,
+                  // Step 4.
+                  items: <String>['مدیر', 'طراح', 'کارگاه 1', 'کارگاه 2']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    );
+                  }).toList(),
+                  // Step 5.
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                      switch(newValue){
 
-                    case "مدیر":
-                      userRole ="admin";
-                      break;
-                    case "طراح":
-                      userRole = "designer";
-                      break;
-                    case "کارگاه 1":
-                      userRole = "workshop1";
-                      break;
-                    case "کارگاه 2":
-                      userRole = "workshop2";
-                      break;
+                        case "مدیر":
+                          userRole ="admin";
+                          break;
+                        case "طراح":
+                          userRole = "designer";
+                          break;
+                        case "کارگاه 1":
+                          userRole = "workshop1";
+                          break;
+                        case "کارگاه 2":
+                          userRole = "workshop2";
+                          break;
 
-                  }
-                  print(newValue);
-                });
-              },
+                      }
+                    });
+                  },
+                ),)
+              ]
+              ),
             ),
-
+            SizedBox(height: 16,),
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
@@ -107,8 +113,9 @@ class LoginScreen extends State<LoginPage> {
                 obscureText: true,
               ),
             ),
+            SizedBox(height: 32,),
             Container(
-              alignment: Alignment.centerRight,
+              alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: ElevatedButton(
                 onPressed: () async {
@@ -164,8 +171,8 @@ class LoginScreen extends State<LoginPage> {
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                 child: Container(
                   alignment: Alignment.center,
-                  height: 50.0,
-                  width: size.width * 0.5,
+                  height: 64,
+                  width: size.width ,
                   padding: const EdgeInsets.all(0),
                   child: Text(
                     "ورود",
