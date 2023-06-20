@@ -83,7 +83,7 @@ class _Workshop2sListState extends State<Workshop2sList> {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
-            userData user =new userData("", "", "", "", "");
+            userData user =new userData("", "", "", "", "","");
             _showForm(user);
           } ,
         )
@@ -139,12 +139,12 @@ class _Workshop2sListState extends State<Workshop2sList> {
                   // Save new journal
 
                   if(user.id != ""){
-                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Workshop2",user.id,passwordController.text);
+                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Workshop2",user.id,passwordController.text,"");
                     String response = await AdminApi.updateWorkshop2(userUpdated);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
                   }
                   if(user.id == ""){
-                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Workshop2","",passwordController.text);
+                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Workshop2","",passwordController.text,"");
                     String response = await AdminApi.addWorkshop2(userUpdated);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
                   }
@@ -172,7 +172,7 @@ class _Workshop2sListState extends State<Workshop2sList> {
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {
-                    userData user =new  userData(userName, fullName,"Workshop2",id,"");
+                    userData user =new  userData(userName, fullName,"Workshop2",id,"","");
                     _showForm(user);
                   },
                 ),

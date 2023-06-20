@@ -85,7 +85,7 @@ class _DesignersListState extends State<DesignersList> {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
-            userData user =new userData("", "", "", "", "");
+            userData user =new userData("", "", "", "", "","");
             _showForm(user);
           } ,
         )
@@ -141,12 +141,12 @@ class _DesignersListState extends State<DesignersList> {
                   // Save new journal
 
                   if(user.id != ""){
-                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Designer",user.id,passwordController.text);
+                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Designer",user.id,passwordController.text,"");
                     String response = await AdminApi.updateDesigner(userUpdated);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
                   }
                   if(user.id == ""){
-                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Designer","",passwordController.text);
+                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Designer","",passwordController.text,"");
                     String response = await AdminApi.addDesigner(userUpdated);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
                   }
@@ -174,7 +174,7 @@ class _DesignersListState extends State<DesignersList> {
                 IconButton(
                   icon: const Icon(Icons.edit),
                   onPressed: () {
-                    userData user =new  userData(userName, fullName,"Designer",id,"");
+                    userData user =new  userData(userName, fullName,"Designer",id,"","");
                     _showForm(user);
                   },
                 ),

@@ -4,13 +4,15 @@ class userData {
   String? role;
   String? id;
   String? password;
+  String? isAdmin;
 
   userData(
       this.username,
       this.fullName,
       this.role,
       this.id,
-      this.password
+      this.password,
+      this.isAdmin
 );
 
   userData.fromJson(Map<String, dynamic> json) {
@@ -18,6 +20,8 @@ class userData {
     fullName = json['fullName'];
     role = json['role'];
     id = json['id'];
+    isAdmin = json['isAdmin'];
+
   }
 
 
@@ -27,6 +31,8 @@ class userData {
     fullName = json['fullName'];
     role = json['role'];
     id = json['id'];
+    isAdmin = json['isAdmin'];
+
 
   }
 
@@ -38,6 +44,8 @@ class userData {
     data['role'] = this.role;
     data['id'] = this.id;
     data['password']= this.password;
+    data['isAdmin']= this.isAdmin;
+
     return data;
   }
 }

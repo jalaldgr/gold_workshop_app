@@ -85,7 +85,7 @@ class _DesignerProfileScreenState extends State<DesignerProfileScreen> {
               ElevatedButton(
                 onPressed: () async {
                   // Save new journal
-                userData userUpdated =new  userData(user.username, fullNameController.text,"Designer",user.id,passwordController.text);
+                userData userUpdated =new  userData(user.username, fullNameController.text,"Designer",user.id,passwordController.text,"");
                 String response = await DesignerApi.updateDesigner(userUpdated);
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
                   // Close the bottom sheet
@@ -179,7 +179,7 @@ class _DesignerProfileScreenState extends State<DesignerProfileScreen> {
             dynamic user = jsonDecode(prefs.getString(
                 "user")!);
             userData userModel =userData.fromJson(user);
-            _showForm(userData(userModel.username, userModel.fullName, "", userModel.id, ""));
+            _showForm(userData(userModel.username, userModel.fullName, "", userModel.id, "",""));
           } ,
         )
     );
