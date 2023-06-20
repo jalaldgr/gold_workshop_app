@@ -6,6 +6,7 @@ import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:gold_workshop/sections/admin/orders/addNewOrder.dart';
 import 'package:gold_workshop/sections/admin/orders/editOrder.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../helper/serverApi.dart';
 
@@ -52,7 +53,7 @@ class _OrdersListState extends State<OrdersList> {
             child:
             EasySearchBar(
               onSearch: (s) => _searchOrders(s),
-              title: const Text('لیست سفارش ها',
+              title:  Text('لیست سفارش ها   ${Jalali.now().formatFullDate()}',
                   style: TextStyle(
                       color: Colors.black87,
                       fontWeight: FontWeight.bold,

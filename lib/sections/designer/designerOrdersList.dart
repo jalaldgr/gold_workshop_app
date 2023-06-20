@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/designerApi.dart';
 import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'showDesignerOrder.dart';
 
 
@@ -36,7 +37,7 @@ class _DesignerOrdersListState extends State<DesignerOrdersList> {
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: const Text('لیست سفارش ها',
+          title:  Text('لیست سفارش ها   ${Jalali.now().formatFullDate()}',
               style: TextStyle(
                   color: Colors.black87,
                   fontWeight: FontWeight.bold,

@@ -6,6 +6,7 @@ import 'package:gold_workshop/helper/workshop1Api.dart';
 import 'package:gold_workshop/helper/workshop2Api.dart';
 import 'package:gold_workshop/models/tableModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 class Table5Screen extends StatefulWidget {
@@ -910,7 +911,7 @@ class _Table5ScreenState extends State<Table5Screen> {
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text('جدول 5',
+        title:  Text('جدول 5   ${Jalali.now().formatFullDate()}',
             style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.bold,

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/tableModel.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
 class Table3Screen extends StatefulWidget {
@@ -486,7 +487,7 @@ class _Table3ScreenState extends State<Table3Screen> {
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text('جدول 3',
+        title:  Text('جدول 3   ${Jalali.now().formatFullDate()}',
             style: TextStyle(
                 color: Colors.black87,
                 fontWeight: FontWeight.bold,

@@ -8,6 +8,7 @@ import 'package:gold_workshop/models/userModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
 import 'package:gold_workshop/sections/admin/orders/addNewOrder.dart';
 import 'package:http/http.dart' as http;
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../helper/serverApi.dart';
 import '../../helper/workshop2Api.dart';
@@ -44,7 +45,7 @@ class _Workshop2OrdersListState extends State<Workshop2OrdersList> {
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: const Text('لیست سفارش ها',
+          title:  Text('لیست سفارش ها   ${Jalali.now().formatFullDate()}',
               style: TextStyle(
                   color: Colors.black87,
                   fontWeight: FontWeight.bold,
