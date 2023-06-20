@@ -459,8 +459,7 @@ class _Table3ScreenState extends State<Table3Screen> {
             }, icon: Icon(Icons.delete),tooltip: "حذف سطر انتخاب شده"),
           SizedBox(width: 16,),
           IconButton(onPressed: (){
-            resetTable();
-
+            resetTableAlertDialog(context);
           }, icon: Icon(Icons.cleaning_services_rounded),tooltip: "پاکسازی جدول"),
 
 
@@ -564,5 +563,45 @@ class _Table3ScreenState extends State<Table3Screen> {
       },
     );
   }
+
+  resetTableAlertDialog(BuildContext context ) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("انصراف",style: TextStyle(color: Colors.red),),
+      onPressed:  () {Navigator.of(context).pop();},
+    );
+    Widget continueButton = TextButton(
+      child: Text("تایید",style: TextStyle(color: Colors.blue,fontSize: 20)),
+      onPressed:  () async {
+        resetTable();
+        setState(()  {
+          Navigator.of(context).pop();
+        });
+
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("پاکسازی جدول"),
+      content: Text("آیا از پاکسازی جدول اطمینان دارید؟"),
+      actions: [
+        Column(children: [
+          Row(children: [
+            Expanded(child: cancelButton ),
+            Expanded(child: continueButton )
+          ],)
+        ],)
+
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }
 

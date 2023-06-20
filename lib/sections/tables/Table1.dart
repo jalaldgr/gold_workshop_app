@@ -365,12 +365,11 @@ class _Table1ScreenState extends State<Table1Screen> {
         backgroundColor: widget.headerColor?? Colors.pink,
         actions: [
           IconButton(onPressed: (){
-            deleteCurrentRowAlertDialog(context,stateManager );
+            deleteCurrentRowAlertDialog(context );
           }, icon: Icon(Icons.delete),tooltip: "حذف سطر انتخاب شده"),
           SizedBox(width: 16,),
           IconButton(onPressed: (){
-            resetTable();
-
+            resetTableAlertDialog(context);
           }, icon: Icon(Icons.cleaning_services_rounded),tooltip: "پاکسازی جدول"),
 
         ],
@@ -436,7 +435,7 @@ class _Table1ScreenState extends State<Table1Screen> {
 
 
 
-  deleteCurrentRowAlertDialog(BuildContext context ,PlutoGridStateManager stateManager) {
+  deleteCurrentRowAlertDialog(BuildContext context ) {
     // set up the buttons
     Widget cancelButton = TextButton(
       child: Text("انصراف",style: TextStyle(color: Colors.red),),
@@ -475,5 +474,45 @@ class _Table1ScreenState extends State<Table1Screen> {
       },
     );
   }
+
+  resetTableAlertDialog(BuildContext context ) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("انصراف",style: TextStyle(color: Colors.red),),
+      onPressed:  () {Navigator.of(context).pop();},
+    );
+    Widget continueButton = TextButton(
+      child: Text("تایید",style: TextStyle(color: Colors.blue,fontSize: 20)),
+      onPressed:  () async {
+        resetTable();
+        setState(()  {
+          Navigator.of(context).pop();
+        });
+
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("پاکسازی جدول"),
+      content: Text("آیا از پاکسازی جدول اطمینان دارید؟"),
+      actions: [
+        Column(children: [
+          Row(children: [
+            Expanded(child: cancelButton ),
+            Expanded(child: continueButton )
+          ],)
+        ],)
+
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }
 
