@@ -1074,8 +1074,7 @@ class _Table4ScreenState extends State<Table4Screen> {
         backgroundColor: widget.headerColor?? Colors.pink,
         actions: [IconButton(tooltip: "حذف سطر انتخاب شده",
             onPressed: (){
-              gridAStateManager.removeCurrentRow();
-              updateTable();
+              deleteCurrentRowAlertDialog(context,gridAStateManager );
             }, icon: Icon(Icons.delete)),
           SizedBox(width: 16,),
           IconButton(onPressed: (){
@@ -1161,6 +1160,46 @@ class _Table4ScreenState extends State<Table4Screen> {
 
           },child: const Icon(Icons.add)),
 
+    );
+  }
+
+  deleteCurrentRowAlertDialog(BuildContext context ,PlutoGridStateManager stateManager) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("انصراف",style: TextStyle(color: Colors.red),),
+      onPressed:  () {Navigator.of(context).pop();},
+    );
+    Widget continueButton = TextButton(
+      child: Text("تایید",style: TextStyle(color: Colors.blue,fontSize: 20)),
+      onPressed:  () async {
+        stateManager.removeCurrentRow();
+        updateTable();
+        setState(()  {
+          Navigator.of(context).pop();
+        });
+
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("حذف سطر انتخاب شده"),
+      content: Text("آیا از حذف این سطر اطمینان دارید؟"),
+      actions: [
+        Column(children: [
+          Row(children: [
+            Expanded(child: cancelButton ),
+            Expanded(child: continueButton )
+          ],)
+        ],)
+
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
