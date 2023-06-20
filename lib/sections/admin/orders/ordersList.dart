@@ -224,10 +224,9 @@ class _OrdersListState extends State<OrdersList> {
                         onPressed: () async {
 
                           if(order?.id != null){
-                            String response = await AdminApi.deleteOrder(order?.id);
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
+                            deleteOrderAlertDialog(context ,order);
+
                           }
-                          setState(() {});
                         },
                       ),
                     ],),)
@@ -238,4 +237,45 @@ class _OrdersListState extends State<OrdersList> {
       )
       ,),);
   }
+
+  deleteOrderAlertDialog(BuildContext context, orderData order) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("انصراف",style: TextStyle(color: Colors.red),),
+      onPressed:  () {Navigator.of(context).pop();},
+    );
+    Widget continueButton = TextButton(
+      child: Text("تایید",style: TextStyle(color: Colors.blue,fontSize: 20)),
+      onPressed:  () async {
+        String response = await AdminApi.deleteOrder(order?.id);
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
+        setState(()  {
+          Navigator.of(context).pop();
+        });
+
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("حذف سفارش"),
+      content: Text("آیا از حذف سفارش ${order.clientFullName} اطمینان دارید؟"),
+      actions: [
+        Column(children: [
+          Row(children: [
+            Expanded(child: cancelButton ),
+            Expanded(child: continueButton )
+          ],)
+        ],)
+
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }
