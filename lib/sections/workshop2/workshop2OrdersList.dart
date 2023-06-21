@@ -10,6 +10,7 @@ import 'package:gold_workshop/sections/admin/orders/addNewOrder.dart';
 import 'package:http/http.dart' as http;
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../helper/serverApi.dart';
 import '../../helper/workshop2Api.dart';
 import 'showWorkshop2Order.dart';
@@ -65,25 +66,6 @@ class _Workshop2OrdersListState extends State<Workshop2OrdersList> {
                       ? Column(
                     children: [
 
-                      ListTile(
-                        onTap: null,
-                        leading: CircleAvatar(
-                          backgroundColor: Colors.transparent,
-                        ),
-                        title:
-                        Row(mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              SizedBox(height: 8,),
-                              Expanded(child: Text("ردیف" ,style: TextStyle(fontStyle: FontStyle.italic),)),
-                              Expanded(child: Text("نام مشتری",style: TextStyle(fontStyle: FontStyle.italic))),
-                              Expanded(child: Text("نوع محصول",style: TextStyle(fontStyle: FontStyle.italic))),
-                              Expanded(child: Text("تاریخ تحویل",style: TextStyle(fontStyle: FontStyle.italic))),
-                              Expanded(child: Text("وضعیت",style: TextStyle(fontStyle: FontStyle.italic))),
-                              SizedBox(width: 100,)
-                            ]
-                        ),
-                      ),
-
                       Container(
                         height: MediaQuery.of(context).size.height * 0.87,
                         decoration: const BoxDecoration(
@@ -96,8 +78,6 @@ class _Workshop2OrdersListState extends State<Workshop2OrdersList> {
                             itemBuilder: (context, index) {
                               return _buildOrderItem(
                                   context,
-                                  snapshot.data?[index].clientFullName,
-                                  snapshot.data?[index].status,
                                   snapshot.data?[index],
                                   index);
                             }),
@@ -126,17 +106,15 @@ class _Workshop2OrdersListState extends State<Workshop2OrdersList> {
 
 
   Widget _buildOrderItem(BuildContext context,
-      String? clientFullname,String? status , orderData? order,int? index) {
-    return InkWell(onTap: (){
+      orderData? order,int? index) {
+    return InkWell(onTap: () {
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => ShowWorkshop2OrderScreen(order: order!,)));
-
-    },child:
-    Padding(padding: EdgeInsets.all(4),
+    },child: Padding(padding: EdgeInsets.all(4),
       child:
-      Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 100,
+      Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 128,
         child:
         Card(color: order?.status=="در انتظار بررسی"?Colors.lightGreenAccent.shade100:
         order?.status=="تکمیل نهایی"?Colors.lightGreen:
@@ -144,18 +122,60 @@ class _Workshop2OrdersListState extends State<Workshop2OrdersList> {
         order?.status=="ارسال به کارگاه"?Colors.amberAccent.shade100:
         order?.status=="برگشت از طراح"?Colors.lightBlue:
         order?.status=="برگشت از کارگاه"?Colors.amber  :
-        Colors.redAccent.shade100,          child: Row(
-            children: <Widget>[
-              Expanded(child: Text("${index}")),
-              Expanded(child: Text("${order?.clientFullName}")),
-              Expanded(child: Text("${order?.productType}")),
-              Expanded(child: Text("${order?.deliveryDate}")),
-              Expanded(child: Text("${order?.status}")),
-            ]
-        ),
+        Colors.redAccent.shade100,
+          child: Container(padding: EdgeInsets.all(8),
+            child:Row(children: [
+              Expanded(child:
+              Row(children: [
+                Flexible(flex: 9,child:
+                Column(children: [
+                  Expanded(child:
+                  Row(
+                      children: <Widget>[
+                        Text("${index+1}"),
+                        SizedBox(width: 32,),
+                        Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("نام مشتری",style: TextStyle(fontSize: 11),),Text("${order!.clientFullName}")],)),
+                        Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("نوع محصول",style: TextStyle(fontSize: 11),),Text("${order!.productType}")],)),
+                        Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("تاریخ سفارش",style: TextStyle(fontSize: 11),),Text("${order!.orderDate}")],)),
+                        Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("تاریخ تحویل",style: TextStyle(fontSize: 11),),Text("${order!.deliveryDate}")],)),
+                      ]
+                  )),
+                  SizedBox(height: 12,),
+                  Expanded(child:
+                  Row(
+                    children: <Widget>[
+                      SizedBox(width: 40,),
+                      Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("سفارش گیرنده",style: TextStyle(fontSize: 11),),Text("سفارش گیرنده")],)),
+                      Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("وضعیت سفارش",style: TextStyle(fontSize: 11),),Text("${order!.status}")],)),
+                      Expanded(child:Row(children: [Text("${order.instantDelivery=="true" ? "✓ تحویل فوری":""}"),],)),
+                      Expanded(child:Row(children: [Text("${order.paperDelivery=="true" ? "✓ کاغذی":""}"),],)),
+                      Expanded(child:Row(children: [Text("${order.feeOrder=="true" ? "✓ بیعانه":""}"),],)),
+                      Expanded(child:Row(children: [Text("${order.customerDelivery=="true" ? "✓ تحویل مشتری":""}"),],)),
+                    ],
+                  )),
+                ],)
+
+
+                ),
+                Flexible(flex: 3,child:Row(children: [
+                  Expanded(child:InkWell(
+                      child: Image.network("${dotenv.env['API_URL']}/public/uploads/${order!.image}"),
+                      onTap: (){
+                        launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${order.image}"));
+                      })),
+                  Expanded(child:
+                  OutlinedButton(onPressed: () {
+                    launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${order.designerFile}"));
+
+                  }, child: Text("فایل طراح"),) ),
+                ],) )
+
+              ],))
+            ],),
+
+          ),
         ),
       )
-
       ,),);
   }
 }
