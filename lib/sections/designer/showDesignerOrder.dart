@@ -125,14 +125,19 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                         // Flex(       direction: isScreenWide ? Axis.horizontal : Axis.vertical,
                         Row(
                           children: [
+                            Expanded(child:Column(children: [Text("نوع سفارش",style: TextStyle(fontSize: 14,color: Colors.grey)),Text("${widget.order.orderType}")])),
+                            Expanded(child:Column(children: [Text("گیرنده سفارش",style: TextStyle(fontSize: 14,color: Colors.grey)),Text("${widget.order.orderRecipient}")])),
+
                             Expanded(child:Column(children: [Text("توضیحات",style: TextStyle(fontSize: 14,color: Colors.grey)),Text("${widget.order.description}")])),
-                            Expanded(child: Row(children: [
-                              Expanded(child:Row(children: [Text("${widget.order.instantDelivery=="true" ? "✓ تحویل فوری":""}"),],)),
-                              Expanded(child:Row(children: [Text("${widget.order.paperDelivery=="true" ? "✓ کاغذی":""}"),],)),
-                              Expanded(child:Row(children: [Text("${widget.order.feeOrder=="true" ? "✓ بیعانه":""}"),],)),
-                              Expanded(child:Row(children: [Text("${widget.order.customerDelivery=="true" ? "✓ تحویل مشتری":""}"),],)),],
-                            )
-                            )]
+                            Expanded(child: Column(children: [
+                              Text("${widget.order.instantDelivery=="true" ? "✓ تحویل فوری":""}"),
+                              Text("${widget.order.paperDelivery=="true" ? "✓ کاغذی":""}"),
+                              Text("${widget.order.feeOrder=="true" ? "✓ بیعانه":""}"),
+                              Text("${widget.order.customerDelivery=="true" ? "✓ تحویل مشتری":""}"),
+                            ],)),
+
+
+                            ]
                           ,)
                           ,),
 
