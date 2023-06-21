@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:gold_workshop/models/tableModel.dart';
 import 'package:gold_workshop/sections/admin/draw_menu_admin.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import '../../helper/serverApi.dart';
 import 'archiveTables/TableArchive1.dart';
 import 'archiveTables/TableArchive2.dart';
@@ -16,11 +18,24 @@ class TableArchiveListScreen extends StatefulWidget {
 }
 
 class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
+  String _listState = "archive";
+  String _searchKeyword = "keyword";
 
   @override
   void initState() {
 
     super.initState();
+  }
+
+  _searchOrders(s)async{
+    print("trig search");
+    if(s.toString().length>3){
+      setState(() {
+        _listState="search";
+        _searchKeyword = s;
+      });
+    }
+
   }
 
   Widget build(BuildContext context) {
@@ -29,20 +44,27 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
           iconTheme: IconThemeData(color: Colors.black87),
           backgroundColor: Colors.pink,
           actions: <Widget>[
-            IconButton(onPressed: (){setState(() {});},
+            IconButton(onPressed: (){setState(() {_listState="archive";});},
                 tooltip: "بروزرسانی",
                 icon: Icon(Icons.refresh)),
 
-          ],
-          leading: IconButton(
+          ],          leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: const Text('آرشیو جدول ها',
-              style: TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22.0)),
+          title: Container(
+            height: 48,
+            child:
+            EasySearchBar(
+              onSearch: (s) => _searchOrders(s),
+              title:  Text('لیست سفارش ها   ${Jalali.now().formatFullDate()}',
+                  style: TextStyle(
+                      color: Colors.black87,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22.0)),
+            ),
+
+          ),
         ),
         drawer: SideMenuAdmin(),
         backgroundColor: Colors.white,
@@ -51,7 +73,7 @@ class _TableArchiveListScreenState extends State<TableArchiveListScreen> {
             children: [
               Center(
                 child: FutureBuilder(
-                  future: AdminApi.getTables(),
+                  future:_listState=="archive"? AdminApi.getTables():AdminApi.searchTables(_searchKeyword),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<tableData>> snapshot) =>
                   snapshot.hasData && snapshot.data!.isNotEmpty

@@ -385,4 +385,24 @@ class AdminApi {
   }
 
 
+
+  /////////////////////////// Search Orders ////////////////////////
+  static Future<List<tableData>> searchTables(s) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+    final response = await http.get(
+      Uri.parse('${dotenv.env['API_URL']}/admin/search-table/${s}'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    List jsonResponse = json.decode(response.body);
+    print(response.body);
+    if(jsonResponse.length>0)
+      return jsonResponse.map((myMap) => tableData.fromJson(myMap)).toList();
+    else
+      return jsonResponse.map((myMap) => tableData.fromJson({})).toList();
+
+  }
+
+
+
 }
