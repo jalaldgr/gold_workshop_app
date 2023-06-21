@@ -36,7 +36,7 @@ class NewOrderFormState extends State<NewOrderForm> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-  String customerTypeDropDownValue = 'مشتری';
+  String customerTypeDropDownValue = 'نوع خرید';
   var customerTypeDropDownItems = [ 'مشتری','همکار' ];
   String statusDropDownValue = 'در انتظار بررسی';
   var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'ارسال به طراح','ارسال به کارگاه','برگشت از طراح','برگشت از کارگاه' ,'لغو شده'];
@@ -47,6 +47,8 @@ class NewOrderFormState extends State<NewOrderForm> {
     "طلای مناسبتی","طوق و بنگل طلا","تمیمه","انگشتر مردانه","زنجیر مردانه","دستبند مردانه","انگشتر زنانه","هدایای اقتصادی","برند ها"];
   String orderMetaDropDownValue = 'کد';
   var orderMetaDropDownItems = [ 'کد','وزن','سایز','ابعاد','رنگ','سایر', ];
+  String orderTypeDropDownValue = 'تلفنی';
+  var orderTypeDropDownItems = [ 'تلفنی','حضوری','واتساپ','سایت' ];
   bool instantDeliveryCheckBoxValue = false;
   bool deliveryByCustomerCheckBoxValue = false;
   bool feeCheckBoxValue = false;
@@ -113,6 +115,7 @@ class NewOrderFormState extends State<NewOrderForm> {
       widget.order.status = statusDropDownValue;
       widget.order.productType = productTypeDropDownValue;
       widget.order.orderDate = Jalali.now().formatFullDate();
+      widget.order.orderType = orderTypeDropDownValue;
 
     });
   }
@@ -193,12 +196,22 @@ class NewOrderFormState extends State<NewOrderForm> {
                             Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration(hintText: "تاریخ تحویل",labelText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
                             Expanded(child:
                             DropdownButtonFormField(
-                              decoration: InputDecoration(labelText: "نوع مشتری"),
+                              decoration: InputDecoration(labelText: "نوع همکاری"),
                               value: customerTypeDropDownValue,
                               items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                               onChanged: (String? value) {setState(() {
                                 customerTypeDropDownValue = value!;
                                 widget.order.clientType = value;
+                              });},
+                            )),
+                            Expanded(child:
+                            DropdownButtonFormField(
+                              decoration: InputDecoration(labelText: "نوع سفارش"),
+                              value: orderTypeDropDownValue,
+                              items: orderTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                              onChanged: (String? value) {setState(() {
+                                orderTypeDropDownValue = value!;
+                                widget.order.orderType = value;
                               });},
                             )),
                             Expanded(child:

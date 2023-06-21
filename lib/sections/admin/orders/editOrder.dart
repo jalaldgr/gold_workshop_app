@@ -48,6 +48,9 @@ class EditOrderScreenState extends State<EditOrderScreen> {
     "طلای مناسبتی","طوق و بنگل طلا","تمیمه","انگشتر مردانه","زنجیر مردانه","دستبند مردانه","انگشتر زنانه","هدایای اقتصادی","برند ها"];
   String orderMetaDropDownValue = 'وزن';
   var orderMetaDropDownItems = [ 'وزن','کد' ];
+
+  String orderTypeDropDownValue = 'تلفنی';
+  var orderTypeDropDownItems = [ 'تلفنی','حضوری','واتساپ','سایت' ];
   bool instantDeliveryCheckBoxValue = false;
   bool deliveryByCustomerCheckBoxValue = false;
   bool feeCheckBoxValue = false;
@@ -152,6 +155,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
     customerTypeDropDownValue = widget.order.clientType!;
     statusDropDownValue = widget.order.status!;
     productTypeDropDownValue = widget.order.productType!;
+    orderTypeDropDownValue = widget.order.orderType!;
 
   }
 
@@ -203,12 +207,22 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                         Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration(hintText: "تاریخ تحویل",labelText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
                         Expanded(child:
                         DropdownButtonFormField(
-                          decoration: InputDecoration(labelText: "نوع مشتری"),
+                          decoration: InputDecoration(labelText: "نوع خرید"),
                           value: customerTypeDropDownValue,
                           items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                           onChanged: (String? value) {setState(() {
                             customerTypeDropDownValue = value!;
                             widget.order.clientType = value;
+                          });},
+                        )),
+                        Expanded(child:
+                        DropdownButtonFormField(
+                          decoration: InputDecoration(labelText: "نوع سفارش"),
+                          value: orderTypeDropDownValue,
+                          items: orderTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                          onChanged: (String? value) {setState(() {
+                            orderTypeDropDownValue = value!;
+                            widget.order.orderType = value;
                           });},
                         )),
                         Expanded(child:
