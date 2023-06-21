@@ -52,7 +52,6 @@ class LoginScreen extends State<HomeScreen> {
                 Image.asset("assets/images/logo.png",width: 512,),
                 Text("مینیاتور",style: TextStyle(fontWeight: FontWeight.w900,fontSize: 32),),
                 SizedBox(height: 8,),
-                Text("ورژن   ${_appVersion}",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 16),)
 
               ],),
           )
