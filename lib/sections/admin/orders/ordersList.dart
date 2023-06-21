@@ -80,24 +80,7 @@ class _OrdersListState extends State<OrdersList> {
                       child:
                       Column(
                         children: [
-                          Card(
-                            child: Container(padding: EdgeInsets.all(8),
-                              child: Row(mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    SizedBox(height: 8,),
-                                     Text("ردیف" ,style: TextStyle(fontStyle: FontStyle.italic),),
-                                    SizedBox(width: 50,),
-                                    Expanded(child: Text("عکس محصول",style: TextStyle(fontStyle: FontStyle.italic))),
-                                    Expanded(child: Text("فایل طراح",style: TextStyle(fontStyle: FontStyle.italic))),
-                                    Expanded(child: Text("نام مشتری",style: TextStyle(fontStyle: FontStyle.italic))),
-                                    Expanded(child: Text("نوع محصول",style: TextStyle(fontStyle: FontStyle.italic))),
-                                    Expanded(child: Text("تاریخ سفارش",style: TextStyle(fontStyle: FontStyle.italic))),
-                                    Expanded(child: Text("تاریخ تحویل",style: TextStyle(fontStyle: FontStyle.italic))),
-                                    Expanded(child: Text("وضعیت",style: TextStyle(fontStyle: FontStyle.italic))),
-                                    SizedBox(width: 100,)
-                                  ]
-                              ),
-                            ),),
+
                           Container(
                             child:ListView.builder(
                               shrinkWrap: true,
@@ -188,7 +171,7 @@ class _OrdersListState extends State<OrdersList> {
               builder: (context) => EditOrderScreen(order: order!,)));
     },child: Padding(padding: EdgeInsets.all(4),
       child:
-      Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 100,
+      Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 120,
         child:
         Card(color: order?.status=="در انتظار بررسی"?Colors.lightGreenAccent.shade100:
         order?.status=="تکمیل نهایی"?Colors.lightGreen:
@@ -198,24 +181,60 @@ class _OrdersListState extends State<OrdersList> {
         order?.status=="برگشت از کارگاه"?Colors.amber  :
         Colors.redAccent.shade100,
           child: Container(padding: EdgeInsets.all(8),
-            child:Row(
-                children: <Widget>[
-                  Text("${index}"),
+            child:Row(children: [
+              Expanded(child:
+              Row(children: [
+                Flexible(flex: 8,child:
+                    Column(children: [
+                      Expanded(child:
+                      Row(
+                          children: <Widget>[
+                            Text("${index+1}"),
+                            SizedBox(width: 16,),
+                            Expanded(child: Text("${order!.clientFullName}")),
+                            Expanded(child: Text("${order.productType}")),
+                            Expanded(child: Text("${order.orderDate}")),
+                            Expanded(child: Text("${order.deliveryDate}")),
+
+
+
+                          ]
+                      )),
+                      Expanded(child:
+                      Row(
+                          children: <Widget>[
+                            Text("${index+1}"),
+                            SizedBox(width: 16,),
+                            Expanded(child: Text("سفارش گیرنده")),
+                            Expanded(child: Text("${order.status}")),
+
+
+
+                              Expanded(child:Row(children: [Text("${order.instantDelivery=="true" ? "✓ تحویل فوری":""}"),],)),
+                              Expanded(child:Row(children: [Text("${order.paperDelivery=="true" ? "✓ کاغذی":""}"),],)),
+                              Expanded(child:Row(children: [Text("${order.feeOrder=="true" ? "✓ بیعانه":""}"),],)),
+                              Expanded(child:Row(children: [Text("${order.customerDelivery=="true" ? "✓ تحویل مشتری":""}"),],)),],
+
+
+
+
+
+                      )),
+                    ],)
+
+
+                ),
+                Flexible(flex: 3,child:Row(children: [
                   Expanded(child:InkWell(
                       child: Image.network("${dotenv.env['API_URL']}/public/uploads/${order!.image}"),
                       onTap: (){
                         launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${order.image}"));
                       })),
-                   Expanded(child:
-                   OutlinedButton(onPressed: () {
-                     launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${order.designerFile}"));
+                  Expanded(child:
+                  OutlinedButton(onPressed: () {
+                    launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${order.designerFile}"));
 
-                   }, child: Text("فایل طراح"),) ),
-                  Expanded(child: Text("${order.clientFullName}")),
-                  Expanded(child: Text("${order.productType}")),
-                  Expanded(child: Text("${order.orderDate}")),
-                  Expanded(child: Text("${order.deliveryDate}")),
-                  Expanded(child: Text("${order.status}")),
+                  }, child: Text("فایل طراح"),) ),
                   SizedBox(width: 64,
                     child:Row(children: [
                       IconButton(
@@ -223,15 +242,18 @@ class _OrdersListState extends State<OrdersList> {
                         tooltip: "حذف",
                         onPressed: () async {
 
-                          if(order?.id != null){
+                          if(order.id != null){
                             deleteOrderAlertDialog(context ,order);
 
                           }
                         },
                       ),
-                    ],),)
-                ]
-            ),
+                    ],),),
+                ],) )
+
+              ],))
+            ],),
+
           ),
         ),
       )
