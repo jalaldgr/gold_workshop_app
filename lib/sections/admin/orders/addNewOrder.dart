@@ -76,10 +76,7 @@ class NewOrderFormState extends State<NewOrderForm> {
     });
   }
   onChangeProductMeta(value){
-    setState(() {
-      widget.order.orderMeta = value;
-      print(widget.order.orderMeta);
-    });
+    widget.order.orderMeta = value;
   }
   onChangeDesignerDropDown(value){
     setState(() {

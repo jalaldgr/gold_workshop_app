@@ -83,10 +83,9 @@ class EditOrderScreenState extends State<EditOrderScreen> {
     });
   }
   onChangeProductMeta(value){
-    setState(() {
-      widget.order.orderMeta = value;
-      print(widget.order.orderMeta);
-    });
+    widget.order.orderMeta = value;
+
+
   }
 
   onChangeWorkshop1DropDown(value){
