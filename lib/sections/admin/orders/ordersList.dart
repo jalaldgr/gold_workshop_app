@@ -171,7 +171,7 @@ class _OrdersListState extends State<OrdersList> {
               builder: (context) => EditOrderScreen(order: order!,)));
     },child: Padding(padding: EdgeInsets.all(4),
       child:
-      Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 120,
+      Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 128,
         child:
         Card(color: order?.status=="در انتظار بررسی"?Colors.lightGreenAccent.shade100:
         order?.status=="تکمیل نهایی"?Colors.lightGreen:
@@ -184,41 +184,31 @@ class _OrdersListState extends State<OrdersList> {
             child:Row(children: [
               Expanded(child:
               Row(children: [
-                Flexible(flex: 8,child:
+                Flexible(flex: 9,child:
                     Column(children: [
                       Expanded(child:
                       Row(
                           children: <Widget>[
                             Text("${index+1}"),
-                            SizedBox(width: 16,),
-                            Expanded(child: Text("${order!.clientFullName}")),
-                            Expanded(child: Text("${order.productType}")),
-                            Expanded(child: Text("${order.orderDate}")),
-                            Expanded(child: Text("${order.deliveryDate}")),
-
-
-
+                            SizedBox(width: 32,),
+                            Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("نام مشتری",style: TextStyle(fontSize: 11),),Text("${order!.clientFullName}")],)),
+                            Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("نوع محصول",style: TextStyle(fontSize: 11),),Text("${order!.productType}")],)),
+                            Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("تاریخ سفارش",style: TextStyle(fontSize: 11),),Text("${order!.orderDate}")],)),
+                            Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("تاریخ تحویل",style: TextStyle(fontSize: 11),),Text("${order!.deliveryDate}")],)),
                           ]
                       )),
+                      SizedBox(height: 12,),
                       Expanded(child:
                       Row(
                           children: <Widget>[
-                            Text("${index+1}"),
-                            SizedBox(width: 16,),
-                            Expanded(child: Text("سفارش گیرنده")),
-                            Expanded(child: Text("${order.status}")),
-
-
-
-                              Expanded(child:Row(children: [Text("${order.instantDelivery=="true" ? "✓ تحویل فوری":""}"),],)),
-                              Expanded(child:Row(children: [Text("${order.paperDelivery=="true" ? "✓ کاغذی":""}"),],)),
-                              Expanded(child:Row(children: [Text("${order.feeOrder=="true" ? "✓ بیعانه":""}"),],)),
-                              Expanded(child:Row(children: [Text("${order.customerDelivery=="true" ? "✓ تحویل مشتری":""}"),],)),],
-
-
-
-
-
+                            SizedBox(width: 40,),
+                            Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("سفارش گیرنده",style: TextStyle(fontSize: 11),),Text("سفارش گیرنده")],)),
+                            Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("وضعیت سفارش",style: TextStyle(fontSize: 11),),Text("${order!.status}")],)),
+                            Expanded(child:Row(children: [Text("${order.instantDelivery=="true" ? "✓ تحویل فوری":""}"),],)),
+                            Expanded(child:Row(children: [Text("${order.paperDelivery=="true" ? "✓ کاغذی":""}"),],)),
+                            Expanded(child:Row(children: [Text("${order.feeOrder=="true" ? "✓ بیعانه":""}"),],)),
+                            Expanded(child:Row(children: [Text("${order.customerDelivery=="true" ? "✓ تحویل مشتری":""}"),],)),
+                          ],
                       )),
                     ],)
 
