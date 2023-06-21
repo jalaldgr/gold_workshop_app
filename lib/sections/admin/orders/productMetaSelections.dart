@@ -55,6 +55,9 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
   TextEditingController stoneHandleTypeTextController = TextEditingController();
   TextEditingController stoneHandleSizeTextController = TextEditingController();
 
+  TextEditingController ringHandleSizeTextController = TextEditingController();
+  TextEditingController ringHandleTypeTextController = TextEditingController();
+  TextEditingController ringStoneTypeTextController = TextEditingController();
 
   Map<String,String>  _metaKeyValue={};
 
@@ -141,6 +144,21 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
           if(meta["نوع دسته"].toString().length>0)_metaKeyValue["نوع دسته"] = meta["نوع دسته"]??"";
           if(meta["سایز دسته"].toString().length>0)_metaKeyValue["سایز دسته"] = meta["سایز دسته"]??"";
           if(meta["نوع سنگ"].toString().length>0)_metaKeyValue["نوع سنگ"] = meta["نوع سنگ"]??"ساده";
+
+        }
+        break;
+
+      case 'انگشتر':
+        if(widget.meta!.length>0) {
+          _metaKeyValue={};
+          dynamic meta = json.decode(widget.meta!);
+          if(meta["نوع دسته"].toString().length>0)ringHandleTypeTextController.text = meta["نوع دسته"]??"";
+          if(meta["سایز دسته"].toString().length>0)ringHandleSizeTextController.text = meta["سایز دسته"]??"";
+          if(meta["نوع سنگ"].toString().length>0)ringStoneTypeTextController.text = meta["نوع سنگ"]??"";
+
+          if(meta["نوع دسته"].toString().length>0)_metaKeyValue["نوع دسته"] = meta["نوع دسته"]??"";
+          if(meta["سایز دسته"].toString().length>0)_metaKeyValue["سایز دسته"] = meta["سایز دسته"]??"";
+          if(meta["نوع سنگ"].toString().length>0)_metaKeyValue["نوع سنگ"] = meta["نوع سنگ"]??"";
 
         }
         break;
@@ -480,6 +498,52 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
             ],
           ),
         ),
+        Visibility(
+          visible: widget.productType=="انگشتر",
+          child:Row(
+            children: [
+
+              Expanded(
+                child: TextFormField(
+                  onChanged: (value){
+                    _metaKeyValue["نوع دسته"] = value;
+                    widget.callback(jsonEncode(_metaKeyValue));
+                  },
+                  controller: ringHandleTypeTextController,
+                  decoration: InputDecoration(
+                      hintText: "نوع دسته", labelText: "نوع دسته"),
+                ),
+              ),
+              Expanded(
+                child: TextFormField(
+                  controller: ringHandleSizeTextController,
+                  onChanged: (value){
+                    _metaKeyValue["سایز دسته"] = value;
+                    widget.callback(jsonEncode(_metaKeyValue));
+                  },
+                  decoration: InputDecoration(
+                      hintText: "سایز دسته", labelText: "سایز دسته"),
+                ),
+              ),
+              Expanded(
+                child: TextFormField(
+                  controller: ringStoneTypeTextController,
+                  onChanged: (value){
+                    _metaKeyValue["نوع سنگ"] = value;
+                    widget.callback(jsonEncode(_metaKeyValue));
+                  },
+                  decoration: InputDecoration(
+                      hintText: "نوع سنگ", labelText: "نوع سنگ"),
+                ),
+              ),
+
+
+
+
+            ],
+          ),
+        ),
+
       ],
     );
 

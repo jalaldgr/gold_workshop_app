@@ -36,7 +36,7 @@ class NewOrderFormState extends State<NewOrderForm> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-  String customerTypeDropDownValue = 'نوع خرید';
+  String customerTypeDropDownValue = 'مشتری';
   var customerTypeDropDownItems = [ 'مشتری','همکار' ];
   String statusDropDownValue = 'در انتظار بررسی';
   var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'ارسال به طراح','ارسال به کارگاه','برگشت از طراح','برگشت از کارگاه' ,'لغو شده'];
@@ -196,7 +196,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                             Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration(hintText: "تاریخ تحویل",labelText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
                             Expanded(child:
                             DropdownButtonFormField(
-                              decoration: InputDecoration(labelText: "نوع همکاری"),
+                              decoration: InputDecoration(labelText: "نوع خرید"),
                               value: customerTypeDropDownValue,
                               items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                               onChanged: (String? value) {setState(() {
@@ -373,6 +373,11 @@ class NewOrderFormState extends State<NewOrderForm> {
                                     case "دوره سنگ":
                                       setState(() {
                                         widget.order.orderMeta = jsonEncode({"نوع سنگ": "ساده"});
+                                      });
+                                      break;
+                                    case "انگشتر":
+                                      setState(() {
+                                        widget.order.orderMeta = jsonEncode({});
                                       });
                                       break;
                                     default:
