@@ -105,11 +105,12 @@ class _Workshop1OrdersListState extends State<Workshop1OrdersList> {
 
   Widget _buildOrderItem(BuildContext context,
       orderData? order,int? index) {
-    return InkWell(onTap: () {
-      Navigator.push(
+    return InkWell(onTap: () async {
+      final value = await Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => ShowWorkshop1OrderScreen(order: order!,)));
+      setState(() {});
     },child: Padding(padding: EdgeInsets.all(4),
       child:
       Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 128,

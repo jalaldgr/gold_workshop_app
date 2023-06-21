@@ -110,8 +110,8 @@ class _OrdersListState extends State<OrdersList> {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           tooltip: "سفارش جدید",
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+          final value = await  Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => NewOrderForm(order: orderData.fromJson({
@@ -144,6 +144,9 @@ class _OrdersListState extends State<OrdersList> {
                       "productType":""
 
                     }),)));
+          setState(() {
+
+          });
           } ,
         )
     );
@@ -164,11 +167,14 @@ class _OrdersListState extends State<OrdersList> {
 
   Widget _buildOrderItem(BuildContext context,
        orderData? order,int? index) {
-    return InkWell(onTap: () {
-      Navigator.push(
+    return InkWell(onTap: () async {
+      final value = await Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => EditOrderScreen(order: order!,)));
+      setState(() {
+
+      });
     },child: Padding(padding: EdgeInsets.all(4),
       child:
       Container( color: (index! % 2 == 0) ? Colors.brown.shade100 : Colors.lightBlue.shade100,height: 128,

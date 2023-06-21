@@ -73,22 +73,24 @@ class _Workshop2HomeScreenState extends State<Workshop2HomeScreen> {
                               children: [
                                 Expanded(child:Padding(padding: EdgeInsets.all(4),child:
                                 OutlinedButton(
-                                    onPressed: () {
-                                      Navigator.push(
+                                    onPressed: () async {
+                                      final value = await Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => Table3Screen(headerColor: Colors.cyan,)));
+                                      setState(() {});
                                     },
                                     child: Text("جدول 3",style: TextStyle(fontSize: 32),))
                                   ,)),
                                 Expanded(child:
                                 Padding(padding: EdgeInsets.all(4),
                                   child: OutlinedButton(
-                                      onPressed: () {
-                                        Navigator.push(
+                                      onPressed: () async {
+                                        final value = await Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => Table4Screen(headerColor: Colors.cyan)));
+                                        setState(() {});
                                       },
                                       child: Text("جدول 4",style: TextStyle(fontSize: 32),))
                                   ,)
@@ -97,11 +99,12 @@ class _Workshop2HomeScreenState extends State<Workshop2HomeScreen> {
                                 Expanded(child:
                                 Padding(padding: EdgeInsets.all(4),
                                   child: OutlinedButton(
-                                      onPressed: () {
-                                        Navigator.push(
+                                      onPressed: () async {
+                                        final value = await Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => Table5Screen(headerColor: Colors.cyan)));
+                                        setState(() {});
                                       },
                                       child: Text("جدول 5",style: TextStyle(fontSize: 32),))
                                   ,)
