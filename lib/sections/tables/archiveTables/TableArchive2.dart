@@ -437,21 +437,6 @@ class _Table2ArchiveScreenState extends State<Table2ArchiveScreen> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black87),
         backgroundColor: widget.headerColor??Colors.pink,
-        actions: [IconButton(tooltip: "حذف سطر انتخاب شده",
-       onPressed: (){
-          stateManager.removeCurrentRow();
-          updateTable();
-        }, icon: Icon(Icons.delete)),
-          SizedBox(width: 16,),
-          IconButton(onPressed: (){
-            resetTable();
-
-          }, icon: Icon(Icons.cleaning_services_rounded),tooltip: "ریست کردن جدول"),
-        ],
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
         title:  Text('جدول   2${widget.table.date}',
             style: TextStyle(
                 color: Colors.black87,
