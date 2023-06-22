@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:gold_workshop/models/tableModel.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gold_workshop/models/orderModel.dart';
+import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -211,7 +212,7 @@ class AdminApi {
   static Future<List<orderData>> getOrders() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
-
+    String stringResponse="";
     final WPResponse = await http.get(
       Uri.parse('https://minitala.com/wp-json/wp/v2/sefareshat'),
     );
@@ -222,30 +223,71 @@ class AdminApi {
     );
     List notCompletedJsonResponse = json.decode(notCompletedResponse.body);
 
-    WPJsonResponse.forEach((WPElement) {
+    WPJsonResponse.forEach((WPElement) async {
       var title = json.encode(WPElement["title"]);
       bool orderExist = false;
       notCompletedJsonResponse.forEach((notElement) {
-        if(WPElement["id"]==notElement["woocommerceOrderId"])orderExist = true;
+        if(WPElement["id"].toString()==notElement["woocommerceOrderId"])orderExist = true;
         // print("notElement is ${notElement}");
-        print("WPElement is ${WPElement["id"]}");
+        print("WPElement is ${WPElement["meta"]["shomaretamas"][0]}");
 
       });
-      if(!orderExist)print("order must saved");
+      ////////////add wc order to server orders/////////////////
+      if(!orderExist) {
+        var uri = Uri.parse('${dotenv.env['API_URL']}/admin/create-order');
+        var request2 = http.MultipartRequest('POST', uri)
+          ..headers.addAll({'Authorization': 'Bearer $token'});
+
+        http.MultipartFile file = await http.MultipartFile.fromString('image', "https://www.minitala.com/wp-content/uploads/2023/06/%D9%85%D8%AF%D8%A7%D9%84-%D8%B3%D9%86%DA%AF-%D9%84%D8%A7%D8%AC%D9%88%D8%B1%D8%AF-768x768.jpg");
+        request2.files.add(file);
+        print(WPElement);
+        if(WPElement["meta"]["sefareshDahandeName"][0]!=null)request2.fields["clientFullName"] = WPElement["meta"]["sefareshDahandeName"][0].toString();
+        if(WPElement["id"]!=null)request2.fields["woocommerceOrderId"] = WPElement["id"].toString();
+        if(WPElement["date"]!=null)request2.fields["orderDate"] = Jalali.fromDateTime(DateTime.parse(WPElement["date"])).formatFullDate().toString();
+        if(WPElement["meta"]["tozihat"]!=null)request2.fields["description"] = WPElement["meta"]["tozihat"][0].toString();
+        if(WPElement["meta"]["codemahsool"]!=null)request2.fields["code"] = WPElement["meta"]["codemahsool"][0].toString();
+        if(WPElement["meta"]["vaznemahsool"]!=null)request2.fields["weight"] = WPElement["meta"]["vaznemahsool"][0].toString();
+        if(WPElement["meta"]["noemahsool"]!=null)request2.fields["productType"] = WPElement["meta"]["noemahsool"][0].toString();
+        if(WPElement["meta"]["moshtarihamkar"]!=null)request2.fields["clientType"] = WPElement["meta"]["moshtarihamkar"][0].toString();
+        if(WPElement["meta"]["tarikhtahvil"]!=null)request2.fields["deliveryDate"] = WPElement["meta"]["tarikhtahvil"][0];
+        if(WPElement["meta"]["shomaretamas"]!=null)request2.fields["clientMobile"] = WPElement["meta"]["shomaretamas"][0].toString();
+        if(WPElement["meta"]["noetahvil"]!=null)request2.fields["instantDelivery"] = "true";
+        if(WPElement["meta"]["tahvilmoshtari"]!=null)request2.fields["customerDelivery"] = "true";
+        if(WPElement["meta"]["kaghazi"]!=null)request2.fields["paperDelivery"] = "true";
+        if(WPElement["meta"]["beyane"]!=null)request2.fields["feeOrder"] = "true";
+        request2.fields["orderType"] = "سایت";
+        request2.fields["status"] = "در انتظار بررسی";
+        if(WPElement["meta"]["vaznemahsool"]!=null)request2.fields["weight"] =WPElement["meta"]["vaznemahsool"] [0];
+        if(WPElement["meta"]["codemahsool"]!=null)request2.fields["code"] =WPElement["meta"]["codemahsool"][0] ;
+
+        Map<String,String>  _metaKeyValue={};
+        if(WPElement["meta"]["namepelak"]!=null)_metaKeyValue["نام پلاک"]=WPElement["meta"]["namepelak"][0];
+        if(WPElement["meta"]["halatpelak"]!=null)_metaKeyValue["حالت پلاک"]=WPElement["meta"]["halatpelak"][0];
+        if(WPElement["meta"]["abadmahsool"]!=null)_metaKeyValue["ابعاد محصول"]=WPElement["meta"]["abadmahsool"][0];
+
+        if(WPElement["meta"]["noepelak"]!=null)_metaKeyValue["نوع پلاک"]=WPElement["meta"]["noepelak"][0];
+        if(WPElement["meta"]["noehak"]!=null)_metaKeyValue["نوع حک"]=WPElement["meta"]["noehak"][0];
+        if(WPElement["meta"]["bakhshbandi"]!=null)_metaKeyValue["بخش بندی"]=WPElement["meta"]["bakhshbandi"][0];
+
+
+        request2.fields["orderMeta"] = jsonEncode(_metaKeyValue);
+        // request2.fields["orderRecipient"] = WPElement["meta"]["tozihat"][0].toString();
+
+
+
+
+        final response = await request2.send();
+        await response.stream.transform(utf8.decoder).listen((value) {
+          stringResponse = value;
+        });
+        print(stringResponse);
+      }
+
 
     });
 
 
-
-
-
-
-
-
-
-
-
-
+    //////////get server orders//////////////
     final response = await http.get(
       Uri.parse('${dotenv.env['API_URL']}/admin/get-all-order'),
       headers: {'Authorization': 'Bearer $token'},
