@@ -229,7 +229,6 @@ class AdminApi {
       notCompletedJsonResponse.forEach((notElement) {
         if(WPElement["id"].toString()==notElement["woocommerceOrderId"])orderExist = true;
         // print("notElement is ${notElement}");
-        print("WPElement is ${WPElement["meta"]["shomaretamas"][0]}");
 
       });
       ////////////add wc order to server orders/////////////////
@@ -240,7 +239,6 @@ class AdminApi {
 
         http.MultipartFile file = await http.MultipartFile.fromString('image', "https://www.minitala.com/wp-content/uploads/2023/06/%D9%85%D8%AF%D8%A7%D9%84-%D8%B3%D9%86%DA%AF-%D9%84%D8%A7%D8%AC%D9%88%D8%B1%D8%AF-768x768.jpg");
         request2.files.add(file);
-        print(WPElement);
         if(WPElement["meta"]["sefareshDahandeName"][0]!=null)request2.fields["clientFullName"] = WPElement["meta"]["sefareshDahandeName"][0].toString();
         if(WPElement["id"]!=null)request2.fields["woocommerceOrderId"] = WPElement["id"].toString();
         if(WPElement["date"]!=null)request2.fields["orderDate"] = Jalali.fromDateTime(DateTime.parse(WPElement["date"])).formatFullDate().toString();
@@ -280,13 +278,11 @@ class AdminApi {
         if(WPElement["meta"]["noedastband"]!=null)_metaKeyValue["نوع دستبند"]=WPElement["meta"]["noedastband"][0].toString();
         if(WPElement["meta"]["noecharmdastband"]!=null)_metaKeyValue["نوع چرم"]=WPElement["meta"]["noecharmdastband"][0].toString();
 
-
         if(WPElement["meta"]["codemahsoolgoshvare"]!=null)request2.fields["code"] =WPElement["meta"]["codemahsoolgoshvare"][0].toString();
         if(WPElement["meta"]["vaznemahsoolgoshvare"]!=null)request2.fields["weight"] =WPElement["meta"]["vaznemahsoolgoshvare"][0].toString();
         if(WPElement["meta"]["abadmahsoolgoshvare"]!=null)_metaKeyValue["ابعاد محصول"]=WPElement["meta"]["abadmahsoolgoshvare"][0].toString();
         if(WPElement["meta"]["noegoshvare"]!=null)_metaKeyValue["نوع گوشواره"]=WPElement["meta"]["noegoshvare"][0].toString();
         if(WPElement["meta"]["noehakgoshvare"]!=null)_metaKeyValue["نوع حک"]=WPElement["meta"]["noehakgoshvare"][0].toString();
-
 
         if(WPElement["meta"]["codemahsooldoresang"]!=null)request2.fields["code"] =WPElement["meta"]["codemahsooldoresang"][0].toString();
         if(WPElement["meta"]["vaznemahsooldoresang"]!=null)request2.fields["weight"] =WPElement["meta"]["vaznemahsooldoresang"][0].toString();
@@ -294,10 +290,16 @@ class AdminApi {
         if(WPElement["meta"]["noedoresang"]!=null)_metaKeyValue["نوع سنگ"]=WPElement["meta"]["noedoresang"][0].toString();
         if(WPElement["meta"]["noehakgoshvare"]!=null)_metaKeyValue["نوع حک"]=WPElement["meta"]["noehakgoshvare"][0].toString();
 
+        request2.fields["orderMeta"] = jsonEncode(_metaKeyValue);// save all product metas
+
+        if(WPElement["_links"]["author"]!=null){
+          var url = WPElement["_links"]["author"][0]["href"];
+          final response = await http.get(Uri.parse(url));
+          var name = json.decode(response.body);
+          request2.fields["orderRecipient"] = name["name"];
+        }
 
 
-        request2.fields["orderMeta"] = jsonEncode(_metaKeyValue);
-        // request2.fields["orderRecipient"] = WPElement["meta"]["tozihat"][0].toString();
 
 
 
@@ -305,7 +307,6 @@ class AdminApi {
         await response.stream.transform(utf8.decoder).listen((value) {
           stringResponse = value;
         });
-        print(stringResponse);
       }
 
 
