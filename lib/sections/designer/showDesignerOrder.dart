@@ -151,10 +151,10 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                             children: [
                               Expanded(child:
                               InkWell(onTap: (){
-                                launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}"));
+                                launchUrl(Uri.parse(widget.order.image!.contains("https")?"${widget.order.image}":"${dotenv.env['API_URL']}/public/uploads/${widget.order!.image}"));
 
                               },child:
-                              Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}")
+                              Image.network(widget.order.image!.contains("https")?"${widget.order.image}":"${dotenv.env['API_URL']}/public/uploads/${widget.order!.image}")
                               )),
                               Expanded(
                                   child:

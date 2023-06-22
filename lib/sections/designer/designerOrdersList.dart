@@ -153,9 +153,9 @@ class _DesignerOrdersListState extends State<DesignerOrdersList> {
                 ),
                 Flexible(flex: 3,child:Row(children: [
                   Expanded(child:InkWell(
-                      child: Image.network("${dotenv.env['API_URL']}/public/uploads/${order!.image}"),
+                      child: Image.network(order.image!.contains("https")?"${order.image}":"${dotenv.env['API_URL']}/public/uploads/${order!.image}"),
                       onTap: (){
-                        launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${order.image}"));
+                        launchUrl(Uri.parse(order.image!.contains("https")?"${order.image}":"${dotenv.env['API_URL']}/public/uploads/${order!.image}"));
                       })),
                   Expanded(child:
                   OutlinedButton(onPressed: () {

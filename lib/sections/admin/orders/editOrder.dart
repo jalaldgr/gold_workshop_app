@@ -359,7 +359,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                       Expanded(child: TextFormField(decoration: InputDecoration(hintText: "وزن محصول",labelText: "وزن محصول"),controller: productWeightTextController,),),
                       Visibility(visible: !selectImage,
                           child: InkWell(
-                              child: Image.network("${dotenv.env['API_URL']}/public/uploads/${widget.order.image}",width: 128,),
+                              child: Image.network(widget.order.image!.contains("https")?"${widget.order.image}":"${dotenv.env['API_URL']}/public/uploads/${widget.order!.image}",width: 128,),
                               onTap: openImagePicker)
                       ),
                       Visibility(visible: selectImage,
