@@ -139,7 +139,7 @@ class _DesignerOrdersListState extends State<DesignerOrdersList> {
                   Row(
                     children: <Widget>[
                       SizedBox(width: 40,),
-                      Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("سفارش گیرنده",style: TextStyle(fontSize: 11),),Text("سفارش گیرنده")],)),
+                      Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("سفارش گیرنده",style: TextStyle(fontSize: 11),),Text("${order!.orderRecipient}")],)),
                       Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("وضعیت سفارش",style: TextStyle(fontSize: 11),),Text("${order!.status}")],)),
                       Expanded(child:Row(children: [Text("${order.instantDelivery=="true" ? "✓ تحویل فوری":""}"),],)),
                       Expanded(child:Row(children: [Text("${order.paperDelivery=="true" ? "✓ کاغذی":""}"),],)),
