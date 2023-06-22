@@ -211,15 +211,50 @@ class AdminApi {
   static Future<List<orderData>> getOrders() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
+
+    final WPResponse = await http.get(
+      Uri.parse('https://minitala.com/wp-json/wp/v2/sefareshat'),
+    );
+    List WPJsonResponse = json.decode(WPResponse.body);
+    final notCompletedResponse = await http.get(
+      Uri.parse('${dotenv.env['API_URL']}/admin/get-not-completed-orders'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    List notCompletedJsonResponse = json.decode(notCompletedResponse.body);
+
+    WPJsonResponse.forEach((WPElement) {
+      var title = json.encode(WPElement["title"]);
+      bool orderExist = false;
+      notCompletedJsonResponse.forEach((notElement) {
+        if(WPElement["id"]==notElement["woocommerceOrderId"])orderExist = true;
+        // print("notElement is ${notElement}");
+        print("WPElement is ${WPElement["id"]}");
+
+      });
+      if(!orderExist)print("order must saved");
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
     final response = await http.get(
       Uri.parse('${dotenv.env['API_URL']}/admin/get-all-order'),
       headers: {'Authorization': 'Bearer $token'},
     );
-
     List jsonResponse = json.decode(response.body);
+
+
+
     return jsonResponse.map((myMap) => orderData.fromJson(myMap)).toList();
-
-
   }
 
   static Future<String> updateOrder(orderData order) async{
