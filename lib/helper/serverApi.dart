@@ -257,22 +257,47 @@ class AdminApi {
         if(WPElement["meta"]["beyane"]!=null)request2.fields["feeOrder"] = "true";
         request2.fields["orderType"] = "سایت";
         request2.fields["status"] = "در انتظار بررسی";
-        if(WPElement["meta"]["vaznemahsool"]!=null)request2.fields["weight"] =WPElement["meta"]["vaznemahsool"] [0];
-        if(WPElement["meta"]["codemahsool"]!=null)request2.fields["code"] =WPElement["meta"]["codemahsool"][0] ;
+        if(WPElement["meta"]["vaznemahsool"]!=null)request2.fields["weight"] =WPElement["meta"]["vaznemahsool"][0].toString();
+        if(WPElement["meta"]["codemahsool"]!=null)request2.fields["code"] =WPElement["meta"]["codemahsool"][0].toString() ;
 
-        Map<String,String>  _metaKeyValue={};
-        if(WPElement["meta"]["namepelak"]!=null)_metaKeyValue["نام پلاک"]=WPElement["meta"]["namepelak"][0];
-        if(WPElement["meta"]["halatpelak"]!=null)_metaKeyValue["حالت پلاک"]=WPElement["meta"]["halatpelak"][0];
-        if(WPElement["meta"]["abadmahsool"]!=null)_metaKeyValue["ابعاد محصول"]=WPElement["meta"]["abadmahsool"][0];
+        Map<String,String>  _metaKeyValue={};// order meta key value
+        //collect order meta for every type of product
+        if(WPElement["meta"]["namepelak"]!=null)_metaKeyValue["نام پلاک"]=WPElement["meta"]["namepelak"][0].toString();
+        if(WPElement["meta"]["halatpelak"]!=null)_metaKeyValue["حالت پلاک"]=WPElement["meta"]["halatpelak"][0].toString();
+        if(WPElement["meta"]["abadmahsool"]!=null)_metaKeyValue["ابعاد محصول"]=WPElement["meta"]["abadmahsool"][0].toString();
+        if(WPElement["meta"]["noepelak"]!=null)_metaKeyValue["نوع پلاک"]=WPElement["meta"]["noepelak"][0].toString();
+        if(WPElement["meta"]["noehak"]!=null)_metaKeyValue["نوع حک"]=WPElement["meta"]["noehak"][0].toString();
+        if(WPElement["meta"]["bakhshbandi"]!=null)_metaKeyValue["بخش بندی"]=WPElement["meta"]["bakhshbandi"][0].toString();
 
-        if(WPElement["meta"]["noepelak"]!=null)_metaKeyValue["نوع پلاک"]=WPElement["meta"]["noepelak"][0];
-        if(WPElement["meta"]["noehak"]!=null)_metaKeyValue["نوع حک"]=WPElement["meta"]["noehak"][0];
-        if(WPElement["meta"]["bakhshbandi"]!=null)_metaKeyValue["بخش بندی"]=WPElement["meta"]["bakhshbandi"][0];
+        if(WPElement["meta"]["noesangangoshtar"]!=null)_metaKeyValue["نوع سنگ"]=WPElement["meta"]["noesangangoshtar"][0].toString();
+        if(WPElement["meta"]["vaznemahsoolangoshtar"]!=null)request2.fields["weight"] =WPElement["meta"]["vaznemahsoolangoshtar"][0].toString();
+        if(WPElement["meta"]["sizedasteangoshtar"]!=null)_metaKeyValue["سایز دسته"]=WPElement["meta"]["sizedasteangoshtar"][0].toString();
+        if(WPElement["meta"]["noedasteangoshtar"]!=null)_metaKeyValue["نوع دسته"]=WPElement["meta"]["noedasteangoshtar"][0].toString();
+
+        if(WPElement["meta"]["bakhshbandinamdastband"]!=null)_metaKeyValue["بخش بندی"]=WPElement["meta"]["bakhshbandinamdastband"][0].toString();
+        if(WPElement["meta"]["vaznemahsooldastband"]!=null)request2.fields["weight"] =WPElement["meta"]["vaznemahsooldastband"][0].toString();
+        if(WPElement["meta"]["abadmahsooldastband"]!=null)_metaKeyValue["ابعاد محصول"]=WPElement["meta"]["abadmahsooldastband"][0].toString();
+        if(WPElement["meta"]["noedastband"]!=null)_metaKeyValue["نوع دستبند"]=WPElement["meta"]["noedastband"][0].toString();
+        if(WPElement["meta"]["noecharmdastband"]!=null)_metaKeyValue["نوع چرم"]=WPElement["meta"]["noecharmdastband"][0].toString();
+
+
+        if(WPElement["meta"]["codemahsoolgoshvare"]!=null)request2.fields["code"] =WPElement["meta"]["codemahsoolgoshvare"][0].toString();
+        if(WPElement["meta"]["vaznemahsoolgoshvare"]!=null)request2.fields["weight"] =WPElement["meta"]["vaznemahsoolgoshvare"][0].toString();
+        if(WPElement["meta"]["abadmahsoolgoshvare"]!=null)_metaKeyValue["ابعاد محصول"]=WPElement["meta"]["abadmahsoolgoshvare"][0].toString();
+        if(WPElement["meta"]["noegoshvare"]!=null)_metaKeyValue["نوع گوشواره"]=WPElement["meta"]["noegoshvare"][0].toString();
+        if(WPElement["meta"]["noehakgoshvare"]!=null)_metaKeyValue["نوع حک"]=WPElement["meta"]["noehakgoshvare"][0].toString();
+
+
+        if(WPElement["meta"]["codemahsooldoresang"]!=null)request2.fields["code"] =WPElement["meta"]["codemahsooldoresang"][0].toString();
+        if(WPElement["meta"]["vaznemahsooldoresang"]!=null)request2.fields["weight"] =WPElement["meta"]["vaznemahsooldoresang"][0].toString();
+        if(WPElement["meta"]["abadmahsooldoresang"]!=null)_metaKeyValue["ابعاد محصول"]=WPElement["meta"]["abadmahsooldoresang"][0].toString();
+        if(WPElement["meta"]["noedoresang"]!=null)_metaKeyValue["نوع سنگ"]=WPElement["meta"]["noedoresang"][0].toString();
+        if(WPElement["meta"]["noehakgoshvare"]!=null)_metaKeyValue["نوع حک"]=WPElement["meta"]["noehakgoshvare"][0].toString();
+
 
 
         request2.fields["orderMeta"] = jsonEncode(_metaKeyValue);
         // request2.fields["orderRecipient"] = WPElement["meta"]["tozihat"][0].toString();
-
 
 
 
