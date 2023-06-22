@@ -9,6 +9,7 @@ import 'package:gold_workshop/helper/serverApi.dart';
 import 'package:gold_workshop/models/orderModel.dart';
 import 'package:gold_workshop/sections/admin/orders/designerDropDown.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'productMetaSelections.dart';
 import 'workshop1DropDown.dart';
@@ -68,7 +69,7 @@ class NewOrderFormState extends State<NewOrderForm> {
 
   File? _imageFile;
 
-
+  String userFullName="";
 
   onSelectedRow( String row) async {
     setState(() {
@@ -101,7 +102,7 @@ class NewOrderFormState extends State<NewOrderForm> {
 
 
   collectFields(){
-    setState(() {
+    setState(()  {
       widget.order.clientFullName = nameEditTextController.text;
       widget.order.clientMobile =  contactEditTextController.text;
       widget.order.description = descriptionEditTextController.text;
@@ -113,6 +114,7 @@ class NewOrderFormState extends State<NewOrderForm> {
       widget.order.productType = productTypeDropDownValue;
       widget.order.orderDate = Jalali.now().formatFullDate();
       widget.order.orderType = orderTypeDropDownValue;
+      widget.order.orderRecipient = userFullName;
 
     });
   }
@@ -150,6 +152,18 @@ class NewOrderFormState extends State<NewOrderForm> {
       _imageFile = File(result!.paths[0]!);
     });
   }
+
+  initUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic user = jsonDecode(prefs.getString("user")!);
+    userFullName = user["fullName"];
+  }
+
+  @override
+  void initState() {
+    initUser();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -411,7 +425,6 @@ class NewOrderFormState extends State<NewOrderForm> {
                       child:
                       ElevatedButton(onPressed: () async {
                         collectFields();
-                        print(widget.order.toJson());
 
                         var res = await AdminApi.addOrder(widget.order);
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
