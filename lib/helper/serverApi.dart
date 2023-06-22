@@ -237,8 +237,7 @@ class AdminApi {
         var request2 = http.MultipartRequest('POST', uri)
           ..headers.addAll({'Authorization': 'Bearer $token'});
 
-        http.MultipartFile file = await http.MultipartFile.fromString('image', "https://www.minitala.com/wp-content/uploads/2023/06/%D9%85%D8%AF%D8%A7%D9%84-%D8%B3%D9%86%DA%AF-%D9%84%D8%A7%D8%AC%D9%88%D8%B1%D8%AF-768x768.jpg");
-        request2.files.add(file);
+
         if(WPElement["meta"]["sefareshDahandeName"][0]!=null)request2.fields["clientFullName"] = WPElement["meta"]["sefareshDahandeName"][0].toString();
         if(WPElement["id"]!=null)request2.fields["woocommerceOrderId"] = WPElement["id"].toString();
         if(WPElement["date"]!=null)request2.fields["orderDate"] = Jalali.fromDateTime(DateTime.parse(WPElement["date"])).formatFullDate().toString();
@@ -297,6 +296,14 @@ class AdminApi {
           final response = await http.get(Uri.parse(url));
           var name = json.decode(response.body);
           request2.fields["orderRecipient"] = name["name"];
+        }
+
+        if(WPElement["_links"]!=null){
+          var url = WPElement["_links"]["wp:featuredmedia"][0]["href"];
+          final response = await http.get(Uri.parse(url));
+          var image = json.decode(response.body)["guid"]["rendered"];
+          http.MultipartFile file = await http.MultipartFile.fromString('image', image);
+          request2.files.add(file);
         }
 
 
