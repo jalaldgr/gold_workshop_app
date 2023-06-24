@@ -298,7 +298,7 @@ class AdminApi {
           request2.fields["orderRecipient"] = name["name"];
         }
 
-        if(WPElement["_links"]!=null){
+        if(WPElement["_links"]["wp:featuredmedia"]!=null){
           var url = WPElement["_links"]["wp:featuredmedia"][0]["href"];
           final response = await http.get(Uri.parse(url));
           var image = json.decode(response.body)["guid"]["rendered"];
