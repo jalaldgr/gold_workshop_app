@@ -233,8 +233,10 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                               Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
                                 OutlinedButton(onPressed: () async {
                                   var res = await Workshop1Api.SendOrderFileWorkshop1(widget.order);
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                  setState(() {
                                   Navigator.pop(context);
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                                                    });
                                 }, child: Padding(padding: EdgeInsets.all(16),child:  Text("ارسال فایل"))
                                 ),
                                 SizedBox(height: 16,),
