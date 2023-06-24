@@ -224,17 +224,6 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                             widget.order.orderType = value;
                           });},
                         )),
-                        Expanded(child:
-                        DropdownButtonFormField(
-                          decoration: InputDecoration(labelText: "وضعیت سفارش"),
-                          value: statusDropDownValue,
-                          items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                          onChanged: (String? value) {setState(() {
-                            statusDropDownValue = value!;
-                            widget.order.status = value;
-                          });},)
-
-                        )
                       ],),
                     ) ,),
                 ),
@@ -322,18 +311,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                                 maxLines: null,
                                 controller: descriptionEditTextController,
                               )),
-                          Flexible(
-                                flex: 4,
-                                child: Row(
-                                  children: [
 
-
-
-                                    Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,hint: "${widget.order.designerFullName}",),),
-                                    Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: "${widget.order.workshop1fullName}",),),
-                                    Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: "${widget.order.workshop2fullName}",),),
-                                  ],
-                                ))
                           ],
                       )
                     ),
@@ -402,6 +380,32 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                     
                   )
                   ,),
+                Padding(padding: EdgeInsets.all(8),
+                  child:Card(
+                    child: Row(
+                      children: [
+
+
+
+                        Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,hint: "${widget.order.designerFullName}",),),
+                        Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: "${widget.order.workshop1fullName}",),),
+                        Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: "${widget.order.workshop2fullName}",),),
+                        Expanded(child:
+                        DropdownButtonFormField(
+                          decoration: InputDecoration(labelText: "وضعیت سفارش"),
+                          value: statusDropDownValue,
+                          items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                          onChanged: (String? value) {setState(() {
+                            statusDropDownValue = value!;
+                            widget.order.status = value;
+                          });},)
+
+                        )
+                      ],
+                    ),
+
+                  )
+                  ,),
 
                 Padding(padding: const EdgeInsets.all(8)
                   ,child:SizedBox(width: size.width-8,height: 64,
@@ -409,8 +413,10 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                       collectFields();
 
                       var res = await AdminApi.updateOrder(widget.order);
+                      setState(() {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
                       Navigator.pop(context);
+                      });
 
                     }, child: Text("بروزرسانی"),),
                   ),

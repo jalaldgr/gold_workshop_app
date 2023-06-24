@@ -225,17 +225,6 @@ class NewOrderFormState extends State<NewOrderForm> {
                                 widget.order.orderType = value;
                               });},
                             )),
-                            Expanded(child:
-                            DropdownButtonFormField(
-                              decoration: InputDecoration(labelText: "وضعیت سفارش"),
-                              value: statusDropDownValue,
-                              items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
-                              onChanged: (String? value) {setState(() {
-                                statusDropDownValue = value!;
-                                widget.order.status = value;
-                              });},)
-
-                            )
                           ],),
                         ) ,),
                     ),
@@ -323,18 +312,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                                       maxLines: null,
                                       controller: descriptionEditTextController,
                                     )),
-                                Flexible(
-                                    flex: 4,
-                                    child: Row(
-                                      children: [
 
-
-
-                                        Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,hint: "${widget.order.designerFullName}",),),
-                                        Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: "${widget.order.workshop1fullName}",),),
-                                        Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: "${widget.order.workshop2fullName}",),),
-                                      ],
-                                    ))
                               ],
                             )
                         ),
@@ -420,6 +398,33 @@ class NewOrderFormState extends State<NewOrderForm> {
                         ),
                       )
                       ,),
+                    Padding(padding: EdgeInsets.all(8),
+                      child:Card(
+                        child: Container(padding: EdgeInsets.all(16),
+                          child:  Row(
+                            children: [
+
+
+
+                              Expanded(child:DesignerDropDown(callback: onChangeDesignerDropDown,hint: "${widget.order.designerFullName}",),),
+                              Expanded(child:Workshop1DropDown(callback: onChangeWorkshop1DropDown,hint: "${widget.order.workshop1fullName}",),),
+                              Expanded(child:Workshop2DropDown(callback: onChangeWorkshop2DropDown,hint: "${widget.order.workshop2fullName}",),),
+                              Expanded(child:
+                              DropdownButtonFormField(
+                                decoration: InputDecoration(labelText: "وضعیت سفارش"),
+                                value: statusDropDownValue,
+                                items: statusDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
+                                onChanged: (String? value) {setState(() {
+                                  statusDropDownValue = value!;
+                                  widget.order.status = value;
+                                });},)
+
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                      ,),
                     Container(padding: EdgeInsets.all(8),
                     child:SizedBox(height: 64,width: size.width,
                       child:
@@ -427,9 +432,12 @@ class NewOrderFormState extends State<NewOrderForm> {
                         collectFields();
 
                         var res = await AdminApi.addOrder(widget.order);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
 
+                        setState(() {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
                         Navigator.pop(context);
+                        });
+
 
                       }, child: Text("ثبت سفارش"),)
                       ,)
