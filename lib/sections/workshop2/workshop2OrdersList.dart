@@ -59,7 +59,7 @@ class _Workshop2OrdersListState extends State<Workshop2OrdersList> {
             children: [
               Center(
                 child: FutureBuilder(
-                  future: Workshop2Api.getOrders(),
+                  future: Workshop2Api.getPendingOrdersByWorkshop2(),
                   builder: (BuildContext context,
                       AsyncSnapshot<List<orderData>> snapshot) =>
                   snapshot.hasData && snapshot.data!.isNotEmpty
