@@ -28,9 +28,11 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
 
   List<DataRow> tableItem=[];
   TextEditingController imageEditTextController=TextEditingController();
+  bool _enableFileButton=false;
 
   @override
   void initState() {
+    super.initState();
     initOrderMeta();
 
   }
@@ -54,6 +56,11 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
       allowedExtensions: ['*'],
     );
     setState(() {
+      if("${result?.paths[0]}"== "null"){
+        _enableFileButton=false;
+      }else{
+        _enableFileButton=true;
+      }
       imageEditTextController.text = "${result?.paths[0]}";
       widget.order.workshop1File = "${result?.paths[0]}".replaceAll("\\", "\\\\");
     });
@@ -228,28 +235,32 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                               child: TextFormField(
                                 onTap: openImagePicker,
                                 controller: imageEditTextController,
-                                decoration: InputDecoration(hintText: "انتخاب فایل",labelText: "انتخاب فایل"),),),),
+                                decoration: InputDecoration(
+                                    hintText:"${widget.order.workshop1File}"==""?"انتخاب فایل":"تغییر فایل",
+                                    labelText: "${widget.order.workshop1File}"==""?"انتخاب فایل":"تغییر فایل"),
+                              ),),),
                               Expanded(child:
                               Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
-                                OutlinedButton(onPressed: () async {
+                                OutlinedButton(onPressed:_enableFileButton? () async {
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("فایل در حال ارسال است")));
+                                  _enableFileButton=false;
                                   var res = await Workshop1Api.SendOrderFileWorkshop1(widget.order);
                                   setState(() {
                                   Navigator.pop(context);
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
                                                                     });
-                                }, child: Padding(padding: EdgeInsets.all(16),child:  Text("ارسال فایل"))
+                                }:null, child: Padding(padding: EdgeInsets.all(16),child:  Text("ارسال فایل"))
                                 ),
                                 SizedBox(height: 16,),
-                                ElevatedButton(onPressed: () async {
-                                  if(widget.order.workshop1File!="null") {
+                                ElevatedButton(onPressed:"${widget.order.workshop1File}".contains("workshop1File") ?() async {
                                     var res = await Workshop1Api
                                         .completeOrderWorkshop1(widget.order);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("${res}")));
+                                    setState(() {
                                     Navigator.pop(context);
-                                  }
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                    });
 
-                                }, child: Padding(padding: EdgeInsets.all(16),child:  Text("تکمیل سفارش") )
+                                }:null, child: Padding(padding: EdgeInsets.all(16),child:  Text("تکمیل سفارش") )
                                 ),
                               ],)
                               ),

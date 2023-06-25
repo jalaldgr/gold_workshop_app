@@ -29,10 +29,11 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
   List<DataRow> tableItem=[];
 
   TextEditingController imageEditTextController=TextEditingController();
-
+  bool _enableFileButton=false;
 
   @override
   void initState() {
+    super.initState();
     initOrderMeta();
 
   }
@@ -56,6 +57,12 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
       allowedExtensions: ['*'],
     );
     setState(() {
+
+      if("${result?.paths[0]}"== "null"){
+        _enableFileButton=false;
+      }else{
+        _enableFileButton=true;
+      }
       imageEditTextController.text = "${result?.paths[0]}";
       widget.order.designerFile = "${result?.paths[0]}".replaceAll("\\", "\\\\");
     });
@@ -230,8 +237,8 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                                       onTap: openImagePicker,
                                       controller: imageEditTextController,
                                       decoration: InputDecoration(
-                                          hintText: "انتخاب فایل",
-                                          labelText: "انتخاب فایل"),
+                                          hintText:"${widget.order.designerFile}"==""?"انتخاب فایل":"تغییر فایل",
+                                          labelText: "${widget.order.designerFile}"==""?"انتخاب فایل":"تغییر فایل"),
                                       textAlign: TextAlign.center,
                                     )
                                       ,),
@@ -242,17 +249,16 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                                         CrossAxisAlignment.stretch,
                                     children: [
                                       OutlinedButton(
-                                          onPressed: () async {
-                                            if(widget.order.designerFile!="null"){
-                                              var res = await DesignerApi.SendOrderFileDesigner(widget.order);
+                                          onPressed:_enableFileButton? () async {
+                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("فایل در حال ارسال است")));
+                                            _enableFileButton=false;
+
+                                            var res = await DesignerApi.SendOrderFileDesigner(widget.order);
                                               setState(() {
-                                                Navigator.pop(context);
                                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-
                                               });
-                                            }
 
-                                          },
+                                          }:null,// the null disable elevatedButton clicks
                                           child: Padding(
                                               padding: EdgeInsets.all(16),
                                               child: Text("ارسال فایل"))),
@@ -260,15 +266,15 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                                         height: 16,
                                       ),
                                       ElevatedButton(
-                                          onPressed: () async {
-                                            var res = await DesignerApi
-                                                .completeOrderDesigner(
-                                                    widget.order);
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackBar(
-                                                    content: Text("${res}")));
-                                            Navigator.pop(context);
-                                          },
+                                          onPressed:"${widget.order.designerFile}".contains("designerFile")? () async {
+                                            var res = await DesignerApi.completeOrderDesigner(widget.order);
+                                            setState(() {
+                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                              Navigator.pop(context);
+                                            });
+
+
+                                          }:null,
                                           child: Padding(
                                               padding: EdgeInsets.all(16),
                                               child: Text("تکمیل سفارش"))),

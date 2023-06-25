@@ -28,6 +28,7 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
 
   List<DataRow> tableItem=[DataRow(cells: [DataCell(Text("کلید")),DataCell(Text("مقدار"))])];
   TextEditingController imageEditTextController=TextEditingController();
+  bool _enableFileButton=false;
 
 
   onChangeDesignerDropDown(value){
@@ -42,6 +43,11 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
       allowedExtensions: ['*'],
     );
     setState(() {
+      if("${result?.paths[0]}"== "null"){
+        _enableFileButton=false;
+      }else{
+        _enableFileButton=true;
+      }
       imageEditTextController.text = "${result?.paths[0]}";
       widget.order.workshop2File = "${result?.paths[0]}".replaceAll("\\", "\\\\");
     });
@@ -49,6 +55,8 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
 
   @override
   void initState() {
+    super.initState();
+
     initOrderMeta();
 
   }
@@ -229,27 +237,30 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
                                   ,child: TextFormField(
                                   onTap: openImagePicker,
                                   controller: imageEditTextController,
-                                  decoration: InputDecoration(hintText: "انتخاب فایل",labelText: "انتخاب فایل"),),),),
+                                  decoration: InputDecoration(
+                                      hintText:"${widget.order.workshop2File}"==""?"انتخاب فایل":"تغییر فایل",
+                                      labelText: "${widget.order.workshop2File}"==""?"انتخاب فایل":"تغییر فایل"),
+                                ),),),
                               Expanded(child:
                               Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
-                                OutlinedButton(onPressed: () async {
+                                OutlinedButton(onPressed:_enableFileButton?  () async {
+
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("فایل در حال ارسال است")));
+                                  _enableFileButton=false;
                                   var res = await Workshop2Api.SendOrderFileWorkshop2(widget.order);
                                   setState(() {
-                                  Navigator.pop(context);
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
                                   });
-                                }, child: Padding(padding: EdgeInsets.all(16),child: Text("ارسال فایل") )
+                                }:null, child: Padding(padding: EdgeInsets.all(16),child: Text("ارسال فایل") )
                                 ),
                                 SizedBox(height: 16,),
-                                ElevatedButton(onPressed: () async {
-                                if(widget.order.workshop1File!="null") {
-                                  var res = await Workshop2Api
-                                      .completeOrderWorkshop2(widget.order);
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text("${res}")));
+                                ElevatedButton(onPressed:"${widget.order.workshop2File}".contains("workshop2File")? () async {
+                                  var res = await Workshop2Api.completeOrderWorkshop2(widget.order);
+                                  setState(() {
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
                                   Navigator.pop(context);
-                                }
-                                }, child: Padding(padding: EdgeInsets.all(16),child:  Text("تکمیل سفارش"))
+                                  });
+                                }:null, child: Padding(padding: EdgeInsets.all(16),child:  Text("تکمیل سفارش"))
                                 ),
 
                               ],)
