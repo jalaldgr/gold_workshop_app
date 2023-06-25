@@ -34,7 +34,12 @@ class LoginScreen extends State<HomeScreen> {
 
   getVersion()async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    _appVersion = prefs.getString('version')?? " ";// if version is empty, prefs.getString return null value and will make error....
+    final info = await PackageInfo.fromPlatform();
+    prefs.setString("version",info.version );
+    setState(() {
+    _appVersion = info.version;
+    });
+
 
   }
 
@@ -51,6 +56,9 @@ class LoginScreen extends State<HomeScreen> {
 
                 Image.asset("assets/images/logo.png",width: 512,),
                 Text("مینیاتور",style: TextStyle(fontWeight: FontWeight.w900,fontSize: 32),),
+                SizedBox(height: 16,),
+                Text("ورژن ${_appVersion}",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20),),
+
                 SizedBox(height: 8,),
 
               ],),
