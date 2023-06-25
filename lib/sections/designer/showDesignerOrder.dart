@@ -206,18 +206,18 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                       child:Card(
                         child: Row(
                           children: [
-                            Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                            Expanded(child: SizedBox(child:OutlinedButton(onPressed: "${widget.order.designerFile}".contains("designerFile")? () {
                               launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.designerFile}"));
 
-                            }, child: Text("فایل طراح"),) ,),),
-                            Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                            }:null, child: Text("فایل طراح"),) ,),),
+                            Expanded(child: SizedBox(child:OutlinedButton(onPressed:"${widget.order.workshop1File}".contains("workshop1File")? (){
                               launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.workshop1File}"));
 
-                            }, child: Text("فایل کارگاه یک"),) ,),),
-                            Expanded(child: SizedBox(child:OutlinedButton(onPressed: () {
+                            }:null, child: Text("فایل کارگاه یک"),) ,),),
+                            Expanded(child: SizedBox(child:OutlinedButton(onPressed:"${widget.order.workshop2File}".contains("workshop2File")?  () {
                               launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${widget.order.workshop2File}"));
 
-                            }, child: Text("فایل کارگاه دو"),) ,),),
+                            }:null, child: Text("فایل کارگاه دو"),) ,),),
 
                           ],
                         ),
