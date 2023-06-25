@@ -253,12 +253,8 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                                 ),
                                 SizedBox(height: 16,),
                                 ElevatedButton(onPressed:"${widget.order.workshop1File}".contains("workshop1File") ?() async {
-                                    var res = await Workshop1Api
-                                        .completeOrderWorkshop1(widget.order);
-                                    setState(() {
-                                    Navigator.pop(context);
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                                    });
+
+                                  completeOrderAlertDialog(context);
 
                                 }:null, child: Padding(padding: EdgeInsets.all(16),child:  Text("تکمیل سفارش") )
                                 ),
@@ -285,4 +281,48 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
 
     );
   }
+
+  completeOrderAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("انصراف",style: TextStyle(color: Colors.red),),
+      onPressed:  () {
+        Navigator.of(context).pop();},
+    );
+    Widget continueButton = TextButton(
+      child: Text("تایید",style: TextStyle(color: Colors.blue,fontSize: 20)),
+      onPressed:  () async {
+        var res = await Workshop1Api.completeOrderWorkshop1(widget.order);
+        setState(() {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+          Navigator.pop(context);
+          Navigator.pop(context);
+
+        });
+
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("تکمیل سفارش"),
+      content: Text("آیا از تکمیل سفارش اطمینان دارید؟"),
+      actions: [
+        Column(children: [
+          Row(children: [
+            Expanded(child: cancelButton ),
+            Expanded(child: continueButton )
+          ],)
+        ],)
+
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }
