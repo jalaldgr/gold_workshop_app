@@ -163,10 +163,10 @@ class _Workshop1OrdersListState extends State<Workshop1OrdersList> {
                         launchUrl(Uri.parse(order.image!.contains("https")?"${order.image}":"${dotenv.env['API_URL']}/public/uploads/${order!.image}"));
                       })),
                   Expanded(child:
-                  OutlinedButton(onPressed: () {
+                  ElevatedButton(onPressed:"${order.designerFile}".contains("designerFile")?  () {
                     launchUrl(Uri.parse("${dotenv.env['API_URL']}/public/uploads/${order.designerFile}"));
 
-                  }, child: Text("فایل طراح"),) ),
+                  }:null, child: Text("فایل طراح"),) ),
                 ],) )
 
               ],))
