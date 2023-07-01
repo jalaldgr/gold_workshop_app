@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ir.yadegardev.gold_workshop">
+    package="ir.yadegardev.goldworkshop">
    <application
         android:label="gold_workshop"
         android:name="${applicationName}"
