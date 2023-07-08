@@ -47,6 +47,7 @@ dependencies:
   url_launcher: ^6.1.11
   pluto_grid: ^5.4.9
   easy_search_bar: ^2.5.0
+  path_provider: ^2.0.15
 
 dev_dependencies:
   flutter_test:

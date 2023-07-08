@@ -1,5 +1,6 @@
 
 
+import 'dart:io';
 import 'dart:ui';
 import "dart:convert";
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gold_workshop/Home.dart';
 
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:persian_fonts/persian_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -15,9 +17,14 @@ import 'package:url_strategy/url_strategy.dart';
 
 
 Future<void> main() async {
-  runApp(MyApp());
   setPathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
+
+  final Directory directory = await getApplicationDocumentsDirectory();
+  final File file = File('${directory.path}/errors.log');
+  await file.writeAsString("file created");
+  runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
