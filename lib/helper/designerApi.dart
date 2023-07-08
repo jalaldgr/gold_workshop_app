@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../models/orderModel.dart';
@@ -61,20 +63,29 @@ class DesignerApi {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
     var stringResponse="default response";
-    var uri = Uri.parse('${dotenv.env['API_URL']}/designer/send-file/${order.id}/designerFile/');
-    var request2 = http.MultipartRequest('POST', uri)
-      ..headers.addAll({'Authorization': 'Bearer $token'});
 
-    if(order.designerFile!="" && order.designerFile!="null"){
-      http.MultipartFile file = await http.MultipartFile.fromPath('designerFile', "${order.designerFile}");
-      request2.files.add(file);
+    try{
+      var uri = Uri.parse('${dotenv.env['API_URL']}/designer/send-file/${order.id}/designerFile/');
+      var request2 = http.MultipartRequest('POST', uri)
+        ..headers.addAll({'Authorization': 'Bearer $token'});
+
+      if(order.designerFile!="" && order.designerFile!="null"){
+        http.MultipartFile file = await http.MultipartFile.fromPath('designerFile', "${order.designerFile}");
+        request2.files.add(file);
+      }
+
+      final response = await request2.send();
+      await response.stream.transform(utf8.decoder).listen((value) {
+        stringResponse = value;
+      });
+      print(stringResponse);
+    }catch(e){
+
+      final Directory directory = await getApplicationDocumentsDirectory();
+      final File file = File('${directory.path}/errors.log');
+      await file.writeAsString(e.toString(),mode: FileMode.append);
     }
 
-    final response = await request2.send();
-    await response.stream.transform(utf8.decoder).listen((value) {
-      stringResponse = value;
-    });
-    print(stringResponse);
     return stringResponse;
 
   }

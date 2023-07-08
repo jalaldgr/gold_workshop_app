@@ -1,9 +1,11 @@
 
 
 import 'dart:convert';
+import 'dart:io';
 import 'package:gold_workshop/models/tableModel.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gold_workshop/models/orderModel.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:persian_datetime_picker/persian_datetime_picker.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -433,21 +435,30 @@ class AdminApi {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     dynamic token = prefs.getString("jwt");
     var stringResponse="default response";
-    var uri = Uri.parse('${dotenv.env['API_URL']}/admin/create-order');
-    var request2 = http.MultipartRequest('POST', uri)
-      ..headers.addAll({'Authorization': 'Bearer $token'});
+    try{
 
-    if(order.image!="" && order.image!="null"){
-      http.MultipartFile file = await http.MultipartFile.fromPath('image', "${order.image}");
-      request2.files.add(file);
+      var uri = Uri.parse('${dotenv.env['API_URL']}/admin/create-order');
+      var request2 = http.MultipartRequest('POST', uri)
+        ..headers.addAll({'Authorization': 'Bearer $token'});
+
+      if(order.image!="" && order.image!="null"){
+        http.MultipartFile file = await http.MultipartFile.fromPath('image', "${order.image}");
+        request2.files.add(file);
+      }
+      order.toJson().forEach((key, value) {
+        request2.fields[key] = value;
+      });
+      final response = await request2.send();
+      await response.stream.transform(utf8.decoder).listen((value) {
+        stringResponse = value;
+      });
+    }catch(e){
+      final Directory directory = await getApplicationDocumentsDirectory();
+      final File file = File('${directory.path}/errors.log');
+      await file.writeAsString(e.toString(),mode: FileMode.append);
+
     }
-    order.toJson().forEach((key, value) {
-      request2.fields[key] = value;
-    });
-    final response = await request2.send();
-    await response.stream.transform(utf8.decoder).listen((value) {
-      stringResponse = value;
-    });
+
     return stringResponse;
   }
 
