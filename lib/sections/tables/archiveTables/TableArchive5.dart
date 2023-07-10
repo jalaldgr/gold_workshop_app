@@ -646,7 +646,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               'description':PlutoCell(value: element.orderType),
               'code':PlutoCell(value: element.code),
               'weight':PlutoCell(value: element.weight),
-              'cut_deficiency':PlutoCell(value: 0),
+              'cut_deficiency':PlutoCell(value: element.deficiency),
               'popion_deficiency':PlutoCell(value: 0),
               'jewel_weight':PlutoCell(value: 0),
               'summary':PlutoCell(value: element.description),
