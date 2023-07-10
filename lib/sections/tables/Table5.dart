@@ -648,7 +648,7 @@ class _Table5ScreenState extends State<Table5Screen> {
               'cut_deficiency':PlutoCell(value: 0),
               'popion_deficiency':PlutoCell(value: 0),
               'jewel_weight':PlutoCell(value: 0),
-              'summary':PlutoCell(value: ""),
+              'summary':PlutoCell(value: element.orderType),
               'melting':PlutoCell(value: 0),
               'wire_pulling':PlutoCell(value: 0),
               'cut':PlutoCell(value: 0),
