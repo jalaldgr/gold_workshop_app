@@ -318,6 +318,19 @@ class _Table2ScreenState extends State<Table2Screen> {
           },
         ));
         table6["cut_deference"] +=difference[i];
+      }else{
+        updatedRows.add(PlutoRow(
+          cells: {
+            'row': PlutoCell(value: i+1),
+            'description': PlutoCell(value: description[i]),
+            'import': PlutoCell(value: import[i]),
+            'export': PlutoCell(value:export[i]),
+            'final_balance': PlutoCell(value: final_balance[i]),
+            'real_balance': PlutoCell(value: real_balance[i]),
+            'balance': PlutoCell(value: balance[i]),
+            'difference': PlutoCell(value: difference[i]),
+          },
+        ));
       }
 // update table
       table2["row"][i]=rowNumber[i];
@@ -493,7 +506,7 @@ class _Table2ScreenState extends State<Table2Screen> {
         stateManager.insertRows(stateManager.rows.length, [
             PlutoRow(
               cells: {
-                'row': PlutoCell(value: 0 ),
+                'row': PlutoCell(value: stateManager.rows.length+1 ),
                 'description': PlutoCell(value: ""),
                 'import': PlutoCell(value: 0),
                 'export': PlutoCell(value: 0),
