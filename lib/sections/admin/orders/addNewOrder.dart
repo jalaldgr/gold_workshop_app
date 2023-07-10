@@ -66,6 +66,8 @@ class NewOrderFormState extends State<NewOrderForm> {
   TextEditingController fileEditTextController=TextEditingController();
   TextEditingController productCodeEditTextController=TextEditingController();
   TextEditingController productWeightTextController=TextEditingController();
+  TextEditingController deficiencyTextController=TextEditingController();
+
 
   File? _imageFile;
 
@@ -115,6 +117,7 @@ class NewOrderFormState extends State<NewOrderForm> {
       widget.order.orderDate = Jalali.now().formatFullDate();
       widget.order.orderType = orderTypeDropDownValue;
       widget.order.orderRecipient = userFullName;
+      widget.order.deficiency = deficiencyTextController.text;
 
     });
   }
@@ -380,6 +383,8 @@ class NewOrderFormState extends State<NewOrderForm> {
                               )),
                               Expanded(child: TextFormField(decoration: InputDecoration(hintText: "کد محصول",labelText: "کد محصول"),controller: productCodeEditTextController,),),
                               Expanded(child: TextFormField(decoration: InputDecoration(hintText: "وزن محصول",labelText: "وزن محصول"),controller: productWeightTextController,),),
+                              Expanded(child: TextFormField(decoration: InputDecoration(hintText: "کسر",labelText: "کسر"),controller: deficiencyTextController,),),
+
                               InkWell(
                                 onTap: (){openImagePicker();},
                                 child:

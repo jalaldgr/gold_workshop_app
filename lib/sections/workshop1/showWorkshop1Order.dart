@@ -167,8 +167,10 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                                     Row(
                                       children: [
                                         Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
-                                        Expanded(child: Column(children: [Text("کد",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.code}")],)),
-                                        Expanded(child: Column(children: [Text("محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.weight}")],)),
+                                        Expanded(child: Column(children: [Text("کد محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.code}")],)),
+                                        Expanded(child: Column(children: [Text("وزن محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.weight}")],)),
+                                        Expanded(child: Column(children: [Text("کسر",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.deficiency}")],)),
+
                                       ],)
                                   ],)
                               ),

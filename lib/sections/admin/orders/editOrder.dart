@@ -62,7 +62,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
   TextEditingController contactEditTextController=TextEditingController();
   TextEditingController productCodeEditTextController=TextEditingController();
   TextEditingController productWeightTextController=TextEditingController();
-
+  TextEditingController deficiencyTextController =TextEditingController();
   TextEditingController descriptionEditTextController=TextEditingController();
   TextEditingController deliverDateEditTextController=TextEditingController();
   TextEditingController imageEditTextController=TextEditingController();
@@ -109,6 +109,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
       widget.order.deliveryDate = deliverDateEditTextController.text;
       widget.order.code = productCodeEditTextController.text;
       widget.order.weight = productWeightTextController.text;
+      widget.order.deficiency = deficiencyTextController.text;
       if(!selectImage)widget.order.image="";
 
     });
@@ -145,7 +146,7 @@ class EditOrderScreenState extends State<EditOrderScreen> {
     deliverDateEditTextController.text="${widget.order.deliveryDate}";
     productWeightTextController.text="${widget.order.weight}";
     productCodeEditTextController.text="${widget.order.code}";
-
+    deficiencyTextController.text = "${widget.order.deficiency}";
 
     instantDeliveryCheckBoxValue = widget.order.instantDelivery=="true"? true : false ;
     deliveryByCustomerCheckBoxValue = widget.order.customerDelivery=="true"? true : false ;
@@ -335,6 +336,8 @@ class EditOrderScreenState extends State<EditOrderScreen> {
                       )),
                       Expanded(child: TextFormField(decoration: InputDecoration(hintText: "کد محصول",labelText: "کد محصول"),controller: productCodeEditTextController,),),
                       Expanded(child: TextFormField(decoration: InputDecoration(hintText: "وزن محصول",labelText: "وزن محصول"),controller: productWeightTextController,),),
+                      Expanded(child: TextFormField(decoration: InputDecoration(hintText: "کسر",labelText: "کسر"),controller: deficiencyTextController,),),
+
                       Visibility(visible: !selectImage,
                           child: InkWell(
                               child: Image.network(widget.order.image!.contains("https")?"${widget.order.image}":"${dotenv.env['API_URL']}/public/uploads/${widget.order!.image}",width: 128,),

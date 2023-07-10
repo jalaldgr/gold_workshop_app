@@ -31,7 +31,7 @@ class orderData {
   String? orderDate="";
   String? orderType="";
   String? orderRecipient = "";
-
+  String? deficiency = "";
 
   orderData(
       this.clientFullName,
@@ -64,7 +64,8 @@ class orderData {
       this.deliveryDate,
       this.orderDate,
       this.orderType,
-      this.orderRecipient
+      this.orderRecipient,
+      this.deficiency
 );
 
   orderData.fromJson(Map<String, dynamic> json) {
@@ -99,6 +100,8 @@ class orderData {
     orderDate = json['orderDate'] ?? "";
     orderType = json['orderType'] ?? "";
     orderRecipient = json['orderRecipient'] ?? "";
+    deficiency = json['deficiency'] ?? "";
+
 
 
 
@@ -138,6 +141,8 @@ class orderData {
     data['orderDate']= orderDate;
     data['orderType']= orderType;
     data['orderRecipient']= orderRecipient;
+    data['deficiency']= deficiency;
+
 
 
 
