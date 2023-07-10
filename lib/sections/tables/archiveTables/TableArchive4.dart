@@ -80,11 +80,13 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
         width: 100
     ),
     PlutoColumn(
-      title: 'مانده واقعی',
-      field: 'real_balance',
+      title: 'مانده دیروز',
+      field: 'yesterday_balance',
       type: PlutoColumnType.number( format: "#.###"),
       enableEditingMode: true,
       width: 120,
+      readOnly: true,
+      backgroundColor: Colors.amberAccent,
       footerRenderer: (rendererContext) {
         return PlutoAggregateColumnFooter(
           format: "#.###",
@@ -101,6 +103,21 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
               TextSpan(text: text),
             ];
           },
+        );
+      },
+    ),
+    PlutoColumn(
+      title: 'مانده واقعی',
+      field: 'real_balance',
+      type: PlutoColumnType.number( format: "#.###"),
+      enableEditingMode: true,
+      width: 120,
+      footerRenderer: (rendererContext) {
+        return PlutoAggregateColumnFooter(
+          format: "#.###",
+          rendererContext: rendererContext,
+          type: PlutoAggregateColumnType.sum,
+          alignment: Alignment.center,
         );
       },
     ),
@@ -330,6 +347,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
     PlutoRow(
       cells: {
         'description': PlutoCell(value: "متفرقه"),
+        'yesterday_balance': PlutoCell(value: 0),
         'real_balance': PlutoCell(value: 0),
         'system_balance': PlutoCell(value: 0),
         'difference': PlutoCell(value: 0),
@@ -339,6 +357,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
     PlutoRow(
       cells: {
         'description': PlutoCell(value: "حلقه"),
+        'yesterday_balance': PlutoCell(value: 0),
         'real_balance': PlutoCell(value: 0),
         'system_balance': PlutoCell(value: 0),
         'difference': PlutoCell(value: 0),
@@ -348,6 +367,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
     PlutoRow(
       cells: {
         'description': PlutoCell(value: "مفتول"),
+        'yesterday_balance': PlutoCell(value: 0),
         'real_balance': PlutoCell(value: 0),
         'system_balance': PlutoCell(value: 0),
         'difference': PlutoCell(value: 0),
@@ -357,6 +377,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
     PlutoRow(
       cells: {
         'description': PlutoCell(value: "گوی"),
+        'yesterday_balance': PlutoCell(value: 0),
         'real_balance': PlutoCell(value: 0),
         'system_balance': PlutoCell(value: 0),
         'difference': PlutoCell(value: 0),
@@ -366,6 +387,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
     PlutoRow(
       cells: {
         'description': PlutoCell(value: "لحیم"),
+        'yesterday_balance': PlutoCell(value: 0),
         'real_balance': PlutoCell(value: 0),
         'system_balance': PlutoCell(value: 0),
         'difference': PlutoCell(value: 0),
@@ -375,6 +397,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
     PlutoRow(
       cells: {
         'description': PlutoCell(value: "زنجیر"),
+        'yesterday_balance': PlutoCell(value: 0),
         'real_balance': PlutoCell(value: 0),
         'system_balance': PlutoCell(value: 0),
         'difference': PlutoCell(value: 0),
@@ -384,6 +407,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
     PlutoRow(
       cells: {
         'description': PlutoCell(value: "تکه زنجیر"),
+        'yesterday_balance': PlutoCell(value: 0),
         'real_balance': PlutoCell(value: 0),
         'system_balance': PlutoCell(value: 0),
         'difference': PlutoCell(value: 0),
@@ -393,6 +417,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
     PlutoRow(
       cells: {
         'description': PlutoCell(value: "مدبر"),
+        'yesterday_balance': PlutoCell(value: 0),
         'real_balance': PlutoCell(value: 0),
         'system_balance': PlutoCell(value: 0),
         'difference': PlutoCell(value: 0),
@@ -402,6 +427,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
     PlutoRow(
       cells: {
         'description': PlutoCell(value: "کارساخت",),
+        'yesterday_balance': PlutoCell(value: 0),
         'real_balance': PlutoCell(value: 0),
         'system_balance': PlutoCell(value: 0),
         'difference': PlutoCell(value: 0),
@@ -411,6 +437,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
     PlutoRow(
       cells: {
         'description': PlutoCell(value: "سرسنجاق"),
+        'yesterday_balance': PlutoCell(value: 0),
         'real_balance': PlutoCell(value: 0),
         'system_balance': PlutoCell(value: 0),
         'difference': PlutoCell(value: 0),
@@ -484,6 +511,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       gridBStateManager.setShowLoading(true);
       dynamic table1 =json.decode(tables.table42!);
       List description = table1["description"];
+      List yesterday_balance = table1["yesterday_balance"];
       List real_balance = table1["real_balance"];
       List system_balance = table1["system_balance"];
       List difference = table1["difference"];
@@ -494,6 +522,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
         updatedRows.add(PlutoRow(
           cells: {
             'description': PlutoCell(value:description[i] ),
+            'yesterday_balance': PlutoCell(value: yesterday_balance[i]),
             'real_balance': PlutoCell(value: real_balance[i]),
             'system_balance': PlutoCell(value: system_balance[i]),
             'difference': PlutoCell(value: difference[i]),
@@ -521,10 +550,12 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
 
     List description42 = gridBStateManager.rows.map((e) => e.cells['description']?.value).toList();
     List real_balance = gridBStateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
+    List yesterday_balance = gridBStateManager.rows.map((e) => e.cells['yesterday_balance']?.value).toList();
     List system_balance = gridBStateManager.rows.map((e) => e.cells['system_balance']?.value).toList();
     List difference = gridBStateManager.rows.map((e) => e.cells['difference']?.value).toList();
     List summary42 = gridBStateManager.rows.map((e) => e.cells['summary']?.value).toList();
     table42["description"]=description42.toList();
+    table42["yesterday_balance"]=yesterday_balance.toList();
     table42["real_balance"]=real_balance.toList();
     table42["system_balance"]=system_balance.toList();
     table42["difference"]=difference.toList();
@@ -535,6 +566,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       updatedRows.add(PlutoRow(
         cells: {
           'description': PlutoCell(value:description42[i] ),
+          'yesterday_balance': PlutoCell(value: yesterday_balance[i]),
           'real_balance': PlutoCell(value: real_balance[i]),
           'system_balance': PlutoCell(value: system_balance[i]),
           'difference': PlutoCell(value: difference[i]),
@@ -732,6 +764,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       PlutoRow(
         cells: {
           'description': PlutoCell(value: "متفرقه"),
+          'yesterday_balance': PlutoCell(value: 0),
           'real_balance': PlutoCell(value: 0),
           'system_balance': PlutoCell(value: 0),
           'difference': PlutoCell(value: 0),
@@ -741,6 +774,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       PlutoRow(
         cells: {
           'description': PlutoCell(value: "حلقه"),
+          'yesterday_balance': PlutoCell(value: 0),
           'real_balance': PlutoCell(value: 0),
           'system_balance': PlutoCell(value: 0),
           'difference': PlutoCell(value: 0),
@@ -750,6 +784,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       PlutoRow(
         cells: {
           'description': PlutoCell(value: "مفتول"),
+          'yesterday_balance': PlutoCell(value: 0),
           'real_balance': PlutoCell(value: 0),
           'system_balance': PlutoCell(value: 0),
           'difference': PlutoCell(value: 0),
@@ -759,6 +794,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       PlutoRow(
         cells: {
           'description': PlutoCell(value: "گوی"),
+          'yesterday_balance': PlutoCell(value: 0),
           'real_balance': PlutoCell(value: 0),
           'system_balance': PlutoCell(value: 0),
           'difference': PlutoCell(value: 0),
@@ -768,6 +804,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       PlutoRow(
         cells: {
           'description': PlutoCell(value: "لحیم"),
+          'yesterday_balance': PlutoCell(value: 0),
           'real_balance': PlutoCell(value: 0),
           'system_balance': PlutoCell(value: 0),
           'difference': PlutoCell(value: 0),
@@ -777,6 +814,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       PlutoRow(
         cells: {
           'description': PlutoCell(value: "زنجیر"),
+          'yesterday_balance': PlutoCell(value: 0),
           'real_balance': PlutoCell(value: 0),
           'system_balance': PlutoCell(value: 0),
           'difference': PlutoCell(value: 0),
@@ -786,6 +824,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       PlutoRow(
         cells: {
           'description': PlutoCell(value: "تکه زنجیر"),
+          'yesterday_balance': PlutoCell(value: 0),
           'real_balance': PlutoCell(value: 0),
           'system_balance': PlutoCell(value: 0),
           'difference': PlutoCell(value: 0),
@@ -795,6 +834,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       PlutoRow(
         cells: {
           'description': PlutoCell(value: "مدبر"),
+          'yesterday_balance': PlutoCell(value: 0),
           'real_balance': PlutoCell(value: 0),
           'system_balance': PlutoCell(value: 0),
           'difference': PlutoCell(value: 0),
@@ -804,6 +844,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       PlutoRow(
         cells: {
           'description': PlutoCell(value: "کارساخت",),
+          'yesterday_balance': PlutoCell(value: 0),
           'real_balance': PlutoCell(value: 0),
           'system_balance': PlutoCell(value: 0),
           'difference': PlutoCell(value: 0),
@@ -813,6 +854,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       PlutoRow(
         cells: {
           'description': PlutoCell(value: "سرسنجاق"),
+          'yesterday_balance': PlutoCell(value: 0),
           'real_balance': PlutoCell(value: 0),
           'system_balance': PlutoCell(value: 0),
           'difference': PlutoCell(value: 0),
@@ -1041,6 +1083,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       updatedRows42.add(PlutoRow(
         cells: {
           'description': PlutoCell(value:description42[i] ),
+          'yesterday_balance': PlutoCell(value: 0),
           'real_balance': PlutoCell(value: real_balance[i]),
           'system_balance': PlutoCell(value: system_balance[i]),
           'difference': PlutoCell(value: difference[i]),
