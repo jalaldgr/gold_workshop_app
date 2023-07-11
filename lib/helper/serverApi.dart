@@ -598,5 +598,15 @@ class AdminApi {
   }
 
 
-
+  /////////////////////////// yesterday table 4 ////////////////////////
+  static Future<tableData> getYesterdayTable4Balance() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+    final response = await http.get(
+      Uri.parse('${dotenv.env['API_URL']}/admin/get-yesterday-table/'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    tableData table = tableData.fromJson(json.decode(response.body));
+    return  table;
+  }
 }
