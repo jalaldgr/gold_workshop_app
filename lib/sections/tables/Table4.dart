@@ -982,38 +982,6 @@ class _Table4ScreenState extends State<Table4Screen> {
     List summary = gridAStateManager.rows.map((e) => e.cells['summary']?.value).toList();
     List<PlutoRow> updatedRows=[];
     for (var i = 0; i < row.length; i++) {
-
-      if(description[i]=="متفرقه"){
-        otherSumTable3 += import_weight[i];
-      }
-      if(description[i]=="حلقه"){
-        ringSumTable3 += import_weight[i];
-      }
-      if(description[i]=="مفتول"){
-        wireSumTable3 += import_weight[i];
-      }
-      if(description[i]=="گوی"){
-        ballSumTable3 += import_weight[i];
-      }
-      if(description[i]=="لحیم"){
-        solderSumTable3 += import_weight[i];
-      }
-      if(description[i]=="زنجیر"){
-        chainSumTable3 += import_weight[i];
-      }
-      if(description[i]=="تکه زنجیر"){
-        piece_chainSumTable3 += import_weight[i];
-      }
-      if(description[i]=="مدبر"){
-        lockSumTable3 += import_weight[i];
-      }
-      if(description[i]=="کارساخت"){
-        work_madeSumTable3 += import_weight[i];
-      }
-      if(description[i]=="سرسنجاق"){
-        //TODO
-      }
-//formula
       updatedRows.add(PlutoRow(
         cells: {
           'row': PlutoCell(value:row[i] ),
@@ -1027,9 +995,6 @@ class _Table4ScreenState extends State<Table4Screen> {
       table41["description"][i]=description[i];
       table41["import_weight"][i]=import_weight[i];
       table41["summary"][i]=summary[i];
-
-
-
     }
 
 
@@ -1057,7 +1022,10 @@ class _Table4ScreenState extends State<Table4Screen> {
         system_balance[i]=otherSumTable3 +import_weight[i] - (popionSumTable5 + wiringSumTable5 + meltingSumTable5+cutSumTable5);
       }
       if(table42["description"][i]=="حلقه"){
+        print("her is weight  ${import_weight[i]} and balance${system_balance[i]} and ring sum 3 ${ringSumTable3}");
         system_balance[i] =import_weight[i] + ringSumTable3 - ringSumTable5;
+        print("her is ${system_balance[i]}");
+
       }
       if(table42["description"][i]=="مفتول"){
         system_balance[i]=import_weight[i]+wireSumTable3- (caneSumTable5  + wireSumTable5 + pinSumTable5);
@@ -1094,6 +1062,7 @@ class _Table4ScreenState extends State<Table4Screen> {
 
         },
       ));
+
 
     }
     gridBStateManager.refRows.clear();

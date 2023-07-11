@@ -981,38 +981,6 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
     List summary = gridAStateManager.rows.map((e) => e.cells['summary']?.value).toList();
     List<PlutoRow> updatedRows=[];
     for (var i = 0; i < row.length; i++) {
-
-      if(description[i]=="متفرقه"){
-        otherSumTable3 += import_weight[i];
-      }
-      if(description[i]=="حلقه"){
-        ringSumTable3 += import_weight[i];
-      }
-      if(description[i]=="مفتول"){
-        wireSumTable3 += import_weight[i];
-      }
-      if(description[i]=="گوی"){
-        ballSumTable3 += import_weight[i];
-      }
-      if(description[i]=="لحیم"){
-        solderSumTable3 += import_weight[i];
-      }
-      if(description[i]=="زنجیر"){
-        chainSumTable3 += import_weight[i];
-      }
-      if(description[i]=="تکه زنجیر"){
-        piece_chainSumTable3 += import_weight[i];
-      }
-      if(description[i]=="مدبر"){
-        lockSumTable3 += import_weight[i];
-      }
-      if(description[i]=="کارساخت"){
-        work_madeSumTable3 += import_weight[i];
-      }
-      if(description[i]=="سرسنجاق"){
-        //TODO
-      }
-//formula
       updatedRows.add(PlutoRow(
         cells: {
           'row': PlutoCell(value:row[i] ),
