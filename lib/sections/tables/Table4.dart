@@ -476,6 +476,7 @@ class _Table4ScreenState extends State<Table4Screen> {
 
   fetchTable() async {
     var tables = await AdminApi.getTable();
+    var yesterdayTables = await AdminApi.getYesterdayTable4Balance();
 
     if(tables.table41!.length>10){
       gridAStateManager.setShowLoading(true);
@@ -507,10 +508,13 @@ class _Table4ScreenState extends State<Table4Screen> {
 
 
     if(tables.table42!.length>10){
+      dynamic yesterdayTablesJson = json.decode(yesterdayTables.table42!);
+
       gridBStateManager.setShowLoading(true);
       dynamic table1 =json.decode(tables.table42!);
       List description = table1["description"];
       List real_balance = table1["real_balance"];
+      List yesterday_balance = yesterdayTablesJson["real_balance"];
       List system_balance = table1["system_balance"];
       List difference = table1["difference"];
       List summary = table1["summary"];
@@ -520,7 +524,7 @@ class _Table4ScreenState extends State<Table4Screen> {
         updatedRows.add(PlutoRow(
           cells: {
             'description': PlutoCell(value:description[i] ),
-            'yesterday_balance': PlutoCell(value: 0),
+            'yesterday_balance': PlutoCell(value: yesterday_balance[i]),
             'real_balance': PlutoCell(value: real_balance[i]),
             'system_balance': PlutoCell(value: system_balance[i]),
             'difference': PlutoCell(value: difference[i]),
@@ -540,13 +544,13 @@ class _Table4ScreenState extends State<Table4Screen> {
 
   }
 
-
   calculateTableB()async{
     var tables = await AdminApi.getTable();
     dynamic table41 =json.decode(tables.table41!);
     dynamic table42 =json.decode(tables.table42!);
 
     List description42 = gridBStateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List yesterday_balance = gridBStateManager.rows.map((e) => e.cells['yesterday_balance']?.value).toList();
     List real_balance = gridBStateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
     List system_balance = gridBStateManager.rows.map((e) => e.cells['system_balance']?.value).toList();
     List difference = gridBStateManager.rows.map((e) => e.cells['difference']?.value).toList();
@@ -562,7 +566,7 @@ class _Table4ScreenState extends State<Table4Screen> {
       updatedRows.add(PlutoRow(
         cells: {
           'description': PlutoCell(value:description42[i] ),
-          'yesterday_balance': PlutoCell(value: 0),
+          'yesterday_balance': PlutoCell(value: yesterday_balance[i]),
           'real_balance': PlutoCell(value: real_balance[i]),
           'system_balance': PlutoCell(value: system_balance[i]),
           'difference': PlutoCell(value: difference[i]),
@@ -864,6 +868,7 @@ class _Table4ScreenState extends State<Table4Screen> {
 
     gridAStateManager.refRows.clear();
     gridAStateManager.insertRows(0, gridARows);
+    fetchTable();
     updateTable();
   }
 
