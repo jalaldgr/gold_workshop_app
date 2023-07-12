@@ -462,11 +462,13 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
 
     Map<String,dynamic> table42 = {};
     List description42 = gridBStateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List yesterday_balance = gridBStateManager.rows.map((e) => e.cells['yesterday_balance']?.value).toList();
     List real_balance = gridBStateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
     List system_balance = gridBStateManager.rows.map((e) => e.cells['system_balance']?.value).toList();
     List difference = gridBStateManager.rows.map((e) => e.cells['difference']?.value).toList();
     List summary42 = gridBStateManager.rows.map((e) => e.cells['summary']?.value).toList();
     table42["description"]=description42.toList();
+    table42["yesterday_balance"]=yesterday_balance.toList();
     table42["real_balance"]=real_balance.toList();
     table42["system_balance"]=system_balance.toList();
     table42["difference"]=difference.toList();
@@ -1007,6 +1009,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
 
 
     List description42 = gridBStateManager.rows.map((e) => e.cells['description']?.value).toList();
+    List yesterday_balance = gridBStateManager.rows.map((e) => e.cells['yesterday_balance']?.value).toList();
     List real_balance = gridBStateManager.rows.map((e) => e.cells['real_balance']?.value).toList();
     List system_balance = gridBStateManager.rows.map((e) => e.cells['system_balance']?.value).toList();
     List difference = gridBStateManager.rows.map((e) => e.cells['difference']?.value).toList();
@@ -1051,7 +1054,7 @@ class _Table4ArchiveScreenState extends State<Table4ArchiveScreen> {
       updatedRows42.add(PlutoRow(
         cells: {
           'description': PlutoCell(value:description42[i] ),
-          'yesterday_balance': PlutoCell(value: 0),
+          'yesterday_balance': PlutoCell(value: yesterday_balance[i]),
           'real_balance': PlutoCell(value: real_balance[i]),
           'system_balance': PlutoCell(value: system_balance[i]),
           'difference': PlutoCell(value: difference[i]),

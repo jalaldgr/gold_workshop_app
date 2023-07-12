@@ -1022,10 +1022,7 @@ class _Table4ScreenState extends State<Table4Screen> {
         system_balance[i]=otherSumTable3 +import_weight[i] - (popionSumTable5 + wiringSumTable5 + meltingSumTable5+cutSumTable5);
       }
       if(table42["description"][i]=="حلقه"){
-        print("her is weight  ${import_weight[i]} and balance${system_balance[i]} and ring sum 3 ${ringSumTable3}");
         system_balance[i] =import_weight[i] + ringSumTable3 - ringSumTable5;
-        print("her is ${system_balance[i]}");
-
       }
       if(table42["description"][i]=="مفتول"){
         system_balance[i]=import_weight[i]+wireSumTable3- (caneSumTable5  + wireSumTable5 + pinSumTable5);
@@ -1121,9 +1118,9 @@ class _Table4ScreenState extends State<Table4Screen> {
                 cellTextStyle: TextStyle(fontSize: 16),
 
               )),
-          onLoaded: (PlutoGridOnLoadedEvent event) {
+          onLoaded: (PlutoGridOnLoadedEvent event) async {
             gridAStateManager = event.stateManager;
-            fetchTable();
+           var mustWait = await fetchTable();
             calculateTableA();
             calculateTableB();
           },
