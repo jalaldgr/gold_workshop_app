@@ -833,7 +833,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
               enterKeyAction: PlutoGridEnterKeyAction.editingAndMoveRight,
 
               style: PlutoGridStyleConfig(evenRowColor: Colors.black12,
-                cellTextStyle: TextStyle(fontSize: 16),
+
               )),        ),
       ),
       floatingActionButton: FloatingActionButton(tooltip: "افزودن سطر جدید",
