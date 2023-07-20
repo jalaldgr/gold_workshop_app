@@ -642,7 +642,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             cells: {
               'row': PlutoCell(value: element),
               'client_name': PlutoCell(value: element.clientFullName),
-              'description':PlutoCell(value: element.orderType),
+              'description':PlutoCell(value: element.productType),
               'code':PlutoCell(value: element.code),
               'weight':PlutoCell(value: element.weight),
               'cut_deficiency':PlutoCell(value: element.deficiency),
