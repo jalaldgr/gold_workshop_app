@@ -75,64 +75,64 @@ class LoginScreen extends State<HomeScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final info = await PackageInfo.fromPlatform();
     prefs.setString("version",info.version );
-    var jwtToken = prefs.getString("jwt");
-
-    dynamic role =jsonDecode(prefs.getString('user')!)['role']; // get driver user id
-
-    if (jwtToken != null) {
-      dynamic str = jwtToken;
-      dynamic jwt = str.length > 1 ? str.toString().split(".") : "";
-      if (jwt.length != 3) {
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-                builder: (BuildContext context) =>
-                    LoginPage()),
-                (Route<dynamic> route) => false);
-      } else {
-        var payload = json.decode(
-            ascii.decode(base64.decode(base64.normalize(jwt[1]))));
-
-        if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000).isAfter(DateTime.now())) {
-
-                  switch(role){
-                    case "Admin":
-                      Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  AdminHomeScreen(str, payload)),
-                              );
-                      break;
-                    case "Designer":
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  DesignerHomeScreen(str, payload)),
-                              (Route<dynamic> route) => false);
-                      break;
-                    case "Workshop1":
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  Workshop1HomeScreen(str, payload)),
-                              (Route<dynamic> route) => false);
-                      break;
-                    case "Workshop2":
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  Workshop1HomeScreen(str, payload)),
-                              (Route<dynamic> route) => false);
-                      break;
-
-                  }
-        }
-      }
-    } else {
+    // var jwtToken = prefs.getString("jwt");
+    //
+    // dynamic role =jsonDecode(prefs.getString('user')!)['role']; // get driver user id
+    //
+    // if (jwtToken != null) {
+    //   dynamic str = jwtToken;
+    //   dynamic jwt = str.length > 1 ? str.toString().split(".") : "";
+    //   if (jwt.length != 3) {
+    //     Navigator.of(context).pushAndRemoveUntil(
+    //         MaterialPageRoute(
+    //             builder: (BuildContext context) =>
+    //                 LoginPage()),
+    //             (Route<dynamic> route) => false);
+    //   } else {
+    //     var payload = json.decode(
+    //         ascii.decode(base64.decode(base64.normalize(jwt[1]))));
+    //
+    //     if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000).isAfter(DateTime.now())) {
+    //
+    //               switch(role){
+    //                 case "Admin":
+    //                   Navigator.of(context).push(
+    //                       MaterialPageRoute(
+    //                           builder: (BuildContext context) =>
+    //                               AdminHomeScreen(str, payload)),
+    //                           );
+    //                   break;
+    //                 case "Designer":
+    //                   Navigator.of(context).pushAndRemoveUntil(
+    //                       MaterialPageRoute(
+    //                           builder: (BuildContext context) =>
+    //                               DesignerHomeScreen(str, payload)),
+    //                           (Route<dynamic> route) => false);
+    //                   break;
+    //                 case "Workshop1":
+    //                   Navigator.of(context).pushAndRemoveUntil(
+    //                       MaterialPageRoute(
+    //                           builder: (BuildContext context) =>
+    //                               Workshop1HomeScreen(str, payload)),
+    //                           (Route<dynamic> route) => false);
+    //                   break;
+    //                 case "Workshop2":
+    //                   Navigator.of(context).pushAndRemoveUntil(
+    //                       MaterialPageRoute(
+    //                           builder: (BuildContext context) =>
+    //                               Workshop1HomeScreen(str, payload)),
+    //                           (Route<dynamic> route) => false);
+    //                   break;
+    //
+    //               }
+    //     }
+    //   }
+    // } else {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
               builder: (BuildContext context) =>
                   LoginPage()),
               (Route<dynamic> route) => false);
     }
-  }
+  // }
 }
