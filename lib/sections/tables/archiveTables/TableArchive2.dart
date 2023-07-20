@@ -285,23 +285,6 @@ class _Table2ArchiveScreenState extends State<Table2ArchiveScreen> {
           },
         ));
         table6["cut_deference"] +=difference[i];
-      }else if(i==2){ // row is greater than 2
-        final_balance[i] = import[i]-export[i]+final_balance[i-1];
-        balance[i] = final_balance[i]-real_balance[i];
-        difference[i] = balance[i]+difference[i-1];
-        updatedRows.add(PlutoRow(
-          cells: {
-            'row': PlutoCell(value: rowNumber[i]),
-            'description': PlutoCell(value: description[i]),
-            'import': PlutoCell(value: import[i]),
-            'export': PlutoCell(value:export[i]),
-            'final_balance': PlutoCell(value: final_balance[i]),
-            'real_balance': PlutoCell(value: real_balance[i]),
-            'balance': PlutoCell(value: balance[i] ),
-            'difference': PlutoCell(value: difference[i]),
-          },
-        ));
-        table6["cut_deference"] +=difference[i];
       }else if(import[i]>0||export[i]>0){
         if(real_balance[i]>0)difference[i] = balance[i]+difference[i-1];
           else difference[i] = balance[i]+difference[i-1];
