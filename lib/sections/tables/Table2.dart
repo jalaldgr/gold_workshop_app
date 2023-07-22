@@ -267,28 +267,15 @@ class _Table2ScreenState extends State<Table2Screen> {
             'difference': PlutoCell(value: difference[i]),
           },
         ));
-      }else if (i == 1) {// if row 2
+      }else if(i>0 && i<3){
+        if(real_balance[i]>0){
+          difference[i] = balance[i]+difference[i-1];
+        }else {
+          difference[i] = balance[i]+difference[i-1];
+        }
+          print("${final_balance[i]}   ${real_balance[i]}");
         final_balance[i] = import[i]-export[i]+final_balance[i-1];
         balance[i] = final_balance[i]-real_balance[i];
-        difference[i] = balance[i];
-        updatedRows.add(PlutoRow(
-          cells: {
-            'row': PlutoCell(value: rowNumber[i]),
-            'description': PlutoCell(value: description[i]),
-            'import': PlutoCell(value: import[i]),
-            'export': PlutoCell(value: export[i]),
-            'final_balance': PlutoCell(value: final_balance[i]),
-            'real_balance': PlutoCell(value: real_balance[i]),
-            'balance': PlutoCell(value: balance[i]  ),
-            'difference': PlutoCell(value: balance[i]),
-          },
-        ));
-        table6["cut_deference"] +=difference[i];
-      }else if(import[i]>0||export[i]>0){
-        if(real_balance[i]>0)difference[i] = balance[i]+difference[i-1];
-          else difference[i] = balance[i]+difference[i-1];
-        balance[i] = final_balance[i]-real_balance[i];
-        final_balance[i] = import[i]-export[i]+final_balance[i-1];
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value: i+1),
@@ -302,7 +289,26 @@ class _Table2ScreenState extends State<Table2Screen> {
           },
         ));
         table6["cut_deference"] +=difference[i];
-      }else{
+      }else if(import[i]>0||export[i]>0){
+        if(real_balance[i]>0)difference[i] = balance[i]+difference[i-1];
+        else difference[i] = balance[i]+difference[i-1];
+        final_balance[i] = import[i]-export[i]+final_balance[i-1];
+        balance[i] = final_balance[i]-real_balance[i];
+        updatedRows.add(PlutoRow(
+          cells: {
+            'row': PlutoCell(value: i+1),
+            'description': PlutoCell(value: description[i]),
+            'import': PlutoCell(value: import[i]),
+            'export': PlutoCell(value:export[i]),
+            'final_balance': PlutoCell(value: final_balance[i]),
+            'real_balance': PlutoCell(value: real_balance[i]),
+            'balance': PlutoCell(value: balance[i]),
+            'difference': PlutoCell(value: difference[i]),
+          },
+        ));
+        table6["cut_deference"] +=difference[i];
+      }
+      else{
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value: i+1),
@@ -469,7 +475,7 @@ class _Table2ScreenState extends State<Table2Screen> {
           onChanged: (PlutoGridOnChangedEvent event) {
             if((event.columnIdx==3 && event.rowIdx==0)||(event.columnIdx==3 && event.rowIdx==2)||
                 (event.columnIdx==2 && event.rowIdx==1)||(event.columnIdx==2 && event.rowIdx==2)
-            || (event.columnIdx==3 && event.rowIdx==1)
+
             ){
               stateManager.rows[event.rowIdx].cells[event.column.field]!.value = 0;
 
