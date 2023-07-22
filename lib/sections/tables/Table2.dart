@@ -268,14 +268,14 @@ class _Table2ScreenState extends State<Table2Screen> {
           },
         ));
       }else if(i>0 && i<3){
-        if(real_balance[i]>0){
-          difference[i] = balance[i]+difference[i-1];
-        }else {
-          difference[i] = balance[i]+difference[i-1];
-        }
-          print("${final_balance[i]}   ${real_balance[i]}");
         final_balance[i] = import[i]-export[i]+final_balance[i-1];
         balance[i] = final_balance[i]-real_balance[i];
+        if(real_balance[i]>0){
+          difference[i] = balance[i];
+        }else {
+          difference[i] = 0;
+        }
+
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value: i+1),
@@ -290,10 +290,12 @@ class _Table2ScreenState extends State<Table2Screen> {
         ));
         table6["cut_deference"] +=difference[i];
       }else if(import[i]>0||export[i]>0){
-        if(real_balance[i]>0)difference[i] = balance[i]+difference[i-1];
-        else difference[i] = balance[i]+difference[i-1];
+
+
         final_balance[i] = import[i]-export[i]+final_balance[i-1];
         balance[i] = final_balance[i]-real_balance[i];
+        if(real_balance[i]>0)difference[i] = balance[i];
+        else difference[i] =0;
         updatedRows.add(PlutoRow(
           cells: {
             'row': PlutoCell(value: i+1),
