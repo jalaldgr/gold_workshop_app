@@ -84,6 +84,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'cut_deficiency',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
+        readOnly: true,
         width: 100,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
