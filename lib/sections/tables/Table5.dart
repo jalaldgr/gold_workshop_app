@@ -46,7 +46,7 @@ class _Table5ScreenState extends State<Table5Screen> {
         field: 'description',
         type: PlutoColumnType.text(),
         enableEditingMode: true,
-        width: 100),
+        width: 120),
     PlutoColumn(
         title: 'کد',
         field: 'code',
@@ -643,7 +643,7 @@ class _Table5ScreenState extends State<Table5Screen> {
             cells: {
               'row': PlutoCell(value: element),
               'client_name': PlutoCell(value: element.clientFullName),
-              'description':PlutoCell(value: element.productType),
+              'description':PlutoCell(value: element.productType=="پلاک اسم"?"${element.productType} - ${jsonDecode(element.orderMeta!)["نام پلاک"]}":"${element.productType}"),
               'code':PlutoCell(value: element.code),
               'weight':PlutoCell(value: element.weight),
               'cut_deficiency':PlutoCell(value: element.deficiency),
