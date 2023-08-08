@@ -37,8 +37,8 @@ class NewOrderFormState extends State<NewOrderForm> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-  String customerTypeDropDownValue = 'مشتری';
-  var customerTypeDropDownItems = [ 'مشتری','همکار' ];
+  String customerTypeDropDownValue = 'همکار';
+  var customerTypeDropDownItems = ['همکار', 'مشتری' ];
   String statusDropDownValue = 'در انتظار بررسی';
   var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'ارسال به طراح','ارسال به کارگاه','برگشت از طراح','برگشت از کارگاه' ,'لغو شده'];
   String productTypeDropDownValue = 'پلاک اسم';
@@ -49,7 +49,7 @@ class NewOrderFormState extends State<NewOrderForm> {
   String orderMetaDropDownValue = 'کد';
   var orderMetaDropDownItems = [ 'کد','وزن','سایز','ابعاد','رنگ','سایر', ];
   String orderTypeDropDownValue = 'تلفنی';
-  var orderTypeDropDownItems = [ 'تلفنی','حضوری','واتساپ','سایت' ];
+  var orderTypeDropDownItems = [ 'تلفنی','حضوری','واتساپ','تلگرام','روبیکا','ایتا','سایت' ];
   bool instantDeliveryCheckBoxValue = false;
   bool deliveryByCustomerCheckBoxValue = false;
   bool feeCheckBoxValue = false;
@@ -210,7 +210,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                             Expanded(child: TextFormField(onTap: openDatePicker,decoration: InputDecoration(hintText: "تاریخ تحویل",labelText: "تاریخ تحویل"),controller: deliverDateEditTextController,),),
                             Expanded(child:
                             DropdownButtonFormField(
-                              decoration: InputDecoration(labelText: "نوع خرید"),
+                              decoration: InputDecoration(labelText: "نوع خریدار"),
                               value: customerTypeDropDownValue,
                               items: customerTypeDropDownItems.map((String items) {return DropdownMenuItem(value: items,child: Text(items),);}).toList(),
                               onChanged: (String? value) {setState(() {
