@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gold_workshop/helper/designerApi.dart';
@@ -129,8 +131,8 @@ class _DesignerOrdersListState extends State<DesignerOrdersList> {
                         Text("${index+1}"),
                         SizedBox(width: 32,),
                         Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("نام مشتری",style: TextStyle(fontSize: 11),),Text("${order!.clientFullName}")],)),
-                        Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("نوع محصول",style: TextStyle(fontSize: 11),),Text("${order!.productType}")],)),
-                        Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("تاریخ سفارش",style: TextStyle(fontSize: 11),),Text("${order!.orderDate}")],)),
+                        Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("نوع محصول",style: TextStyle(fontSize: 11),),
+                          Text("${order.productType=="پلاک اسم"?"${order.productType} - ${jsonDecode(order.orderMeta!)["نام پلاک"]}":order.productType}")],)),                        Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("تاریخ سفارش",style: TextStyle(fontSize: 11),),Text("${order!.orderDate}")],)),
                         Expanded(child: Column(crossAxisAlignment:CrossAxisAlignment.start,children: [Text("تاریخ تحویل",style: TextStyle(fontSize: 11),),Text("${order!.deliveryDate}")],)),
                       ]
                   )),
