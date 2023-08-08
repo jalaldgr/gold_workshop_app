@@ -683,38 +683,7 @@ class _Table5ScreenState extends State<Table5Screen> {
   resetTable(){
 
     List<PlutoRow> updatedRows=[];
-    updatedRows.add(PlutoRow(
-      cells: {
-        'row': PlutoCell(value: 1),
-        'client_name': PlutoCell(value: ""),
-        'description': PlutoCell(value: ""),
-        'code': PlutoCell(value: ""),
-        'weight': PlutoCell(value: 0),
-        'cut_deficiency': PlutoCell(value: 0),
-        'popion_deficiency': PlutoCell(value: 0),
-        'jewel_weight': PlutoCell(value: 0),
-        'summary': PlutoCell(value: ""),
-        'melting': PlutoCell(value: 0),
-        'wire_pulling': PlutoCell(value: 0),
-        'cut': PlutoCell(value: 0),
-        'popion': PlutoCell(value: 0),
-        'ring': PlutoCell(value: 0),
-        'chain': PlutoCell(value: 0),
-        'piece_chain': PlutoCell(value: 0),
-        'cane': PlutoCell(value: 0),
-        'lock': PlutoCell(value: 0),
-        'wire': PlutoCell(value: 0),
-        'solder': PlutoCell(value: 0),
-        'ball': PlutoCell(value: 0),
-        'pin': PlutoCell(value: 0),
-        'ring2': PlutoCell(value: 0),
-        'half_made': PlutoCell(value: 0),
-        'wiring': PlutoCell(value: 0),
-        'final_weight': PlutoCell(value: 0),
-        'burnish_deficiency': PlutoCell(value: 0),
 
-      },
-    ));
     stateManager.refRows.clear();
     stateManager.insertRows(0, updatedRows);
     updateTable();
