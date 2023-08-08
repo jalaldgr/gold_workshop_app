@@ -101,6 +101,7 @@ class _Table5ScreenState extends State<Table5Screen> {
     PlutoColumn(
         title: 'کسر پاپیون',
         field: 'popion_deficiency',
+        readOnly: true,
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
