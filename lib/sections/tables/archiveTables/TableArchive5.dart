@@ -27,11 +27,11 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
 
   List<PlutoColumn> columns = [
     PlutoColumn(
-        title: 'ردیف',
+        title: 'ر',
         field: 'row',
         type: PlutoColumnType.number(),
         enableEditingMode: true,
-        width: 70,
+        width: 40,
 ),
 
     /// Select Column definition
@@ -47,19 +47,19 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'description',
         type: PlutoColumnType.text(),
         enableEditingMode: true,
-        width: 120),
+        width: 130),
     PlutoColumn(
         title: 'کد',
         field: 'code',
         type: PlutoColumnType.text(),
         enableEditingMode: true,
-        width: 100),
+        width: 65),
     PlutoColumn(
         title: 'وزن',
         field: 'weight',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 60,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -85,7 +85,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         readOnly: true,
-        width: 100,
+        width: 90,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -124,7 +124,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'jewel_weight',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 90,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -143,13 +143,13 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'summary',
         type: PlutoColumnType.text(),
         enableEditingMode: true,
-        width: 100),
+        width: 120),
     PlutoColumn(
         title: 'ذوب',
         field: 'melting',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 65,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -187,7 +187,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'cut',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 65,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -206,7 +206,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'popion',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 80,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -225,7 +225,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'ring',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 70,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -244,7 +244,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'chain',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 80,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -282,7 +282,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'cane',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 75,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -301,7 +301,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'lock',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 70,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -320,7 +320,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'wire',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 75,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -339,7 +339,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'solder',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 70,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -358,7 +358,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'ball',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 65,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -377,7 +377,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'pin',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 95,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
@@ -396,7 +396,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         field: 'ring2',
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
-        width: 100,
+        width: 70,
         footerRenderer: (rendererContext) {
           return PlutoAggregateColumnFooter(
             rendererContext: rendererContext,
