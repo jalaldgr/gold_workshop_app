@@ -358,7 +358,7 @@ class NewOrderFormState extends State<NewOrderForm> {
 
                                     case "دستبند":
                                       setState(() {
-                                        widget.order.orderMeta = jsonEncode({"نوع دستبند": "پرچی", "نوع چرم": "طبیعی"});
+                                        widget.order.orderMeta = jsonEncode({"نوع دستبند": "پرچی", "نوع چرم": "طبیعی","رنگ دستبند":"قهوه ای"});
                                       });
                                       break;
 

@@ -38,6 +38,9 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
   String braceletTypeDropdownValue="پرچی";
   var braceletTypeDropDownItemList=["پرچی","دوختی","پانچی"];
 
+  String braceletColorDropdownValue="قهوه ای";
+  var braceletColorDropDownItemList=["قهوه ای","مشکی","غیره"];
+
   String braceletLeatherTypeDropdownValue="طبیعی";
   var braceletleatherTypeDropDownItemList=["طبیعی","مصنوعی"];
 
@@ -111,11 +114,14 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
           if(meta["نوع چرم"].toString().length>0)braceletLeatherTypeDropdownValue = meta["نوع چرم"]??"طبیعی";
           if(meta["ابعاد محصول"].toString().length>0)braceletDimensionsTextController.text = meta["ابعاد محصول"]??"";
           if(meta["بخش بندی"].toString().length>0)braceletSectionTextController.text = meta["بخش بندی"]??"";
+          if(meta["رنگ دستبند"].toString().length>0)braceletColorDropdownValue = meta["رنگ دستبند"]??"قهوه ای";
 
           if(meta["نوع دستبند"].toString().length>0)_metaKeyValue["نوع دستبند"] = meta["نوع دستبند"]??"پرچی";
           if(meta["نوع چرم"].toString().length>0)_metaKeyValue["نوع چرم"] = meta["نوع چرم"]??"طبیعی";
           if(meta["بخش بندی"].toString().length>0)_metaKeyValue["بخش بندی"] = meta["بخش بندی"]??"";
           if(meta["ابعاد محصول"].toString().length>0)_metaKeyValue["ابعاد محصول"]= meta["ابعاد محصول"]??"";
+          if(meta["رنگ دستبند"].toString().length>0)_metaKeyValue["رنگ دستبند"] = meta["رنگ دستبند"]??"قهوه ای";
+
 
 
         }
@@ -492,7 +498,24 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
                       });
                     },
                   )),
-
+              Expanded(
+                  child: DropdownButtonFormField(
+                    decoration: InputDecoration(labelText: "رنگ دستبند"),
+                    value: braceletColorDropdownValue,
+                    items: braceletColorDropDownItemList.map((String items) {
+                      return DropdownMenuItem(
+                        value: items,
+                        child: Text(items),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      setState(() {
+                        braceletLeatherTypeDropdownValue = value!;
+                        _metaKeyValue["رنگ دستبند"] = value;
+                        widget.callback(jsonEncode(_metaKeyValue));
+                      });
+                    },
+                  )),
 
 
             ],
