@@ -102,6 +102,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
     PlutoColumn(
         title: 'کسر پاپیون',
         field: 'popion_deficiency',
+        readOnly: true,
         type: PlutoColumnType.number(format: "#.###"),
         enableEditingMode: true,
         width: 100,
@@ -630,7 +631,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
       stateManager.refRows.clear();
       stateManager.insertRows(0, updatedRows);
       stateManager.setShowLoading(false);
-    }else fetchOrders();
+    }//else fetchOrders();
   }
   fetchOrders()async{
     var orders =await Workshop2Api.getAllActiveOrders() ;
