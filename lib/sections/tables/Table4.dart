@@ -475,71 +475,86 @@ class _Table4ScreenState extends State<Table4Screen> {
   }
 
   fetchTable() async {
-    var tables = await AdminApi.getTable();
-    var yesterdayTables = await AdminApi.getYesterdayTable4Balance();
+    try{
+      var tables = await AdminApi.getTable();
+      var yesterdayTables = await AdminApi.getYesterdayTable4Balance();
 
-    if(tables.table41!.length>10){
-      gridAStateManager.setShowLoading(true);
+      if(tables.table41!.length>10){
+        gridAStateManager.setShowLoading(true);
 
-      dynamic table1 =json.decode(tables.table41!);
-      List rowNumber = table1["row"];
-      List description = table1["description"];
-      List import_weight = table1["import_weight"];
-      List summary = table1["summary"];
+        dynamic table1 =json.decode(tables.table41!);
+        dynamic table2 =json.decode(tables.table2!);
+        List weight = table2["import"];
+        dynamic table1WeightSum=0;
+        for(var i=0;i<weight.length;i++){
+          print(weight[i]);
+          table1WeightSum +=weight[i];
+        }
+        List rowNumber = table1["row"];
+        List description = table1["description"];
+        List import_weight = table1["import_weight"];
+        List summary = table1["summary"];
 
-      List<PlutoRow> updatedRows=[];
-      for (var i = 0; i < rowNumber.length; i++) {
-        updatedRows.add(PlutoRow(
-          cells: {
-            'row': PlutoCell(value:rowNumber[i] ),
-            'description': PlutoCell(value: description[i]),
-            'import_weight': PlutoCell(value: import_weight[i]),
-            'summary': PlutoCell(value: summary[i]),
-          },
-        ));
+        List<PlutoRow> updatedRows=[];
+        for (var i = 0; i < rowNumber.length; i++) {
+          updatedRows.add(PlutoRow(
+            cells: {
+              'row': PlutoCell(value:rowNumber[i] ),
+              'description': PlutoCell(value: description[i]),
+              'import_weight': PlutoCell(value:i==0?table1WeightSum: import_weight[i]),
+              'summary': PlutoCell(value: summary[i]),
+            },
+          ));
+        }
+
+        gridAStateManager.refRows.clear();
+        gridAStateManager.insertRows(0, updatedRows);
+        gridAStateManager.setShowLoading(false);
+
+
       }
 
-      gridAStateManager.refRows.clear();
-      gridAStateManager.insertRows(0, updatedRows);
-      gridAStateManager.setShowLoading(false);
 
+      if(tables.table42!.length>10){
+        dynamic yesterdayTablesJson = json.decode(yesterdayTables.table42!);
+
+        gridBStateManager.setShowLoading(true);
+        dynamic table1 =json.decode(tables.table42!);
+        List description = table1["description"];
+        List real_balance = table1["real_balance"];
+        List yesterday_balance = yesterdayTablesJson["real_balance"];
+        List system_balance = table1["system_balance"];
+        List difference = table1["difference"];
+        List summary = table1["summary"];
+
+        List<PlutoRow> updatedRows=[];
+        for (var i = 0; i < description.length; i++) {
+          updatedRows.add(PlutoRow(
+            cells: {
+              'description': PlutoCell(value:description[i] ),
+              'yesterday_balance': PlutoCell(value: yesterday_balance[i]),
+              'real_balance': PlutoCell(value: real_balance[i]),
+              'system_balance': PlutoCell(value: system_balance[i]),
+              'difference': PlutoCell(value: difference[i]),
+              'summary': PlutoCell(value: summary[i]),
+
+            },
+          ));
+        }
+
+        gridBStateManager.refRows.clear();
+        gridBStateManager.insertRows(0, updatedRows);
+        gridBStateManager.setShowLoading(false);
+
+
+      }
+
+    }catch(e){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${e}")));
+      print(e);
 
     }
 
-
-    if(tables.table42!.length>10){
-      dynamic yesterdayTablesJson = json.decode(yesterdayTables.table42!);
-
-      gridBStateManager.setShowLoading(true);
-      dynamic table1 =json.decode(tables.table42!);
-      List description = table1["description"];
-      List real_balance = table1["real_balance"];
-      List yesterday_balance = yesterdayTablesJson["real_balance"];
-      List system_balance = table1["system_balance"];
-      List difference = table1["difference"];
-      List summary = table1["summary"];
-
-      List<PlutoRow> updatedRows=[];
-      for (var i = 0; i < description.length; i++) {
-        updatedRows.add(PlutoRow(
-          cells: {
-            'description': PlutoCell(value:description[i] ),
-            'yesterday_balance': PlutoCell(value: yesterday_balance[i]),
-            'real_balance': PlutoCell(value: real_balance[i]),
-            'system_balance': PlutoCell(value: system_balance[i]),
-            'difference': PlutoCell(value: difference[i]),
-            'summary': PlutoCell(value: summary[i]),
-
-          },
-        ));
-      }
-
-      gridBStateManager.refRows.clear();
-      gridBStateManager.insertRows(0, updatedRows);
-      gridBStateManager.setShowLoading(false);
-
-
-    }
 
 
   }
