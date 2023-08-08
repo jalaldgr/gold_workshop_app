@@ -436,12 +436,32 @@ class NewOrderFormState extends State<NewOrderForm> {
                       ElevatedButton(onPressed: () async {
                         collectFields();
 
-                        var res = await AdminApi.addOrder(widget.order);
+                        if(widget.order.productType=="پلاک اسم"){ //check only plate name in plate product type, before submit
+                          try{
+                            var plateName=jsonDecode(widget.order.orderMeta!)["نام پلاک"];
+                            if(plateName==""||plateName==null){
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("نام پلاک را وارد کنید")));
 
-                        setState(() {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                        Navigator.pop(context);
-                        });
+                            }else {
+                              var res = await AdminApi.addOrder(widget.order);
+                              setState(() {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                Navigator.pop(context);
+                              });
+
+                            }
+                          }catch(e){
+                            print(e);
+                          }
+
+                        }else{
+                          var res = await AdminApi.addOrder(widget.order);
+                          setState(() {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                            Navigator.pop(context);
+                          });
+                        }
+
 
 
                       }, child: Text("ثبت سفارش"),)
