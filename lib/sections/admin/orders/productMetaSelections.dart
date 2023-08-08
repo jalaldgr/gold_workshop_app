@@ -19,11 +19,11 @@ class ProductMetaSelections extends StatefulWidget {
 class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
 
   String plateLanguageDropdownValue="فارسی";
-  var plateLanguageItemList = ["انگلیسی","فارسی"];
+  var plateLanguageItemList = ["انگلیسی","فارسی","طبق کاتالوگ"];
   String plateTypeDropdownValue="تک حلقه";
-  var plateTypeItemList = ["تک حلقه","دو حلقه"];
+  var plateTypeItemList = ["تک حلقه","دو حلقه","طبق کاتالوگ"];
   String plateHackTypeDropdownValue="براق";
-  var plateHackTypeItemList = ["براق","مات","مات و براق"];
+  var plateHackTypeItemList = ["براق","مات","مات و براق","مات اسکاچی","طبق کاتالوگ"];
 
   String bangleColorDropdownValue="زرد";
   var bangleColorItemList = ["زرد","سفید","زرد و سفید"];
@@ -33,10 +33,10 @@ class _ProductMetaSelectionsState extends State<ProductMetaSelections> {
   String earringsTypeDropDownValUe="عصایی";
   var earringsTypeItemList = ["عصایی","بخیه ای","بیخ گوشی"];
   String earringsHackTypeDropdownValue="براق";
-  var earringsHackTypeDropDownItemList=["براق","مات","مات و براق"];
+  var earringsHackTypeDropDownItemList=["براق","مات","مات و براق","مات اسکاچی","طبق کاتالوگ"];
 
   String braceletTypeDropdownValue="پرچی";
-  var braceletTypeDropDownItemList=["پرچی","دوختی"];
+  var braceletTypeDropDownItemList=["پرچی","دوختی","پانچی"];
 
   String braceletLeatherTypeDropdownValue="طبیعی";
   var braceletleatherTypeDropDownItemList=["طبیعی","مصنوعی"];
