@@ -11,6 +11,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../helper/serverApi.dart';
 import '../tables/Table1.dart';
 import '../tables/Table2.dart';
+import '../tables/Table3.dart';
+import '../tables/Table4.dart';
+import '../tables/Table5.dart';
 import 'workshop1OrdersList.dart';
 
 
@@ -62,84 +65,125 @@ class _Workshop1HomeScreenState extends State<Workshop1HomeScreen> {
                   Expanded(
                       child: Padding(
                         padding: EdgeInsets.all(32),
-                        child:Column(crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Expanded(child:
-                              Row(crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                Expanded(child:Padding(padding: EdgeInsets.all(4),child:
-                                OutlinedButton(
-                                    onPressed: () async {
-                                      final value = await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => Table1Screen(headerColor: Colors.amber,)));
-                                      setState(() {});
-                                    },
-                                    child: Text("جدول 1",style: TextStyle(fontSize: 32),))
-                                  ,)),
-                                Expanded(child:
-                                Padding(padding: EdgeInsets.all(4),
-                                  child: OutlinedButton(
-                                      onPressed: () async {
-                                        final value = await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => Table2Screen(headerColor: Colors.amber)));
-                                        setState(() {});
-                                      },
-                                      child: Text("جدول 2",style: TextStyle(fontSize: 32),))
-                                  ,)
+                        child: Column(
+                          children: [
+                            Expanded(
+                                child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    Expanded(child:Padding(padding: EdgeInsets.all(4),child:
+                                    OutlinedButton(
+                                        onPressed: () async {
+                                          final value = await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => Table1Screen(headerColor: Colors.amber,)));
+                                          setState(() {});
+                                        },
+                                        child: Text("جدول 1",style: TextStyle(fontSize: 32),))
+                                      ,)),
+                                    Expanded(child:
+                                    Padding(padding: EdgeInsets.all(4),
+                                      child: OutlinedButton(
+                                          onPressed: () async {
+                                            final value = await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => Table2Screen(headerColor: Colors.amber)));
+                                            setState(() {});
+                                          },
+                                          child: Text("جدول 2",style: TextStyle(fontSize: 32),))
+                                      ,)
 
-                                ),
-                              ],)),
-                              Expanded(child: Column(children: [
-                                Expanded(child:
-                                    InkWell(child:
-                                    Card(color: Colors.blue.shade100,
-                                      child: Container(
-                                        padding: EdgeInsets.all(8),
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              child:
-                                              Row(crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  Expanded(child: Text("ذوب روزانه",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                                  Expanded(child: Text("کسر پرداخت",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                                  Expanded(child: Text("کسر ذوب",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                                  Expanded(child: Text("کسر برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                                  Expanded(child: Text("اختلاف برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                                  Expanded(child: Text("مجموع",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
-                                                ],
-                                              )
-                                              ,)
-                                            ,
-                                            SizedBox(height: 4,),
-
-                                            Container(
-                                              decoration:
-                                              BoxDecoration(color: Colors.blue.shade100),
-                                              child: FutureBuilder(
-                                                future: fetchTables(),
-                                                builder: (BuildContext context,
-                                                    AsyncSnapshot<dynamic> snapshot) =>
-                                                snapshot.hasData
-                                                    ? _buildTableItem(context, snapshot.data)
-                                                    : CircularProgressIndicator(),
-                                              ),
-                                            )
-                                            ,
-                                          ],
-                                        ),
-                                      ),
                                     ),
-                                    onTap: (){setState(() {
 
-                                    });},)
-                                )
-                              ],))
-                            ],
+                                  ],
+                                )),
+                            Expanded(
+                                child: Row(crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    Expanded(child:
+                                    Padding(padding: EdgeInsets.all(4),child:
+                                    OutlinedButton(
+                                        onPressed: () async {
+                                          final value = await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => Table3Screen(headerColor: Colors.amber)));
+                                          setState(() {});
+                                        },
+                                        child: Text("جدول 3",style: TextStyle(fontSize: 32),))
+                                      ,)
+                                    ),
+                                    Expanded(child:Padding(padding: EdgeInsets.all(4),child:
+                                    OutlinedButton(
+                                        onPressed: () async {
+                                          final value = await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => Table4Screen(headerColor: Colors.amber)));
+                                          setState(() {});
+                                        },
+                                        child: Text("جدول 4",style: TextStyle(fontSize: 32),))
+                                      ,)),
+                                    Expanded(child:
+                                    Padding(padding: EdgeInsets.all(4),
+                                      child: OutlinedButton(
+                                          onPressed: () async {
+                                            final value = await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => Table5Screen(headerColor: Colors.amber)));
+                                            setState(() {});
+                                          },
+                                          child: Text("جدول 5",style: TextStyle(fontSize: 32),))
+                                      ,)
+
+                                    ),
+                                  ],
+                                )),
+                            InkWell(
+                              onTap: (){
+                                setState(() {
+
+                                });
+                              },
+                              child:Card(color: Colors.blue.shade100,
+                                child: Container(
+                                  padding: EdgeInsets.all(8),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        child:
+                                        Row(crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            Expanded(child: Text("ذوب روزانه",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                            Expanded(child: Text("کسر پرداخت",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                            Expanded(child: Text("کسر ذوب",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                            Expanded(child: Text("کسر برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                            Expanded(child: Text("اختلاف برش",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                            Expanded(child: Text("مجموع",style: TextStyle(fontWeight: FontWeight.w100),textAlign: TextAlign.center)),
+                                          ],
+                                        )
+                                        ,)
+                                      ,
+                                      SizedBox(height: 4,),
+                                      Container(
+                                        decoration:
+                                        BoxDecoration(color: Colors.blue.shade100),
+                                        child: FutureBuilder(
+                                          future: fetchTables(),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<dynamic> snapshot) =>
+                                          snapshot.hasData
+                                              ? _buildTableItem(context, snapshot.data)
+                                              : CircularProgressIndicator(),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),)
+                          ],
                         ),
                       )),
                   Expanded(
