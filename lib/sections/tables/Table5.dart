@@ -641,7 +641,7 @@ class _Table5ScreenState extends State<Table5Screen> {
         rows.add(
           PlutoRow(
             cells: {
-              'row': PlutoCell(value: element),
+              'row': PlutoCell(value: index),
               'client_name': PlutoCell(value: element.clientFullName),
               'description':PlutoCell(value: element.productType=="پلاک اسم"?"${element.productType} - ${jsonDecode(element.orderMeta!)["نام پلاک"]}":"${element.productType}"),
               'code':PlutoCell(value: element.code),
