@@ -40,7 +40,7 @@ class NewOrderFormState extends State<NewOrderForm> {
   String customerTypeDropDownValue = 'همکار';
   var customerTypeDropDownItems = ['همکار', 'مشتری' ];
   String statusDropDownValue = 'در انتظار بررسی';
-  var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'ارسال به طراح','ارسال به کارگاه','برگشت از طراح','برگشت از کارگاه' ,'لغو شده'];
+  var statusDropDownItems = ['در انتظار بررسی','تکمیل نهایی' , 'ارسال به طراح','ارسال به کارگاه','برگشت از طراح','برگشت از کارگاه' ,'برگشت طرح','لغو شده'];
   String productTypeDropDownValue = 'پلاک اسم';
   var productTypeDropDownItems = ["پلاک اسم","انگشتر","النگو","دستبند","گوشواره","دوره سنگ","سرویس طلا","نیم ست طلا","آویز طلا",
     "پا بند طلا","رو لباسی طلا","جواهرات","ساعت طلا","دستبند چرمی طلا","دستبند مهره ای فانتزی طلا","تک پوش طلا","گردنبند","حلقه ست",
@@ -196,6 +196,7 @@ class NewOrderFormState extends State<NewOrderForm> {
                 widget.order.status=="ارسال به کارگاه"?Colors.amberAccent.withOpacity(0.1):
                 widget.order.status=="برگشت از طراح"?Colors.lightBlue.withOpacity(0.3):
                 widget.order.status=="برگشت از کارگاه"?Colors.amber.withOpacity(0.3)  :
+                widget.order.status=="برگشت طرح"?Colors.pinkAccent.withOpacity(0.1)  :
                 Colors.lightGreenAccent.withOpacity(0.1),
                 ),
                 child: Column(

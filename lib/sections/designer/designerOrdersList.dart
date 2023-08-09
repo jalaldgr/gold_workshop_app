@@ -118,7 +118,8 @@ class _DesignerOrdersListState extends State<DesignerOrdersList> {
         order?.status=="ارسال به کارگاه"?Colors.amberAccent.shade100:
         order?.status=="برگشت از طراح"?Colors.lightBlue:
         order?.status=="برگشت از کارگاه"?Colors.amber  :
-        Colors.redAccent.shade100,
+        order?.status=="برگشت طرح"?Colors.pinkAccent.shade100  :
+        Colors.red.shade300,
           child: Container(padding: EdgeInsets.all(8),
             child:Row(children: [
               Expanded(child:

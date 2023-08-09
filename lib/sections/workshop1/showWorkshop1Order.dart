@@ -104,6 +104,8 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                     ? Colors.lightBlue.withOpacity(0.3)
                     : widget.order.status == "برگشت از کارگاه"
                     ? Colors.amber.withOpacity(0.3)
+                    : widget.order.status == "برگشت طرح"
+                    ? Colors.pink.withOpacity(0.1)
                     : Colors.redAccent.withOpacity(0.3),
               ),
               child:Center(
