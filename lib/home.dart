@@ -22,26 +22,20 @@ class HomeScreen extends StatefulWidget {
 
 class LoginScreen extends State<HomeScreen> {
   String? _appVersion="";
+  String?  _jwtToken="";
+  String? _user = "";
+  dynamic _role;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getVersion();
+    init();
     Timer(Duration(seconds: 3),
             ()=>    navigate());
   }
 
-  getVersion()async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final info = await PackageInfo.fromPlatform();
-    prefs.setString("version",info.version );
-    setState(() {
-    _appVersion = info.version;
-    });
 
-
-  }
 
 
   @override
@@ -68,71 +62,81 @@ class LoginScreen extends State<HomeScreen> {
     );
   }
 
-  navigate() async {
-    //disable save logins
-
-    await dotenv.load(fileName: "assets/env");
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final info = await PackageInfo.fromPlatform();
-    prefs.setString("version",info.version );
-    // var jwtToken = prefs.getString("jwt");
-    //
-    // dynamic role =jsonDecode(prefs.getString('user')!)['role']; // get driver user id
-    //
-    // if (jwtToken != null) {
-    //   dynamic str = jwtToken;
-    //   dynamic jwt = str.length > 1 ? str.toString().split(".") : "";
-    //   if (jwt.length != 3) {
-    //     Navigator.of(context).pushAndRemoveUntil(
-    //         MaterialPageRoute(
-    //             builder: (BuildContext context) =>
-    //                 LoginPage()),
-    //             (Route<dynamic> route) => false);
-    //   } else {
-    //     var payload = json.decode(
-    //         ascii.decode(base64.decode(base64.normalize(jwt[1]))));
-    //
-    //     if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000).isAfter(DateTime.now())) {
-    //
-    //               switch(role){
-    //                 case "Admin":
-    //                   Navigator.of(context).push(
-    //                       MaterialPageRoute(
-    //                           builder: (BuildContext context) =>
-    //                               AdminHomeScreen(str, payload)),
-    //                           );
-    //                   break;
-    //                 case "Designer":
-    //                   Navigator.of(context).pushAndRemoveUntil(
-    //                       MaterialPageRoute(
-    //                           builder: (BuildContext context) =>
-    //                               DesignerHomeScreen(str, payload)),
-    //                           (Route<dynamic> route) => false);
-    //                   break;
-    //                 case "Workshop1":
-    //                   Navigator.of(context).pushAndRemoveUntil(
-    //                       MaterialPageRoute(
-    //                           builder: (BuildContext context) =>
-    //                               Workshop1HomeScreen(str, payload)),
-    //                           (Route<dynamic> route) => false);
-    //                   break;
-    //                 case "Workshop2":
-    //                   Navigator.of(context).pushAndRemoveUntil(
-    //                       MaterialPageRoute(
-    //                           builder: (BuildContext context) =>
-    //                               Workshop1HomeScreen(str, payload)),
-    //                           (Route<dynamic> route) => false);
-    //                   break;
-    //
-    //               }
-    //     }
-    //   }
-    // } else {
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(
-              builder: (BuildContext context) =>
-                  LoginPage()),
-              (Route<dynamic> route) => false);
+  init()async{
+    try {
+      await dotenv.load(fileName: "assets/env");
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final info = await PackageInfo.fromPlatform();
+      prefs.setString("version", info.version);
+      setState(() {
+        _appVersion = info.version;
+      });
+      _jwtToken = prefs.getString("jwt");
+      _user = prefs.getString('user');
+      if(_user!.length>5)
+      _role = jsonDecode(prefs.getString('user')!)['role']; // get driver user id
+    } catch (e) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("${e}")));
     }
-  // }
+  }
+
+  navigate()  {
+      if (_jwtToken != null) {
+        dynamic str = _jwtToken;
+        dynamic jwt = str.length > 1 ? str.toString().split(".") : "";
+        if (jwt.length != 3) {
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      LoginPage()),
+                  (Route<dynamic> route) => false);
+        } else {
+
+          var payload = json.decode(
+              ascii.decode(base64.decode(base64.normalize(jwt[1]))));
+
+          if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
+              .isAfter(DateTime.now())) {
+            switch (_role) {
+              case "Admin":
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          AdminHomeScreen(str, payload)),
+                );
+                break;
+              case "Designer":
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            DesignerHomeScreen(str, payload)),
+                        (Route<dynamic> route) => false);
+                break;
+              case "Workshop1":
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            Workshop1HomeScreen(str, payload)),
+                        (Route<dynamic> route) => false);
+                break;
+              case "Workshop2":
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            Workshop1HomeScreen(str, payload)),
+                        (Route<dynamic> route) => false);
+                break;
+            }
+          }
+        }
+      } else {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    LoginPage()),
+                (Route<dynamic> route) => false);
+      }
+
+  }
 }
