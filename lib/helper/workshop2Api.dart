@@ -106,4 +106,16 @@ class Workshop2Api {
 
 
   }
+
+  static Future<String> returnOrderWorkshop2(orderData order) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+
+    final response = await http.post(
+        Uri.parse('${dotenv.env['API_URL']}/workshop1/complete-order/${order.id}/برگشت طرح'),
+        headers: {'Authorization': 'Bearer $token'},
+        body: order.toJson()
+    );
+    return response.body;
+  }
 }

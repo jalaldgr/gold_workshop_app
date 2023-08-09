@@ -238,24 +238,32 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
                           Row(
                             children: [
                               Expanded(child:Padding(padding: EdgeInsets.all(8)
-                                  ,child: TextFormField(
+                                  ,child: Column(crossAxisAlignment: CrossAxisAlignment.stretch
+                                  ,children: [
+                                    TextFormField(
                                   onTap: openImagePicker,
                                   controller: imageEditTextController,
                                   decoration: InputDecoration(
                                       hintText:"${widget.order.workshop2File}"==""?"انتخاب فایل":"تغییر فایل",
                                       labelText: "${widget.order.workshop2File}"==""?"انتخاب فایل":"تغییر فایل"),
-                                ),),),
+                                ),
+                                 SizedBox(height: 16,),
+                                    OutlinedButton(onPressed:_enableFileButton?  () async {
+
+                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("فایل در حال ارسال است")));
+                                      _enableFileButton=false;
+                                      var res = await Workshop2Api.SendOrderFileWorkshop2(widget.order);
+                                      setState(() {
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                      });
+                                    }:null, child: Padding(padding: EdgeInsets.all(16),child: Text("ارسال فایل") )
+                                    ),
+                                  ],),),),
                               Expanded(child:
                               Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
-                                OutlinedButton(onPressed:_enableFileButton?  () async {
-
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("فایل در حال ارسال است")));
-                                  _enableFileButton=false;
-                                  var res = await Workshop2Api.SendOrderFileWorkshop2(widget.order);
-                                  setState(() {
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                                  });
-                                }:null, child: Padding(padding: EdgeInsets.all(16),child: Text("ارسال فایل") )
+                                OutlinedButton(onPressed:(){
+                                  returnOrderAlertDialog(context);
+                                }, child: Padding(padding: EdgeInsets.all(16),child: Text("برگشت طرح") )
                                 ),
                                 SizedBox(height: 16,),
                                 ElevatedButton(onPressed:"${widget.order.workshop2File}".contains("workshop2File")? () async {
@@ -330,5 +338,49 @@ class ShowWorkshop2OrderScreenState extends State<ShowWorkshop2OrderScreen> {
       },
     );
   }
+
+  returnOrderAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("انصراف",style: TextStyle(color: Colors.red),),
+      onPressed:  () {
+        Navigator.of(context).pop();},
+    );
+    Widget continueButton = TextButton(
+      child: Text("تایید",style: TextStyle(color: Colors.blue,fontSize: 20)),
+      onPressed:  () async {
+        var res = await Workshop2Api.returnOrderWorkshop2(widget.order);
+        setState(() {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+          Navigator.pop(context);
+          Navigator.pop(context);
+
+        });
+
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("برگشت طرح"),
+      content: Text("آیا از برگشت طرح اطمینان دارید؟"),
+      actions: [
+        Column(children: [
+          Row(children: [
+            Expanded(child: cancelButton ),
+            Expanded(child: continueButton )
+          ],)
+        ],)
+
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 
 }
