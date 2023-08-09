@@ -236,31 +236,41 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
                           Row(
                             children: [
                               Expanded(child:Padding(padding: EdgeInsets.all(8),
-                              child: TextFormField(
-                                onTap: openImagePicker,
-                                controller: imageEditTextController,
-                                decoration: InputDecoration(
-                                    hintText:"${widget.order.workshop1File}"==""?"انتخاب فایل":"تغییر فایل",
-                                    labelText: "${widget.order.workshop1File}"==""?"انتخاب فایل":"تغییر فایل"),
-                              ),),),
-                              Expanded(child:
-                              Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
+                              child: Column(crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                TextFormField(
+                                  onTap: openImagePicker,
+                                  controller: imageEditTextController,
+                                  decoration: InputDecoration(
+                                      hintText:"${widget.order.workshop1File}"==""?"انتخاب فایل":"تغییر فایل",
+                                      labelText: "${widget.order.workshop1File}"==""?"انتخاب فایل":"تغییر فایل"),
+                                ),
+                                SizedBox(height: 16,),
                                 OutlinedButton(onPressed:_enableFileButton? () async {
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("فایل در حال ارسال است")));
                                   _enableFileButton=false;
                                   var res = await Workshop1Api.SendOrderFileWorkshop1(widget.order);
                                   setState(() {
-                                  Navigator.pop(context);
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
-                                                                    });
+                                    Navigator.pop(context);
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                  });
                                 }:null, child: Padding(padding: EdgeInsets.all(16),child:  Text("ارسال فایل"))
                                 ),
-                                SizedBox(height: 16,),
+                              ],),),),
+                              Expanded(child:
+                              Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
+
                                 ElevatedButton(onPressed:"${widget.order.workshop1File}".contains("workshop1File") ?() async {
 
                                   completeOrderAlertDialog(context);
 
                                 }:null, child: Padding(padding: EdgeInsets.all(16),child:  Text("تکمیل سفارش") )
+                                ),
+                                SizedBox(height: 16,),
+                                OutlinedButton(
+                                    onPressed:() {
+                                      returnOrderAlertDialog(context);
+                                }, child: Padding(padding: EdgeInsets.all(16),child:  Text("برگشت طرح") )
                                 ),
                               ],)
                               ),
@@ -311,6 +321,49 @@ class ShowWorkshop1OrderScreenState extends State<ShowWorkshop1OrderScreen> {
     AlertDialog alert = AlertDialog(
       title: Text("تکمیل سفارش"),
       content: Text("آیا از تکمیل سفارش اطمینان دارید؟"),
+      actions: [
+        Column(children: [
+          Row(children: [
+            Expanded(child: cancelButton ),
+            Expanded(child: continueButton )
+          ],)
+        ],)
+
+      ],
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  returnOrderAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text("انصراف",style: TextStyle(color: Colors.red),),
+      onPressed:  () {
+        Navigator.of(context).pop();},
+    );
+    Widget continueButton = TextButton(
+      child: Text("تایید",style: TextStyle(color: Colors.blue,fontSize: 20)),
+      onPressed:  () async {
+        var res = await Workshop1Api.returnOrderWorkshop1(widget.order);
+        setState(() {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+          Navigator.pop(context);
+          Navigator.pop(context);
+
+        });
+
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("برگشت طرح"),
+      content: Text("آیا از برگشت طرح اطمینان دارید؟"),
       actions: [
         Column(children: [
           Row(children: [
