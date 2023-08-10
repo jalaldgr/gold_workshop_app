@@ -103,58 +103,85 @@ class _Workshop2sListState extends State<Workshop2sList> {
         isScrollControlled: true,
         builder: (_) => Container(
           padding: EdgeInsets.only(
-            top: 15,
-            left: 15,
-            right: 15,
+            top: 16,
+            left: 16,
+            right: 16,
             // this will prevent the soft keyboard from covering the text fields
-            bottom: MediaQuery.of(context).viewInsets.bottom + 120,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 128,
           ),
-          child: Column(
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              TextField(
-                decoration: const InputDecoration(hintText: 'نام و نام خانوادگی'),
-                controller: fullNameController,
-              ),
+              Expanded(
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        hintText: 'نام و نام خانوادگی',
+                        labelText: "نام و نام خانوادگی"),
+                    controller: fullNameController,
+                  )),
               const SizedBox(
                 height: 10,
               ),
-              TextField(
-                decoration: const InputDecoration(hintText: 'نام کاربری'),
-                controller: userNameController,
-              ),
+              Expanded(
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        hintText: 'نام کاربری', labelText: "نام کاربری"),
+                    controller: userNameController,
+                  )),
               const SizedBox(
                 height: 10,
               ),
-              TextField(
-                decoration: const InputDecoration(hintText: 'پسورد'),
-                controller: passwordController,
-                obscureText: true,
-              ),
+              Expanded(
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        hintText: 'پسورد', labelText: "پسورد"),
+                    controller: passwordController,
+                    obscureText: true,
+                  )),
               const SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  // Save new journal
+              Expanded(
+                  child: SizedBox(
+                    height: 64,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        // Save new journal
 
-                  if(user.id != ""){
-                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Workshop2",user.id,passwordController.text,"");
-                    String response = await AdminApi.updateWorkshop2(userUpdated);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
-                  }
-                  if(user.id == ""){
-                    userData userUpdated =new  userData(userNameController.text, fullNameController.text,"Workshop2","",passwordController.text,"");
-                    String response = await AdminApi.addWorkshop2(userUpdated);
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${response}")));
-                  }
-                  // Close the bottom sheet
-                  Navigator.of(context).pop();
-                  setState(() {});
-                },
-                child: Text(user.id == ""  ? 'ایجاد کاربر' : 'بروزرسانی'),
-              )
+                        if (user.id != "") {
+                          userData userUpdated = new userData(
+                              userNameController.text,
+                              fullNameController.text,
+                              "Workshop2",
+                              user.id,
+                              passwordController.text,
+                              "");
+                          String response =
+                          await AdminApi.updateWorkshop2(userUpdated);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("${response}")));
+                        }
+                        if (user.id == "") {
+                          userData userUpdated = new userData(
+                              userNameController.text,
+                              fullNameController.text,
+                              "Workshop2",
+                              "",
+                              passwordController.text,
+                              "");
+                          String response =
+                          await AdminApi.addWorkshop2(userUpdated);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("${response}")));
+                        }
+                        // Close the bottom sheet
+                        Navigator.of(context).pop();
+                        setState(() {});
+                      },
+                      child: Text(user.id == "" ? 'ایجاد کاربر' : 'بروزرسانی'),
+                    ),
+                  ))
             ],
           ),
         ));
@@ -164,33 +191,59 @@ class _Workshop2sListState extends State<Workshop2sList> {
 
   Widget _buildPaymentItem(BuildContext context, String? fullName,
       String? userName,String? id,int? index) {
-    return Padding(padding: EdgeInsets.all(4),
-      child: ListTile(
-            title: Text("${fullName}"),
-            subtitle: Text("${userName}"),
-            trailing: SizedBox(width: 100,
-              child:Row(children: [
-                IconButton(
-                  tooltip: "ویراش کاربر",
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    userData user =new  userData(userName, fullName,"Workshop2",id,"","");
-                    _showForm(user);
-                  },
-                ),
-                IconButton(
-                  tooltip: "حذف کاربر",
-                  icon: const Icon(Icons.delete),
-                  onPressed: () async {
+    return InkWell(
+        onTap: (){
+          userData user =new  userData(userName, fullName,"Workshop2",id,"","");
+          _showForm(user);
+        },
+        child: Card(child:
+        Padding(padding: EdgeInsets.all(16),
+          child: Row(children: [
+            Flexible(flex: 11,child: Row(children: [
+              Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "نام و نام خانوادگی",
+                        style: TextStyle(fontSize: 11),
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text("${fullName}")
+                    ],
+                  )),
+              Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "نام کاربری",
+                        style: TextStyle(fontSize: 11),
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      Text("${userName}")
+                    ],
+                  )),
 
-                    if(id != null){
-                      deleteDesignerAlertDialog(context,id);
 
-                    }
-                  },
-                ),
-              ],),)
-      ),);
+            ],)),
+            Flexible(flex: 1,child: IconButton(
+              tooltip: "حذف کاربر",
+              icon: const Icon(Icons.delete),
+              onPressed: () async {
+
+                if(id != null){
+                  deleteDesignerAlertDialog(context,id);
+
+                }
+              },
+            ))
+          ],),
+        ),));
   }
 
   deleteDesignerAlertDialog(BuildContext context, String userId) {

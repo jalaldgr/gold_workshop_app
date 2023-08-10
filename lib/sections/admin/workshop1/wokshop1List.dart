@@ -107,7 +107,7 @@ class _Workshop1sListState extends State<Workshop1sList> {
                 left: 16,
                 right: 16,
                 // this will prevent the soft keyboard from covering the text fields
-                bottom: MediaQuery.of(context).viewInsets.bottom + 512,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 128,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
