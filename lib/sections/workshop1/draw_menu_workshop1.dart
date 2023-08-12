@@ -102,7 +102,7 @@ class _SideMenuWorkshop1State extends State<SideMenuWorkshop1> {
                   alignment: Alignment.bottomCenter,
                   child: Padding(
                     padding: EdgeInsets.all(8),
-                    child: Text("ورژن اپلیکیشن  ${_appVersion}"),
+                    child: Text(" مینیاتور ورژن  ${_appVersion}"),
                   ))
             ],
           )

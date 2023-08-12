@@ -153,7 +153,7 @@ class _SideMenuAdminState extends State<SideMenuAdmin> {
                             alignment: Alignment.bottomCenter,
                             child: Padding(
                               padding: EdgeInsets.all(8),
-                              child: Text("ورژن اپلیکیشن  ${_appVersion}"),
+                              child: Text(" مینیاتور ورژن  ${_appVersion}"),
                             ))
                       ],
                     )
