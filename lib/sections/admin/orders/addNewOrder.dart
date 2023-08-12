@@ -169,6 +169,7 @@ class NewOrderFormState extends State<NewOrderForm> {
 
   @override
   Widget build(BuildContext context) {
+    widget.order.orderMeta = jsonEncode({"حالت پلاک": "فارسی", "نوع پلاک": "تک حلقه", "نوع حک": "براق","نام پلاک":""});
 
     // Build a Form widget using the _formKey created above.
     Size size = MediaQuery.of(context).size;
