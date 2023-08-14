@@ -217,181 +217,181 @@ class AdminApi {
     String stringResponse="";
 
     try{
-    final WPResponse = await http.get(
-      Uri.parse('https://minitala.com/wp-json/wp/v2/sefareshat'),
-    );
-    List WPJsonResponse = json.decode(WPResponse.body);
+    // final WPResponse = await http.get(
+    //   Uri.parse('https://minitala.com/wp-json/wp/v2/sefareshat'),
+    // );
+    // List WPJsonResponse = json.decode(WPResponse.body);
     final notCompletedResponse = await http.get(
       Uri.parse('${dotenv.env['API_URL']}/admin/get-not-completed-orders'),
       headers: {'Authorization': 'Bearer $token'},
     );
     List notCompletedJsonResponse = json.decode(notCompletedResponse.body);
 
-    WPJsonResponse.forEach((WPElement) async {
-      var title = json.encode(WPElement["title"]);
-      bool orderExist = false;
-      notCompletedJsonResponse.forEach((notElement) {
-        if(WPElement["id"].toString()==notElement["woocommerceOrderId"])orderExist = true;
-        // print("notElement is ${notElement}");
-
-      });
-      ////////////add wc order to server orders/////////////////
-      if(!orderExist) {
-        var uri = Uri.parse('${dotenv.env['API_URL']}/admin/create-order');
-        var request2 = http.MultipartRequest('POST', uri)
-          ..headers.addAll({'Authorization': 'Bearer $token'});
-
-
-        if (WPElement["meta"]["sefareshDahandeName"][0] != null)
-          request2.fields["clientFullName"] =
-              WPElement["meta"]["sefareshDahandeName"][0].toString();
-        if (WPElement["id"] != null)
-          request2.fields["woocommerceOrderId"] = WPElement["id"].toString();
-        if (WPElement["date"] != null) request2.fields["orderDate"] =
-            Jalali.fromDateTime(DateTime.parse(WPElement["date"]))
-                .formatFullDate()
-                .toString();
-        if (WPElement["meta"]["tozihat"] != null)
-          request2.fields["description"] =
-              WPElement["meta"]["tozihat"][0].toString();
-        if (WPElement["meta"]["codemahsool"] != null) request2.fields["code"] =
-            WPElement["meta"]["codemahsool"][0].toString();
-        if (WPElement["meta"]["vaznemahsool"] != null)
-          request2.fields["weight"] =
-              WPElement["meta"]["vaznemahsool"][0].toString();
-        if (WPElement["meta"]["noemahsool"] != null)
-          request2.fields["productType"] =
-              WPElement["meta"]["noemahsool"][0].toString();
-        if (WPElement["meta"]["moshtarihamkar"] != null)
-          request2.fields["clientType"] =
-              WPElement["meta"]["moshtarihamkar"][0].toString();
-        if (WPElement["meta"]["tarikhtahvil"] != null)
-          request2.fields["deliveryDate"] =
-          WPElement["meta"]["tarikhtahvil"][0];
-        if (WPElement["meta"]["shomaretamas"] != null)
-          request2.fields["clientMobile"] =
-              WPElement["meta"]["shomaretamas"][0].toString();
-        if (WPElement["meta"]["noetahvil"] != null)
-          request2.fields["instantDelivery"] = "true";
-        if (WPElement["meta"]["tahvilmoshtari"] != null)
-          request2.fields["customerDelivery"] = "true";
-        if (WPElement["meta"]["kaghazi"] != null)
-          request2.fields["paperDelivery"] = "true";
-        if (WPElement["meta"]["beyane"] != null)
-          request2.fields["feeOrder"] = "true";
-        request2.fields["orderType"] = "سایت";
-        request2.fields["status"] = "در انتظار بررسی";
-        if (WPElement["meta"]["vaznemahsool"] != null)
-          request2.fields["weight"] =
-              WPElement["meta"]["vaznemahsool"][0].toString();
-        if (WPElement["meta"]["codemahsool"] != null) request2.fields["code"] =
-            WPElement["meta"]["codemahsool"][0].toString();
-
-        Map<String, String> _metaKeyValue = {}; // order meta key value
-        //collect order meta for every type of product
-        if (WPElement["meta"]["namepelak"] != null) _metaKeyValue["نام پلاک"] =
-            WPElement["meta"]["namepelak"][0].toString();
-        if (WPElement["meta"]["halatpelak"] != null)
-          _metaKeyValue["حالت پلاک"] =
-              WPElement["meta"]["halatpelak"][0].toString();
-        if (WPElement["meta"]["abadmahsool"] != null)
-          _metaKeyValue["ابعاد محصول"] =
-              WPElement["meta"]["abadmahsool"][0].toString();
-        if (WPElement["meta"]["noepelak"] != null) _metaKeyValue["نوع پلاک"] =
-            WPElement["meta"]["noepelak"][0].toString();
-        if (WPElement["meta"]["noehak"] != null)
-          _metaKeyValue["نوع حک"] = WPElement["meta"]["noehak"][0].toString();
-        if (WPElement["meta"]["bakhshbandi"] != null)
-          _metaKeyValue["بخش بندی"] =
-              WPElement["meta"]["bakhshbandi"][0].toString();
-
-        if (WPElement["meta"]["noesangangoshtar"] != null)
-          _metaKeyValue["نوع سنگ"] =
-              WPElement["meta"]["noesangangoshtar"][0].toString();
-        if (WPElement["meta"]["vaznemahsoolangoshtar"] != null)
-          request2.fields["weight"] =
-              WPElement["meta"]["vaznemahsoolangoshtar"][0].toString();
-        if (WPElement["meta"]["sizedasteangoshtar"] != null)
-          _metaKeyValue["سایز دسته"] =
-              WPElement["meta"]["sizedasteangoshtar"][0].toString();
-        if (WPElement["meta"]["noedasteangoshtar"] != null)
-          _metaKeyValue["نوع دسته"] =
-              WPElement["meta"]["noedasteangoshtar"][0].toString();
-
-        if (WPElement["meta"]["bakhshbandinamdastband"] != null)
-          _metaKeyValue["بخش بندی"] =
-              WPElement["meta"]["bakhshbandinamdastband"][0].toString();
-        if (WPElement["meta"]["vaznemahsooldastband"] != null)
-          request2.fields["weight"] =
-              WPElement["meta"]["vaznemahsooldastband"][0].toString();
-        if (WPElement["meta"]["abadmahsooldastband"] != null)
-          _metaKeyValue["ابعاد محصول"] =
-              WPElement["meta"]["abadmahsooldastband"][0].toString();
-        if (WPElement["meta"]["noedastband"] != null)
-          _metaKeyValue["نوع دستبند"] =
-              WPElement["meta"]["noedastband"][0].toString();
-        if (WPElement["meta"]["noecharmdastband"] != null)
-          _metaKeyValue["نوع چرم"] =
-              WPElement["meta"]["noecharmdastband"][0].toString();
-
-        if (WPElement["meta"]["codemahsoolgoshvare"] != null)
-          request2.fields["code"] =
-              WPElement["meta"]["codemahsoolgoshvare"][0].toString();
-        if (WPElement["meta"]["vaznemahsoolgoshvare"] != null)
-          request2.fields["weight"] =
-              WPElement["meta"]["vaznemahsoolgoshvare"][0].toString();
-        if (WPElement["meta"]["abadmahsoolgoshvare"] != null)
-          _metaKeyValue["ابعاد محصول"] =
-              WPElement["meta"]["abadmahsoolgoshvare"][0].toString();
-        if (WPElement["meta"]["noegoshvare"] != null)
-          _metaKeyValue["نوع گوشواره"] =
-              WPElement["meta"]["noegoshvare"][0].toString();
-        if (WPElement["meta"]["noehakgoshvare"] != null)
-          _metaKeyValue["نوع حک"] =
-              WPElement["meta"]["noehakgoshvare"][0].toString();
-
-        if (WPElement["meta"]["codemahsooldoresang"] != null)
-          request2.fields["code"] =
-              WPElement["meta"]["codemahsooldoresang"][0].toString();
-        if (WPElement["meta"]["vaznemahsooldoresang"] != null)
-          request2.fields["weight"] =
-              WPElement["meta"]["vaznemahsooldoresang"][0].toString();
-        if (WPElement["meta"]["abadmahsooldoresang"] != null)
-          _metaKeyValue["ابعاد محصول"] =
-              WPElement["meta"]["abadmahsooldoresang"][0].toString();
-        if (WPElement["meta"]["noedoresang"] != null) _metaKeyValue["نوع سنگ"] =
-            WPElement["meta"]["noedoresang"][0].toString();
-        if (WPElement["meta"]["noehakgoshvare"] != null)
-          _metaKeyValue["نوع حک"] =
-              WPElement["meta"]["noehakgoshvare"][0].toString();
-
-        request2.fields["orderMeta"] =
-            jsonEncode(_metaKeyValue); // save all product metas
-
-        if (WPElement["_links"]["author"] != null) {
-          var url = WPElement["_links"]["author"][0]["href"];
-          final response = await http.get(Uri.parse(url));
-          var name = json.decode(response.body);
-          request2.fields["orderRecipient"] = name["name"];
-        }
-
-        if (WPElement["_links"]["wp:featuredmedia"] != null) {
-          var url = WPElement["_links"]["wp:featuredmedia"][0]["href"];
-          final response = await http.get(Uri.parse(url));
-          var image = json.decode(response.body)["guid"]["rendered"];
-          http.MultipartFile file = await http.MultipartFile.fromString(
-              'image', image);
-          request2.files.add(file);
-        }
-
-
-
-        final response = await request2.send();
-        await response.stream.transform(utf8.decoder).listen((value) {
-          stringResponse = value;
-        });
-      }
-    });
+    // WPJsonResponse.forEach((WPElement) async {
+    //   var title = json.encode(WPElement["title"]);
+    //   bool orderExist = false;
+    //   notCompletedJsonResponse.forEach((notElement) {
+    //     if(WPElement["id"].toString()==notElement["woocommerceOrderId"])orderExist = true;
+    //     // print("notElement is ${notElement}");
+    //
+    //   });
+    //   ////////////add wc order to server orders/////////////////
+    //   if(!orderExist) {
+    //     var uri = Uri.parse('${dotenv.env['API_URL']}/admin/create-order');
+    //     var request2 = http.MultipartRequest('POST', uri)
+    //       ..headers.addAll({'Authorization': 'Bearer $token'});
+    //
+    //
+    //     if (WPElement["meta"]["sefareshDahandeName"][0] != null)
+    //       request2.fields["clientFullName"] =
+    //           WPElement["meta"]["sefareshDahandeName"][0].toString();
+    //     if (WPElement["id"] != null)
+    //       request2.fields["woocommerceOrderId"] = WPElement["id"].toString();
+    //     if (WPElement["date"] != null) request2.fields["orderDate"] =
+    //         Jalali.fromDateTime(DateTime.parse(WPElement["date"]))
+    //             .formatFullDate()
+    //             .toString();
+    //     if (WPElement["meta"]["tozihat"] != null)
+    //       request2.fields["description"] =
+    //           WPElement["meta"]["tozihat"][0].toString();
+    //     if (WPElement["meta"]["codemahsool"] != null) request2.fields["code"] =
+    //         WPElement["meta"]["codemahsool"][0].toString();
+    //     if (WPElement["meta"]["vaznemahsool"] != null)
+    //       request2.fields["weight"] =
+    //           WPElement["meta"]["vaznemahsool"][0].toString();
+    //     if (WPElement["meta"]["noemahsool"] != null)
+    //       request2.fields["productType"] =
+    //           WPElement["meta"]["noemahsool"][0].toString();
+    //     if (WPElement["meta"]["moshtarihamkar"] != null)
+    //       request2.fields["clientType"] =
+    //           WPElement["meta"]["moshtarihamkar"][0].toString();
+    //     if (WPElement["meta"]["tarikhtahvil"] != null)
+    //       request2.fields["deliveryDate"] =
+    //       WPElement["meta"]["tarikhtahvil"][0];
+    //     if (WPElement["meta"]["shomaretamas"] != null)
+    //       request2.fields["clientMobile"] =
+    //           WPElement["meta"]["shomaretamas"][0].toString();
+    //     if (WPElement["meta"]["noetahvil"] != null)
+    //       request2.fields["instantDelivery"] = "true";
+    //     if (WPElement["meta"]["tahvilmoshtari"] != null)
+    //       request2.fields["customerDelivery"] = "true";
+    //     if (WPElement["meta"]["kaghazi"] != null)
+    //       request2.fields["paperDelivery"] = "true";
+    //     if (WPElement["meta"]["beyane"] != null)
+    //       request2.fields["feeOrder"] = "true";
+    //     request2.fields["orderType"] = "سایت";
+    //     request2.fields["status"] = "در انتظار بررسی";
+    //     if (WPElement["meta"]["vaznemahsool"] != null)
+    //       request2.fields["weight"] =
+    //           WPElement["meta"]["vaznemahsool"][0].toString();
+    //     if (WPElement["meta"]["codemahsool"] != null) request2.fields["code"] =
+    //         WPElement["meta"]["codemahsool"][0].toString();
+    //
+    //     Map<String, String> _metaKeyValue = {}; // order meta key value
+    //     //collect order meta for every type of product
+    //     if (WPElement["meta"]["namepelak"] != null) _metaKeyValue["نام پلاک"] =
+    //         WPElement["meta"]["namepelak"][0].toString();
+    //     if (WPElement["meta"]["halatpelak"] != null)
+    //       _metaKeyValue["حالت پلاک"] =
+    //           WPElement["meta"]["halatpelak"][0].toString();
+    //     if (WPElement["meta"]["abadmahsool"] != null)
+    //       _metaKeyValue["ابعاد محصول"] =
+    //           WPElement["meta"]["abadmahsool"][0].toString();
+    //     if (WPElement["meta"]["noepelak"] != null) _metaKeyValue["نوع پلاک"] =
+    //         WPElement["meta"]["noepelak"][0].toString();
+    //     if (WPElement["meta"]["noehak"] != null)
+    //       _metaKeyValue["نوع حک"] = WPElement["meta"]["noehak"][0].toString();
+    //     if (WPElement["meta"]["bakhshbandi"] != null)
+    //       _metaKeyValue["بخش بندی"] =
+    //           WPElement["meta"]["bakhshbandi"][0].toString();
+    //
+    //     if (WPElement["meta"]["noesangangoshtar"] != null)
+    //       _metaKeyValue["نوع سنگ"] =
+    //           WPElement["meta"]["noesangangoshtar"][0].toString();
+    //     if (WPElement["meta"]["vaznemahsoolangoshtar"] != null)
+    //       request2.fields["weight"] =
+    //           WPElement["meta"]["vaznemahsoolangoshtar"][0].toString();
+    //     if (WPElement["meta"]["sizedasteangoshtar"] != null)
+    //       _metaKeyValue["سایز دسته"] =
+    //           WPElement["meta"]["sizedasteangoshtar"][0].toString();
+    //     if (WPElement["meta"]["noedasteangoshtar"] != null)
+    //       _metaKeyValue["نوع دسته"] =
+    //           WPElement["meta"]["noedasteangoshtar"][0].toString();
+    //
+    //     if (WPElement["meta"]["bakhshbandinamdastband"] != null)
+    //       _metaKeyValue["بخش بندی"] =
+    //           WPElement["meta"]["bakhshbandinamdastband"][0].toString();
+    //     if (WPElement["meta"]["vaznemahsooldastband"] != null)
+    //       request2.fields["weight"] =
+    //           WPElement["meta"]["vaznemahsooldastband"][0].toString();
+    //     if (WPElement["meta"]["abadmahsooldastband"] != null)
+    //       _metaKeyValue["ابعاد محصول"] =
+    //           WPElement["meta"]["abadmahsooldastband"][0].toString();
+    //     if (WPElement["meta"]["noedastband"] != null)
+    //       _metaKeyValue["نوع دستبند"] =
+    //           WPElement["meta"]["noedastband"][0].toString();
+    //     if (WPElement["meta"]["noecharmdastband"] != null)
+    //       _metaKeyValue["نوع چرم"] =
+    //           WPElement["meta"]["noecharmdastband"][0].toString();
+    //
+    //     if (WPElement["meta"]["codemahsoolgoshvare"] != null)
+    //       request2.fields["code"] =
+    //           WPElement["meta"]["codemahsoolgoshvare"][0].toString();
+    //     if (WPElement["meta"]["vaznemahsoolgoshvare"] != null)
+    //       request2.fields["weight"] =
+    //           WPElement["meta"]["vaznemahsoolgoshvare"][0].toString();
+    //     if (WPElement["meta"]["abadmahsoolgoshvare"] != null)
+    //       _metaKeyValue["ابعاد محصول"] =
+    //           WPElement["meta"]["abadmahsoolgoshvare"][0].toString();
+    //     if (WPElement["meta"]["noegoshvare"] != null)
+    //       _metaKeyValue["نوع گوشواره"] =
+    //           WPElement["meta"]["noegoshvare"][0].toString();
+    //     if (WPElement["meta"]["noehakgoshvare"] != null)
+    //       _metaKeyValue["نوع حک"] =
+    //           WPElement["meta"]["noehakgoshvare"][0].toString();
+    //
+    //     if (WPElement["meta"]["codemahsooldoresang"] != null)
+    //       request2.fields["code"] =
+    //           WPElement["meta"]["codemahsooldoresang"][0].toString();
+    //     if (WPElement["meta"]["vaznemahsooldoresang"] != null)
+    //       request2.fields["weight"] =
+    //           WPElement["meta"]["vaznemahsooldoresang"][0].toString();
+    //     if (WPElement["meta"]["abadmahsooldoresang"] != null)
+    //       _metaKeyValue["ابعاد محصول"] =
+    //           WPElement["meta"]["abadmahsooldoresang"][0].toString();
+    //     if (WPElement["meta"]["noedoresang"] != null) _metaKeyValue["نوع سنگ"] =
+    //         WPElement["meta"]["noedoresang"][0].toString();
+    //     if (WPElement["meta"]["noehakgoshvare"] != null)
+    //       _metaKeyValue["نوع حک"] =
+    //           WPElement["meta"]["noehakgoshvare"][0].toString();
+    //
+    //     request2.fields["orderMeta"] =
+    //         jsonEncode(_metaKeyValue); // save all product metas
+    //
+    //     if (WPElement["_links"]["author"] != null) {
+    //       var url = WPElement["_links"]["author"][0]["href"];
+    //       final response = await http.get(Uri.parse(url));
+    //       var name = json.decode(response.body);
+    //       request2.fields["orderRecipient"] = name["name"];
+    //     }
+    //
+    //     if (WPElement["_links"]["wp:featuredmedia"] != null) {
+    //       var url = WPElement["_links"]["wp:featuredmedia"][0]["href"];
+    //       final response = await http.get(Uri.parse(url));
+    //       var image = json.decode(response.body)["guid"]["rendered"];
+    //       http.MultipartFile file = await http.MultipartFile.fromString(
+    //           'image', image);
+    //       request2.files.add(file);
+    //     }
+    //
+    //
+    //
+    //     final response = await request2.send();
+    //     await response.stream.transform(utf8.decoder).listen((value) {
+    //       stringResponse = value;
+    //     });
+    //   }
+    // });
     }catch(e){print(e);}
 
 
