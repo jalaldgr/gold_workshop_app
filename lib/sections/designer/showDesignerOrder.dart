@@ -29,6 +29,8 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
   List<DataRow> tableItem=[];
 
   TextEditingController imageEditTextController=TextEditingController();
+  TextEditingController deficiencyTextController=TextEditingController();
+
   bool _enableFileButton=false;
 
   @override
@@ -43,6 +45,7 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
     orderMetaList.forEach((key, value) {
       tableItem.add(DataRow(cells: [DataCell(Text("${key}")),DataCell(Text("${value}"))]));
     });
+    deficiencyTextController.text=widget.order.deficiency!;
 
   }
   onChangeDesignerDropDown(value){
@@ -173,7 +176,17 @@ class ShowDesignerOrderScreenState extends State<ShowDesignerOrderScreen> {
                                         Expanded(child: Column(children: [Text("نوع محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.productType}")],)),
                                         Expanded(child: Column(children: [Text("کد محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.code}")],)),
                                         Expanded(child: Column(children: [Text("وزن محصول",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.weight}")],)),
-                                        Expanded(child: Column(children: [Text("کسر",style: TextStyle(fontSize: 14,color: Colors.grey),),Text("${widget.order.deficiency}")],)),
+                                        Expanded(child: Column(children: [Text("کسر",style: TextStyle(fontSize: 14,color: Colors.grey),),TextFormField(
+                                          controller: deficiencyTextController
+                                          ,onFieldSubmitted: (value) async {
+                                          widget.order.deficiency = value;
+                                          var res = await DesignerApi.updateOrderDeficiency(widget.order)
+                                          ;
+                                          setState(() {
+                                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${res}")));
+                                          });
+                                          },)
+                                        ],)),
 
                                       ],)
                                   ],)

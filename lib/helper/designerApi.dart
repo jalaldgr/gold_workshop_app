@@ -104,5 +104,18 @@ class DesignerApi {
 
   }
 
+
+  static Future<String> updateOrderDeficiency(orderData order) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic token = prefs.getString("jwt");
+
+    final response = await http.post(
+        Uri.parse('${dotenv.env['API_URL']}/designer/update-order-cut-deficiency/${order.id}/${order.deficiency}'),
+        headers: {'Authorization': 'Bearer $token'},
+        body: order.toJson()
+    );
+    return response.body;
+  }
+
 }
 
