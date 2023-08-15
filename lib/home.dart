@@ -92,42 +92,54 @@ class LoginScreen extends State<HomeScreen> {
                       LoginPage()),
                   (Route<dynamic> route) => false);
         } else {
-
-          var payload = json.decode(
-              ascii.decode(base64.decode(base64.normalize(jwt[1]))));
-
-          if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
-              .isAfter(DateTime.now())) {
-            switch (_role) {
-              case "Admin":
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          AdminHomeScreen(str, payload)),
-                );
-                break;
-              case "Designer":
-                Navigator.of(context).pushAndRemoveUntil(
+          if(  jwt[1].length % 4 > 0){//check Invalid base64 encoding length to prevent format exception error
+          try{
+            var payload = json.decode(
+                ascii.decode(base64.decode(base64.normalize(jwt[1]))));
+            if (DateTime.fromMillisecondsSinceEpoch(payload["exp"] * 1000)
+                .isAfter(DateTime.now())) {
+              switch (_role) {
+                case "Admin":
+                  Navigator.of(context).push(
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
-                            DesignerHomeScreen(str, payload)),
-                        (Route<dynamic> route) => false);
-                break;
-              case "Workshop1":
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            Workshop1HomeScreen(str, payload)),
-                        (Route<dynamic> route) => false);
-                break;
-              case "Workshop2":
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            Workshop1HomeScreen(str, payload)),
-                        (Route<dynamic> route) => false);
-                break;
+                            AdminHomeScreen(str, payload)),
+                  );
+                  break;
+                case "Designer":
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              DesignerHomeScreen(str, payload)),
+                          (Route<dynamic> route) => false);
+                  break;
+                case "Workshop1":
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              Workshop1HomeScreen(str, payload)),
+                          (Route<dynamic> route) => false);
+                  break;
+                case "Workshop2":
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              Workshop1HomeScreen(str, payload)),
+                          (Route<dynamic> route) => false);
+                  break;
+              }
             }
+
+          }catch(e){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("${e}")));
+          }
+
+        }else {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        LoginPage()),
+                    (Route<dynamic> route) => false);
           }
         }
       } else {
