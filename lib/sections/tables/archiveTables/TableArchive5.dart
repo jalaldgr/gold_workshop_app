@@ -727,7 +727,7 @@ class _Table5ArchiveScreenState extends State<Table5ArchiveScreen> {
         if(wiring[i]>0){
           burnish_deficiency[i] = wiring[i] - wire_pulling[i];
         }else{
-          burnish_deficiency[i] = final_weight[i] - (popion[i]+ring[i]+chain[i]+piece_chain[i]+cane[i]+lock[i]+wire[i]+solder[i]+ball[i]+ring2[i]+half_made[i]);
+          burnish_deficiency[i] = final_weight[i] - (cut[i]+popion[i]+ring[i]+chain[i]+piece_chain[i]+cane[i]+lock[i]+wire[i]+solder[i]+ball[i]+ring2[i]+half_made[i]);
         }
         if(popion[i]>0){
           popion_deficiency[i] = popion[i]*0.03;
