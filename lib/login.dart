@@ -23,7 +23,7 @@ class LoginScreen extends State<LoginPage> {
   bool _is_loged_in = false;
   String dropdownValue = 'مدیر';
   String userRole="admin";
-
+  bool _isObscure = true;
   Future<String> signIn(String username, String password) async {
     String url = "${dotenv.env['API_URL']}/${userRole}/login";
     Map<String, String> body = {"username": username, "password": password};
@@ -107,10 +107,20 @@ class LoginScreen extends State<LoginPage> {
             Container(
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
+              child: TextFormField(
                 controller: passwordController,
-                decoration: InputDecoration(labelText: "رمز عبور"),
-                obscureText: true,
+                decoration: InputDecoration(labelText: "رمز عبور",
+                    suffixIcon: IconButton(
+                        icon: Icon(
+                            _isObscure ? Icons.visibility : Icons.visibility_off),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        }),
+                ),
+                obscureText: _isObscure,
+
               ),
             ),
             SizedBox(height: 32,),
